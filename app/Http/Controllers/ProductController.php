@@ -99,6 +99,7 @@ class ProductController extends Controller
 
         if($request['pack'] == 'Stem') {
             $product->number_of_stem = 1;
+            $product->s_increment = $request['s_increment'];
         } else {
             $product->number_of_stem = $request['number_of_stem'];
         }

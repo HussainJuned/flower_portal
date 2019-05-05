@@ -115,6 +115,7 @@ namespace App{
  * @property int $stock
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $s_increment
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\ProductReview[] $reviews
  * @property-read \App\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product newModelQuery()
@@ -135,6 +136,7 @@ namespace App{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product wherePhotoUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product wherePricePerStemBunch($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereSIncrement($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereStock($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereUpdatedAt($value)
