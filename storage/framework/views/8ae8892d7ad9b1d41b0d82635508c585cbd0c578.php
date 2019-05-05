@@ -1,43 +1,44 @@
-@extends('layouts.master')
-@section('title', 'Upload Product')
+<?php $__env->startSection('title', 'Floral Portal'); ?>
 
-@section('content')
+
+<?php $__env->startSection('content'); ?>
 
     <div class="container" id="vue-product">
         <main>
-            <form action="{{ route('products.store') }}" method="post" class="w-50 mx-auto mb-5"
+            <form action="<?php echo e(route('products.update', ['product' => $product->id])); ?>" method="post" class="w-50 mx-auto mb-5"
                   id="my-form" enctype="multipart/form-data">
-                @csrf
-                <h2 class="mt-3 mb-30">Upload your product</h2>
+                <?php echo csrf_field(); ?>
+                <?php echo method_field('PUT'); ?>
+                <h2 class="mt-3 mb-30">Update your product</h2>
                 <div class="form-group mb-30">
                     <label for="name">Name of the product</label>
-                    <input required type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
-                           value="{{ old('name') }}"
+                    <input required type="text" class="form-control<?php echo e($errors->has('name') ? ' is-invalid' : ''); ?>"
+                           value="<?php echo e($product->name); ?>"
                            id="name" name="name" placeholder="e.g. Rose">
-                    @if ($errors->has('name'))
+                    <?php if($errors->has('name')): ?>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('name') }}</strong>
+                            <strong><?php echo e($errors->first('name')); ?></strong>
                         </span>
-                    @endif
+                    <?php endif; ?>
                 </div>
                 <div class="form-group mb-30">
                     <label for="description">Description</label>
                     <textarea required type="text"
-                              class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}"
-                              id="description" name="description" placeholder="{{ old('description') }}"
-                              maxlength="1000" minlength="1" rows="6">{{ old('description') }}</textarea>
-                    @if ($errors->has('description'))
+                              class="form-control<?php echo e($errors->has('description') ? ' is-invalid' : ''); ?>"
+                              id="description" name="description" placeholder="<?php echo e($product->description); ?>"
+                              maxlength="1000" minlength="1" rows="6"><?php echo e($product->description); ?></textarea>
+                    <?php if($errors->has('description')): ?>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('description') }}</strong>
+                            <strong><?php echo e($errors->first('description')); ?></strong>
                         </span>
-                    @endif
+                    <?php endif; ?>
                 </div>
                 <div class="form-group mb-30">
                     <label for="pack">Packing type</label>
                     <select class="form-control" id="pack" name="pack" required>
-                        @if(old('pack', null) != null)
-                            <option selected value="{{ old('pack') }}">{{ old('pack') }}</option>
-                        @endif
+                        <?php if( $product->pack ): ?>
+                            <option selected value="<?php echo e($product->pack); ?>"><?php echo e($product->pack); ?></option>
+                        <?php endif; ?>
                         <option value="Stem">Stem</option>
                         <option value="Bunch">Bunch</option>
                     </select>
@@ -50,130 +51,111 @@
                             <div class="input-group-text">$</div>
                         </div>
                         <input required type="number"
-                               class="form-control{{ $errors->has('price_per_stem_bunch') ? ' is-invalid' : '' }}"
-                               value="{{ old('price_per_stem_bunch') }}" min="0.01" step="0.01" max="99999999"
-                               id="price_per_stem_bunch" name="price_per_stem_bunch" placeholder="0">
-                        @if ($errors->has('price_per_stem_bunch'))
+                               class="form-control<?php echo e($errors->has('price_per_stem_bunch') ? ' is-invalid' : ''); ?>"
+                               value="<?php echo e($product->price_per_stem_bunch); ?>" min="0.01" step="0.01" max="99999999"
+                               id="price_per_stem_bunch" name="price_per_stem_bunch" placeholder="10">
+                        <?php if($errors->has('price_per_stem_bunch')): ?>
                             <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('price_per_stem_bunch') }}</strong>
+                            <strong><?php echo e($errors->first('price_per_stem_bunch')); ?></strong>
                         </span>
-                        @endif
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="form-group mb-30" id="nos_box">
                     <label for="number_of_stem">Number Of Stem per Bunch</label>
                     <input required type="number"
-                           class="form-control{{ $errors->has('number_of_stem') ? ' is-invalid' : '' }}"
-                           value="1" min="1" max="999999" step="1"
+                           class="form-control<?php echo e($errors->has('number_of_stem') ? ' is-invalid' : ''); ?>"
+                           value="<?php echo e($product->number_of_stem); ?>" min="1" max="999999" step="1"
                            id="number_of_stem" name="number_of_stem">
-                    @if ($errors->has('number_of_stem'))
+                    <?php if($errors->has('number_of_stem')): ?>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('number_of_stem') }}</strong>
+                            <strong><?php echo e($errors->first('number_of_stem')); ?></strong>
                         </span>
-                    @endif
+                    <?php endif; ?>
                 </div>
                 <div class="form-group mb-30">
-
-                    <label for="price">Price: </label>
+                    <label for="price">Price</label>
 
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <div class="input-group-text">$</div>
                         </div>
-
-                        <input required type="number" class="form-control{{ $errors->has('price') ? ' is-invalid' : '' }}"
-                               value="0" min="0.1" max="9999999999" step="0.1"
+                        <input required type="number" class="form-control<?php echo e($errors->has('price') ? ' is-invalid' : ''); ?>"
+                               value="<?php echo e($product->price); ?>" min="0.1" max="9999999999" step="0.1"
                                id="price" name="price" disabled>
-                        @if ($errors->has('price'))
+                        <?php if($errors->has('price')): ?>
                             <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('price') }}</strong>
+                            <strong><?php echo e($errors->first('price')); ?></strong>
                         </span>
-                        @endif
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="form-group mb-30">
-                    {{--<label for="photo">Product Photo</label>
-                    <input required type="file"
-                           class="form-control-file{{ $errors->has('photo') ? ' is-invalid' : '' }}"
-                           id="photo" name="photo" accept="image/*">--}}
-                    @if ($errors->has('product_photo'))
+                    
+                    <?php if($errors->has('product_photo')): ?>
                         <span class="invalid-feedback d-block" role="alert">
-                            <strong>{{ $errors->first('product_photo') }}</strong>
+                            <strong><?php echo e($errors->first('product_photo')); ?></strong>
                         </span>
-                    @endif
-                    <h5 class="mb-3">Upload Product Photo</h5>
-
-                    <div class="upload_photo_container box">
-                        <div class="box__input">
-                            <label class="cabinet center-block">
-                                <figure>
-                                    <img src="" class="gambar img-fluid img-thumbnail" id="item-img-output"/>
-                                    <figcaption><i class="fas fa-camera"></i></figcaption>
-                                </figure>
-                                <input type="file" class="item-img file center-block box__file" {{--name="file_photo"--}} accept="image/*" />
-                            </label>
-                        </div>
-                        {{--<div class="box__uploading">Uploading&hellip;</div>
-                        <div class="box__success">Done!</div>
-                        <div class="box__error">Error! <span></span>.</div>--}}
-                    </div>
-
+                    <?php endif; ?>
+                    <label for="">update Product Photo</label>
+                    <label class="cabinet center-block">
+                        <figure>
+                            <img src="<?php echo e(url('/')); ?>/<?php echo e($product->photo_url); ?>" class="gambar img-fluid img-thumbnail" id="item-img-output"/>
+                            <figcaption><i class="fas fa-camera"></i></figcaption>
+                        </figure>
+                        <input type="file" class="item-img file center-block"/>
+                    </label>
                 </div>
-                {{--<div class="mb-30 text-center">
-
-                </div>
-                <div id="preview-crop-image" class="mb-30"
-                     style="width:500px;height:500px;">
-                </div>--}}
+                
                 <div class="form-group mb-30">
                     <label for="stock">Number in Stock</label>
-                    <input required type="number" class="form-control{{ $errors->has('stock') ? ' is-invalid' : '' }}"
-                           value="{{ old('stock') }}" id="stock" name="stock" placeholder="e.g. 10">
-                    @if ($errors->has('stock'))
+                    <input required type="number" class="form-control<?php echo e($errors->has('stock') ? ' is-invalid' : ''); ?>"
+                           value="<?php echo e($product->stock); ?>" id="stock" name="stock" placeholder="e.g. 10">
+                    <?php if($errors->has('stock')): ?>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('stock') }}</strong>
+                            <strong><?php echo e($errors->first('stock')); ?></strong>
                         </span>
-                    @endif
+                    <?php endif; ?>
                 </div>
                 <div class="form-group mb-30">
                     <label for="height">Height</label>
-                    <input required type="text" class="form-control{{ $errors->has('height') ? ' is-invalid' : '' }}"
-                           value="{{ old('height') }}"
+                    <input required type="text" class="form-control<?php echo e($errors->has('height') ? ' is-invalid' : ''); ?>"
+                           value="<?php echo e($product->height); ?>"
                            id="height" name="height" placeholder="e.g. 30cm">
-                    @if ($errors->has('height'))
+                    <?php if($errors->has('height')): ?>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('height') }}</strong>
+                            <strong><?php echo e($errors->first('height')); ?></strong>
                         </span>
-                    @endif
+                    <?php endif; ?>
                 </div>
                 <div class="form-group mb-30">
                     <label for="origin">Origin</label>
-                    <input required type="text" class="form-control{{ $errors->has('origin') ? ' is-invalid' : '' }}"
-                           value="{{ old('origin') }}"
+                    <input required type="text" class="form-control<?php echo e($errors->has('origin') ? ' is-invalid' : ''); ?>"
+                           value="<?php echo e($product->origin); ?>"
                            id="origin" name="origin" placeholder="e.g. ">
-                    @if ($errors->has('origin'))
+                    <?php if($errors->has('origin')): ?>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('origin') }}</strong>
+                            <strong><?php echo e($errors->first('origin')); ?></strong>
                         </span>
-                    @endif
+                    <?php endif; ?>
                 </div>
                 <div class="form-group mb-30">
                     <label for="colour">Colour</label>
-                    <input required type="text" class="form-control{{ $errors->has('colour') ? ' is-invalid' : '' }}"
-                           value="{{ old('colour') }}"
+                    <input required type="text" class="form-control<?php echo e($errors->has('colour') ? ' is-invalid' : ''); ?>"
+                           value="<?php echo e($product->colour); ?>"
                            id="colour" name="colour" placeholder="e.g. red">
-                    @if ($errors->has('colour'))
+                    <?php if($errors->has('colour')): ?>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('colour') }}</strong>
+                            <strong><?php echo e($errors->first('colour')); ?></strong>
                         </span>
-                    @endif
+                    <?php endif; ?>
                 </div>
                 <div class="form-group mb-30">
                     <label for="category">Category</label>
                     <select class="form-control" id="category" name="category" required>
-                        @if(old('category', null) != null)
-                            <option selected value="{{ old('category') }}">{{ old('category') }}</option>
-                        @endif
+                        <?php if( $product->category ): ?>
+                            <option selected value="<?php echo e($product->category); ?>"><?php echo e($product->category); ?></option>
+                        <?php endif; ?>
                         <option value="Flower">Flower</option>
                         <option value="Green">Green</option>
                         <option value="Dried">Dried</option>
@@ -182,55 +164,56 @@
                 <div class="form-group mb-30">
                     <label for="available_date_start">Available Date Starts From</label>
                     <input required type="date"
-                           class="form-control{{ $errors->has('available_date_start') ? ' is-invalid' : '' }}"
-                           value="{{ old('available_date_start') }}"
+                           class="form-control<?php echo e($errors->has('available_date_start') ? ' is-invalid' : ''); ?>"
+                           value="<?php echo e($product->available_date_start); ?>"
                            id="available_date_start" name="available_date_start" placeholder="e.g. red">
-                    @if ($errors->has('available_date_start'))
+                    <?php if($errors->has('available_date_start')): ?>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('available_date_start') }}</strong>
+                            <strong><?php echo e($errors->first('available_date_start')); ?></strong>
                         </span>
-                    @endif
+                    <?php endif; ?>
                 </div>
                 <div class="form-group mb-30">
                     <label for="available_date_end">Available Date Ends At</label>
                     <input required type="date"
-                           class="form-control{{ $errors->has('available_date_end') ? ' is-invalid' : '' }}"
-                           value="{{ old('available_date_end') }}"
+                           class="form-control<?php echo e($errors->has('available_date_end') ? ' is-invalid' : ''); ?>"
+                           value="<?php echo e($product->available_date_end); ?>"
                            id="available_date_end" name="available_date_end" placeholder="e.g. red">
-                    @if ($errors->has('available_date_end'))
+                    <?php if($errors->has('available_date_end')): ?>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('available_date_end') }}</strong>
+                            <strong><?php echo e($errors->first('available_date_end')); ?></strong>
                         </span>
-                    @endif
+                    <?php endif; ?>
                 </div>
 
                 <div class="form-group mb-30 row form-check">
                     <label for="">Status</label>
                     <div class="col-md-12 text-center">
-                        <input type="checkbox" value="active" checked
-                               class="form-check-input{{ $errors->has('status') ? ' is-invalid' : '' }}"
+                        <input type="checkbox" value="active"
+                               <?php if($product->status > 0 ): ?>
+                                   checked
+                               <?php endif; ?>
+                               class="form-check-input<?php echo e($errors->has('status') ? ' is-invalid' : ''); ?>"
                                id="exampleCheck1" name="status">
                         <label for="exampleCheck1" class="form-check-label text-md-right">Active (if not selected
                             innactive,
                             we can turn this checkbox into switch later)
                         </label>
-                        @if ($errors->has('status'))
+                        <?php if($errors->has('status')): ?>
                             <span class="invalid-feedback" role="alert">
-                               <strong>{{ $errors->first('status') }}</strong>
+                               <strong><?php echo e($errors->first('status')); ?></strong>
                         </span>
-                        @endif
+                        <?php endif; ?>
                     </div>
                 </div>
-                <textarea required name="product_photo" id="product_photo" cols="30" rows="100" hidden></textarea>
+                <textarea name="product_photo" id="product_photo" cols="30" rows="100" hidden></textarea>
                 <button type="submit" class="btn j_btn">Submit</button>
             </form>
         </main>
     </div>
 
 
-
-
-
+    
     <div class="modal fade" id="cropImagePop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2"
          aria-hidden="true">
         <div class="modal-dialog">
@@ -253,11 +236,9 @@
         </div>
     </div>
 
+<?php $__env->stopSection(); ?>
 
-
-@endsection
-
-@push('footer-js')
+<?php $__env->startPush('footer-js'); ?>
     <script type="text/javascript">
         // domReady handler
         $(function () {
@@ -277,7 +258,7 @@
 
 
             // Start upload preview image
-            $(".gambar").attr("src", "https://via.placeholder.com/400x300?text=Click or drag and drop image here");
+            $(".gambar").attr("src", "<?php echo e(url('/')); ?>/<?php echo e($product->photo_url); ?>");
             var $uploadCrop,
                 tempFilename,
                 rawImg,
@@ -290,7 +271,7 @@
                         $('.upload-demo').addClass('ready');
                         $('#cropImagePop').modal('show');
                         rawImg = e.target.result;
-                    };
+                    }
                     reader.readAsDataURL(input.files[0]);
                 } else {
                     alert("Sorry - you're browser doesn't support the FileReader API");
@@ -337,7 +318,6 @@
             });
             // End upload preview image
 
-
             var pack = $('#pack');
             var nos_box = $('#nos_box');
             var number_of_stem = $('#number_of_stem');
@@ -346,7 +326,12 @@
             /*var nos = number_of_stem.val();
             var pp_stem = price_per_s_b.val();*/
             var price_res = 0;
-            nos_box.hide();
+
+            if(pack.val() === 'Bunch') {
+                nos_box.show();
+            } else {
+                nos_box.hide();
+            }
 
             pack.on('change', function (event) {
                 var sv = pack.val();
@@ -370,93 +355,7 @@
                 price_res = number_of_stem.val() *  price_per_s_b.val();
                 price.val(price_res);               
             });
-
-
-
-
-            // drag and drop file
-
-            /*var isAdvancedUpload = function() {
-                var div = document.createElement('div');
-                return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window;
-            }();
-
-            var $form = $('#my-form');
-
-            var $input    = $form.find('input[type="file"]'),
-                $label    = $form.find('label'),
-                showFiles = function(files) {
-                    $label.text(files.length > 1 ? ($input.attr('data-multiple-caption') || '').replace( '{count}', files.length ) : files[ 0 ].name);
-
-                };
-
-
-            if (isAdvancedUpload) {
-
-                var droppedFiles = false;
-
-
-                $form.on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                })
-                    .on('dragover dragenter', function() {
-                        $form.addClass('is-dragover');
-                        console.log('dragover dreagenter');
-                    })
-                    .on('dragleave dragend drop', function() {
-                        $form.removeClass('is-dragover');
-                        console.log('dragLEAVE dreagend drop');
-                    })
-                    .on('drop', function(e) {
-                        droppedFiles = e.originalEvent.dataTransfer.files;
-                        showFiles( droppedFiles );
-                        console.log('drop');
-                        readFile('.item-img');
-                    });
-
-            }*/
-
-            var isAdvancedUpload = function() {
-                var div = document.createElement('div');
-                return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window;
-            }();
-
-            var $form = $('.box');
-
-
-            if (isAdvancedUpload) {
-
-                var droppedFiles = false;
-                $form.addClass('has-advanced-upload');
-
-                $form.on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                }).on('dragover dragenter', function() {
-                        $form.addClass('is-dragover');
-                    }).on('dragleave dragend drop', function() {
-                        $form.removeClass('is-dragover');
-                    }).on('drop', function(e) {
-                        droppedFiles = e.originalEvent.dataTransfer.files;
-                        readFile(e.originalEvent.dataTransfer);
-                    });
-
-            }
-
-
-        });
-
-        var product = new Vue({
-            el: '#vue-product',
-            data: {
-                msg: 'Vue js works are needed'
-            },
-            methods: {
-                stem: function (event) {
-                    alert('stem');
-                }
-            }
         });
     </script>
-@endpush
+<?php $__env->stopPush(); ?>
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>

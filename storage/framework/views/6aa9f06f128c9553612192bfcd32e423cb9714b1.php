@@ -1,43 +1,42 @@
-@extends('layouts.master')
-@section('title', 'Upload Product')
+<?php $__env->startSection('title', 'Upload Product'); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 
     <div class="container" id="vue-product">
         <main>
-            <form action="{{ route('products.store') }}" method="post" class="w-50 mx-auto mb-5"
+            <form action="<?php echo e(route('products.store')); ?>" method="post" class="w-50 mx-auto mb-5"
                   id="my-form" enctype="multipart/form-data">
-                @csrf
+                <?php echo csrf_field(); ?>
                 <h2 class="mt-3 mb-30">Upload your product</h2>
                 <div class="form-group mb-30">
                     <label for="name">Name of the product</label>
-                    <input required type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
-                           value="{{ old('name') }}"
+                    <input required type="text" class="form-control<?php echo e($errors->has('name') ? ' is-invalid' : ''); ?>"
+                           value="<?php echo e(old('name')); ?>"
                            id="name" name="name" placeholder="e.g. Rose">
-                    @if ($errors->has('name'))
+                    <?php if($errors->has('name')): ?>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('name') }}</strong>
+                            <strong><?php echo e($errors->first('name')); ?></strong>
                         </span>
-                    @endif
+                    <?php endif; ?>
                 </div>
                 <div class="form-group mb-30">
                     <label for="description">Description</label>
                     <textarea required type="text"
-                              class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}"
-                              id="description" name="description" placeholder="{{ old('description') }}"
-                              maxlength="1000" minlength="1" rows="6">{{ old('description') }}</textarea>
-                    @if ($errors->has('description'))
+                              class="form-control<?php echo e($errors->has('description') ? ' is-invalid' : ''); ?>"
+                              id="description" name="description" placeholder="<?php echo e(old('description')); ?>"
+                              maxlength="1000" minlength="1" rows="6"><?php echo e(old('description')); ?></textarea>
+                    <?php if($errors->has('description')): ?>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('description') }}</strong>
+                            <strong><?php echo e($errors->first('description')); ?></strong>
                         </span>
-                    @endif
+                    <?php endif; ?>
                 </div>
                 <div class="form-group mb-30">
                     <label for="pack">Packing type</label>
                     <select class="form-control" id="pack" name="pack" required>
-                        @if(old('pack', null) != null)
-                            <option selected value="{{ old('pack') }}">{{ old('pack') }}</option>
-                        @endif
+                        <?php if(old('pack', null) != null): ?>
+                            <option selected value="<?php echo e(old('pack')); ?>"><?php echo e(old('pack')); ?></option>
+                        <?php endif; ?>
                         <option value="Stem">Stem</option>
                         <option value="Bunch">Bunch</option>
                     </select>
@@ -50,27 +49,27 @@
                             <div class="input-group-text">$</div>
                         </div>
                         <input required type="number"
-                               class="form-control{{ $errors->has('price_per_stem_bunch') ? ' is-invalid' : '' }}"
-                               value="{{ old('price_per_stem_bunch') }}" min="0.01" step="0.01" max="99999999"
+                               class="form-control<?php echo e($errors->has('price_per_stem_bunch') ? ' is-invalid' : ''); ?>"
+                               value="<?php echo e(old('price_per_stem_bunch')); ?>" min="0.01" step="0.01" max="99999999"
                                id="price_per_stem_bunch" name="price_per_stem_bunch" placeholder="0">
-                        @if ($errors->has('price_per_stem_bunch'))
+                        <?php if($errors->has('price_per_stem_bunch')): ?>
                             <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('price_per_stem_bunch') }}</strong>
+                            <strong><?php echo e($errors->first('price_per_stem_bunch')); ?></strong>
                         </span>
-                        @endif
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="form-group mb-30" id="nos_box">
                     <label for="number_of_stem">Number Of Stem per Bunch</label>
                     <input required type="number"
-                           class="form-control{{ $errors->has('number_of_stem') ? ' is-invalid' : '' }}"
+                           class="form-control<?php echo e($errors->has('number_of_stem') ? ' is-invalid' : ''); ?>"
                            value="1" min="1" max="999999" step="1"
                            id="number_of_stem" name="number_of_stem">
-                    @if ($errors->has('number_of_stem'))
+                    <?php if($errors->has('number_of_stem')): ?>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('number_of_stem') }}</strong>
+                            <strong><?php echo e($errors->first('number_of_stem')); ?></strong>
                         </span>
-                    @endif
+                    <?php endif; ?>
                 </div>
                 <div class="form-group mb-30">
 
@@ -81,26 +80,23 @@
                             <div class="input-group-text">$</div>
                         </div>
 
-                        <input required type="number" class="form-control{{ $errors->has('price') ? ' is-invalid' : '' }}"
+                        <input required type="number" class="form-control<?php echo e($errors->has('price') ? ' is-invalid' : ''); ?>"
                                value="0" min="0.1" max="9999999999" step="0.1"
                                id="price" name="price" disabled>
-                        @if ($errors->has('price'))
+                        <?php if($errors->has('price')): ?>
                             <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('price') }}</strong>
+                            <strong><?php echo e($errors->first('price')); ?></strong>
                         </span>
-                        @endif
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="form-group mb-30">
-                    {{--<label for="photo">Product Photo</label>
-                    <input required type="file"
-                           class="form-control-file{{ $errors->has('photo') ? ' is-invalid' : '' }}"
-                           id="photo" name="photo" accept="image/*">--}}
-                    @if ($errors->has('product_photo'))
+                    
+                    <?php if($errors->has('product_photo')): ?>
                         <span class="invalid-feedback d-block" role="alert">
-                            <strong>{{ $errors->first('product_photo') }}</strong>
+                            <strong><?php echo e($errors->first('product_photo')); ?></strong>
                         </span>
-                    @endif
+                    <?php endif; ?>
                     <h5 class="mb-3">Upload Product Photo</h5>
 
                     <div class="upload_photo_container box">
@@ -110,70 +106,63 @@
                                     <img src="" class="gambar img-fluid img-thumbnail" id="item-img-output"/>
                                     <figcaption><i class="fas fa-camera"></i></figcaption>
                                 </figure>
-                                <input type="file" class="item-img file center-block box__file" {{--name="file_photo"--}} accept="image/*" />
+                                <input type="file" class="item-img file center-block box__file"  accept="image/*" />
                             </label>
                         </div>
-                        {{--<div class="box__uploading">Uploading&hellip;</div>
-                        <div class="box__success">Done!</div>
-                        <div class="box__error">Error! <span></span>.</div>--}}
+                        
                     </div>
 
                 </div>
-                {{--<div class="mb-30 text-center">
-
-                </div>
-                <div id="preview-crop-image" class="mb-30"
-                     style="width:500px;height:500px;">
-                </div>--}}
+                
                 <div class="form-group mb-30">
                     <label for="stock">Number in Stock</label>
-                    <input required type="number" class="form-control{{ $errors->has('stock') ? ' is-invalid' : '' }}"
-                           value="{{ old('stock') }}" id="stock" name="stock" placeholder="e.g. 10">
-                    @if ($errors->has('stock'))
+                    <input required type="number" class="form-control<?php echo e($errors->has('stock') ? ' is-invalid' : ''); ?>"
+                           value="<?php echo e(old('stock')); ?>" id="stock" name="stock" placeholder="e.g. 10">
+                    <?php if($errors->has('stock')): ?>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('stock') }}</strong>
+                            <strong><?php echo e($errors->first('stock')); ?></strong>
                         </span>
-                    @endif
+                    <?php endif; ?>
                 </div>
                 <div class="form-group mb-30">
                     <label for="height">Height</label>
-                    <input required type="text" class="form-control{{ $errors->has('height') ? ' is-invalid' : '' }}"
-                           value="{{ old('height') }}"
+                    <input required type="text" class="form-control<?php echo e($errors->has('height') ? ' is-invalid' : ''); ?>"
+                           value="<?php echo e(old('height')); ?>"
                            id="height" name="height" placeholder="e.g. 30cm">
-                    @if ($errors->has('height'))
+                    <?php if($errors->has('height')): ?>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('height') }}</strong>
+                            <strong><?php echo e($errors->first('height')); ?></strong>
                         </span>
-                    @endif
+                    <?php endif; ?>
                 </div>
                 <div class="form-group mb-30">
                     <label for="origin">Origin</label>
-                    <input required type="text" class="form-control{{ $errors->has('origin') ? ' is-invalid' : '' }}"
-                           value="{{ old('origin') }}"
+                    <input required type="text" class="form-control<?php echo e($errors->has('origin') ? ' is-invalid' : ''); ?>"
+                           value="<?php echo e(old('origin')); ?>"
                            id="origin" name="origin" placeholder="e.g. ">
-                    @if ($errors->has('origin'))
+                    <?php if($errors->has('origin')): ?>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('origin') }}</strong>
+                            <strong><?php echo e($errors->first('origin')); ?></strong>
                         </span>
-                    @endif
+                    <?php endif; ?>
                 </div>
                 <div class="form-group mb-30">
                     <label for="colour">Colour</label>
-                    <input required type="text" class="form-control{{ $errors->has('colour') ? ' is-invalid' : '' }}"
-                           value="{{ old('colour') }}"
+                    <input required type="text" class="form-control<?php echo e($errors->has('colour') ? ' is-invalid' : ''); ?>"
+                           value="<?php echo e(old('colour')); ?>"
                            id="colour" name="colour" placeholder="e.g. red">
-                    @if ($errors->has('colour'))
+                    <?php if($errors->has('colour')): ?>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('colour') }}</strong>
+                            <strong><?php echo e($errors->first('colour')); ?></strong>
                         </span>
-                    @endif
+                    <?php endif; ?>
                 </div>
                 <div class="form-group mb-30">
                     <label for="category">Category</label>
                     <select class="form-control" id="category" name="category" required>
-                        @if(old('category', null) != null)
-                            <option selected value="{{ old('category') }}">{{ old('category') }}</option>
-                        @endif
+                        <?php if(old('category', null) != null): ?>
+                            <option selected value="<?php echo e(old('category')); ?>"><?php echo e(old('category')); ?></option>
+                        <?php endif; ?>
                         <option value="Flower">Flower</option>
                         <option value="Green">Green</option>
                         <option value="Dried">Dried</option>
@@ -182,43 +171,43 @@
                 <div class="form-group mb-30">
                     <label for="available_date_start">Available Date Starts From</label>
                     <input required type="date"
-                           class="form-control{{ $errors->has('available_date_start') ? ' is-invalid' : '' }}"
-                           value="{{ old('available_date_start') }}"
+                           class="form-control<?php echo e($errors->has('available_date_start') ? ' is-invalid' : ''); ?>"
+                           value="<?php echo e(old('available_date_start')); ?>"
                            id="available_date_start" name="available_date_start" placeholder="e.g. red">
-                    @if ($errors->has('available_date_start'))
+                    <?php if($errors->has('available_date_start')): ?>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('available_date_start') }}</strong>
+                            <strong><?php echo e($errors->first('available_date_start')); ?></strong>
                         </span>
-                    @endif
+                    <?php endif; ?>
                 </div>
                 <div class="form-group mb-30">
                     <label for="available_date_end">Available Date Ends At</label>
                     <input required type="date"
-                           class="form-control{{ $errors->has('available_date_end') ? ' is-invalid' : '' }}"
-                           value="{{ old('available_date_end') }}"
+                           class="form-control<?php echo e($errors->has('available_date_end') ? ' is-invalid' : ''); ?>"
+                           value="<?php echo e(old('available_date_end')); ?>"
                            id="available_date_end" name="available_date_end" placeholder="e.g. red">
-                    @if ($errors->has('available_date_end'))
+                    <?php if($errors->has('available_date_end')): ?>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('available_date_end') }}</strong>
+                            <strong><?php echo e($errors->first('available_date_end')); ?></strong>
                         </span>
-                    @endif
+                    <?php endif; ?>
                 </div>
 
                 <div class="form-group mb-30 row form-check">
                     <label for="">Status</label>
                     <div class="col-md-12 text-center">
                         <input type="checkbox" value="active" checked
-                               class="form-check-input{{ $errors->has('status') ? ' is-invalid' : '' }}"
+                               class="form-check-input<?php echo e($errors->has('status') ? ' is-invalid' : ''); ?>"
                                id="exampleCheck1" name="status">
                         <label for="exampleCheck1" class="form-check-label text-md-right">Active (if not selected
                             innactive,
                             we can turn this checkbox into switch later)
                         </label>
-                        @if ($errors->has('status'))
+                        <?php if($errors->has('status')): ?>
                             <span class="invalid-feedback" role="alert">
-                               <strong>{{ $errors->first('status') }}</strong>
+                               <strong><?php echo e($errors->first('status')); ?></strong>
                         </span>
-                        @endif
+                        <?php endif; ?>
                     </div>
                 </div>
                 <textarea required name="product_photo" id="product_photo" cols="30" rows="100" hidden></textarea>
@@ -255,9 +244,9 @@
 
 
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('footer-js')
+<?php $__env->startPush('footer-js'); ?>
     <script type="text/javascript">
         // domReady handler
         $(function () {
@@ -459,4 +448,6 @@
             }
         });
     </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>

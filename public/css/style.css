@@ -15,6 +15,8 @@ label.cabinet input.file{
 
 label.cabinet figure {
     position: relative;
+    display: inline-block;
+    text-align: left;
 }
 
 #upload-demo{
@@ -34,4 +36,24 @@ figure figcaption {
 
 p {
     font-size: 1.15rem;
+}
+
+
+/*drag and drop*/
+.box {
+    font-size: 1.25rem;
+    background-color: #c8dadf;
+    position: relative;
+    padding: 52px 0 0 0;
+    text-align: center;
+}
+
+.box.has-advanced-upload {
+    background-color: #f3f3f3;
+    outline: 2px dashed black;
+    outline-offset: -10px;
+}
+
+.box.is-dragover {
+    background-color: grey;
 }

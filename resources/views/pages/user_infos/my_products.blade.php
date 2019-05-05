@@ -5,6 +5,12 @@
 @section('content')
     <div class="container">
         <div class="row">
+            @if(session()->has('message'))
+                <div class="my-5 container">
+                    <a href="{{ route('products.create') }}" class="btn btn-primary">Upload another product</a>
+                </div>
+            @endif
+
             @if(count($products) < 1)
                 <div class="col-sm-12 mb-3">
                     <div class="card p-5">

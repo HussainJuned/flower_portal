@@ -24,12 +24,43 @@ namespace App{
 
 namespace App{
 /**
+ * App\BuyerAccountReview
+ *
+ * @property int $id
+ * @property int $buyer_user_id
+ * @property int $seller_user_id
+ * @property int $order_id
+ * @property int $quality
+ * @property string $comment
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAccountReview getBar($buyer_user_id, $seller_user_id)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAccountReview newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAccountReview newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAccountReview query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAccountReview whereBuyerUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAccountReview whereComment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAccountReview whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAccountReview whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAccountReview whereOrderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAccountReview whereQuality($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAccountReview whereSellerUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAccountReview whereUpdatedAt($value)
+ */
+	class BuyerAccountReview extends \Eloquent {}
+}
+
+namespace App{
+/**
  * App\Order
  *
  * @property int $id
  * @property int $buyer_user_id
  * @property int $seller_user_id
  * @property int $product_id
+ * @property int $quantity
+ * @property float $unit_price
+ * @property float $total_price
  * @property string $order_date
  * @property int $status
  * @property string $shipping
@@ -37,7 +68,9 @@ namespace App{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\User $buyer
+ * @property-read \App\BuyerAccountReview $buyerAccountReview
  * @property-read \App\Product $product
+ * @property-read \App\ProductReview $productReview
  * @property-read \App\User $seller
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order newQuery()
@@ -47,9 +80,12 @@ namespace App{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereOrderDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereQuantity($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereSellerUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereShipping($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereTotalPrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereUnitPrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereZip($value)
  */
@@ -72,7 +108,8 @@ namespace App{
  * @property string $origin
  * @property string $colour
  * @property string $category
- * @property string $available_date
+ * @property string $available_date_start
+ * @property string $available_date_end
  * @property int $status
  * @property string $photo_url
  * @property int $stock
@@ -83,7 +120,8 @@ namespace App{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereAvailableDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereAvailableDateEnd($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereAvailableDateStart($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereCategory($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereColour($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereCreatedAt($value)
@@ -111,10 +149,12 @@ namespace App{
  *
  * @property int $id
  * @property int $product_id
+ * @property int $order_id
  * @property int $quality
  * @property string $comment
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Order $order
  * @property-read \App\Product $product
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ProductReview newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ProductReview newQuery()
@@ -122,6 +162,7 @@ namespace App{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ProductReview whereComment($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ProductReview whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ProductReview whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ProductReview whereOrderId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ProductReview whereProductId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ProductReview whereQuality($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\ProductReview whereUpdatedAt($value)
@@ -141,7 +182,10 @@ namespace App{
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\BuyerAccountReview[] $buyerAccountReviews
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Order[] $orders_as_buyer
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Order[] $orders_as_seller
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Product[] $products
  * @property-read \App\Userinfo $userinfo
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User newModelQuery()
@@ -186,6 +230,7 @@ namespace App{
  * @property int $isBuyer
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $status
  * @property-read \App\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Userinfo newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Userinfo newQuery()
@@ -207,6 +252,7 @@ namespace App{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Userinfo whereLanguage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Userinfo whereLastName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Userinfo whereState($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Userinfo whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Userinfo whereTelephone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Userinfo whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Userinfo whereUpdatedAt($value)

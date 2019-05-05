@@ -21,6 +21,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/my-products', 'SellerDashboardController@myProducts')
     ->name('seller_dashboard.myProducts');
+
 Route::get('/seller-dashboard', 'SellerDashboardController@sellerDashboard')
     ->name('seller_dashboard.seller_dashboard');
 
