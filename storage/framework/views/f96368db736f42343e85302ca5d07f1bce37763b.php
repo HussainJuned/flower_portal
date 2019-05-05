@@ -6,7 +6,7 @@
         <div class="row">
             <?php if(session()->has('message')): ?>
                 <div class="my-5 container">
-                    <a href="<?php echo e(route('products.create')); ?>" class="btn btn-danger">Upload another product</a>
+                    <a href="<?php echo e(route('products.create')); ?>" class="btn btn-primary">Upload another product</a>
                 </div>
             <?php endif; ?>
 

@@ -71,6 +71,21 @@
                         </span>
                     <?php endif; ?>
                 </div>
+
+                 <div class="form-group mb-30" id="stem_increment">
+                    <label for="s_increment">Stem Increment</label>
+                    <input required type="number"
+                           class="form-control<?php echo e($errors->has('s_increment') ? ' is-invalid' : ''); ?>"
+                           value="1" min="1" max="999999" step="1"
+                           id="s_increment" name="s_increment">
+                    <?php if($errors->has('s_increment')): ?>
+                        <span class="invalid-feedback" role="alert">
+                            <strong><?php echo e($errors->first('s_increment')); ?></strong>
+                        </span>
+                    <?php endif; ?>
+                </div>
+
+
                 <div class="form-group mb-30">
 
                     <label for="price">Price: </label>
@@ -147,10 +162,94 @@
                     <?php endif; ?>
                 </div>
                 <div class="form-group mb-30">
-                    <label for="colour">Colour</label>
-                    <input required type="text" class="form-control<?php echo e($errors->has('colour') ? ' is-invalid' : ''); ?>"
-                           value="<?php echo e(old('colour')); ?>"
-                           id="colour" name="colour" placeholder="e.g. red">
+                    <h6>Choose Colour</h6>
+                    
+
+                    <div class="color_preview_box">
+                        <div class="colour_item">
+
+                            <label for="colour1">
+                                <input type="radio" required name="colour" id="colour1" value="#FFC813">
+                                <span class="checkmark" style="background-color: #FFC813"></span>
+                            </label>
+                        </div>
+                        <div class="colour_item">
+
+                            <label for="colour2">
+                                <input type="radio" required name="colour" id="colour2" value="#FE7418">
+                                <span class="checkmark" style="background-color: #FE7418"></span>
+                            </label>
+                        </div>
+                        <div class="colour_item">
+                            <label for="colour3">
+                                <input type="radio" required name="colour" id="colour3" value="#FFB27E">
+                                <span class="checkmark" style="background-color: #FFB27E"></span>
+                            </label>
+                        </div>
+                        <div class="colour_item">
+                            <label for="colour4">
+                                <input type="radio" required name="colour" id="colour4" value="#B90000">
+                                <span class="checkmark" style="background-color: #B90000"></span>
+                            </label>
+                        </div>
+                        <div class="colour_item">
+                            <label for="colour5">
+                                <input type="radio" required name="colour" id="colour5" value="#E496C4">
+                                <span class="checkmark" style="background-color: #E496C4"></span>
+                            </label>
+                        </div>
+                        <div class="colour_item">
+                            <label for="colour6">
+                                <input type="radio" required name="colour" id="colour6" value="#2F2074">
+                                <span class="checkmark" style="background-color: #2F2074"></span>
+                            </label>
+                        </div>
+                        <div class="colour_item">
+                            <label for="colour7">
+                                <input type="radio" required name="colour" id="colour7" value="#95AB46">
+                                <span class="checkmark" style="background-color: #95AB46"></span>
+                            </label>
+                        </div>
+                        <div class="colour_item">
+                            <label for="colour8">
+                                <input type="radio" required name="colour" id="colour8" value="#914423">
+                                <span class="checkmark" style="background-color: #914423"></span>
+                            </label>
+                        </div>
+                        <div class="colour_item">
+                            <label for="colour9">
+                                <input type="radio" required name="colour" id="colour9" value="#181417">
+                                <span class="checkmark" style="background-color: #181417"></span>
+                            </label>
+                        </div>
+                        <div class="colour_item">
+                            <label for="colour10">
+                                <input type="radio" required name="colour" id="colour10" value="#E8E2DF">
+                                <span class="checkmark" style="background-color: #E8E2DF"></span>
+                            </label>
+                        </div>
+                        <div class="colour_item">
+                            <label for="colour11">
+                                <input type="radio" required name="colour" id="colour11" value="#D4AF37">
+                                <span class="checkmark" style="background-color: #D4AF37"></span>
+                            </label>
+                        </div>
+                        <div class="colour_item">
+                            <label for="colour12">
+                                <input type="radio" required name="colour" id="colour12" value="#C0C0C0">
+                                <span class="checkmark" style="background-color: #C0C0C0"></span>
+                            </label>
+                        </div>
+                        <div class="colour_item">
+                            <label for="colour13">
+                                <input type="radio" required name="colour" id="colour13" value="mix">
+                                <span class="checkmark" style="background: linear-gradient(to right, red, orange, yellow, green, blue, violet)"></span>
+                            </label>
+                        </div>
+
+                    </div>
+
+
                     <?php if($errors->has('colour')): ?>
                         <span class="invalid-feedback" role="alert">
                             <strong><?php echo e($errors->first('colour')); ?></strong>
@@ -329,9 +428,11 @@
 
             var pack = $('#pack');
             var nos_box = $('#nos_box');
+            var stem_incr_box = $('#stem_increment');
             var number_of_stem = $('#number_of_stem');
             var price_per_s_b = $('#price_per_stem_bunch');
             var price = $('#price');
+            var isByBunch = false;
             /*var nos = number_of_stem.val();
             var pp_stem = price_per_s_b.val();*/
             var price_res = 0;
@@ -341,23 +442,40 @@
                 var sv = pack.val();
                 if(sv === 'Bunch') {
                     nos_box.show();
+                    stem_incr_box.hide();
+                    isByBunch = true;
                 } else {
                     number_of_stem.val(1);
                     price_res = number_of_stem.val() *  price_per_s_b.val();
                     price.val(price_res);
                     nos_box.hide();
-
+                    stem_incr_box.show();
+                    isByBunch = false;
                 }
             });
 
             price_per_s_b.on('change', function (event) {
-                price_res = number_of_stem.val() *  price_per_s_b.val();
+                if(isByBunch) {
+                    price_res = number_of_stem.val() *  price_per_s_b.val();
+                } else {
+                    price_res = $('#s_increment').val() *  price_per_s_b.val();
+                }
+                price_res.toFixed(2);
                 price.val(price_res);               
             });
 
             number_of_stem.on('change', function (event) {
                 price_res = number_of_stem.val() *  price_per_s_b.val();
+                price_res.toFixed(2);
+
                 price.val(price_res);               
+            });
+
+            $('#s_increment').on('change', function (event) {
+                price_res = $(this).val() *  price_per_s_b.val();
+                price_res.toFixed(2);
+
+                price.val(price_res);
             });
 
 
