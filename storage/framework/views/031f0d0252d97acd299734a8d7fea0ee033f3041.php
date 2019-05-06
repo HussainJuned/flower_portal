@@ -42,3 +42,4 @@
         <?php endif; ?>
     </ul>
 <?php endif; ?>
+<?php /**PATH C:\Users\Juned\PhpstormProjects\flowerapp\vendor\laravel\framework\src\Illuminate\Pagination/resources/views/bootstrap-4.blade.php ENDPATH**/ ?>

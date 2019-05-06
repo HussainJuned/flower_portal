@@ -161,6 +161,20 @@
                         </span>
                     <?php endif; ?>
                 </div>
+
+                <div class="form-group mb-30">
+                    <label for="tags">Tags</label>
+                    <input required type="text" class="form-control<?php echo e($errors->has('tags') ? ' is-invalid' : ''); ?>"
+                           value="<?php echo e(old('tags')); ?>"
+                           id="tags" name="tags" placeholder="e.g. rose, pink, stem">
+                    <?php if($errors->has('tags')): ?>
+                        <span class="invalid-feedback" role="alert">
+                            <strong><?php echo e($errors->first('tags')); ?></strong>
+                        </span>
+                    <?php endif; ?>
+                </div>
+
+
                 <div class="form-group mb-30">
                     <h6>Choose Colour</h6>
                     
@@ -552,6 +566,11 @@
 
             }
 
+            var tags = [
+                    <?php $__currentLoopData = $tags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                {tag: "<?php echo e($tag); ?>" },
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            ];
 
         });
 
@@ -569,4 +588,4 @@
     </script>
 <?php $__env->stopPush(); ?>
 
-<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Juned\PhpstormProjects\flowerapp\resources\views/pages/products/create.blade.php ENDPATH**/ ?>

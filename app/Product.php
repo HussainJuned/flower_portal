@@ -2,10 +2,13 @@
 
 namespace App;
 
+use Conner\Tagging\Taggable;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    use Taggable;
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -15,11 +18,6 @@ class Product extends Model
     {
         return $this->hasMany(ProductReview::class);
     }
-
-    /*public function scopeReview($query)
-    {
-        return $query->where('');
-    }*/
 
     public function reviewsAvg()
     {

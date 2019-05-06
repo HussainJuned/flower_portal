@@ -172,6 +172,20 @@
                         </span>
                     @endif
                 </div>
+
+                <div class="form-group mb-30">
+                    <label for="tags">Tags</label>
+                    <input required type="text" class="form-control{{ $errors->has('tags') ? ' is-invalid' : '' }}"
+                           value="{{ old('tags') }}"
+                           id="tags" name="tags" placeholder="e.g. rose, pink, stem">
+                    @if ($errors->has('tags'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('tags') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+
                 <div class="form-group mb-30">
                     <h6>Choose Colour</h6>
                     {{--<input required type="text" class="form-control{{ $errors->has('colour') ? ' is-invalid' : '' }}"
@@ -565,6 +579,11 @@
 
             }
 
+            var tags = [
+                    @foreach ($tags as $tag)
+                {tag: "{{$tag}}" },
+                @endforeach
+            ];
 
         });
 

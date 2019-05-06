@@ -11,6 +11,7 @@ window.Vue = require('vue');
 window.Croppie = require('croppie');
 require('exif-js');
 require('@fortawesome/fontawesome-free');
+require('selectize');
 
 /**
  * The following block of code may be used to automatically register your
@@ -34,3 +35,4 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app'
 });
+

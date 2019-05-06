@@ -15,12 +15,14 @@
 </head>
 <body>
 <div id="">
-    <?php echo $__env->make('partials.header', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-    <?php echo $__env->make('partials.success_message', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <?php echo $__env->make('partials.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('partials.success_message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php echo $__env->yieldContent('content'); ?>
 </div>
-<?php echo $__env->make('partials.footer', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('partials.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <script src="<?php echo e(asset('js/app.js')); ?>"></script>
+<script src="<?php echo e(asset('js/custom.js')); ?>"></script>
 <?php echo $__env->yieldPushContent('footer-js'); ?>
 </body>
 </html>
+<?php /**PATH C:\Users\Juned\PhpstormProjects\flowerapp\resources\views/layouts/master.blade.php ENDPATH**/ ?>

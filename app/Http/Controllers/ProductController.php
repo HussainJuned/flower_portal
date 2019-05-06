@@ -32,7 +32,8 @@ class ProductController extends Controller
     public function create()
     {
         $categories = ProductCategory::all();
-        return view('pages.products.create', compact('categories'));
+        $tags = Product::existingTags()->pluck('name');
+        return view('pages.products.create', compact('categories', 'tags'));
     }
 
     /**
@@ -132,6 +133,8 @@ class ProductController extends Controller
         $product->photo_url = $this->cropAndUpload($request, $product->id);
         $product->price = $product->number_of_stem * $product->price_per_stem_bunch;
         $product->update();
+
+        $product->tag(explode(',', $request->tags));
 
         return redirect()->route('seller_dashboard.myProducts')
             ->with('message', 'Product Uploaded Successfully');

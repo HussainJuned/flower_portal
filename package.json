@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "croppie": "^2.6.3",
-        "exif-js": "^2.3.0"
+        "exif-js": "^2.3.0",
+        "selectize": "^0.12.6"
     }
 }
