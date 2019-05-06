@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.7.28 on 2019-05-06 06:56:48.
+ * Generated for Laravel 5.8.15 on 2019-05-06 16:00:02.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -16,7 +16,7 @@ namespace Illuminate\Support\Facades {
     /**
      * 
      *
-     * @see \Illuminate\Foundation\Application
+     * @see \Illuminate\Contracts\Foundation\Application
      */ 
     class App {
         
@@ -329,13 +329,14 @@ namespace Illuminate\Support\Facades {
         /**
          * Get or check the current application environment.
          *
+         * @param string|array $environments
          * @return string|bool 
          * @static 
          */ 
-        public static function environment()
+        public static function environment($environments = null)
         {
                         /** @var \Illuminate\Foundation\Application $instance */
-                        return $instance->environment();
+                        return $instance->environment($environments);
         }
         
         /**
@@ -668,6 +669,30 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
+         * Determine if the application events are cached.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function eventsAreCached()
+        {
+                        /** @var \Illuminate\Foundation\Application $instance */
+                        return $instance->eventsAreCached();
+        }
+        
+        /**
+         * Get the path to the events cache file.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getCachedEventsPath()
+        {
+                        /** @var \Illuminate\Foundation\Application $instance */
+                        return $instance->getCachedEventsPath();
+        }
+        
+        /**
          * Determine if the application is currently down for maintenance.
          *
          * @return bool 
@@ -698,7 +723,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Register a terminating callback with the application.
          *
-         * @param \Closure $callback
+         * @param callable|string $callback
          * @return \Illuminate\Foundation\Application 
          * @static 
          */ 
@@ -1103,7 +1128,7 @@ namespace Illuminate\Support\Facades {
          * Resolve all of the bindings for a given tag.
          *
          * @param string $tag
-         * @return array 
+         * @return \Illuminate\Container\iterable 
          * @static 
          */ 
         public static function tagged($tag)
@@ -1119,6 +1144,7 @@ namespace Illuminate\Support\Facades {
          * @param string $abstract
          * @param string $alias
          * @return void 
+         * @throws \LogicException
          * @static 
          */ 
         public static function alias($abstract, $alias)
@@ -1298,7 +1324,6 @@ namespace Illuminate\Support\Facades {
          *
          * @param string $abstract
          * @return string 
-         * @throws \LogicException
          * @static 
          */ 
         public static function getAlias($abstract)
@@ -1506,6 +1531,7 @@ namespace Illuminate\Support\Facades {
          * @param array $parameters
          * @param \Symfony\Component\Console\Output\OutputInterface $outputBuffer
          * @return int 
+         * @throws \Symfony\Component\Console\Exception\CommandNotFoundException
          * @static 
          */ 
         public static function call($command, $parameters = array(), $outputBuffer = null)
@@ -2193,13 +2219,14 @@ namespace Illuminate\Support\Facades {
          * Mix another object into the class.
          *
          * @param object $mixin
+         * @param bool $replace
          * @return void 
          * @throws \ReflectionException
          * @static 
          */ 
-        public static function mixin($mixin)
+        public static function mixin($mixin, $replace = true)
         {
-                        \Illuminate\Auth\SessionGuard::mixin($mixin);
+                        \Illuminate\Auth\SessionGuard::mixin($mixin, $replace);
         }
         
         /**
@@ -2936,14 +2963,14 @@ namespace Illuminate\Support\Facades {
          *
          * @param string $key
          * @param mixed $value
-         * @param \DateTimeInterface|\DateInterval|float|int|null $minutes
-         * @return void 
+         * @param \DateTimeInterface|\DateInterval|int|null $ttl
+         * @return bool 
          * @static 
          */ 
-        public static function put($key, $value, $minutes = null)
+        public static function put($key, $value, $ttl = null)
         {
                         /** @var \Illuminate\Cache\Repository $instance */
-                        $instance->put($key, $value, $minutes);
+                        return $instance->put($key, $value, $ttl);
         }
         
         /**
@@ -2966,17 +2993,17 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Store multiple items in the cache for a given number of minutes.
+         * Store multiple items in the cache for a given number of seconds.
          *
          * @param array $values
-         * @param \DateTimeInterface|\DateInterval|float|int $minutes
-         * @return void 
+         * @param \DateTimeInterface|\DateInterval|int|null $ttl
+         * @return bool 
          * @static 
          */ 
-        public static function putMany($values, $minutes)
+        public static function putMany($values, $ttl = null)
         {
                         /** @var \Illuminate\Cache\Repository $instance */
-                        $instance->putMany($values, $minutes);
+                        return $instance->putMany($values, $ttl);
         }
         
         /**
@@ -3003,14 +3030,14 @@ namespace Illuminate\Support\Facades {
          *
          * @param string $key
          * @param mixed $value
-         * @param \DateTimeInterface|\DateInterval|float|int $minutes
+         * @param \DateTimeInterface|\DateInterval|int|null $ttl
          * @return bool 
          * @static 
          */ 
-        public static function add($key, $value, $minutes)
+        public static function add($key, $value, $ttl = null)
         {
                         /** @var \Illuminate\Cache\Repository $instance */
-                        return $instance->add($key, $value, $minutes);
+                        return $instance->add($key, $value, $ttl);
         }
         
         /**
@@ -3046,28 +3073,28 @@ namespace Illuminate\Support\Facades {
          *
          * @param string $key
          * @param mixed $value
-         * @return void 
+         * @return bool 
          * @static 
          */ 
         public static function forever($key, $value)
         {
                         /** @var \Illuminate\Cache\Repository $instance */
-                        $instance->forever($key, $value);
+                        return $instance->forever($key, $value);
         }
         
         /**
          * Get an item from the cache, or execute the given Closure and store the result.
          *
          * @param string $key
-         * @param \DateTimeInterface|\DateInterval|float|int $minutes
+         * @param \DateTimeInterface|\DateInterval|int|null $ttl
          * @param \Closure $callback
          * @return mixed 
          * @static 
          */ 
-        public static function remember($key, $minutes, $callback)
+        public static function remember($key, $ttl, $callback)
         {
                         /** @var \Illuminate\Cache\Repository $instance */
-                        return $instance->remember($key, $minutes, $callback);
+                        return $instance->remember($key, $ttl, $callback);
         }
         
         /**
@@ -3171,7 +3198,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the default cache time.
          *
-         * @return float|int 
+         * @return int 
          * @static 
          */ 
         public static function getDefaultCacheTime()
@@ -3181,16 +3208,16 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Set the default cache time in minutes.
+         * Set the default cache time in seconds.
          *
-         * @param float|int $minutes
+         * @param int|null $seconds
          * @return \Illuminate\Cache\Repository 
          * @static 
          */ 
-        public static function setDefaultCacheTime($minutes)
+        public static function setDefaultCacheTime($seconds)
         {
                         /** @var \Illuminate\Cache\Repository $instance */
-                        return $instance->setDefaultCacheTime($minutes);
+                        return $instance->setDefaultCacheTime($seconds);
         }
         
         /**
@@ -3288,13 +3315,14 @@ namespace Illuminate\Support\Facades {
          * Mix another object into the class.
          *
          * @param object $mixin
+         * @param bool $replace
          * @return void 
          * @throws \ReflectionException
          * @static 
          */ 
-        public static function mixin($mixin)
+        public static function mixin($mixin, $replace = true)
         {
-                        \Illuminate\Cache\Repository::mixin($mixin);
+                        \Illuminate\Cache\Repository::mixin($mixin, $replace);
         }
         
         /**
@@ -3691,13 +3719,14 @@ namespace Illuminate\Support\Facades {
          * Mix another object into the class.
          *
          * @param object $mixin
+         * @param bool $replace
          * @return void 
          * @throws \ReflectionException
          * @static 
          */ 
-        public static function mixin($mixin)
+        public static function mixin($mixin, $replace = true)
         {
-                        \Illuminate\Cookie\CookieJar::mixin($mixin);
+                        \Illuminate\Cookie\CookieJar::mixin($mixin, $replace);
         }
         
         /**
@@ -3766,6 +3795,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param string $value
          * @return string 
+         * @throws \Illuminate\Contracts\Encryption\EncryptException
          * @static 
          */ 
         public static function encryptString($value)
@@ -3794,6 +3824,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param string $payload
          * @return string 
+         * @throws \Illuminate\Contracts\Encryption\DecryptException
          * @static 
          */ 
         public static function decryptString($payload)
@@ -3949,6 +3980,19 @@ namespace Illuminate\Support\Facades {
         {
                         /** @var \Illuminate\Database\DatabaseManager $instance */
                         return $instance->getConnections();
+        }
+        
+        /**
+         * Set the database reconnector callback.
+         *
+         * @param callable $reconnector
+         * @return void 
+         * @static 
+         */ 
+        public static function setReconnector($reconnector)
+        {
+                        /** @var \Illuminate\Database\DatabaseManager $instance */
+                        $instance->setReconnector($reconnector);
         }
         
         /**
@@ -4392,20 +4436,6 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Set the reconnect instance on the connection.
-         *
-         * @param callable $reconnector
-         * @return \Larapack\DoctrineSupport\Connections\MySqlConnection 
-         * @static 
-         */ 
-        public static function setReconnector($reconnector)
-        {
-            //Method inherited from \Illuminate\Database\Connection            
-                        /** @var \Larapack\DoctrineSupport\Connections\MySqlConnection $instance */
-                        return $instance->setReconnector($reconnector);
-        }
-        
-        /**
          * Get the database connection name.
          *
          * @return string|null 
@@ -4567,7 +4597,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Determine if the connection in a "dry run".
+         * Determine if the connection is in a "dry run".
          *
          * @return bool 
          * @static 
@@ -4909,21 +4939,6 @@ namespace Illuminate\Support\Facades {
          * @return array|null 
          * @static 
          */ 
-        public static function fire($event, $payload = array(), $halt = false)
-        {
-                        /** @var \Illuminate\Events\Dispatcher $instance */
-                        return $instance->fire($event, $payload, $halt);
-        }
-        
-        /**
-         * Fire an event and call the listeners.
-         *
-         * @param string|object $event
-         * @param mixed $payload
-         * @param bool $halt
-         * @return array|null 
-         * @static 
-         */ 
         public static function dispatch($event, $payload = array(), $halt = false)
         {
                         /** @var \Illuminate\Events\Dispatcher $instance */
@@ -5174,7 +5189,7 @@ namespace Illuminate\Support\Facades {
          * @param string $path
          * @param string $contents
          * @param bool $lock
-         * @return int 
+         * @return int|bool 
          * @static 
          */ 
         public static function put($path, $contents, $lock = false)
@@ -5610,13 +5625,14 @@ namespace Illuminate\Support\Facades {
          * Mix another object into the class.
          *
          * @param object $mixin
+         * @param bool $replace
          * @return void 
          * @throws \ReflectionException
          * @static 
          */ 
-        public static function mixin($mixin)
+        public static function mixin($mixin, $replace = true)
         {
-                        \Illuminate\Filesystem\Filesystem::mixin($mixin);
+                        \Illuminate\Filesystem\Filesystem::mixin($mixin, $replace);
         }
         
         /**
@@ -5780,6 +5796,20 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
+         * Determine if all of the given abilities should be denied for the current user.
+         *
+         * @param \Illuminate\Auth\Access\iterable|string $abilities
+         * @param array|mixed $arguments
+         * @return bool 
+         * @static 
+         */ 
+        public static function none($abilities, $arguments = array())
+        {
+                        /** @var \Illuminate\Auth\Access\Gate $instance */
+                        return $instance->none($abilities, $arguments);
+        }
+        
+        /**
          * Determine if the given ability should be granted for the current user.
          *
          * @param string $ability
@@ -5819,6 +5849,19 @@ namespace Illuminate\Support\Facades {
         {
                         /** @var \Illuminate\Auth\Access\Gate $instance */
                         return $instance->getPolicyFor($class);
+        }
+        
+        /**
+         * Specify a callback to be used to guess policy names.
+         *
+         * @param callable $callback
+         * @return \Illuminate\Auth\Access\Gate 
+         * @static 
+         */ 
+        public static function guessPolicyNamesUsing($callback)
+        {
+                        /** @var \Illuminate\Auth\Access\Gate $instance */
+                        return $instance->guessPolicyNamesUsing($callback);
         }
         
         /**
@@ -6357,13 +6400,14 @@ namespace Illuminate\Support\Facades {
          * Mix another object into the class.
          *
          * @param object $mixin
+         * @param bool $replace
          * @return void 
          * @throws \ReflectionException
          * @static 
          */ 
-        public static function mixin($mixin)
+        public static function mixin($mixin, $replace = true)
         {
-                        \Illuminate\Translation\Translator::mixin($mixin);
+                        \Illuminate\Translation\Translator::mixin($mixin, $replace);
         }
         
         /**
@@ -6833,15 +6877,15 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Get the view factory instance.
+         * Get the array of failed recipients.
          *
-         * @return \Illuminate\Contracts\View\Factory 
+         * @return array 
          * @static 
          */ 
-        public static function getViewFactory()
+        public static function failures()
         {
                         /** @var \Illuminate\Mail\Mailer $instance */
-                        return $instance->getViewFactory();
+                        return $instance->failures();
         }
         
         /**
@@ -6857,15 +6901,15 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Get the array of failed recipients.
+         * Get the view factory instance.
          *
-         * @return array 
+         * @return \Illuminate\Contracts\View\Factory 
          * @static 
          */ 
-        public static function failures()
+        public static function getViewFactory()
         {
                         /** @var \Illuminate\Mail\Mailer $instance */
-                        return $instance->failures();
+                        return $instance->getViewFactory();
         }
         
         /**
@@ -6911,13 +6955,14 @@ namespace Illuminate\Support\Facades {
          * Mix another object into the class.
          *
          * @param object $mixin
+         * @param bool $replace
          * @return void 
          * @throws \ReflectionException
          * @static 
          */ 
-        public static function mixin($mixin)
+        public static function mixin($mixin, $replace = true)
         {
-                        \Illuminate\Mail\Mailer::mixin($mixin);
+                        \Illuminate\Mail\Mailer::mixin($mixin, $replace);
         }
         
         /**
@@ -7309,6 +7354,45 @@ namespace Illuminate\Support\Facades {
                         /** @var \Illuminate\Support\Testing\Fakes\NotificationFake $instance */
                         return $instance->hasSent($notifiable, $notification);
         }
+        
+        /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+                        \Illuminate\Support\Testing\Fakes\NotificationFake::macro($name, $macro);
+        }
+        
+        /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+                        \Illuminate\Support\Testing\Fakes\NotificationFake::mixin($mixin, $replace);
+        }
+        
+        /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+                        return \Illuminate\Support\Testing\Fakes\NotificationFake::hasMacro($name);
+        }
          
     }
 
@@ -7696,7 +7780,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Push a new job onto the queue after a delay.
          *
-         * @param \DateTime|int $delay
+         * @param \DateTimeInterface|\DateInterval|int $delay
          * @param string $job
          * @param mixed $data
          * @param string $queue
@@ -7728,7 +7812,7 @@ namespace Illuminate\Support\Facades {
          * Push a new job onto the queue after a delay.
          *
          * @param string $queue
-         * @param \DateTime|int $delay
+         * @param \DateTimeInterface|\DateInterval|int $delay
          * @param string $job
          * @param mixed $data
          * @return mixed 
@@ -7803,6 +7887,20 @@ namespace Illuminate\Support\Facades {
         {
                         /** @var \Illuminate\Support\Testing\Fakes\QueueFake $instance */
                         return $instance->setConnectionName($name);
+        }
+        
+        /**
+         * Get the retry delay for an object-based queue handler.
+         *
+         * @param mixed $job
+         * @return mixed 
+         * @static 
+         */ 
+        public static function getJobRetryDelay($job)
+        {
+            //Method inherited from \Illuminate\Queue\Queue            
+                        /** @var \Illuminate\Queue\SyncQueue $instance */
+                        return $instance->getJobRetryDelay($job);
         }
         
         /**
@@ -8062,13 +8160,14 @@ namespace Illuminate\Support\Facades {
          * Mix another object into the class.
          *
          * @param object $mixin
+         * @param bool $replace
          * @return void 
          * @throws \ReflectionException
          * @static 
          */ 
-        public static function mixin($mixin)
+        public static function mixin($mixin, $replace = true)
         {
-                        \Illuminate\Routing\Redirector::mixin($mixin);
+                        \Illuminate\Routing\Redirector::mixin($mixin, $replace);
         }
         
         /**
@@ -8316,7 +8415,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the client IP address.
          *
-         * @return string 
+         * @return string|null 
          * @static 
          */ 
         public static function ip()
@@ -8422,7 +8521,7 @@ namespace Illuminate\Support\Facades {
          * Create an Illuminate request from a Symfony instance.
          *
          * @param \Symfony\Component\HttpFoundation\Request $request
-         * @return \Illuminate\Http\Request 
+         * @return static 
          * @static 
          */ 
         public static function createFromBase($request)
@@ -10144,13 +10243,14 @@ namespace Illuminate\Support\Facades {
          * Mix another object into the class.
          *
          * @param object $mixin
+         * @param bool $replace
          * @return void 
          * @throws \ReflectionException
          * @static 
          */ 
-        public static function mixin($mixin)
+        public static function mixin($mixin, $replace = true)
         {
-                        \Illuminate\Http\Request::mixin($mixin);
+                        \Illuminate\Http\Request::mixin($mixin, $replace);
         }
         
         /**
@@ -10430,13 +10530,14 @@ namespace Illuminate\Support\Facades {
          * Mix another object into the class.
          *
          * @param object $mixin
+         * @param bool $replace
          * @return void 
          * @throws \ReflectionException
          * @static 
          */ 
-        public static function mixin($mixin)
+        public static function mixin($mixin, $replace = true)
         {
-                        \Illuminate\Routing\ResponseFactory::mixin($mixin);
+                        \Illuminate\Routing\ResponseFactory::mixin($mixin, $replace);
         }
         
         /**
@@ -10753,7 +10854,7 @@ namespace Illuminate\Support\Facades {
          * Return the response returned by the given route.
          *
          * @param string $name
-         * @return mixed 
+         * @return \Illuminate\Http\Response|\Illuminate\Http\JsonResponse 
          * @static 
          */ 
         public static function respondWithRoute($name)
@@ -10779,7 +10880,7 @@ namespace Illuminate\Support\Facades {
          * Dispatch the request to a route and return the response.
          *
          * @param \Illuminate\Http\Request $request
-         * @return mixed 
+         * @return \Illuminate\Http\Response|\Illuminate\Http\JsonResponse 
          * @static 
          */ 
         public static function dispatchToRoute($request)
@@ -10833,6 +10934,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param \Illuminate\Routing\Route $route
          * @return \Illuminate\Routing\Route 
+         * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
          * @static 
          */ 
         public static function substituteBindings($route)
@@ -10846,6 +10948,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param \Illuminate\Routing\Route $route
          * @return void 
+         * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
          * @static 
          */ 
         public static function substituteImplicitBindings($route)
@@ -10985,7 +11088,6 @@ namespace Illuminate\Support\Facades {
          * @param string $class
          * @param \Closure|null $callback
          * @return void 
-         * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
          * @static 
          */ 
         public static function model($key, $class, $callback = null)
@@ -11327,13 +11429,14 @@ namespace Illuminate\Support\Facades {
          * Mix another object into the class.
          *
          * @param object $mixin
+         * @param bool $replace
          * @return void 
          * @throws \ReflectionException
          * @static 
          */ 
-        public static function mixin($mixin)
+        public static function mixin($mixin, $replace = true)
         {
-                        \Illuminate\Routing\Router::mixin($mixin);
+                        \Illuminate\Routing\Router::mixin($mixin, $replace);
         }
         
         /**
@@ -11368,6 +11471,7 @@ namespace Illuminate\Support\Facades {
     /**
      * 
      *
+     * @method static void registerCustomDBALType(string $class, string $name, string $type)
      * @see \Illuminate\Database\Schema\Builder
      */ 
     class Schema {
@@ -11577,6 +11681,23 @@ namespace Illuminate\Support\Facades {
             //Method inherited from \Illuminate\Database\Schema\Builder            
                         /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
                         return $instance->disableForeignKeyConstraints();
+        }
+        
+        /**
+         * Register a custom Doctrine mapping type.
+         *
+         * @param string $class
+         * @param string $name
+         * @param string $type
+         * @return void 
+         * @throws \Doctrine\DBAL\DBALException
+         * @static 
+         */ 
+        public static function registerCustomDoctrineType($class, $name, $type)
+        {
+            //Method inherited from \Illuminate\Database\Schema\Builder            
+                        /** @var \Illuminate\Database\Schema\MySqlBuilder $instance */
+                        $instance->registerCustomDoctrineType($class, $name, $type);
         }
         
         /**
@@ -13338,13 +13459,14 @@ namespace Illuminate\Support\Facades {
          * Mix another object into the class.
          *
          * @param object $mixin
+         * @param bool $replace
          * @return void 
          * @throws \ReflectionException
          * @static 
          */ 
-        public static function mixin($mixin)
+        public static function mixin($mixin, $replace = true)
         {
-                        \Illuminate\Routing\UrlGenerator::mixin($mixin);
+                        \Illuminate\Routing\UrlGenerator::mixin($mixin, $replace);
         }
         
         /**
@@ -13922,13 +14044,14 @@ namespace Illuminate\Support\Facades {
          * Mix another object into the class.
          *
          * @param object $mixin
+         * @param bool $replace
          * @return void 
          * @throws \ReflectionException
          * @static 
          */ 
-        public static function mixin($mixin)
+        public static function mixin($mixin, $replace = true)
         {
-                        \Illuminate\View\Factory::mixin($mixin);
+                        \Illuminate\View\Factory::mixin($mixin, $replace);
         }
         
         /**
@@ -16745,6 +16868,7 @@ namespace  {
              * @param string $column
              * @param string $direction
              * @return \Illuminate\Database\Query\Builder 
+             * @throws \InvalidArgumentException
              * @static 
              */ 
             public static function orderBy($column, $direction = 'asc')
@@ -16857,6 +16981,21 @@ namespace  {
             {
                                 /** @var \Illuminate\Database\Query\Builder $instance */
                                 return $instance->forPage($page, $perPage);
+            }
+         
+            /**
+             * Constrain the query to the previous "page" of results before a given ID.
+             *
+             * @param int $perPage
+             * @param int|null $lastId
+             * @param string $column
+             * @return \Illuminate\Database\Query\Builder|static 
+             * @static 
+             */ 
+            public static function forPageBeforeId($perPage = 15, $lastId = 0, $column = 'id')
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->forPageBeforeId($perPage, $lastId, $column);
             }
          
             /**
@@ -17317,6 +17456,30 @@ namespace  {
             }
          
             /**
+             * Dump the current SQL and bindings.
+             *
+             * @return void 
+             * @static 
+             */ 
+            public static function dump()
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                $instance->dump();
+            }
+         
+            /**
+             * Die and dump the current SQL and bindings.
+             *
+             * @return void 
+             * @static 
+             */ 
+            public static function dd()
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                $instance->dd();
+            }
+         
+            /**
              * Register a custom macro.
              *
              * @param string $name
@@ -17333,13 +17496,14 @@ namespace  {
              * Mix another object into the class.
              *
              * @param object $mixin
+             * @param bool $replace
              * @return void 
              * @throws \ReflectionException
              * @static 
              */ 
-            public static function mixin($mixin)
+            public static function mixin($mixin, $replace = true)
             {
-                                \Illuminate\Database\Query\Builder::mixin($mixin);
+                                \Illuminate\Database\Query\Builder::mixin($mixin, $replace);
             }
          
             /**

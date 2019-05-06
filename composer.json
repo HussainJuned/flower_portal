@@ -12,11 +12,12 @@
         "ext-gd": "*",
         "barryvdh/laravel-ide-helper": "^2.5",
         "fideloper/proxy": "^4.0",
-        "laravel/framework": "5.7.*",
+        "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "tcg/voyager": "^1.2"
     },
     "require-dev": {
+        "roave/security-advisories": "dev-master",
         "beyondcode/laravel-dump-server": "^1.0",
         "doctrine/dbal": "^2.9",
         "filp/whoops": "^2.0",
