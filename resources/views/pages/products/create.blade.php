@@ -275,9 +275,10 @@
                         @if(old('category', null) != null)
                             <option selected value="{{ old('category') }}">{{ old('category') }}</option>
                         @endif
-                        <option value="Flower">Flower</option>
-                        <option value="Green">Green</option>
-                        <option value="Dried">Dried</option>
+                        @foreach ($categories as $category)
+                                <option value="{{ $category->name }}">{{ $category->name }}</option>
+                        @endforeach
+
                     </select>
                 </div>
                 <div class="form-group mb-30">

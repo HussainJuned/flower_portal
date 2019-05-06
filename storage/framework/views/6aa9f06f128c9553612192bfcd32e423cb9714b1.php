@@ -262,9 +262,10 @@
                         <?php if(old('category', null) != null): ?>
                             <option selected value="<?php echo e(old('category')); ?>"><?php echo e(old('category')); ?></option>
                         <?php endif; ?>
-                        <option value="Flower">Flower</option>
-                        <option value="Green">Green</option>
-                        <option value="Dried">Dried</option>
+                        <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($category->name); ?>"><?php echo e($category->name); ?></option>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
                     </select>
                 </div>
                 <div class="form-group mb-30">

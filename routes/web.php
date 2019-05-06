@@ -60,3 +60,8 @@ Route::resource('products', 'ProductController');
 Route::get('/artisan/migrate_fresh', 'CommandController@migrate_fresh');
 Route::get('/artisan/migrate', 'CommandController@migrate');
 Route::get('/artisan/config_clear', 'CommandController@config_clear');
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
