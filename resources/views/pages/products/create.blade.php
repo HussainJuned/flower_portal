@@ -321,6 +321,18 @@
                 </div>
 
                 <div class="form-group mb-30">
+                    <label for="grower">Grower</label>
+                    <input type="text" class="form-control{{ $errors->has('grower') ? ' is-invalid' : '' }}"
+                           value="{{ old('grower') }}"
+                           id="grower" name="grower" placeholder="e.g. ">
+                    @if ($errors->has('grower'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('grower') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+                <div class="form-group mb-30">
                     <label for="feature">Feature</label>
                     <select class="form-control" id="feature" name="feature" required>
                         @if(old('feature', null) != null)

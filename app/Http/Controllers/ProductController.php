@@ -117,6 +117,7 @@ class ProductController extends Controller
         $product->available_date_end = $request['available_date_end'];
         $product->stock = $request['stock'];
         $product->feature = $request['feature'];
+        $product->grower = $request['grower'];
 
         if ($request['status']) {
             $product->status = true;

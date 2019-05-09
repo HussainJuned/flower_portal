@@ -308,6 +308,18 @@
                 </div>
 
                 <div class="form-group mb-30">
+                    <label for="grower">Grower</label>
+                    <input type="text" class="form-control<?php echo e($errors->has('grower') ? ' is-invalid' : ''); ?>"
+                           value="<?php echo e(old('grower')); ?>"
+                           id="grower" name="grower" placeholder="e.g. ">
+                    <?php if($errors->has('grower')): ?>
+                        <span class="invalid-feedback" role="alert">
+                            <strong><?php echo e($errors->first('grower')); ?></strong>
+                        </span>
+                    <?php endif; ?>
+                </div>
+
+                <div class="form-group mb-30">
                     <label for="feature">Feature</label>
                     <select class="form-control" id="feature" name="feature" required>
                         <?php if(old('feature', null) != null): ?>
