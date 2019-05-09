@@ -307,6 +307,20 @@
                     <?php endif; ?>
                 </div>
 
+                <div class="form-group mb-30">
+                    <label for="feature">Feature</label>
+                    <select class="form-control" id="feature" name="feature" required>
+                        <?php if(old('feature', null) != null): ?>
+                            <option selected value="<?php echo e(old('feature')); ?>"><?php echo e(old('feature')); ?></option>
+                        <?php endif; ?>
+                        <option value="0">none</option>
+                        <option value="1">Special</option>
+                        <option value="2">Low Price</option>
+                        <option value="3">Exclusive</option>
+
+                    </select>
+                </div>
+
                 <div class="form-group mb-30 row form-check">
                     <label for="">Status</label>
                     <div class="col-md-12 text-center">
