@@ -56,7 +56,7 @@ class SearchController extends Controller
 
 
 
-        return view('pages.search.results_flower', compact('products', 'keyword', 'a_date'));
+        return view('pages.search.new_search', compact('products', 'keyword', 'a_date'));
     }
 
     public function searchSeller(Request $request)
