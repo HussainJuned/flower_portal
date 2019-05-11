@@ -22,7 +22,7 @@
 </head>
 <body>
     <div id="app">
-        @include('partials.header')
+        @include('partials.header_fixed')
 
         <main class="py-4">
             @include('partials.success_message')
