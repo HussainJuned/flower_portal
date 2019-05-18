@@ -72,7 +72,7 @@
                     <?php endif; ?>
                 </div>
 
-                 <div class="form-group mb-30" id="stem_increment">
+                <div class="form-group mb-30" id="stem_increment">
                     <label for="s_increment">Stem Increment</label>
                     <input required type="number"
                            class="form-control<?php echo e($errors->has('s_increment') ? ' is-invalid' : ''); ?>"
@@ -95,7 +95,8 @@
                             <div class="input-group-text">$</div>
                         </div>
 
-                        <input required type="number" class="form-control<?php echo e($errors->has('price') ? ' is-invalid' : ''); ?>"
+                        <input required type="number"
+                               class="form-control<?php echo e($errors->has('price') ? ' is-invalid' : ''); ?>"
                                value="0" min="0.1" max="9999999999" step="0.1"
                                id="price" name="price" disabled>
                         <?php if($errors->has('price')): ?>
@@ -121,7 +122,8 @@
                                     <img src="" class="gambar img-fluid img-thumbnail" id="item-img-output"/>
                                     <figcaption><i class="fas fa-camera"></i></figcaption>
                                 </figure>
-                                <input type="file" class="item-img file center-block box__file"  accept="image/*" />
+                                <input type="file" class="item-img file center-block box__file"
+                                        accept="image/*"/>
                             </label>
                         </div>
                         
@@ -257,7 +259,8 @@
                         <div class="colour_item">
                             <label for="colour13">
                                 <input type="radio" required name="colour" id="colour13" value="mix">
-                                <span class="checkmark" style="background: linear-gradient(to right, red, orange, yellow, green, blue, violet)"></span>
+                                <span class="checkmark"
+                                      style="background: linear-gradient(to right, red, orange, yellow, green, blue, violet)"></span>
                             </label>
                         </div>
 
@@ -277,7 +280,7 @@
                             <option selected value="<?php echo e(old('category')); ?>"><?php echo e(old('category')); ?></option>
                         <?php endif; ?>
                         <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($category->name); ?>"><?php echo e($category->name); ?></option>
+                            <option value="<?php echo e($category->name); ?>"><?php echo e($category->name); ?></option>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                     </select>
@@ -329,6 +332,7 @@
                         <option value="1">Special</option>
                         <option value="2">Low Price</option>
                         <option value="3">Exclusive</option>
+                        <option value="4">Limited</option>
 
                     </select>
                 </div>
@@ -387,6 +391,25 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('footer-js'); ?>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tags').selectize({
+                delimiter: ',',
+                persist: false,
+                valueField: 'tag',
+                labelField: 'tag',
+                searchField: 'tag',
+                options: tags,
+                create: function (input) {
+                    return {
+                        tag: input
+                    }
+                }
+            });
+        });
+
+    </script>
+
     <script type="text/javascript">
         // domReady handler
         $(function () {
@@ -481,13 +504,13 @@
 
             pack.on('change', function (event) {
                 var sv = pack.val();
-                if(sv === 'Bunch') {
+                if (sv === 'Bunch') {
                     nos_box.show();
                     stem_incr_box.hide();
                     isByBunch = true;
                 } else {
                     number_of_stem.val(1);
-                    price_res = number_of_stem.val() *  price_per_s_b.val();
+                    price_res = number_of_stem.val() * price_per_s_b.val();
                     price.val(price_res);
                     nos_box.hide();
                     stem_incr_box.show();
@@ -496,30 +519,28 @@
             });
 
             price_per_s_b.on('change', function (event) {
-                if(isByBunch) {
-                    price_res = number_of_stem.val() *  price_per_s_b.val();
+                if (isByBunch) {
+                    price_res = number_of_stem.val() * price_per_s_b.val();
                 } else {
-                    price_res = $('#s_increment').val() *  price_per_s_b.val();
+                    price_res = $('#s_increment').val() * price_per_s_b.val();
                 }
                 price_res.toFixed(2);
-                price.val(price_res);               
+                price.val(price_res);
             });
 
             number_of_stem.on('change', function (event) {
-                price_res = number_of_stem.val() *  price_per_s_b.val();
-                price_res.toFixed(2);
-
-                price.val(price_res);               
-            });
-
-            $('#s_increment').on('change', function (event) {
-                price_res = $(this).val() *  price_per_s_b.val();
+                price_res = number_of_stem.val() * price_per_s_b.val();
                 price_res.toFixed(2);
 
                 price.val(price_res);
             });
 
+            $('#s_increment').on('change', function (event) {
+                price_res = $(this).val() * price_per_s_b.val();
+                price_res.toFixed(2);
 
+                price.val(price_res);
+            });
 
 
             // drag and drop file
@@ -565,7 +586,7 @@
 
             }*/
 
-            var isAdvancedUpload = function() {
+            var isAdvancedUpload = function () {
                 var div = document.createElement('div');
                 return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window;
             }();
@@ -578,23 +599,25 @@
                 var droppedFiles = false;
                 $form.addClass('has-advanced-upload');
 
-                $form.on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
+                $form.on('drag dragstart dragend dragover dragenter dragleave drop', function (e) {
                     e.preventDefault();
                     e.stopPropagation();
-                }).on('dragover dragenter', function() {
-                        $form.addClass('is-dragover');
-                    }).on('dragleave dragend drop', function() {
-                        $form.removeClass('is-dragover');
-                    }).on('drop', function(e) {
-                        droppedFiles = e.originalEvent.dataTransfer.files;
-                        readFile(e.originalEvent.dataTransfer);
-                    });
+                }).on('dragover dragenter', function () {
+                    $form.addClass('is-dragover');
+                }).on('dragleave dragend drop', function () {
+                    $form.removeClass('is-dragover');
+                }).on('drop', function (e) {
+                    droppedFiles = e.originalEvent.dataTransfer.files;
+                    readFile(e.originalEvent.dataTransfer);
+                });
 
             }
 
             var tags = [
                     <?php $__currentLoopData = $tags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                {tag: "<?php echo e($tag); ?>" },
+                {
+                    tag: "<?php echo e($tag); ?>"
+                },
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             ];
 

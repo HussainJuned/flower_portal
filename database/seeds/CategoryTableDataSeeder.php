@@ -20,7 +20,7 @@ class CategoryTableDataSeeder extends Seeder
             'Rose Spray', 'Shrub / Wood', 'Syringa / Viburnum', 'Veronica', 'Waxflower', 'Wreaths'];
 
         foreach ($categories as $category) {
-            \App\Category::create([
+            \App\Category::firstOrCreate([
                 'name' => $category
             ]);
         }
