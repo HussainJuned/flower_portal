@@ -334,16 +334,21 @@
 @push('footer-js')
 
     <script type="text/javascript">
-        /*$(document).ready(function () {
-            $('#select-date').selectize({
+        $(document).ready(function () {
+            /*$('#select-date').selectize({
                 create: true,
                 sortField: 'text'
+            });*/
+            $(".dropdown-item").on('click', function(){
+                $(this).siblings().removeClass('active');
+                $(this).addClass('active');
             });
-        });*/
+        });
 
         /*$('.dropdown-toggle').hover(function (e) {
            $(this).dropdown('show');
         });*/
+
     </script>
 
 @endpush
