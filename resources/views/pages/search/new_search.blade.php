@@ -43,7 +43,7 @@
         </div>
     </section>--}}
 
-    <section class="container">
+    <section class="container new_search_page">
         <div class="row">
             <div class="col-md-3 col-sm-12">
 
@@ -61,7 +61,8 @@
 
                                 <!--  button groups (default) -->
                                 <div class="btn-group">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-th"></i>
                                     </button>
                                     <div class="dropdown-menu">
@@ -74,7 +75,8 @@
 
                                 <span class="mx-3 sort_by_txt">Sort by</span>
                                 <div class="btn-group">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Description
                                     </button>
                                     <div class="dropdown-menu">
@@ -90,12 +92,238 @@
 
                             <div class="col-xs-12 col-sm-6 text-right">
                                 <div class="mini_search_box">
-                                    <input type="text" class="form-control" id="mini_search" placeholder="search for flower">
+                                    <input type="text" class="form-control" id="mini_search"
+                                           placeholder="search for flower">
                                     <i class="fas fa-search"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="result_column_container">
+                    <ul class="column fragment">
+                        <li id="P98210910" class="product-col">
+                            <div class="product" id="quickbuy_98210910"><a
+                                    data-href="{Voorcod:'ALL', Celcod:'ALL', Partijnr:98210910, HoofdPartijNr:0}"
+                                    data-partial="True" data-scroll="no">
+                                    <div class="images">
+                                        <div class="image">
+                                            <div class="img"
+                                                 style="background-image: url('../uploads/BuyererAcc_product_12.png')"></div>
+                                        </div>
+                                    </div>
+                                    <div class="specs">
+                                        <ul class="clearfix">
+                                            <li><span>Length</span><span> 60 </span></li>
+                                            <li><span>stock</span> <span>?</span></li>
+                                            <li><span>Total:</span> <span>?</span></li>
+                                            <li><span style="width: 100%"> Available from stock<div
+                                                            class="product-status green"></div></span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="info"><h6>Zwaardvaren (P. Bunch)</h6>
+                                        <div class="price-info"><span class="price">$ 6<sup> 17</sup> <div class="add_to_cart"><i class="fas fa-plus"></i></div></span>
+                                            <span
+                                                class="each">Price per piece</span></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        <li id="P98210910" class="product-col">
+                            <div class="product" id="quickbuy_98210910"><a
+                                    data-href="{Voorcod:'ALL', Celcod:'ALL', Partijnr:98210910, HoofdPartijNr:0}"
+                                    data-partial="True" data-scroll="no">
+                                    <div class="images">
+                                        <div class="image">
+                                            <div class="img"
+                                                 style="background-image: url('../uploads/BuyererAcc_product_12.png')"></div>
+                                        </div>
+                                    </div>
+                                    <div class="specs">
+                                        <ul class="clearfix">
+                                            <li><span>Length</span><span> 60 </span></li>
+                                            <li><span>stock</span> <span>?</span></li>
+                                            <li><span>Total:</span> <span>?</span></li>
+                                            <li><span style="width: 100%"> Available from stock<div
+                                                            class="product-status green"></div></span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="info"><h6>Zwaardvaren (P. Bunch)</h6>
+                                        <div class="price-info"><span class="price">$ 6<sup> 17</sup> <div class="add_to_cart"><i class="fas fa-plus"></i></div></span>
+                                            <span
+                                                class="each">Price per piece</span></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        <li id="P98210910" class="product-col">
+                            <div class="product" id="quickbuy_98210910"><a
+                                    data-href="{Voorcod:'ALL', Celcod:'ALL', Partijnr:98210910, HoofdPartijNr:0}"
+                                    data-partial="True" data-scroll="no">
+                                    <div class="images">
+                                        <div class="image">
+                                            <div class="img"
+                                                 style="background-image: url('../uploads/BuyererAcc_product_12.png')"></div>
+                                        </div>
+                                    </div>
+                                    <div class="specs">
+                                        <ul class="clearfix">
+                                            <li><span>Length</span><span> 60 </span></li>
+                                            <li><span>stock</span> <span>?</span></li>
+                                            <li><span>Total:</span> <span>?</span></li>
+                                            <li><span style="width: 100%"> Available from stock<div
+                                                            class="product-status green"></div></span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="info"><h6>Zwaardvaren (P. Bunch)</h6>
+                                        <div class="price-info"><span class="price">$ 6<sup> 17</sup> <div class="add_to_cart"><i class="fas fa-plus"></i></div></span>
+                                            <span
+                                                class="each">Price per piece</span></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        <li id="P98210910" class="product-col">
+                            <div class="product" id="quickbuy_98210910"><a
+                                    data-href="{Voorcod:'ALL', Celcod:'ALL', Partijnr:98210910, HoofdPartijNr:0}"
+                                    data-partial="True" data-scroll="no">
+                                    <div class="images">
+                                        <div class="image">
+                                            <div class="img"
+                                                 style="background-image: url('../uploads/BuyererAcc_product_12.png')"></div>
+                                        </div>
+                                    </div>
+                                    <div class="specs">
+                                        <ul class="clearfix">
+                                            <li><span>Length</span><span> 60 </span></li>
+                                            <li><span>stock</span> <span>?</span></li>
+                                            <li><span>Total:</span> <span>?</span></li>
+                                            <li><span style="width: 100%"> Available from stock<div
+                                                            class="product-status green"></div></span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="info"><h6>Zwaardvaren (P. Bunch)</h6>
+                                        <div class="price-info"><span class="price">$ 6<sup> 17</sup> <div class="add_to_cart"><i class="fas fa-plus"></i></div></span>
+                                            <span
+                                                class="each">Price per piece</span></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        <li id="P98210910" class="product-col">
+                            <div class="product" id="quickbuy_98210910"><a
+                                    data-href="{Voorcod:'ALL', Celcod:'ALL', Partijnr:98210910, HoofdPartijNr:0}"
+                                    data-partial="True" data-scroll="no">
+                                    <div class="images">
+                                        <div class="image">
+                                            <div class="img"
+                                                 style="background-image: url('../uploads/BuyererAcc_product_12.png')"></div>
+                                        </div>
+                                    </div>
+                                    <div class="specs">
+                                        <ul class="clearfix">
+                                            <li><span>Length</span><span> 60 </span></li>
+                                            <li><span>stock</span> <span>?</span></li>
+                                            <li><span>Total:</span> <span>?</span></li>
+                                            <li><span style="width: 100%"> Available from stock<div
+                                                            class="product-status green"></div></span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="info"><h6>Zwaardvaren (P. Bunch)</h6>
+                                        <div class="price-info"><span class="price">$ 6<sup> 17</sup> <div class="add_to_cart"><i class="fas fa-plus"></i></div></span>
+                                            <span
+                                                class="each">Price per piece</span></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        <li id="P98210910" class="product-col">
+                            <div class="product" id="quickbuy_98210910"><a
+                                    data-href="{Voorcod:'ALL', Celcod:'ALL', Partijnr:98210910, HoofdPartijNr:0}"
+                                    data-partial="True" data-scroll="no">
+                                    <div class="images">
+                                        <div class="image">
+                                            <div class="img"
+                                                 style="background-image: url('../uploads/BuyererAcc_product_12.png')"></div>
+                                        </div>
+                                    </div>
+                                    <div class="specs">
+                                        <ul class="clearfix">
+                                            <li><span>Length</span><span> 60 </span></li>
+                                            <li><span>stock</span> <span>?</span></li>
+                                            <li><span>Total:</span> <span>?</span></li>
+                                            <li><span style="width: 100%"> Available from stock<div
+                                                            class="product-status green"></div></span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="info"><h6>Zwaardvaren (P. Bunch)</h6>
+                                        <div class="price-info"><span class="price">$ 6<sup> 17</sup> <div class="add_to_cart"><i class="fas fa-plus"></i></div></span>
+                                            <span
+                                                class="each">Price per piece</span></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        <li id="P98210910" class="product-col">
+                            <div class="product" id="quickbuy_98210910"><a
+                                    data-href="{Voorcod:'ALL', Celcod:'ALL', Partijnr:98210910, HoofdPartijNr:0}"
+                                    data-partial="True" data-scroll="no">
+                                    <div class="images">
+                                        <div class="image">
+                                            <div class="img"
+                                                 style="background-image: url('../uploads/BuyererAcc_product_12.png')"></div>
+                                        </div>
+                                    </div>
+                                    <div class="specs">
+                                        <ul class="clearfix">
+                                            <li><span>Length</span><span> 60 </span></li>
+                                            <li><span>stock</span> <span>?</span></li>
+                                            <li><span>Total:</span> <span>?</span></li>
+                                            <li><span style="width: 100%"> Available from stock<div
+                                                            class="product-status green"></div></span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="info"><h6>Zwaardvaren (P. Bunch)</h6>
+                                        <div class="price-info"><span class="price">$ 6<sup> 17</sup> <div class="add_to_cart"><i class="fas fa-plus"></i></div></span>
+                                            <span
+                                                class="each">Price per piece</span></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        <li id="P98210910" class="product-col">
+                            <div class="product" id="quickbuy_98210910"><a
+                                    data-href="{Voorcod:'ALL', Celcod:'ALL', Partijnr:98210910, HoofdPartijNr:0}"
+                                    data-partial="True" data-scroll="no">
+                                    <div class="images">
+                                        <div class="image">
+                                            <div class="img"
+                                                 style="background-image: url('../uploads/BuyererAcc_product_12.png')"></div>
+                                        </div>
+                                    </div>
+                                    <div class="specs">
+                                        <ul class="clearfix">
+                                            <li><span>Length</span><span> 60 </span></li>
+                                            <li><span>stock</span> <span>?</span></li>
+                                            <li><span>Total:</span> <span>?</span></li>
+                                            <li><span style="width: 100%"> Available from stock<div
+                                                            class="product-status green"></div></span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="info"><h6>Zwaardvaren (P. Bunch)</h6>
+                                        <div class="price-info"><span class="price">$ 6<sup> 17</sup> <div class="add_to_cart"><i class="fas fa-plus"></i></div></span>
+                                            <span
+                                                class="each">Price per piece</span></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+
+
+
+
+                    </ul>
                 </div>
 
             </div>
