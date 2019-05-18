@@ -95,10 +95,10 @@ class SearchController extends Controller
     }
 
 
-    public function apiFlowerAll()
+    public function apiFlowerAll(Request $request)
     {
-        $products = Product::paginate(16);
-
-        return $products;
+        return Product::where('name', 'like' , '%' .$request->keywords . '%')
+            ->orWhere('description', 'like' , '%' .$request->keywords . '%')
+            ->paginate(16);
     }
 }

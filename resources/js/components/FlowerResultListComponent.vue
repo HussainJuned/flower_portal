@@ -43,13 +43,17 @@
         name: "flower-result-list-component",
         data() {
             return {
-                products: []
+                products: [],
+            }
+        },
+        watch: {
+            keywords(after, before) {
+                console.log(this.keywords);
+                this.fetch();
             }
         },
         created() {
-            axios.get('/api/flower/all').then(
-                response => this.products = response.data.data
-            );
+            this.fetch();
         },
         methods: {
             splitPrice1(str) {
@@ -59,8 +63,14 @@
             splitPrice2(str) {
                 var arr = str.split('.');
                 return arr[1];
+            },
+            fetch() {
+                axios.get('/api/flower', { params: { keywords: this.keywords } })
+                    .then(response => this.products = response.data.data)
+                    .catch(error => {});
             }
-        }
+        },
+        props: ['keywords']
 
 
     }

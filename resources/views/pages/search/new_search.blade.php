@@ -93,7 +93,7 @@
                             <div class="col-xs-12 col-sm-6 text-right">
                                 <div class="mini_search_box">
                                     <input type="text" class="form-control" id="mini_search"
-                                           placeholder="search for flower">
+                                           placeholder="search for flower" v-model="keywords">
                                     <i class="fas fa-search"></i>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@
                 </div>
 
                 <div class="result_column_container">
-                        <flower-result-list-component></flower-result-list-component>
+                        <flower-result-list-component v-bind:keywords="keywords"></flower-result-list-component>
                 </div>
 
             </div>
@@ -131,13 +131,9 @@
 
         var app = new Vue({
             el: '#app_result',
-            /*data: {
-                products: [
-                    {name: 'Ronunculus Red'},
-                    {name: 'Ronunculus White'},
-                    {name: 'Rose Red'},
-                ]
-            }*/
+            data: {
+                'keywords': null
+            }
         });
 
     </script>

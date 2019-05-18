@@ -4259,12 +4259,14 @@ __webpack_require__.r(__webpack_exports__);
       products: []
     };
   },
+  watch: {
+    keywords: function keywords(after, before) {
+      console.log(this.keywords);
+      this.fetch();
+    }
+  },
   created: function created() {
-    var _this = this;
-
-    axios.get('/api/flower/all').then(function (response) {
-      return _this.products = response.data.data;
-    });
+    this.fetch();
   },
   methods: {
     splitPrice1: function splitPrice1(str) {
@@ -4274,8 +4276,20 @@ __webpack_require__.r(__webpack_exports__);
     splitPrice2: function splitPrice2(str) {
       var arr = str.split('.');
       return arr[1];
+    },
+    fetch: function fetch() {
+      var _this = this;
+
+      axios.get('/api/flower', {
+        params: {
+          keywords: this.keywords
+        }
+      }).then(function (response) {
+        return _this.products = response.data.data;
+      }).catch(function (error) {});
     }
-  }
+  },
+  props: ['keywords']
 });
 
 /***/ }),

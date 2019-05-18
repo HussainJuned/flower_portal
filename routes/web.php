@@ -63,7 +63,7 @@ Route::get('/artisan/config_clear', 'CommandController@config_clear');
 
 
 // search api
-Route::get('/api/flower/all', 'SearchController@apiFlowerAll')->name('api.flower.all');
+Route::get('/api/flower', 'SearchController@apiFlowerAll')->name('api.flower.all');
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
