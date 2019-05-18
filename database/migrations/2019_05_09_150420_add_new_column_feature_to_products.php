@@ -15,7 +15,7 @@ class AddNewColumnFeatureToProducts extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->integer('feature')->default(0);
-            // 0 = normal, 1 = special, 2 = low price, 3 = exclusive
+            // 0 = normal, 1 = special, 2 = low price, 3 = exclusive, 4 = Limited
         });
     }
 

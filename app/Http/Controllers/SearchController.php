@@ -95,5 +95,10 @@ class SearchController extends Controller
     }
 
 
+    public function apiFlowerAll()
+    {
+        $products = Product::paginate(16);
 
+        return $products;
+    }
 }

@@ -101,9 +101,9 @@
                     </div>
                 </div>
 
-                <div class="result_column_container">
-                    <ul class="column fragment">
-                        <li id="P98210910" class="product-col">
+                <div class="result_column_container" id="app_result">
+                        <flower-result-list-component></flower-result-list-component>
+                       {{-- <li id="P98210910" class="product-col">
                             <div class="product" id="quickbuy_98210910"><a
                                     data-href="{Voorcod:'ALL', Celcod:'ALL', Partijnr:98210910, HoofdPartijNr:0}"
                                     data-partial="True" data-scroll="no">
@@ -291,8 +291,8 @@
                                     </div>
                                 </a>
                             </div>
-                        </li>
-                        <li id="P98210910" class="product-col">
+                        </li>--}}
+                        {{--<li class="product-col">
                             <div class="product" id="quickbuy_98210910"><a
                                     data-href="{Voorcod:'ALL', Celcod:'ALL', Partijnr:98210910, HoofdPartijNr:0}"
                                     data-partial="True" data-scroll="no">
@@ -318,12 +318,7 @@
                                     </div>
                                 </a>
                             </div>
-                        </li>
-
-
-
-
-                    </ul>
+                        </li>--}}
                 </div>
 
             </div>
@@ -348,6 +343,18 @@
         /*$('.dropdown-toggle').hover(function (e) {
            $(this).dropdown('show');
         });*/
+
+
+        var app = new Vue({
+            el: '#app_result',
+            /*data: {
+                products: [
+                    {name: 'Ronunculus Red'},
+                    {name: 'Ronunculus White'},
+                    {name: 'Rose Red'},
+                ]
+            }*/
+        });
 
     </script>
 

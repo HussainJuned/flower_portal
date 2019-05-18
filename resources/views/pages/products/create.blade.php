@@ -345,6 +345,7 @@
                         <option value="1">Special</option>
                         <option value="2">Low Price</option>
                         <option value="3">Exclusive</option>
+                        <option value="4">Limited</option>
 
                     </select>
                 </div>
