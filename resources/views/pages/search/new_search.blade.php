@@ -50,7 +50,7 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="result_summary_box">
-                    <h1>There are <span class="result_count">2309</span> products with <span class="result_keyword">Flower</span>
+                    <h1>Total <span class="result_count">2309</span> results found</span>
                     </h1>
                 </div>
 
@@ -65,38 +65,34 @@
                                         <i class="fas fa-th"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Separated link</a>
+                                        <a class="dropdown-item" href="#"><i class="fas fa-list"></i></a>
+                                        <a class="dropdown-item" href="#"><i class="fas fa-align-justify"></i></a>
+                                        <a class="dropdown-item active" href="#"><i class="fas fa-th"></i></a>
+                                        <a class="dropdown-item" href="#"><i class="fas fa-grip-horizontal"></i></a>
                                     </div>
                                 </div>
 
-                                <span class="sort_by_txt">Sort by</span>
+                                <span class="mx-3 sort_by_txt">Sort by</span>
                                 <div class="btn-group">
                                     <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Description
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Separated link</a>
+                                        <a class="dropdown-item" href="#">Description</a>
+                                        <a class="dropdown-item" href="#">Discount</a>
+                                        <a class="dropdown-item" href="#">Color</a>
+                                        <a class="dropdown-item active" href="#">Lowest Price</a>
+                                        <a class="dropdown-item" href="#">Highest Price</a>
                                     </div>
                                 </div>
 
                             </div>
 
                             <div class="col-xs-12 col-sm-6 text-right">
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text"><i class="fas fa-search"></i></div>
-                                    </div>
-                                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="keyword">
+                                <div class="mini_search_box">
+                                    <input type="text" class="form-control" id="mini_search" placeholder="search for flower">
+                                    <i class="fas fa-search"></i>
                                 </div>
-                                <span class="icon_box"><i class="fas fa-print"></i></span>
                             </div>
                         </div>
                     </div>
@@ -115,6 +111,10 @@
                 create: true,
                 sortField: 'text'
             });
+        });*/
+
+        /*$('.dropdown-toggle').hover(function (e) {
+           $(this).dropdown('show');
         });*/
     </script>
 
