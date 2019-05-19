@@ -52,6 +52,25 @@ namespace App{
 
 namespace App{
 /**
+ * App\Category
+ *
+ * @property int $id
+ * @property string $name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Category newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Category newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Category query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Category whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Category whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Category whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Category whereUpdatedAt($value)
+ */
+	class Category extends \Eloquent {}
+}
+
+namespace App{
+/**
  * App\Order
  *
  * @property int $id
@@ -116,7 +135,12 @@ namespace App{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int $s_increment
+ * @property int $feature
+ * @property string|null $grower
+ * @property mixed $tag_names
+ * @property-read \Illuminate\Database\Eloquent\Collection $tags
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\ProductReview[] $reviews
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Conner\Tagging\Model\Tagged[] $tagged
  * @property-read \App\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product newQuery()
@@ -127,6 +151,8 @@ namespace App{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereColour($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereFeature($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereGrower($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereHeight($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereName($value)
@@ -141,8 +167,30 @@ namespace App{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereStock($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product withAllTags($tagNames)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product withAnyTag($tagNames)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product withoutTags($tagNames)
  */
 	class Product extends \Eloquent {}
+}
+
+namespace App{
+/**
+ * App\ProductCategory
+ *
+ * @property int $id
+ * @property string $name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ProductCategory newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ProductCategory newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ProductCategory query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ProductCategory whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ProductCategory whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ProductCategory whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ProductCategory whereUpdatedAt($value)
+ */
+	class ProductCategory extends \Eloquent {}
 }
 
 namespace App{
@@ -177,22 +225,29 @@ namespace App{
  * App\User
  *
  * @property int $id
+ * @property int|null $role_id
  * @property string $name
  * @property string $email
+ * @property string|null $avatar
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string $password
  * @property string|null $remember_token
+ * @property string|null $settings
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\BuyerAccountReview[] $buyerAccountReviews
+ * @property mixed $locale
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Order[] $orders_as_buyer
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Order[] $orders_as_seller
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Product[] $products
+ * @property-read \TCG\Voyager\Models\Role|null $role
+ * @property-read \Illuminate\Database\Eloquent\Collection|\TCG\Voyager\Models\Role[] $roles
  * @property-read \App\Userinfo $userinfo
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereAvatar($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEmailVerifiedAt($value)
@@ -200,6 +255,8 @@ namespace App{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRoleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereSettings($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  */
 	class User extends \Eloquent {}

@@ -9,6 +9,8 @@
                     <a href="<?php echo e(route('products.create')); ?>" class="btn btn-primary">Upload another product</a>
                 </div>
             <?php endif; ?>
+            
+            <?php echo $__env->make('partials.errors_message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
             <?php if(count($products) < 1): ?>
                 <div class="col-sm-12 mb-3">
@@ -25,14 +27,14 @@
                 <a href="" class="btn btn-warning">Export product to excel</a>
             </div>
             <div class="col-sm-6 my-3">
-                <form action="" enctype="multipart/form-data">
+                <form action="<?php echo e(route('product.import.excel')); ?>" enctype="multipart/form-data" method="post">
                     <?php echo csrf_field(); ?>
 
                     <label for="choose_excel">
                         Import Prdouct from excel
                         <input type="file" id="choose_excel" name="excel_file" class="form-control">
                     </label>
-                    <a href="" class="btn btn-primary">Submit</a>
+                    <button class="btn btn-primary" type="submit">Submit</button>
                 </form>
             </div>
 

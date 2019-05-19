@@ -67,6 +67,7 @@ Route::get('/api/flower', 'SearchController@apiFlowerAll')->name('api.flower.all
 
 // product export import
 Route::get('/my-products/export', 'ProductExcelController@exportToExcel')->name('product.export.excel');
+Route::post('/my-products/import', 'ProductExcelController@importFromExcel')->name('product.import.excel');
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

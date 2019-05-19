@@ -10,6 +10,8 @@
                     <a href="{{ route('products.create') }}" class="btn btn-primary">Upload another product</a>
                 </div>
             @endif
+            
+            @include('partials.errors_message')
 
             @if(count($products) < 1)
                 <div class="col-sm-12 mb-3">
@@ -26,14 +28,14 @@
                 <a href="" class="btn btn-warning">Export product to excel</a>
             </div>
             <div class="col-sm-6 my-3">
-                <form action="" enctype="multipart/form-data">
+                <form action="{{ route('product.import.excel') }}" enctype="multipart/form-data" method="post">
                     @csrf
 
                     <label for="choose_excel">
                         Import Prdouct from excel
                         <input type="file" id="choose_excel" name="excel_file" class="form-control">
                     </label>
-                    <a href="" class="btn btn-primary">Submit</a>
+                    <button class="btn btn-primary" type="submit">Submit</button>
                 </form>
             </div>
 
