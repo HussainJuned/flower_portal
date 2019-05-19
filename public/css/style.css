@@ -415,6 +415,9 @@ select#select-date:focus {
     font-weight: 300;
     font-size: 16px;
     overflow-wrap: break-word;
+    list-style: none;
+    margin: 0;
+    cursor: pointer;
 }
 
 
@@ -1067,11 +1070,12 @@ section#app_result.container {
 }
 
 .side-filter h6:hover {
-    background: #333;
+    background: #f7f7f7;
 }
 
 .side-filter h6::after {
-    content: '\f10a';
+    content: none;
+    /*content: '\f10a';*/
     font-family: ionicons;
     position: absolute;
     right: 15px;
@@ -1096,6 +1100,8 @@ section#app_result.container {
     float: left;
     width: 100%;
     display: block;
+    margin: 0;
+    padding: 0 0;
 }
 
 .side-filter ul.specs li {
@@ -1205,7 +1211,7 @@ section#app_result.container {
 }
 
 .side-filter ul.list li a {
-    color: #333;
+    color: #666;
     font-weight: 300;
     padding: 5px 15px;
     display: block;
@@ -1229,10 +1235,7 @@ section#app_result.container {
     top: 5px;
 }
 
-.side-filter ul.list li a:hover {
-    color: #333;
-    background: #333;
-}
+.side-filter ul.list li a:hover {color: #5b92f9;background: #fafafa;}
 
 .side-filter ul.list li a.acive {
     color: #333;

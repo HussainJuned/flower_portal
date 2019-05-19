@@ -55,16 +55,12 @@
                         <div class="content overflow-container">
                             <div class="filter-content-height">
                                 <ul class="list no-active-highlight">
-                                    <li id="aanbod_1" onclick="controller.onFilterChange()"><a data-href="{Aanbod: 1}"
-                                                                                               data-partial=""
-                                                                                               data-scroll="no">Everything</a>
+                                    <li id="aanbod_1" onclick="onFilterChange()"><a data-href="{Aanbod: 1}">Length</a>
                                     </li>
-                                    <li class="active" id="aanbod_2" onclick="controller.onFilterChange()"><a
-                                            data-href="{Aanbod: 2}" data-partial="" data-scroll="no">Our collection</a>
+                                    <li class="active" id="aanbod_2" onclick="onFilterChange()"><a
+                                            data-href="{Aanbod: 2}" data-partial="" data-scroll="no">Origin</a>
                                     </li>
-                                    <li id="aanbod_3" onclick="controller.onFilterChange()"><a data-href="{Aanbod: 3}"
-                                                                                               data-partial=""
-                                                                                               data-scroll="no">Partners</a>
+                                    <li id="aanbod_3" onclick="onFilterChange()"><a data-href="{Aanbod: 3}">Category</a>
                                     </li>
                                 </ul>
                             </div>
