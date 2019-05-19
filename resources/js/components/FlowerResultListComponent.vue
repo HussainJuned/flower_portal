@@ -70,11 +70,20 @@
             },
             fetch() {
                 axios.get('/api/flower', { params: { keywords: this.keywords, sort_by: this.sort_by } })
-                    .then(response => this.products = response.data.data)
+                    .then(response => {
+                        this.products = response.data.data;
+                        $('.result_count').text(response.data.total);
+                    })
                     .catch(error => {});
+
             }
         },
-        props: ['keywords', 'sort_by']
+        props: ['keywords', 'sort_by'],
+        computed: {
+            resultCount () {
+                return this.products.total;
+            }
+        }
 
 
     }

@@ -991,3 +991,367 @@ section#app_result.container {
 .wider .product .info.exclusive::before {
     content: none;
 }
+
+/* filter */
+.imported {
+    content: "yay, file support!";
+}
+
+#close-funnel {
+    position: absolute;
+    right: 10px;
+    height: 34px;
+    width: 34px;
+    line-height: 34px;
+    color: #fff;
+    font-size: 32px;
+    text-align: center;
+    top: 10px;
+}
+
+.side-filter {
+    border: 1px solid rgba(0, 0, 0, 0.02);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.02);
+    border-radius: 2px;
+    margin-bottom: 20px;
+    float: left;
+    width: 100%;
+    background: #fff;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.side-filter.placeholder {
+    width: 100%;
+    height: 47px;
+    border: 1px dashed #333;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.02);
+}
+
+.side-filter h6 {
+    padding: 15px;
+    margin: 0;
+    font-weight: 500;
+    position: relative;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.side-filter h6 i.info {
+    color: #333;
+    margin-left: 10px;
+}
+
+.side-filter h6 i.info:hover {
+    color: #333;
+    cursor: pointer;
+}
+
+.side-filter h6 i.drag {
+    display: inline-block;
+    color: #5b92f9;
+    margin: -15px 15px -15px -15px;
+    padding: 15px;
+    border-right: 1px dashed #eee;
+}
+
+.side-filter h6 i:hover {
+    cursor: move;
+}
+
+.side-filter h6 i.checked {
+    display: inline-block;
+    color: #333;
+    margin: 0 10px 0 0;
+}
+
+.side-filter h6:hover {
+    background: #333;
+}
+
+.side-filter h6::after {
+    content: '\f10a';
+    font-family: ionicons;
+    position: absolute;
+    right: 15px;
+    font-size: 14px;
+    display: block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    top: 13px;
+}
+
+.side-filter.active h6 {
+    border-bottom: 1px dashed #eee;
+}
+
+.side-filter.active h6::after {
+    content: '\f104';
+}
+
+.side-filter ul {
+    float: left;
+    width: 100%;
+    display: block;
+}
+
+.side-filter ul.specs li {
+    color: #333;
+    font-weight: 300;
+    padding: 5px 15px;
+    display: block;
+    position: relative;
+    float: left;
+    width: 100%;
+}
+
+.side-filter ul.specs li:first-child {
+    margin-top: 10px;
+}
+
+.side-filter ul.specs li:last-child {
+    margin-bottom: 10px;
+}
+
+.side-filter ul.specs li:hover {
+    background: #f9f9f9;
+}
+
+.side-filter ul.specs li span {
+    float: left;
+    width: 50%;
+    display: block;
+    margin: 0;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+}
+
+.side-filter ul.specs li span:first-child {
+    color: #333;
+    text-align: left;
+}
+
+.side-filter ul.specs li span .color {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    border-radius: 50%;
+    cursor: help;
+}
+
+.side-filter ul.color {
+    padding: 15px 15px 5px 15px;
+}
+
+.side-filter ul.color li {
+    float: left;
+    width: 16.666666667%;
+    height: 25px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.side-filter ul.color li.item-active input[type="checkbox"]:checked + label:after {
+    position: absolute;
+    content: '';
+    right: -2px;
+    bottom: -2px;
+    display: block;
+    width: 10px;
+    border: 1px solid #fff;
+    height: 10px;
+    color: #fff;
+    font-size: 12px;
+    background: #333;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 13px;
+    -webkit-animation-name: bounce;
+    animation-name: bounce;
+    -webkit-animation-duration: .5s;
+    animation-duration: .5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.side-filter ul.color li input[type="checkbox"] {
+    display: none;
+}
+
+.side-filter ul.color li label {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #333;
+    position: relative;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.side-filter ul.list li:first-child {
+    margin-top: 10px;
+}
+
+.side-filter ul.list li:last-child {
+    margin-bottom: 10px;
+}
+
+.side-filter ul.list li a {
+    color: #333;
+    font-weight: 300;
+    padding: 5px 15px;
+    display: block;
+    font-size: 14px;
+    position: relative;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.side-filter ul.list li a::before {
+    content: '';
+    display: block;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #333;
+    border-radius: 2px;
+    float: left;
+    margin-right: 15px;
+    position: relative;
+    top: 5px;
+}
+
+.side-filter ul.list li a:hover {
+    color: #333;
+    background: #333;
+}
+
+.side-filter ul.list li a.acive {
+    color: #333;
+}
+
+.side-filter ul.list li.active a {
+    color: #333;
+    font-weight: 400;
+}
+
+.side-filter ul.list li.active a::before {
+    border: 1px solid #333;
+}
+
+.side-filter ul.list li.active a::after {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 15px;
+    display: block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #333;
+    -webkit-animation-name: bounce;
+    animation-name: bounce;
+    -webkit-animation-duration: .5s;
+    animation-duration: .5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.side-filter ul.list li.artgrplink a {
+    font-size: 12px;
+}
+
+.side-filter ul.list li.artgrplink {
+    padding-left: 2em;
+}
+
+.side-filter ul.list li.artgrplink:first-child {
+    margin-top: unset;
+}
+
+.side-filter ul.list li.artgrplink:last-child {
+    margin-bottom: unset;
+}
+
+.side-filter ul.check li {
+    padding: 5px 15px;
+    position: relative;
+}
+
+.side-filter ul.check li:hover {
+    background: #333;
+}
+
+.side-filter ul.check li:first-child {
+    margin-top: 10px;
+}
+
+.side-filter ul.check li:last-child {
+    margin-bottom: 10px;
+}
+
+.side-filter ul.check li input[type="checkbox"] {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.side-filter ul.check li input[type="checkbox"]:checked + label {
+    font-weight: 400;
+    color: #333;
+}
+
+.side-filter ul.check li input[type="checkbox"]:checked + label::before {
+    content: '\f122';
+    font-family: ionicons;
+    border: 1px solid #333;
+    background: #333;
+}
+
+.side-filter ul.check li input[type="checkbox"] + label {
+    margin: 0;
+    font-weight: 300;
+    cursor: pointer;
+    color: #333;
+    font-size: 14px;
+    display: block;
+}
+
+.side-filter ul.check li input[type="checkbox"] + label::before {
+    content: '';
+    display: block;
+    text-align: center;
+    line-height: 13px;
+    font-size: 12px;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #333;
+    background-color: #333;
+    border-radius: 2px;
+    float: left;
+    margin-right: 15px;
+    position: relative;
+    top: 4px;
+}
+
+.side-filter ul.check li input[type="checkbox"] + label span {
+    font-size: 14px;
+    position: absolute;
+    right: 15px;
+    top: 0;
+    height: 34px;
+    line-height: 34px;
+    opacity: .5;
+}
+
+.side-filter#filter_aanbod h6 i {
+    cursor: default;
+}

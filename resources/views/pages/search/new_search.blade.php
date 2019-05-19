@@ -47,6 +47,35 @@
         <div class="row">
             <div class="col-md-3 col-sm-12">
 
+
+                <ul id="filter_aanbod" class="side-filter filter-opened">
+                    <li class="animate-height open visible opened">
+                        <div><h6 class="opener aanbod-opener"><i class="fas fa-tag"></i> Filter
+                            </h6></div>
+                        <div class="content overflow-container">
+                            <div class="filter-content-height">
+                                <ul class="list no-active-highlight">
+                                    <li id="aanbod_1" onclick="controller.onFilterChange()"><a data-href="{Aanbod: 1}"
+                                                                                               data-partial=""
+                                                                                               data-scroll="no">Everything</a>
+                                    </li>
+                                    <li class="active" id="aanbod_2" onclick="controller.onFilterChange()"><a
+                                            data-href="{Aanbod: 2}" data-partial="" data-scroll="no">Our collection</a>
+                                    </li>
+                                    <li id="aanbod_3" onclick="controller.onFilterChange()"><a data-href="{Aanbod: 3}"
+                                                                                               data-partial=""
+                                                                                               data-scroll="no">Partners</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="scrollbar" data-view="" style="display: none;">
+                                <div class="track-piece" style="height: 122px; top: 0px;"></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="result_summary_box">
@@ -66,25 +95,32 @@
                                         <i class="fas fa-th"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#" v-on:click="changeView(1)"><i class="fas fa-list"></i></a>
+                                        <a class="dropdown-item" href="#" v-on:click="changeView(1)"><i
+                                                class="fas fa-list"></i></a>
                                         {{--                                        <a class="dropdown-item" href="#"><i class="fas fa-align-justify"></i></a>--}}
-                                        <a class="dropdown-item active" href="#" v-on:click="changeView(2)"><i class="fas fa-th"></i></a>
-                                        <a class="dropdown-item" href="#" v-on:click="changeView(3)"><i class="fas fa-grip-horizontal"></i></a>
+                                        <a class="dropdown-item active" href="#" v-on:click="changeView(2)"><i
+                                                class="fas fa-th"></i></a>
+                                        <a class="dropdown-item" href="#" v-on:click="changeView(3)"><i
+                                                class="fas fa-grip-horizontal"></i></a>
                                     </div>
                                 </div>
 
                                 <span class="mx-3 sort_by_txt">Sort by</span>
                                 <div class="btn-group">
                                     <button class="btn btn-secondary dropdown-toggle" type="button"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="sort_btn">
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                            id="sort_btn">
                                         @{{ sort_by.replace("_", " ") }}
                                     </button>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="#" v-on:click="sortBy('name')">Name</a>
-                                        <a class="dropdown-item" href="#" v-on:click="sortBy('description')">Description</a>
+                                        <a class="dropdown-item" href="#"
+                                           v-on:click="sortBy('description')">Description</a>
                                         <a class="dropdown-item" href="#" v-on:click="sortBy('colour')">Color</a>
-                                        <a class="dropdown-item active" href="#" v-on:click="sortBy('price')">Lowest Price</a>
-                                        <a class="dropdown-item" href="#" v-on:click="sortBy('price_high')">Highest Price</a>
+                                        <a class="dropdown-item active" href="#" v-on:click="sortBy('price')">Lowest
+                                            Price</a>
+                                        <a class="dropdown-item" href="#" v-on:click="sortBy('price_high')">Highest
+                                            Price</a>
                                     </div>
                                 </div>
 
@@ -102,7 +138,8 @@
                 </div>
 
                 <div class="result_column_container">
-                        <flower-result-list-component v-bind:keywords="keywords" v-bind:sort_by="sort_by"></flower-result-list-component>
+                    <flower-result-list-component v-bind:keywords="keywords"
+                                                  v-bind:sort_by="sort_by"></flower-result-list-component>
                 </div>
 
             </div>
@@ -118,7 +155,7 @@
                 create: true,
                 sortField: 'text'
             });*/
-            $(".dropdown-item").on('click', function(){
+            $(".dropdown-item").on('click', function () {
                 $(this).siblings().removeClass('active');
                 $(this).addClass('active');
             });

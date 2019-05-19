@@ -4290,11 +4290,17 @@ __webpack_require__.r(__webpack_exports__);
           sort_by: this.sort_by
         }
       }).then(function (response) {
-        return _this.products = response.data.data;
+        _this.products = response.data.data;
+        $('.result_count').text(response.data.total);
       }).catch(function (error) {});
     }
   },
-  props: ['keywords', 'sort_by']
+  props: ['keywords', 'sort_by'],
+  computed: {
+    resultCount: function resultCount() {
+      return this.products.total;
+    }
+  }
 });
 
 /***/ }),
