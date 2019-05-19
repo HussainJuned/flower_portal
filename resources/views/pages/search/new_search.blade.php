@@ -43,7 +43,7 @@
         </div>
     </section>--}}
 
-    <section class="container new_search_page"  id="app_result">
+    <section class="container new_search_page" id="app_result" xmlns:v-on="http://www.w3.org/1999/xhtml">
         <div class="row">
             <div class="col-md-3 col-sm-12">
 
@@ -80,11 +80,11 @@
                                         Description
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Description</a>
-                                        <a class="dropdown-item" href="#">Discount</a>
-                                        <a class="dropdown-item" href="#">Color</a>
-                                        <a class="dropdown-item active" href="#">Lowest Price</a>
-                                        <a class="dropdown-item" href="#">Highest Price</a>
+                                        <a class="dropdown-item" href="#" v-on:click="sortBy('description')">Description</a>
+                                        <a class="dropdown-item" href="#" v-on:click="sortBy('stock')">Stock</a>
+                                        <a class="dropdown-item" href="#" v-on:click="sortBy('colour')">Color</a>
+                                        <a class="dropdown-item active" href="#" v-on:click="sortBy('price')">Lowest Price</a>
+                                        <a class="dropdown-item" href="#" v-on:click="sortBy('price_high')">Highest Price</a>
                                     </div>
                                 </div>
 
@@ -102,7 +102,7 @@
                 </div>
 
                 <div class="result_column_container">
-                        <flower-result-list-component v-bind:keywords="keywords"></flower-result-list-component>
+                        <flower-result-list-component v-bind:keywords="keywords" v-bind:sort_by="sort_by"></flower-result-list-component>
                 </div>
 
             </div>
@@ -132,7 +132,13 @@
         var app = new Vue({
             el: '#app_result',
             data: {
-                'keywords': null
+                'keywords': null,
+                'sort_by': 'price'
+            },
+            methods: {
+                sortBy(sort_by) {
+                    this.sort_by = sort_by;
+                }
             }
         });
 

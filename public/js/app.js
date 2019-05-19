@@ -4252,6 +4252,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "flower-result-list-component",
   data: function data() {
@@ -4261,7 +4262,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     keywords: function keywords(after, before) {
-      console.log(this.keywords);
+      this.fetch();
+    },
+    sort_by: function sort_by(after, before) {
+      console.log(this.sort_by);
       this.fetch();
     }
   },
@@ -4282,14 +4286,15 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/api/flower', {
         params: {
-          keywords: this.keywords
+          keywords: this.keywords,
+          sort_by: this.sort_by
         }
       }).then(function (response) {
         return _this.products = response.data.data;
       }).catch(function (error) {});
     }
   },
-  props: ['keywords']
+  props: ['keywords', 'sort_by']
 });
 
 /***/ }),
@@ -46297,6 +46302,12 @@ var render = function() {
                   _c("span", [_vm._v("pack:")]),
                   _vm._v(" "),
                   _c("span", [_vm._v(_vm._s(product.pack))])
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("span", [_vm._v("colour:")]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v(_vm._s(product.colour))])
                 ]),
                 _vm._v(" "),
                 _c("li", [

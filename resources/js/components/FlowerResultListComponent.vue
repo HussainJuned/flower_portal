@@ -14,6 +14,7 @@
                             <li><span>Length</span><span> {{ product.height }} </span></li>
                             <li><span>stock</span> <span>{{ product.stock }}</span></li>
                             <li><span>pack:</span> <span>{{ product.pack }}</span></li>
+                            <li><span>colour:</span> <span>{{ product.colour }}</span></li>
                             <li><span style="width: 100%" class="availability"> Available from stock<div
                                 v-bind:class="{green: product.status}"
                                 class="product-status"></div></span></li>
@@ -48,7 +49,10 @@
         },
         watch: {
             keywords(after, before) {
-                console.log(this.keywords);
+                this.fetch();
+            },
+            sort_by(after, before) {
+                console.log(this.sort_by);
                 this.fetch();
             }
         },
@@ -65,12 +69,12 @@
                 return arr[1];
             },
             fetch() {
-                axios.get('/api/flower', { params: { keywords: this.keywords } })
+                axios.get('/api/flower', { params: { keywords: this.keywords, sort_by: this.sort_by } })
                     .then(response => this.products = response.data.data)
                     .catch(error => {});
             }
         },
-        props: ['keywords']
+        props: ['keywords', 'sort_by']
 
 
     }

@@ -97,8 +97,20 @@ class SearchController extends Controller
 
     public function apiFlowerAll(Request $request)
     {
-        return Product::where('name', 'like' , '%' .$request->keywords . '%')
-            ->orWhere('description', 'like' , '%' .$request->keywords . '%')
-            ->paginate(16);
+        $product = Product::where('name', 'like' , '%' .$request->keywords . '%')->orWhere('description', 'like' , '%' .$request->keywords . '%');
+
+        if ($request->has('sort_by')) {
+            if($request->sort_by === 'price_high') {
+                $product->orderBy('price', 'desc');
+            } else {
+                $product->orderBy($request->sort_by, 'asc');
+            }
+
+        }
+
+//        $product->paginate(16);
+
+//        return response()->json($product);
+        return $product->paginate(16);
     }
 }
