@@ -453,6 +453,7 @@ button.btn.btn-secondary.dropdown-toggle {
     padding: 5px 15px;
     line-height: 21px;
     border-radius: 40px;
+    text-transform: capitalize;
 }
 
 i.fas.fa-th {

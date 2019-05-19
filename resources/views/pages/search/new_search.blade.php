@@ -76,12 +76,12 @@
                                 <span class="mx-3 sort_by_txt">Sort by</span>
                                 <div class="btn-group">
                                     <button class="btn btn-secondary dropdown-toggle" type="button"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Description
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="sort_btn">
+                                        @{{ sort_by.replace("_", " ") }}
                                     </button>
                                     <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#" v-on:click="sortBy('name')">Name</a>
                                         <a class="dropdown-item" href="#" v-on:click="sortBy('description')">Description</a>
-                                        <a class="dropdown-item" href="#" v-on:click="sortBy('stock')">Stock</a>
                                         <a class="dropdown-item" href="#" v-on:click="sortBy('colour')">Color</a>
                                         <a class="dropdown-item active" href="#" v-on:click="sortBy('price')">Lowest Price</a>
                                         <a class="dropdown-item" href="#" v-on:click="sortBy('price_high')">Highest Price</a>
