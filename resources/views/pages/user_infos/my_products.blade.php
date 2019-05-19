@@ -22,7 +22,20 @@
                 </div>
             @endif
 
+            <div class="col-sm-6 my-3">
+                <a href="" class="btn btn-warning">Export product to excel</a>
+            </div>
+            <div class="col-sm-6 my-3">
+                <form action="" enctype="multipart/form-data">
+                    @csrf
 
+                    <label for="choose_excel">
+                        Import Prdouct from excel
+                        <input type="file" id="choose_excel" name="excel_file" class="form-control">
+                    </label>
+                    <a href="" class="btn btn-primary">Submit</a>
+                </form>
+            </div>
 
             @foreach($products as $product)
                 <div class="col-sm-12 mb-3">

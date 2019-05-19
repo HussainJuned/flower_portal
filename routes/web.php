@@ -65,6 +65,9 @@ Route::get('/artisan/config_clear', 'CommandController@config_clear');
 // search api
 Route::get('/api/flower', 'SearchController@apiFlowerAll')->name('api.flower.all');
 
+// product export import
+Route::get('/my-products/export', 'ProductExcelController@exportToExcel')->name('product.export.excel');
+
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });

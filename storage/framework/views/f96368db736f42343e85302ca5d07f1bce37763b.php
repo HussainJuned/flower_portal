@@ -21,15 +21,28 @@
                 </div>
             <?php endif; ?>
 
+            <div class="col-sm-6 my-3">
+                <a href="" class="btn btn-warning">Export product to excel</a>
+            </div>
+            <div class="col-sm-6 my-3">
+                <form action="" enctype="multipart/form-data">
+                    <?php echo csrf_field(); ?>
 
+                    <label for="choose_excel">
+                        Import Prdouct from excel
+                        <input type="file" id="choose_excel" name="excel_file" class="form-control">
+                    </label>
+                    <a href="" class="btn btn-primary">Submit</a>
+                </form>
+            </div>
 
             <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="col-sm-12 mb-3">
-                    <?php echo $__env->make('partials.product_box', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                    <?php echo $__env->make('partials.product_box', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
     </div>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Juned\PhpstormProjects\flowerapp\resources\views/pages/user_infos/my_products.blade.php ENDPATH**/ ?>
