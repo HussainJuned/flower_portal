@@ -66,10 +66,10 @@
                                         <i class="fas fa-th"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#"><i class="fas fa-list"></i></a>
-                                        <a class="dropdown-item" href="#"><i class="fas fa-align-justify"></i></a>
-                                        <a class="dropdown-item active" href="#"><i class="fas fa-th"></i></a>
-                                        <a class="dropdown-item" href="#"><i class="fas fa-grip-horizontal"></i></a>
+                                        <a class="dropdown-item" href="#" v-on:click="changeView(1)"><i class="fas fa-list"></i></a>
+                                        {{--                                        <a class="dropdown-item" href="#"><i class="fas fa-align-justify"></i></a>--}}
+                                        <a class="dropdown-item active" href="#" v-on:click="changeView(2)"><i class="fas fa-th"></i></a>
+                                        <a class="dropdown-item" href="#" v-on:click="changeView(3)"><i class="fas fa-grip-horizontal"></i></a>
                                     </div>
                                 </div>
 
@@ -138,6 +138,33 @@
             methods: {
                 sortBy(sort_by) {
                     this.sort_by = sort_by;
+                },
+                changeView(type) {
+                    let $resultContainer = $('.result_column_container');
+                    switch (type) {
+                        case 1:
+                            if ($resultContainer.hasClass('thinner')) {
+                                $resultContainer.removeClass('thinner');
+                            }
+                            $resultContainer.addClass('wider');
+                            break;
+                        case 2:
+                            if ($resultContainer.hasClass('thinner')) {
+                                $resultContainer.removeClass('thinner');
+                            }
+                            if ($resultContainer.hasClass('wider')) {
+                                $resultContainer.removeClass('wider');
+                            }
+                            break;
+                        case 3:
+                            if ($resultContainer.hasClass('wider')) {
+                                $resultContainer.removeClass('wider');
+                            }
+                            $resultContainer.addClass('thinner');
+                            console.log('reached');
+                            break;
+
+                    }
                 }
             }
         });
