@@ -13,12 +13,13 @@
                     <thead>
                     <tr>
                         <td scope="col">Date</td>
-                        <td scope="col">Product</td>
-                        <td scope="col">Quantity</td>
-                        <td scope="col">Unit Price</td>
-                        <td scope="col">Total Price</td>
                         <td scope="col">Status</td>
-                        <td scope="col">Review</td>
+                        <td scope="col">Seller</td>
+{{--                        <td scope="col">Product</td>--}}
+{{--                        <td scope="col">Quantity</td>--}}
+{{--                        <td scope="col">Unit Price</td>--}}
+                        <td scope="col">Total Price</td>
+{{--                        <td scope="col">Review</td>--}}
                         <td scope="col">Action</td>
                     </tr>
                     </thead>
@@ -26,18 +27,19 @@
                     @foreach ($upcoming_orders as $order)
                         <tr scope="row">
                             <td>{{ $order->order_date }}</td>
-                            <td>{{ $order->product->name }}</td>
-                            <td>{{ $order->quantity }}</td>
-                            <td>{{ $order->unit_price }}</td>
-                            <td>{{ $order->total_price }}</td>
                             <td>{{ $order->statusToString() }}</td>
-                            <td>
+{{--                            <td>{{ $order->product->name }}</td>--}}
+{{--                            <td>{{ $order->quantity }}</td>--}}
+{{--                            <td>{{ $order->unit_price }}</td>--}}
+                            <td>{{ $order->seller->name }}</td>
+                            <td>{{ $order->total_price }}</td>
+                           {{-- <td>
                                 @if ($order->productReview)
                                     {{ $order->productReview->quality }} / 5
                                 @else
                                     n/a
                                 @endif
-                            </td>
+                            </td>--}}
                             <td><a href="{{ route('buyer_dashboard.order.view', ['order' => $order->id]) }}"
                                    class="btn btn-primary">view</a>
 
@@ -48,7 +50,7 @@
 
                                 <!-- Modal -->
                                 <div class="modal fade" id="buo_{{ $order->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLabel">Edit Status</h5>
@@ -86,12 +88,13 @@
                     <thead>
                     <tr>
                         <td scope="col">Date</td>
-                        <td scope="col">Product</td>
+                        {{--<td scope="col">Product</td>
                         <td scope="col">Quantity</td>
-                        <td scope="col">Unit Price</td>
-                        <td scope="col">total</td>
+                        <td scope="col">Unit Price</td>--}}
                         <td scope="col">Status</td>
-                        <td scope="col">Review</td>
+                        <td scope="col">Seller</td>
+                        <td scope="col">Total Price</td>
+{{--                        <td scope="col">Review</td>--}}
                         <td scope="col">Action</td>
                     </tr>
                     </thead>
@@ -99,28 +102,29 @@
                     @foreach ($past_orders as $order)
                         <tr scope="row">
                             <td>{{ $order->order_date }}</td>
-                            <td>{{ $order->product->name }}</td>
-                            <td>{{ $order->quantity }}</td>
-                            <td>{{ $order->unit_price }}</td>
-                            <td>{{ $order->total_price }}</td>
+{{--                            <td>{{ $order->product->name }}</td>--}}
+{{--                            <td>{{ $order->quantity }}</td>--}}
+{{--                            <td>{{ $order->unit_price }}</td>--}}
                             <td>{{ $order->statusToString() }}</td>
-                            <td>
+                            <td>{{ $order->seller->name }}</td>
+                            <td>{{ $order->total_price }}</td>
+                            {{--<td>
                                 @if ($order->productReview)
                                     {{ $order->productReview->quality }} / 5
                                 @else
                                     n/a
                                 @endif
-                            </td>
+                            </td>--}}
                             <td><a href="{{ route('buyer_dashboard.order.view', ['order' => $order->id]) }}"
                                    class="btn btn-primary">view</a>
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bpo_{{ $order->id }}">
+                                {{--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bpo_{{ $order->id }}">
                                     edit
-                                </button>
+                                </button>--}}
 
                                 <!-- Modal -->
                                 <div class="modal fade" id="bpo_{{ $order->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLabel">Edit Status</h5>
