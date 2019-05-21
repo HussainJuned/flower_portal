@@ -4293,6 +4293,9 @@ __webpack_require__.r(__webpack_exports__);
         _this.products = response.data.data;
         $('.result_count').text(response.data.total);
       }).catch(function (error) {});
+    },
+    routeSP: function routeSP(product_id) {
+      return "{{ route('products.show', ['product' => " + product_id + "]) }}";
     }
   },
   props: ['keywords', 'sort_by'],
@@ -39181,7 +39184,7 @@ return jQuery;
 
   /*--------------------------------------------------------------------------*/
 
-  // Exports lodash.
+  // Export lodash.
   var _ = runInContext();
 
   // Some AMD build optimizers, like r.js, check for condition patterns like:
@@ -46279,7 +46282,7 @@ var render = function() {
     _vm._l(_vm.products, function(product) {
       return _c("li", { staticClass: "product-col" }, [
         _c("div", { staticClass: "product" }, [
-          _c("a", [
+          _c("a", { attrs: { href: "/products/" + product.id } }, [
             _c("div", { staticClass: "images" }, [
               _c("div", { staticClass: "image" }, [
                 _c("div", {

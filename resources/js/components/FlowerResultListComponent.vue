@@ -2,7 +2,7 @@
     <ul class="column fragment">
         <li class="product-col" v-for="product in products">
             <div class="product">
-                <a>
+                <a v-bind:href="'/products/' + product.id">
                     <div class="images">
                         <div class="image">
                             <div class="img"
@@ -76,6 +76,9 @@
                     })
                     .catch(error => {});
 
+            },
+            routeSP(product_id){
+                return "{{ route('products.show', ['product' => " + product_id + "]) }}"
             }
         },
         props: ['keywords', 'sort_by'],
