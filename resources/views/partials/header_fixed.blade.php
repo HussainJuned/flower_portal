@@ -156,7 +156,7 @@
                 <div class="my-3 shopping-cart">
 
                     <template v-if="cart_products">
-                        <div class="item" v-for="cart_product in cart_products">
+                        <section class="item" v-for="cart_product in cart_products">
                             <div class="buttons">
                                 <span class="delete-btn"></span>
                                 <span class="like-btn"></span>
@@ -176,14 +176,14 @@
                                 <button class="plus-btn" type="button" name="button" >
                                     <img src="{{ asset('images/icons/plus.svg') }}" alt="+"/>
                                 </button>
-                                <input type="text" name="name" value="1" min="1" class="q">
+                                <input type="text" name="name" value="1" min="1" class="q" v-bind:max="cart_product.stock">
                                 <button class="minus-btn" type="button" name="button">
                                     <img src="{{ asset('images/icons/minus.svg') }}" alt="-"/>
                                 </button>
                             </div>
 
-                            <div class="total-price">$@{{ cart_product.price }}</div>
-                        </div>
+                            <div class="total-price">$ <span class="price_value" v-bind:data-price="cart_product.price">@{{ cart_product.price }}</span> </div>
+                        </section>
                     </template>
 
                     <!-- Product #2 -->
@@ -272,7 +272,12 @@
                 e.preventDefault();
                 var $this = $(this);
                 var $input = $this.closest('div').find('input');
+
+                var $price = $this.closest('section').find('.price_value');
+                var price_value = parseFloat($price.attr('data-price'));
+
                 var value = parseInt($input.val());
+
 
                 if (value > 1) {
                     value = value - 1;
@@ -282,6 +287,10 @@
 
                 $input.val(value);
 
+                var cal_total = (value * price_value);
+                cal_total = cal_total.toFixed(2);
+                $price.text(cal_total);
+
             });
 
             $('.shopping-cart').on('click', '.plus-btn', function(e) {
@@ -289,15 +298,23 @@
 
                 var $this = $(this);
                 var $input = $this.closest('div').find('input');
-                var value = parseInt($input.val());
 
-                if (value < 100) {
+                var $price = $this.closest('section').find('.price_value');
+                var price_value = parseFloat($price.attr('data-price'));
+
+                var value = parseInt($input.val());
+                var max = parseInt($input.attr('max'));
+
+                if (value < max) {
                     value = value + 1;
                 } else {
-                    value =100;
+                    value =max;
                 }
 
                 $input.val(value);
+                var cal_total = (value * price_value);
+                cal_total = cal_total.toFixed(2);
+                $price.text(cal_total);
             });
 
             $('.like-btn').on('click', function() {
