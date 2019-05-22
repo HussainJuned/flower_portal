@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Conner\Tagging\Taggable;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +11,7 @@ class Product extends Model
     use Taggable;
 
     protected $guarded = [];
+    protected $appends = ['ad'];
 
     public function user()
     {
@@ -48,5 +50,10 @@ class Product extends Model
         }
 
         return $dates;
+    }
+
+    public function getAdAttribute()
+    {
+        return $this->availableDates();
     }
 }

@@ -1467,7 +1467,7 @@ div#cart {
 .shopping-cart .description span:last-child {
     font-weight: 300;
     margin-top: 8px;
-    color: #86939E;
+    color: #63cb6c;
 }
 
 /* Product Quantity */
@@ -1538,6 +1538,10 @@ div#cart {
     color: white;
     padding: 0;
     margin: 0;
+}
+
+.delivery_date {
+    margin-top: 13px;
 }
 
 @keyframes popup {

@@ -169,7 +169,7 @@
                             <div class="description">
                                 <span>@{{ cart_product.name }}</span>
                                 <span>@{{ cart_product.stock }} in stock</span>
-                                <span>@{{ cart_product.colour }}</span>
+                                <span>Delivery Date: </span>
                             </div>
 
                             <div class="quantity">
@@ -180,77 +180,23 @@
                                 <button class="minus-btn" type="button" name="button">
                                     <img src="{{ asset('images/icons/minus.svg') }}" alt="-"/>
                                 </button>
+                                <div class="delivery_date">
+                                    <select class="" id="order_date" name="order_date" required>
+                                        <option selected v-for="ad in cart_product.ad" v-bind:value="ad">@{{ ad }}</option>
+                                    </select>
+                                </div>
                             </div>
+
 
                             <div class="total-price">$ <span class="price_value" v-bind:data-price="cart_product.price">@{{ cart_product.price }}</span> </div>
                         </section>
                     </template>
 
-                    <!-- Product #2 -->
-                    {{--<div class="item">
-                        <div class="buttons">
-                            <span class="delete-btn"></span>
-                            <span class="like-btn"></span>
-                        </div>
-
-                        <div class="image">
-                            <img src="{{ asset('uploads/AmdadHussainJuned_product_2.png') }}" class="img-fluid" alt=""/>
-                        </div>
-
-                        <div class="description">
-                            <span>Maison Margiela</span>
-                            <span>Future Sneakers</span>
-                            <span>White</span>
-                        </div>
-
-                        <div class="quantity">
-                            <button class="plus-btn" type="button" name="button">
-                                <img src="{{ asset('images/icons/plus.svg') }}" alt=""/>
-                            </button>
-                            <input type="text" name="name" value="1">
-                            <button class="minus-btn" type="button" name="button">
-                                <img src="{{ asset('images/icons/minus.svg') }}" alt=""/>
-                            </button>
-                        </div>
-
-                        <div class="total-price">$870</div>
-                    </div>--}}
-
-                    <!-- Product #3 -->
-                    {{--<div class="item">
-                        <div class="buttons">
-                            <span class="delete-btn"></span>
-                            <span class="like-btn"></span>
-                        </div>
-
-                        <div class="image">
-                            <img src="{{ asset('uploads/AmdadHussainJuned_product_1.png') }}" class="img-fluid" alt=""/>
-                        </div>
-
-                        <div class="description">
-                            <span>Our Legacy</span>
-                            <span>Brushed Scarf</span>
-                            <span>Brown</span>
-                        </div>
-
-                        <div class="quantity">
-                            <button class="plus-btn" type="button" name="button">
-                                <img src="{{ asset('images/icons/plus.svg') }}" alt=""/>
-                            </button>
-                            <input type="text" name="name" value="1">
-                            <button class="minus-btn" type="button" name="button">
-                                <img src="{{ asset('images/icons/minus.svg') }}" alt=""/>
-                            </button>
-                        </div>
-
-                        <div class="total-price">$349</div>
-                    </div>--}}
-
 
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" {{--data-dismiss="modal"--}}>Check Out</button>
+                <button type="button" class="btn btn-primary" {{--data-dismiss="modal"--}}>Order Now</button>
             </div>
         </div>
     </div>
