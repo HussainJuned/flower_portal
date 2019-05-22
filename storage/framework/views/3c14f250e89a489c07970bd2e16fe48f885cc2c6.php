@@ -45,7 +45,7 @@
 
                                 <!-- Modal -->
                                 <div class="modal fade" id="ur_<?php echo e($order->id); ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLabel">Edit Status</h5>
@@ -55,7 +55,7 @@
                                             </div>
                                             <div class="modal-body">
                                                 <div class="my-3">
-                                                    <?php echo $__env->make('partials.seller_order_prompt', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                                    <?php echo $__env->make('partials.seller_order_prompt', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -117,7 +117,7 @@
 
                                 <!-- Modal -->
                                 <div class="modal fade" id="po_<?php echo e($order->id); ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLabel">Edit Status</h5>
@@ -127,7 +127,7 @@
                                             </div>
                                             <div class="modal-body">
                                                 <div class="my-3">
-                                                    <?php echo $__env->make('partials.seller_order_prompt', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                                    <?php echo $__env->make('partials.seller_order_prompt', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -150,4 +150,5 @@
         </div>
     </div>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Juned\PhpstormProjects\flowerapp\resources\views/pages/dashboards/seller_dashboard.blade.php ENDPATH**/ ?>

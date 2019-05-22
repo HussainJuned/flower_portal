@@ -30,6 +30,10 @@
             <?php echo $__env->yieldContent('content'); ?>
         </main>
     </div>
+    <?php echo $__env->make('partials.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <script src="<?php echo e(asset('js/app.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/custom.js')); ?>"></script>
+    <?php echo $__env->yieldPushContent('footer-js'); ?>
 </body>
 </html>
 <?php /**PATH C:\Users\Juned\PhpstormProjects\flowerapp\resources\views/layouts/app.blade.php ENDPATH**/ ?>

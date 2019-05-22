@@ -12,12 +12,13 @@
                     <thead>
                     <tr>
                         <td scope="col">Date</td>
-                        <td scope="col">Product</td>
-                        <td scope="col">Quantity</td>
-                        <td scope="col">Unit Price</td>
-                        <td scope="col">Total Price</td>
                         <td scope="col">Status</td>
-                        <td scope="col">Review</td>
+                        <td scope="col">Seller</td>
+
+
+
+                        <td scope="col">Total Price</td>
+
                         <td scope="col">Action</td>
                     </tr>
                     </thead>
@@ -25,18 +26,13 @@
                     <?php $__currentLoopData = $upcoming_orders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr scope="row">
                             <td><?php echo e($order->order_date); ?></td>
-                            <td><?php echo e($order->product->name); ?></td>
-                            <td><?php echo e($order->quantity); ?></td>
-                            <td><?php echo e($order->unit_price); ?></td>
-                            <td><?php echo e($order->total_price); ?></td>
                             <td><?php echo e($order->statusToString()); ?></td>
-                            <td>
-                                <?php if($order->productReview): ?>
-                                    <?php echo e($order->productReview->quality); ?> / 5
-                                <?php else: ?>
-                                    n/a
-                                <?php endif; ?>
-                            </td>
+
+
+
+                            <td><?php echo e($order->seller->name); ?></td>
+                            <td><?php echo e($order->total_price); ?></td>
+                           
                             <td><a href="<?php echo e(route('buyer_dashboard.order.view', ['order' => $order->id])); ?>"
                                    class="btn btn-primary">view</a>
 
@@ -47,7 +43,7 @@
 
                                 <!-- Modal -->
                                 <div class="modal fade" id="buo_<?php echo e($order->id); ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLabel">Edit Status</h5>
@@ -57,7 +53,7 @@
                                             </div>
                                             <div class="modal-body">
                                                 <div class="my-3">
-                                                    <?php echo $__env->make('partials.buyer_order_prompt', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                                    <?php echo $__env->make('partials.buyer_order_prompt', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -85,12 +81,11 @@
                     <thead>
                     <tr>
                         <td scope="col">Date</td>
-                        <td scope="col">Product</td>
-                        <td scope="col">Quantity</td>
-                        <td scope="col">Unit Price</td>
-                        <td scope="col">total</td>
+                        
                         <td scope="col">Status</td>
-                        <td scope="col">Review</td>
+                        <td scope="col">Seller</td>
+                        <td scope="col">Total Price</td>
+
                         <td scope="col">Action</td>
                     </tr>
                     </thead>
@@ -98,28 +93,21 @@
                     <?php $__currentLoopData = $past_orders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr scope="row">
                             <td><?php echo e($order->order_date); ?></td>
-                            <td><?php echo e($order->product->name); ?></td>
-                            <td><?php echo e($order->quantity); ?></td>
-                            <td><?php echo e($order->unit_price); ?></td>
-                            <td><?php echo e($order->total_price); ?></td>
+
+
+
                             <td><?php echo e($order->statusToString()); ?></td>
-                            <td>
-                                <?php if($order->productReview): ?>
-                                    <?php echo e($order->productReview->quality); ?> / 5
-                                <?php else: ?>
-                                    n/a
-                                <?php endif; ?>
-                            </td>
+                            <td><?php echo e($order->seller->name); ?></td>
+                            <td><?php echo e($order->total_price); ?></td>
+                            
                             <td><a href="<?php echo e(route('buyer_dashboard.order.view', ['order' => $order->id])); ?>"
                                    class="btn btn-primary">view</a>
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bpo_<?php echo e($order->id); ?>">
-                                    edit
-                                </button>
+                                
 
                                 <!-- Modal -->
                                 <div class="modal fade" id="bpo_<?php echo e($order->id); ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLabel">Edit Status</h5>
@@ -129,7 +117,7 @@
                                             </div>
                                             <div class="modal-body">
                                                 <div class="my-3">
-                                                    <?php echo $__env->make('partials.buyer_order_prompt', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                                    <?php echo $__env->make('partials.buyer_order_prompt', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -153,4 +141,5 @@
         </div>
     </div>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Juned\PhpstormProjects\flowerapp\resources\views/pages/dashboards/buyer_dashboard.blade.php ENDPATH**/ ?>
