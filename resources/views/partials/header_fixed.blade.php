@@ -1,8 +1,9 @@
-<header class="mb-3">
+<header class="mb-3" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container">
 
-            <a class="navbar-brand" href="{{ route('intro') }}">Floral Portal <br> <span class="text-dark">Flowerat</span></a>
+            <a class="navbar-brand" href="{{ route('intro') }}">Floral Portal <br> <span
+                    class="text-dark">Flowerat</span></a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,7 +23,8 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('search.intro') }}"><i class="fas fa-search"></i> <span class="sr-only">Search</span></a>
+                        <a class="nav-link" href="{{ route('search.intro') }}"><i class="fas fa-search"></i> <span
+                                class="sr-only">Search</span></a>
                     </li>
 
                 </ul>
@@ -39,7 +41,8 @@
                         </li>
                     @else
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle my_account_btn" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle my_account_btn" href="#"
+                               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 My Account
                             </a>
 
@@ -91,17 +94,21 @@
                                                      document.getElementById('logout-form').submit();">
                                     <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }}
                                 </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                      style="display: none;">
                                     @csrf
                                 </form>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav_btn_fav" href="{{ route('login') }}"> <i class="fas fa-heart"></i> </a>
+                            <a class="nav-link nav_btn_fav" href="{{ route('login') }}"> <i class="fas fa-heart"></i>
+                            </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link nav_btn_cart" href="{{ route('login') }}"><i class="fas fa-shopping-cart"></i> Shopping Cart  </a>
+                            <a class="nav-link nav_btn_cart" href="{{ route('login') }}" data-toggle="modal"
+                               data-target="#cart">
+                                <i class="fas fa-shopping-cart"></i> Shopping Cart </a>
                         </li>
 
 
@@ -134,3 +141,181 @@
         </div>
     </div>
 </header>
+
+<!-- Modal -->
+<div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Shopping Cart</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="my-3 shopping-cart">
+
+                    <template v-if="cart_products">
+                        <div class="item" v-for="cart_product in cart_products">
+                            <div class="buttons">
+                                <span class="delete-btn"></span>
+                                <span class="like-btn"></span>
+                            </div>
+
+                            <div class="image">
+                                <img class="img-fluid" v-bind:src="  '/' + cart_product.photo_url " alt=""/>
+                            </div>
+
+                            <div class="description">
+                                <span>@{{ cart_product.name }}</span>
+                                <span>@{{ cart_product.stock }} in stock</span>
+                                <span>@{{ cart_product.colour }}</span>
+                            </div>
+
+                            <div class="quantity">
+                                <button class="plus-btn" type="button" name="button" >
+                                    <img src="{{ asset('images/icons/plus.svg') }}" alt="+"/>
+                                </button>
+                                <input type="text" name="name" value="1" min="1" class="q">
+                                <button class="minus-btn" type="button" name="button">
+                                    <img src="{{ asset('images/icons/minus.svg') }}" alt="-"/>
+                                </button>
+                            </div>
+
+                            <div class="total-price">$@{{ cart_product.price }}</div>
+                        </div>
+                    </template>
+
+                    <!-- Product #2 -->
+                    {{--<div class="item">
+                        <div class="buttons">
+                            <span class="delete-btn"></span>
+                            <span class="like-btn"></span>
+                        </div>
+
+                        <div class="image">
+                            <img src="{{ asset('uploads/AmdadHussainJuned_product_2.png') }}" class="img-fluid" alt=""/>
+                        </div>
+
+                        <div class="description">
+                            <span>Maison Margiela</span>
+                            <span>Future Sneakers</span>
+                            <span>White</span>
+                        </div>
+
+                        <div class="quantity">
+                            <button class="plus-btn" type="button" name="button">
+                                <img src="{{ asset('images/icons/plus.svg') }}" alt=""/>
+                            </button>
+                            <input type="text" name="name" value="1">
+                            <button class="minus-btn" type="button" name="button">
+                                <img src="{{ asset('images/icons/minus.svg') }}" alt=""/>
+                            </button>
+                        </div>
+
+                        <div class="total-price">$870</div>
+                    </div>--}}
+
+                    <!-- Product #3 -->
+                    {{--<div class="item">
+                        <div class="buttons">
+                            <span class="delete-btn"></span>
+                            <span class="like-btn"></span>
+                        </div>
+
+                        <div class="image">
+                            <img src="{{ asset('uploads/AmdadHussainJuned_product_1.png') }}" class="img-fluid" alt=""/>
+                        </div>
+
+                        <div class="description">
+                            <span>Our Legacy</span>
+                            <span>Brushed Scarf</span>
+                            <span>Brown</span>
+                        </div>
+
+                        <div class="quantity">
+                            <button class="plus-btn" type="button" name="button">
+                                <img src="{{ asset('images/icons/plus.svg') }}" alt=""/>
+                            </button>
+                            <input type="text" name="name" value="1">
+                            <button class="minus-btn" type="button" name="button">
+                                <img src="{{ asset('images/icons/minus.svg') }}" alt=""/>
+                            </button>
+                        </div>
+
+                        <div class="total-price">$349</div>
+                    </div>--}}
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" {{--data-dismiss="modal"--}}>Check Out</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="popup">
+    <p>Added to cart Successfully</p>
+</div>
+
+
+@push('footer-js')
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+
+            $(document).on('click', '.minus-btn', function(e) {
+                e.preventDefault();
+                var $this = $(this);
+                var $input = $this.closest('div').find('input');
+                var value = parseInt($input.val());
+
+                if (value > 1) {
+                    value = value - 1;
+                } else {
+                    value = 1;
+                }
+
+                $input.val(value);
+
+            });
+
+            $('.shopping-cart').on('click', '.plus-btn', function(e) {
+                e.preventDefault();
+
+                var $this = $(this);
+                var $input = $this.closest('div').find('input');
+                var value = parseInt($input.val());
+
+                if (value < 100) {
+                    value = value + 1;
+                } else {
+                    value =100;
+                }
+
+                $input.val(value);
+            });
+
+            $('.like-btn').on('click', function() {
+                $(this).toggleClass('is-active');
+
+            });
+
+            $(document).on('click', '.delete-btn', function (event) {
+                console.log('hi');
+                $(this).parent().parent().remove();
+            });
+
+
+        })
+    </script>
+
+    <script>
+
+    </script>
+
+@endpush

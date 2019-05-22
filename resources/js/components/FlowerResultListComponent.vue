@@ -27,11 +27,14 @@
                         <div class="product-label exclusive" v-else-if="product.feature === 3">EXCLUSIVE</div>
                         <div class="product-label exclusive" v-else-if="product.feature === 4">LIMITED</div>
                         <h6>{{ product.name }}</h6>
-                        <div class="price-info"><span class="price">$ {{ splitPrice1(product.price) }}<sup> {{ splitPrice2(product.price) }}</sup> <div
-                            class="add_to_cart"><i
-                            class="fas fa-plus"></i></div></span>
-                            <span
-                                class="each">Price per piece</span></div>
+                        <div class="price-info">
+                            <span class="price">$ {{ splitPrice1(product.price) }}<sup> {{ splitPrice2(product.price) }}</sup>
+                                <div class="add_to_cart" v-on:click.stop.prevent.self="addToCart(product)">
+                                    <i class="fas fa-plus" v-on:click.stop.prevent.self="addToCart(product)"></i>
+                                </div>
+                            </span>
+                            <span class="each">Price per piece</span>
+                        </div>
                     </div>
                 </a>
             </div>
@@ -69,21 +72,32 @@
                 return arr[1];
             },
             fetch() {
-                axios.get('/api/flower', { params: { keywords: this.keywords, sort_by: this.sort_by } })
+                axios.get('/api/flower', {params: {keywords: this.keywords, sort_by: this.sort_by}})
                     .then(response => {
                         this.products = response.data.data;
                         $('.result_count').text(response.data.total);
                     })
-                    .catch(error => {});
+                    .catch(error => {
+                    });
 
             },
-            routeSP(product_id){
+            routeSP(product_id) {
                 return "{{ route('products.show', ['product' => " + product_id + "]) }}"
+            },
+            addToCart(product) {
+                this.cart_products.push(product);
+                this.popup();
+            },
+            popup() {
+                $('.popup').addClass('slidein');
+                setTimeout(function (e) {
+                    $('.popup').removeClass('slidein');
+                }.bind(this), 2050);
             }
         },
-        props: ['keywords', 'sort_by'],
+        props: ['keywords', 'sort_by', 'cart_products'],
         computed: {
-            resultCount () {
+            resultCount() {
                 return this.products.total;
             }
         }

@@ -134,7 +134,7 @@
                 </div>
 
                 <div class="result_column_container">
-                    <flower-result-list-component v-bind:keywords="keywords"
+                    <flower-result-list-component v-bind:keywords="keywords" v-bind:cart_products="cart_products"
                                                   v-bind:sort_by="sort_by"></flower-result-list-component>
                 </div>
 
@@ -163,10 +163,11 @@
 
 
         var app = new Vue({
-            el: '#app_result',
+            el: '#app',
             data: {
                 'keywords': null,
-                'sort_by': 'price'
+                'sort_by': 'price',
+                'cart_products': [],
             },
             methods: {
                 sortBy(sort_by) {

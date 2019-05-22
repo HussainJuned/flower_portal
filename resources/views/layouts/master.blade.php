@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
-<div id="">
+<div id="app">
     @include('partials.header_fixed')
     @include('partials.success_message')
     @yield('content')

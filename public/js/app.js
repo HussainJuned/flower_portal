@@ -4253,6 +4253,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "flower-result-list-component",
   data: function data() {
@@ -4292,13 +4295,23 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         _this.products = response.data.data;
         $('.result_count').text(response.data.total);
-      }).catch(function (error) {});
+      })["catch"](function (error) {});
     },
     routeSP: function routeSP(product_id) {
       return "{{ route('products.show', ['product' => " + product_id + "]) }}";
+    },
+    addToCart: function addToCart(product) {
+      this.cart_products.push(product);
+      this.popup();
+    },
+    popup: function popup() {
+      $('.popup').addClass('slidein');
+      setTimeout(function (e) {
+        $('.popup').removeClass('slidein');
+      }.bind(this), 2050);
     }
   },
-  props: ['keywords', 'sort_by'],
+  props: ['keywords', 'sort_by', 'cart_products'],
   computed: {
     resultCount: function resultCount() {
       return this.products.total;
@@ -46366,7 +46379,37 @@ var render = function() {
                     _vm._v(" " + _vm._s(_vm.splitPrice2(product.price)))
                   ]),
                   _vm._v(" "),
-                  _vm._m(0, true)
+                  _c(
+                    "div",
+                    {
+                      staticClass: "add_to_cart",
+                      on: {
+                        click: function($event) {
+                          $event.stopPropagation()
+                          $event.preventDefault()
+                          if ($event.target !== $event.currentTarget) {
+                            return null
+                          }
+                          return _vm.addToCart(product)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fas fa-plus",
+                        on: {
+                          click: function($event) {
+                            $event.stopPropagation()
+                            $event.preventDefault()
+                            if ($event.target !== $event.currentTarget) {
+                              return null
+                            }
+                            return _vm.addToCart(product)
+                          }
+                        }
+                      })
+                    ]
+                  )
                 ]),
                 _vm._v(" "),
                 _c("span", { staticClass: "each" }, [_vm._v("Price per piece")])
@@ -46379,16 +46422,7 @@ var render = function() {
     0
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "add_to_cart" }, [
-      _c("i", { staticClass: "fas fa-plus" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -58564,19 +58598,20 @@ __webpack_require__(/*! selectize */ "./node_modules/selectize/dist/js/selectize
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 
-Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue").default);
-Vue.component('flower-result-list-component', __webpack_require__(/*! ./components/FlowerResultListComponent */ "./resources/js/components/FlowerResultListComponent.vue").default);
+Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
+Vue.component('flower-result-list-component', __webpack_require__(/*! ./components/FlowerResultListComponent */ "./resources/js/components/FlowerResultListComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-/*
-const app = new Vue({
-    el: '#app'
-});
-*/
+/*const app = new Vue({
+    el: '#app',
+    data: {
+        products: [],
+    }
+});*/
 
 /***/ }),
 
@@ -58595,7 +58630,7 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
  */
 
 try {
-  window.Popper = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js").default;
+  window.Popper = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")["default"];
   window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
   __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
