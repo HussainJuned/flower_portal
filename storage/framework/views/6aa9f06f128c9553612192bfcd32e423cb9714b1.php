@@ -311,6 +311,17 @@
                 </div>
 
                 <div class="form-group mb-30">
+                    <label for="payment_type">Payment type</label>
+                    <select class="form-control" id="payment_type" name="payment_type" required>
+                        <?php if(old('payment_type', null) != null): ?>
+                            <option selected value="<?php echo e(old('payment_type')); ?>"><?php echo e(old('payment_type')); ?></option>
+                        <?php endif; ?>
+                        <option value="online">Online</option>
+                        <option value="invoice">Invoice</option>
+                    </select>
+                </div>
+
+                <div class="form-group mb-30">
                     <label for="grower">Grower</label>
                     <input type="text" class="form-control<?php echo e($errors->has('grower') ? ' is-invalid' : ''); ?>"
                            value="<?php echo e(old('grower')); ?>"
