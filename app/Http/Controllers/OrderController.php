@@ -13,6 +13,7 @@ class OrderController extends Controller
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -36,7 +37,7 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Product $product)
@@ -68,7 +69,7 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Order  $order
+     * @param \App\Order $order
      * @return \Illuminate\Http\Response
      */
     public function show(Order $order)
@@ -79,7 +80,7 @@ class OrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Order  $order
+     * @param \App\Order $order
      * @return \Illuminate\Http\Response
      */
     public function edit(Order $order)
@@ -90,8 +91,8 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Order  $order
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Order $order
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Order $order)
@@ -102,7 +103,7 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Order  $order
+     * @param \App\Order $order
      * @return \Illuminate\Http\Response
      */
     public function destroy(Order $order)
@@ -136,6 +137,24 @@ class OrderController extends Controller
 
         return view('pages.orders.view', compact('order'));*/
 
+    }
+
+    public function buyerOrderDetais(Request $request)
+    {
+
+        $products = [];
+
+        if ( $request->has('product_id') )
+        {
+            foreach ($request['product_id'] as $prouct_id) {
+                $products[] = Product::find($prouct_id);
+            }
+        }
+
+        return view('pages.orders.deatials_buyer')
+            ->with('products', $products)
+            ->with('quantity', $request['quantity'])
+            ->with('order_date', $request['order_date']);
     }
 
 

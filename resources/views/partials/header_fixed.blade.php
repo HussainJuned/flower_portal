@@ -156,7 +156,7 @@
                 <div class="my-3 shopping-cart">
 
                     <template v-if="cart_products">
-                        <form action="{{ route('order.bulkStore') }}" id="card_order_form">
+                        <form action="{{ route('order.details.buyer') }}" id="card_order_form">
                             @csrf
                             <section class="item" v-for="cart_product in cart_products">
                                 <div class="buttons">
@@ -180,6 +180,7 @@
                                         <img src="{{ asset('images/icons/plus.svg') }}" alt="+"/>
                                     </button>
                                     <input type="text" name="quantity[]" value="1" min="1" class="q" v-bind:max="cart_product.stock">
+                                    <input type="number" name="product_id[]" v-bind:value="cart_product.id" hidden>
                                     <button class="minus-btn" type="button" name="button">
                                         <img src="{{ asset('images/icons/minus.svg') }}" alt="-"/>
                                     </button>

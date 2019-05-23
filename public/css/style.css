@@ -1544,6 +1544,14 @@ div#cart {
     margin-top: 13px;
 }
 
+.shopping-cart.order_details_page {
+    max-width: 700px;
+}
+
+.shopping-cart #card_order_form section.item:first-child {
+    border-top: 1px solid #E1E8EE;
+}
+
 @keyframes popup {
     0%   { transform: translateX(305px);  }
     25%   { transform: translateX(0);  }
