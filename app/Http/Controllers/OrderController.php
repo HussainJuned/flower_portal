@@ -109,4 +109,34 @@ class OrderController extends Controller
     {
         //
     }
+
+
+    public function bulkStore(Request $request)
+    {
+        return $request;
+        /*if (auth()->id() == $product->user->id) {
+            return redirect()
+                ->back()
+                ->withErrors(['order_error' => 'You can not buy your own product']);
+        }
+
+        $order = new Order();
+        $order->buyer_user_id = auth()->id();
+        $order->seller_user_id = $product->user->id;
+        $order->product_id = $product->id;
+        $order->zip = auth()->user()->userinfo->zip;
+        $order->order_date = $request['order_date'];
+        $order->quantity = $request['quantity'];
+        $order->unit_price = $product->price;
+        $order->total_price = $product->price * $request['quantity'];
+        $order->status = 1; // 1 = submitted
+        $order->shipping = auth()->user()->userinfo->delivery_address_1 . auth()->user()->userinfo->delivery_address_2;
+
+        $order->save();
+
+        return view('pages.orders.view', compact('order'));*/
+
+    }
+
+
 }

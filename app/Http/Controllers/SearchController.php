@@ -113,4 +113,9 @@ class SearchController extends Controller
 //        return response()->json($product);
         return $product->paginate(16);
     }
+
+    /*public function apiCartTest(Request $request)
+    {
+        return $request;
+    }*/
 }

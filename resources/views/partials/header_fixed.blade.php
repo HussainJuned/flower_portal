@@ -156,47 +156,53 @@
                 <div class="my-3 shopping-cart">
 
                     <template v-if="cart_products">
-                        <section class="item" v-for="cart_product in cart_products">
-                            <div class="buttons">
-                                <span class="delete-btn"></span>
-                                <span class="like-btn"></span>
-                            </div>
-
-                            <div class="image">
-                                <img class="img-fluid" v-bind:src="  '/' + cart_product.photo_url " alt=""/>
-                            </div>
-
-                            <div class="description">
-                                <span>@{{ cart_product.name }}</span>
-                                <span>@{{ cart_product.stock }} in stock</span>
-                                <span>Delivery Date: </span>
-                            </div>
-
-                            <div class="quantity">
-                                <button class="plus-btn" type="button" name="button" >
-                                    <img src="{{ asset('images/icons/plus.svg') }}" alt="+"/>
-                                </button>
-                                <input type="text" name="name" value="1" min="1" class="q" v-bind:max="cart_product.stock">
-                                <button class="minus-btn" type="button" name="button">
-                                    <img src="{{ asset('images/icons/minus.svg') }}" alt="-"/>
-                                </button>
-                                <div class="delivery_date">
-                                    <select class="" id="order_date" name="order_date" required>
-                                        <option selected v-for="ad in cart_product.ad" v-bind:value="ad">@{{ ad }}</option>
-                                    </select>
+                        <form action="{{ route('order.bulkStore') }}" id="card_order_form">
+                            @csrf
+                            <section class="item" v-for="cart_product in cart_products">
+                                <div class="buttons">
+                                    <span class="delete-btn"></span>
+                                    <span class="like-btn"></span>
                                 </div>
-                            </div>
+
+                                <div class="image">
+                                    <img class="img-fluid" v-bind:src="  '/' + cart_product.photo_url " alt=""/>
+                                </div>
+
+                                <div class="description">
+                                    <span>@{{ cart_product.name }}</span>
+                                    <span>@{{ cart_product.stock }} in stock</span>
+                                    <span>Delivery Date: </span>
+                                </div>
+
+                                <div class="quantity">
+
+                                    <button class="plus-btn" type="button" name="button" >
+                                        <img src="{{ asset('images/icons/plus.svg') }}" alt="+"/>
+                                    </button>
+                                    <input type="text" name="quantity[]" value="1" min="1" class="q" v-bind:max="cart_product.stock">
+                                    <button class="minus-btn" type="button" name="button">
+                                        <img src="{{ asset('images/icons/minus.svg') }}" alt="-"/>
+                                    </button>
+                                    <div class="delivery_date">
+                                        <select class="cart_order_date" name="order_date[]" required>
+                                            <option selected v-for="ad in cart_product.ad" v-bind:value="ad">@{{ ad }}</option>
+                                        </select>
+                                    </div>
+
+                                </div>
 
 
-                            <div class="total-price">$ <span class="price_value" v-bind:data-price="cart_product.price">@{{ cart_product.price }}</span> </div>
-                        </section>
+                                <div class="total-price">$ <span class="price_value" v-bind:data-price="cart_product.price">@{{ cart_product.price }}</span> </div>
+                            </section>
+                        </form>
                     </template>
 
 
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" {{--data-dismiss="modal"--}}>Order Now</button>
+                <input type="submit" class="btn btn-primary" {{--data-dismiss="modal"--}}
+                id="cart_order_now" form="card_order_form" value="Order Now">
             </div>
         </div>
     </div>
@@ -272,6 +278,24 @@
                 console.log('hi');
                 $(this).parent().parent().remove();
             });
+
+            /*$("#cart_order_now").on('click', function(){
+                console.log('clicked');
+                $(".shopping-cart form").each(function(){
+                    var fd = new FormData($(this)[0]);
+                    $.ajax({
+                        type: "get",
+                        url: "cart/try",
+                        data: fd,
+                        success: function(data,status) {
+                            console.log(data);
+                        },
+                        error: function(data, status) {
+                            //this will execute when get any error
+                        },
+                    });
+                });
+            });*/
 
 
         })

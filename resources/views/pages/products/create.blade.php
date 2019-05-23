@@ -324,6 +324,17 @@
                 </div>
 
                 <div class="form-group mb-30">
+                    <label for="payment_type">Payment type</label>
+                    <select class="form-control" id="payment_type" name="payment_type" required>
+                        @if(old('payment_type', null) != null)
+                            <option selected value="{{ old('payment_type') }}">{{ old('payment_type') }}</option>
+                        @endif
+                        <option value="online">Online</option>
+                        <option value="invoice">Invoice</option>
+                    </select>
+                </div>
+
+                <div class="form-group mb-30">
                     <label for="grower">Grower</label>
                     <input type="text" class="form-control{{ $errors->has('grower') ? ' is-invalid' : '' }}"
                            value="{{ old('grower') }}"
