@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="my-3 shopping-cart order_details_page">
-
+        <h4 class="text-center mt-3">Delivery Date: <span>{{ $delivery_date }}</span> </h4>
         <form action="{{ route('order.bulkStore') }}" id="card_order_form">
             @foreach($products as $index => $product)
                 <section class="item">

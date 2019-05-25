@@ -1548,8 +1548,15 @@ div#cart {
     max-width: 700px;
 }
 
-.shopping-cart #card_order_form section.item:first-child {
+.shopping-cart #card_order_form section.item:first-child,
+.shopping-cart section.item:first-child
+{
     border-top: 1px solid #E1E8EE;
+}
+
+.shopping-cart h4 {
+    font-size: 15px;
+    margin-bottom: 30px;
 }
 
 @keyframes popup {

@@ -154,6 +154,7 @@ class OrderController extends Controller
         return view('pages.orders.deatials_buyer')
             ->with('products', $products)
             ->with('quantity', $request['quantity'])
+            ->with('delivery_date', $request['delivery_date'])
             ->with('order_date', $request['order_date']);
     }
 

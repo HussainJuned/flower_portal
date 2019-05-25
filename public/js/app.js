@@ -58611,7 +58611,57 @@ Vue.component('flower-result-list-component', __webpack_require__(/*! ./componen
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-0;
+var delivery_date_o = new Date();
+delivery_date_o = delivery_date_o.getFullYear() + '-' + (delivery_date_o.getMonth() + 1) + '-' + delivery_date_o.getDate();
+var app = new Vue({
+  el: '#app',
+  data: {
+    'keywords': null,
+    'sort_by': 'price',
+    'delivery_date': delivery_date_o,
+    'cart_products': []
+  },
+  methods: {
+    sortBy: function sortBy(sort_by) {
+      this.sort_by = sort_by;
+    },
+    changeView: function changeView(type) {
+      var $resultContainer = $('.result_column_container');
+
+      switch (type) {
+        case 1:
+          if ($resultContainer.hasClass('thinner')) {
+            $resultContainer.removeClass('thinner');
+          }
+
+          $resultContainer.addClass('wider');
+          break;
+
+        case 2:
+          if ($resultContainer.hasClass('thinner')) {
+            $resultContainer.removeClass('thinner');
+          }
+
+          if ($resultContainer.hasClass('wider')) {
+            $resultContainer.removeClass('wider');
+          }
+
+          break;
+
+        case 3:
+          if ($resultContainer.hasClass('wider')) {
+            $resultContainer.removeClass('wider');
+          }
+
+          $resultContainer.addClass('thinner');
+          break;
+      }
+    },
+    onDDChange: function onDDChange(event) {
+      this.delivery_date = event.target.value;
+    }
+  }
+});
 
 /***/ }),
 

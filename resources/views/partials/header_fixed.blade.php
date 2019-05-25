@@ -156,9 +156,11 @@
             <div class="modal-body">
                 <div class="my-3 shopping-cart">
 
-                    <template v-if="cart_products">
+                    <h4 v-if="delivery_date" class="text-center">Delivery Date: <span>@{{ delivery_date }}</span> </h4>
+
+
                         <form action="{{ route('order.details.buyer') }}" id="card_order_form">
-                            @csrf
+                            <template v-if="cart_products">
                             <section class="item" v-for="cart_product in cart_products">
                                 <div class="buttons">
                                     <span class="delete-btn"></span>
@@ -196,8 +198,11 @@
 
                                 <div class="total-price">$ <span class="price_value" v-bind:data-price="cart_product.price">@{{ cart_product.price }}</span> </div>
                             </section>
+                            </template>
+                            <input type="text" name="delivery_date" v-bind:value="delivery_date" hidden>
+                            @csrf
                         </form>
-                    </template>
+
 
 
                 </div>
