@@ -31,9 +31,13 @@ class CreateProductsTable extends Migration
             $table->string('category');
             $table->date('available_date_start');
             $table->date('available_date_end');
-            $table->boolean('status');
+            $table->boolean('status')->default(0);
             $table->string('photo_url');
             $table->integer('stock')->unsigned();
+            $table->integer('s_increment')->default(1);
+            $table->integer('feature')->default(0);
+            // 0 = normal, 1 = special, 2 = low price, 3 = exclusive, 4 = Limited
+            $table->string('grower')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')

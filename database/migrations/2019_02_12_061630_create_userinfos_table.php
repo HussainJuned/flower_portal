@@ -35,6 +35,8 @@ class CreateUserinfosTable extends Migration
             $table->string('fax')->nullable();
             $table->boolean('isSeller')->default(false);
             $table->boolean('isBuyer')->default(false);
+            $table->integer('status')->unsigned()->default(1);
+            $table->string('payment_type')->default('invoice');
             $table->timestamps();
 
             $table->foreign('user_id')
