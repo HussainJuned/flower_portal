@@ -97,13 +97,24 @@ class SearchController extends Controller
 
     public function apiFlowerAll(Request $request)
     {
-        $product = Product::where('name', 'like' , '%' .$request->keywords . '%')->orWhere('description', 'like' , '%' .$request->keywords . '%');
+        $product = Product::query();
+
+        $product = $product->where('name', 'like' , '%' .$request->keywords . '%')
+            /*->orWhere('description', 'like' , '%' .$request->keywords . '%')*/;
+
+        if ($request->has('delivery_date')) {
+            $product = $product->whereDate('available_date_start', '<=', $request['delivery_date'])
+                ->whereDate('available_date_end', '>=', $request['delivery_date']);
+        }
+
+
+
 
         if ($request->has('sort_by')) {
             if($request->sort_by === 'price_high') {
-                $product->orderBy('price', 'desc');
+                $product = $product->orderBy('price', 'desc');
             } else {
-                $product->orderBy($request->sort_by, 'asc');
+                $product = $product->orderBy($request->sort_by, 'asc');
             }
 
         }
@@ -113,6 +124,7 @@ class SearchController extends Controller
 //        return response()->json($product);
         return $product->paginate(16);
     }
+
 
     /*public function apiCartTest(Request $request)
     {

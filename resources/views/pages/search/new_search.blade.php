@@ -135,7 +135,7 @@
 
                 <div class="result_column_container">
                     <flower-result-list-component v-bind:keywords="keywords" v-bind:cart_products="cart_products"
-                                                  v-bind:sort_by="sort_by"></flower-result-list-component>
+                                                  v-bind:sort_by="sort_by" v-bind:delivery_date="delivery_date"></flower-result-list-component>
                 </div>
 
             </div>
@@ -146,6 +146,9 @@
 @push('footer-js')
 
     <script type="text/javascript">
+        var delivery_date_o = new Date();
+        delivery_date_o = delivery_date_o.getFullYear()+'-'+(delivery_date_o.getMonth()+1)+'-'+delivery_date_o.getDate();
+
         $(document).ready(function () {
             /*$('#select-date').selectize({
                 create: true,
@@ -155,6 +158,10 @@
                 $(this).siblings().removeClass('active');
                 $(this).addClass('active');
             });
+
+            /*$('#select-date').on('change', function (e) {
+                delivery_date_o = $(this).val();
+            });*/
         });
 
         /*$('.dropdown-toggle').hover(function (e) {
@@ -167,6 +174,7 @@
             data: {
                 'keywords': null,
                 'sort_by': 'price',
+                'delivery_date': delivery_date_o,
                 'cart_products': [],
             },
             methods: {
@@ -195,10 +203,12 @@
                                 $resultContainer.removeClass('wider');
                             }
                             $resultContainer.addClass('thinner');
-                            console.log('reached');
                             break;
 
                     }
+                },
+                onDDChange(event) {
+                    this.delivery_date = event.target.value;
                 }
             }
         });

@@ -57,7 +57,12 @@
             sort_by(after, before) {
                 console.log(this.sort_by);
                 this.fetch();
-            }
+            },
+            delivery_date(after, before) {
+                console.log(this.delivery_date);
+                this.fetch();
+            },
+
         },
         created() {
             this.fetch();
@@ -72,7 +77,7 @@
                 return arr[1];
             },
             fetch() {
-                axios.get('/api/flower', {params: {keywords: this.keywords, sort_by: this.sort_by}})
+                axios.get('/api/flower', {params: {keywords: this.keywords, sort_by: this.sort_by, delivery_date: this.delivery_date}})
                     .then(response => {
                         this.products = response.data.data;
                         $('.result_count').text(response.data.total);
@@ -95,7 +100,7 @@
                 }.bind(this), 2050);
             }
         },
-        props: ['keywords', 'sort_by', 'cart_products'],
+        props: ['keywords', 'sort_by', 'cart_products', 'delivery_date'],
         computed: {
             resultCount() {
                 return this.products.total;

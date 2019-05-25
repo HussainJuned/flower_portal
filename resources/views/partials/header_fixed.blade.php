@@ -131,10 +131,11 @@
                     </nav>
                 </div>
                 <div class="col-sm-6 text-right align-self-center">
-                    <select name="select-date" id="select-date" class="custom-select">
-                        <option value="">Tuesday - 5/5/2019</option>
-                        <option value="">Wednesday - 6/5/2019</option>
-                        <option value="">Thursday - 7/5/2019</option>
+                    <select name="select-date" id="select-date" class="custom-select" v-on:change="onDDChange($event)">
+                        <option value="{{ \Carbon\Carbon::today()->toDateString() }}">Today</option>
+                        @for( $i=1; $i<14; $i++)
+                            <option value="{{ \Carbon\Carbon::today()->addDays($i)->toDateString() }}">{{ \Carbon\Carbon::today()->addDays($i)->format('l') }} - {{ \Carbon\Carbon::today()->addDays($i)->toDateString() }}</option>
+                        @endfor
                     </select>
                 </div>
             </div>
@@ -171,7 +172,7 @@
                                 <div class="description">
                                     <span>@{{ cart_product.name }}</span>
                                     <span>@{{ cart_product.stock }} in stock</span>
-                                    <span>Delivery Date: </span>
+{{--                                    <span>Delivery Date: </span>--}}
                                 </div>
 
                                 <div class="quantity">
@@ -184,11 +185,11 @@
                                     <button class="minus-btn" type="button" name="button">
                                         <img src="{{ asset('images/icons/minus.svg') }}" alt="-"/>
                                     </button>
-                                    <div class="delivery_date">
+                                    {{--<div class="delivery_date">
                                         <select class="cart_order_date" name="order_date[]" required>
                                             <option selected v-for="ad in cart_product.ad" v-bind:value="ad">@{{ ad }}</option>
                                         </select>
-                                    </div>
+                                    </div>--}}
 
                                 </div>
 
@@ -203,7 +204,7 @@
             </div>
             <div class="modal-footer">
                 <input type="submit" class="btn btn-primary" {{--data-dismiss="modal"--}}
-                id="cart_order_now" form="card_order_form" value="Order Now">
+                id="cart_order_now" form="card_order_form" value="Check Out">
             </div>
         </div>
     </div>

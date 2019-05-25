@@ -20,7 +20,7 @@
                     <div class="description">
                         <span>{{ $product->name }}</span>
                         <span>{{ $product->stock }} in stock</span>
-                        <span>Delivery Date: </span>
+{{--                        <span>Delivery Date: </span>--}}
                     </div>
 
                     <div class="quantity">
@@ -33,10 +33,14 @@
                         {{--<button class="minus-btn" type="button" name="button">
                             <img src="{{ asset('images/icons/minus.svg') }}" alt="-"/>
                         </button>--}}
-                        <div class="delivery_date">
+                        {{--<div class="delivery_date">
                             <span>{{ $order_date[$index] }}</span>
                             <input type="text" name="order_date[]" value="{{ $order_date[$index] }}" class="q" hidden>
-                        </div>
+                        </div>--}}
+
+                    </div>
+
+                    <div>
 
                     </div>
 
