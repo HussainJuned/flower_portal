@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BuyerAddress;
 use App\Order;
 use App\Product;
 use Carbon\Carbon;
@@ -114,6 +115,12 @@ class OrderController extends Controller
 
     public function bulkStore(Request $request)
     {
+        if($request->has('delivery_address_id')) {
+            if ($request['delivery_address_id'] === 'new') {
+                BuyerAddressController::store($request->toArray(), auth()->id());
+            }
+        }
+
         return $request;
         /*if (auth()->id() == $product->user->id) {
             return redirect()

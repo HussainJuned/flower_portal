@@ -62,6 +62,13 @@ class User extends \TCG\Voyager\Models\User
         return $this->hasMany(BuyerAccountReview::class, 'buyer_user_id');
     }
 
+    public function buyerAddresses()
+    {
+        return $this->hasMany(BuyerAddress::class, 'user_id');
+    }
+
+
+
 
     public function isBuyer()
     {

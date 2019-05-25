@@ -71,9 +71,7 @@ class UserinfoController extends Controller
         $userinfo->payment_type = $request['payment_type'];
         $userinfo->save();
 
-//        $address = new BuyerAddress;
-
-
+        BuyerAddressController::store($request, $user_id);
 
 //        return redirect()->route('home')->with('message', 'Userinfo Registration Completed Successfully');
 
