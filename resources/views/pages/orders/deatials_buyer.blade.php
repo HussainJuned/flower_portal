@@ -40,15 +40,58 @@
 
                     </div>
 
-                    <div>
+                    {{--<div>
 
-                    </div>
+                    </div>--}}
 
 
                     {{--            <div class="total-price">$ <span class="price_value" v-bind:data-price="$product.price">@{{ $product.price }}</span> </div>--}}
                 </section>
             @endforeach
             @csrf
+            <div class="my-3 text-center">
+                <div class="form-group mb-30">
+                    <label for="purchase_order_name">Purchase Order Name</label>
+                    <input type="text" class="form-control{{ $errors->has('purchase_order_name') ? ' is-invalid' : '' }}"
+                           value="{{ old('purchase_order_name') }}"
+                           id="purchase_order_name" name="purchase_order_name" placeholder="e.g. For Donald Trump">
+                    @if ($errors->has('purchase_order_name'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('purchase_order_name') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+                <div class="form-group mb-30">
+                    <label for="delivery_option">Delivery Option</label>
+                    <select class="form-control" id="delivery_option" name="delivery_option" required>
+                        @if(old('delivery_option', null) != null)
+                            <option selected value="{{ old('delivery_option') }}">{{ old('delivery_option') }}</option>
+                        @endif
+                        <option value="pick_up">Pick Up</option>
+                        <option value="delivery">Delivery</option>
+                    </select>
+                </div>
+
+                <div class="form-group mb-30">
+                    <label for="delivery_address_id">Delivery Address</label>
+                    <select class="form-control" id="delivery_address_id" name="delivery_address_id">
+                        @if(old('delivery_address_id', null) != null)
+                            <option selected value="{{ old('delivery_address_id') }}">{{ old('delivery_address_id') }}</option>
+                        @endif
+                        <option value="pick_up">Address 1</option>
+                        <option value="delivery">Address 2</option>
+                    </select>
+                </div>
+
+                <div class="form-group mb-30">
+                    <a href="">Add new address</a>
+                </div>
+
+
+
+                <input type="submit" class="btn btn-primary" value="Order Now">
+            </div>
         </form>
 
     </div>
