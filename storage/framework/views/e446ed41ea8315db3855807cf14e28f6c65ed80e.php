@@ -123,7 +123,7 @@
                                            class="form-control<?php echo e($errors->has('country') ? ' is-invalid' : ''); ?>"
                                            value="<?php echo e(old('country')); ?>" required>
                                     <datalist id="country">
-                                        <?php echo $__env->make('partials.all_country_options', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                        <?php echo $__env->make('partials.all_country_options', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                     </datalist>
                                     <?php if($errors->has('country')): ?>
                                         <span class="invalid-feedback" role="alert">
@@ -190,6 +190,7 @@
                         </span>
                                     <?php endif; ?> </div>
                             </div>
+
                             <div class="form-group mb-30 row">
                                 <label for="zip" class="col-md-4 col-form-label text-md-right">Zip</label>
                                 <div class="col-md-6">
@@ -199,10 +200,45 @@
                                            id="zip" name="zip" placeholder="e.g. 14048">
                                     <?php if($errors->has('zip')): ?>
                                         <span class="invalid-feedback" role="alert">
-                            <strong><?php echo e($errors->first('zip')); ?></strong>
-                        </span>
-                                    <?php endif; ?> </div>
+                                            <strong><?php echo e($errors->first('zip')); ?></strong>
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
                             </div>
+
+                            <div class="form-group mb-30 row">
+                                <label for="suite" class="col-md-4 col-form-label text-md-right">Suite</label>
+                                <div class="col-md-6">
+                                    <input required type="text"
+                                           class="form-control<?php echo e($errors->has('suite') ? ' is-invalid' : ''); ?>"
+                                           value="<?php echo e(old('suite')); ?>"
+                                           id="suite" name="suite" placeholder="e.g. 14048">
+                                    <?php if($errors->has('suite')): ?>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong><?php echo e($errors->first('suite')); ?></strong>
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-30 row">
+                                <label for="buzzer" class="col-md-4 col-form-label text-md-right">Buzzer</label>
+                                <div class="col-md-6">
+                                    <input required type="text"
+                                           class="form-control<?php echo e($errors->has('buzzer') ? ' is-invalid' : ''); ?>"
+                                           value="<?php echo e(old('buzzer')); ?>"
+                                           id="buzzer" name="buzzer" placeholder="e.g. 14048">
+                                    <?php if($errors->has('buzzer')): ?>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong><?php echo e($errors->first('buzzer')); ?></strong>
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
+
+
+
                             <div class="form-group mb-30 row">
                                 <label for="telephone" class="col-md-4 col-form-label text-md-right">Telephone</label>
                                 <div class="col-md-6">
@@ -282,10 +318,12 @@
                                            placeholder="e.g. www.hussain-juned.com">
                                     <?php if($errors->has('website')): ?>
                                         <span class="invalid-feedback" role="alert">
-                            <strong><?php echo e($errors->first('website')); ?></strong>
-                        </span>
-                                    <?php endif; ?></div>
+                                            <strong><?php echo e($errors->first('website')); ?></strong>
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
                             </div>
+
                             <div class="form-group mb-30 row">
                                 <label for="fax" class="col-md-4 col-form-label text-md-right">Fax (optional)</label>
                                 <div class="col-md-6">
@@ -300,6 +338,18 @@
                         </span>
                                     <?php endif; ?></div>
                             </div>
+
+                            <div class="form-group mb-30">
+                                <label for="payment_type">If you are a seller. Preferred Payment type</label>
+                                <select class="form-control" id="payment_type" name="payment_type" required>
+                                    <?php if(old('payment_type', null) != null): ?>
+                                        <option selected value="<?php echo e(old('payment_type')); ?>"><?php echo e(old('payment_type')); ?></option>
+                                    <?php endif; ?>
+                                    <option value="online">Online</option>
+                                    <option value="invoice">Invoice</option>
+                                </select>
+                            </div>
+
                             <div class="form-group mb-30 row form-check">
                                 <div class="col-md-12 text-center">
                                     <input required type="checkbox"
@@ -333,4 +383,4 @@
     </div>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Juned\PhpstormProjects\flowerapp\resources\views/auth/register.blade.php ENDPATH**/ ?>

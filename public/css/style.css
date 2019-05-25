@@ -1559,6 +1559,10 @@ div#cart {
     margin-bottom: 30px;
 }
 
+div#cropImagePop {
+    z-index: 99999999!important;
+}
+
 @keyframes popup {
     0%   { transform: translateX(305px);  }
     25%   { transform: translateX(0);  }

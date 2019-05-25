@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BuyerAddress;
 use App\User;
 use App\Userinfo;
 use Illuminate\Http\Request;
@@ -67,7 +68,11 @@ class UserinfoController extends Controller
         $userinfo->language = $request['language'];
         $userinfo->website = $request['website'];
         $userinfo->fax = $request['fax'];
+        $userinfo->payment_type = $request['payment_type'];
         $userinfo->save();
+
+//        $address = new BuyerAddress;
+
 
 
 //        return redirect()->route('home')->with('message', 'Userinfo Registration Completed Successfully');

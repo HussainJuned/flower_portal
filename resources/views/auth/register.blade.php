@@ -192,6 +192,7 @@
                         </span>
                                     @endif </div>
                             </div>
+
                             <div class="form-group mb-30 row">
                                 <label for="zip" class="col-md-4 col-form-label text-md-right">Zip</label>
                                 <div class="col-md-6">
@@ -201,10 +202,45 @@
                                            id="zip" name="zip" placeholder="e.g. 14048">
                                     @if ($errors->has('zip'))
                                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('zip') }}</strong>
-                        </span>
-                                    @endif </div>
+                                            <strong>{{ $errors->first('zip') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
+
+                            <div class="form-group mb-30 row">
+                                <label for="suite" class="col-md-4 col-form-label text-md-right">Suite</label>
+                                <div class="col-md-6">
+                                    <input required type="text"
+                                           class="form-control{{ $errors->has('suite') ? ' is-invalid' : '' }}"
+                                           value="{{ old('suite') }}"
+                                           id="suite" name="suite" placeholder="e.g. 14048">
+                                    @if ($errors->has('suite'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('suite') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-30 row">
+                                <label for="buzzer" class="col-md-4 col-form-label text-md-right">Buzzer</label>
+                                <div class="col-md-6">
+                                    <input required type="text"
+                                           class="form-control{{ $errors->has('buzzer') ? ' is-invalid' : '' }}"
+                                           value="{{ old('buzzer') }}"
+                                           id="buzzer" name="buzzer" placeholder="e.g. 14048">
+                                    @if ($errors->has('buzzer'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('buzzer') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+
+
+
                             <div class="form-group mb-30 row">
                                 <label for="telephone" class="col-md-4 col-form-label text-md-right">Telephone</label>
                                 <div class="col-md-6">
@@ -284,10 +320,12 @@
                                            placeholder="e.g. www.hussain-juned.com">
                                     @if ($errors->has('website'))
                                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('website') }}</strong>
-                        </span>
-                                    @endif</div>
+                                            <strong>{{ $errors->first('website') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
+
                             <div class="form-group mb-30 row">
                                 <label for="fax" class="col-md-4 col-form-label text-md-right">Fax (optional)</label>
                                 <div class="col-md-6">
@@ -302,6 +340,18 @@
                         </span>
                                     @endif</div>
                             </div>
+
+                            <div class="form-group mb-30">
+                                <label for="payment_type">If you are a seller. Preferred Payment type</label>
+                                <select class="form-control" id="payment_type" name="payment_type" required>
+                                    @if(old('payment_type', null) != null)
+                                        <option selected value="{{ old('payment_type') }}">{{ old('payment_type') }}</option>
+                                    @endif
+                                    <option value="online">Online</option>
+                                    <option value="invoice">Invoice</option>
+                                </select>
+                            </div>
+
                             <div class="form-group mb-30 row form-check">
                                 <div class="col-md-12 text-center">
                                     <input required type="checkbox"
