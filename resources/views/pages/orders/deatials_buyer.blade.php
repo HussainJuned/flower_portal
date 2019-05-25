@@ -73,19 +73,25 @@
                     </select>
                 </div>
 
-                <div class="form-group mb-30">
-                    <label for="delivery_address_id">Delivery Address</label>
-                    <select class="form-control" id="delivery_address_id" name="delivery_address_id">
-                        @if(old('delivery_address_id', null) != null)
-                            <option selected value="{{ old('delivery_address_id') }}">{{ old('delivery_address_id') }}</option>
-                        @endif
-                        <option value="pick_up">Address 1</option>
-                        <option value="delivery">Address 2</option>
-                    </select>
-                </div>
+                <div class="delivery_container" style="display: none">
+                    <div class="form-group mb-30">
+                        <label for="delivery_address_id">Delivery Address</label>
+                        <select class="form-control" id="delivery_address_id" name="delivery_address_id">
+                            @if(old('delivery_address_id', null) != null)
+                                <option selected value="{{ old('delivery_address_id') }}">{{ old('delivery_address_id') }}</option>
+                            @endif
+                            <option value="pick_up">Address 1</option>
+                            <option value="delivery">Address 2</option>
+                        </select>
+                    </div>
 
-                <div class="form-group mb-30">
-                    <a href="">Add new address</a>
+                    <div class="buyer_address_show">
+
+                    </div>
+
+                    <div class="form-group mb-30">
+                        <a href="">Add new address</a>
+                    </div>
                 </div>
 
 
@@ -96,3 +102,17 @@
 
     </div>
 @endsection
+
+@push('footer-js')
+
+    <script type="text/javascript">
+        $('#delivery_option').on('change', function (e) {
+           if ($(this).val() == 'delivery') {
+               $('.delivery_container').show();
+           } else {
+               $('.delivery_container').hide();
+           }
+        });
+    </script>
+
+    @endpush
