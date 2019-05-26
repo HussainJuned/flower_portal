@@ -16,7 +16,7 @@
                         <td scope="col">Status</td>
                         <td scope="col">Seller</td>
 {{--                        <td scope="col">Product</td>--}}
-{{--                        <td scope="col">Quantity</td>--}}
+{{--                        <td scope="col">Bought</td>--}}
 {{--                        <td scope="col">Unit Price</td>--}}
                         <td scope="col">Total Price</td>
 {{--                        <td scope="col">Review</td>--}}
@@ -29,10 +29,10 @@
                             <td>{{ $order->order_date }}</td>
                             <td>{{ $order->statusToString() }}</td>
 {{--                            <td>{{ $order->product->name }}</td>--}}
-{{--                            <td>{{ $order->quantity }}</td>--}}
 {{--                            <td>{{ $order->unit_price }}</td>--}}
                             <td>{{ $order->seller->name }}</td>
-                            <td>{{ $order->total_price }}</td>
+{{--                            <td>1 x {{ $order->quantity }}</td>--}}
+                            <td>{{ $order->order_total_price }}</td>
                            {{-- <td>
                                 @if ($order->productReview)
                                     {{ $order->productReview->quality }} / 5

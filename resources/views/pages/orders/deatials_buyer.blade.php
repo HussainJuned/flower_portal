@@ -5,7 +5,7 @@
 @section('content')
     <div class="my-3 shopping-cart order_details_page">
         <h4 class="text-center mt-3">Delivery Date: <span>{{ $delivery_date }}</span></h4>
-        <form action="{{ route('order.bulkStore') }}" id="card_order_form">
+        <form action="{{ route('order.bulkStore') }}" id="card_order_form" method="post">
             @foreach($products as $index => $product)
                 <section class="item">
                     {{--<div class="buttons">
@@ -30,6 +30,7 @@
                         </button>--}}
                         <input type="text" name="a_quantity[]" value="{{ $quantity[$index] }}" class="q" disabled>
                         <input type="text" name="quantity[]" value="{{ $quantity[$index] }}" class="q" hidden>
+                        <input type="text" name="product_id[]" value="{{ $product->id }}" hidden>
                         {{--<button class="minus-btn" type="button" name="button">
                             <img src="{{ asset('images/icons/minus.svg') }}" alt="-"/>
                         </button>--}}
@@ -85,8 +86,6 @@
                             @foreach (auth()->user()->buyerAddresses as $index => $address)
                                     <option value="{{ $address->id }}">Address {{ $index+1 }}</option>
                             @endforeach
-
-
                             <option value="new">New Address</option>
                         </select>
                     </div>
@@ -220,7 +219,7 @@
                     </div>
                 </div>
 
-
+                <input type="date" name="delivery_date" value="{{ \Carbon\Carbon::parse($delivery_date)->toDateString() }}" hidden>
                 <input type="submit" class="btn btn-primary" value="Order Now">
             </div>
         </form>

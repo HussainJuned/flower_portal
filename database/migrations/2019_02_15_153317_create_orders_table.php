@@ -17,15 +17,18 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->integer('buyer_user_id')->unsigned();
             $table->integer('seller_user_id')->unsigned();
-            $table->integer('product_id')->unsigned();
-            $table->integer('quantity')->unsigned();
-            $table->decimal('unit_price', 10, 2)->unsigned();
-            $table->decimal('total_price', 10, 2)->unsigned();
+//            $table->integer('product_id')->unsigned();
+//            $table->integer('quantity')->unsigned();
+//            $table->decimal('unit_price', 10, 2)->unsigned();
+//            $table->decimal('total_price', 10, 2)->unsigned();
+            $table->decimal('order_total_price', 10, 2)->nullable();
             $table->date('order_date');
             $table->integer('status');//(1 Fullfilled/2 Outstanding/3 Confirmed/ 4 running/ 5 pending)
-            $table->string('shipping');// (Delivery/Pickup)
-            $table->string('zip');
+//            $table->string('shipping');// (Delivery/Pickup)
+//            $table->string('zip');
 
+            $table->string('purchase_order_name')->nullable();
+            $table->string('delivery_option')->nullable();
 
             $table->timestamps();
         });

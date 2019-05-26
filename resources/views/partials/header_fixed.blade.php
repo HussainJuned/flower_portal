@@ -66,7 +66,7 @@
 
                                 <a href="{{ route('seller_dashboard.myProducts') }}"
                                    class="dropdown-item">
-                                    My History
+                                    Buying History
                                 </a>
 
                                 <a href="{{ route('seller_dashboard.myProducts') }}"
@@ -132,7 +132,7 @@
                 </div>
                 <div class="col-sm-6 text-right align-self-center">
                     <select name="select-date" id="select-date" class="custom-select" v-on:change="onDDChange($event)">
-                        <option value="{{ \Carbon\Carbon::today()->toDateString() }}">Today</option>
+                        <option value="{{ \Carbon\Carbon::today()->addDays(0)->toDateString() }}">Today</option>
                         @for( $i=1; $i<14; $i++)
                             <option value="{{ \Carbon\Carbon::today()->addDays($i)->toDateString() }}">{{ \Carbon\Carbon::today()->addDays($i)->format('l') }} - {{ \Carbon\Carbon::today()->addDays($i)->toDateString() }}</option>
                         @endfor

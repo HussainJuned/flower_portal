@@ -46,8 +46,11 @@ Route::get('/seller-dashboard/order/{order}', 'SellerDashboardController@viewOrd
 Route::get('/search-intro', 'SearchController@intro')->name('search.intro');
 Route::get('/search/flower', 'SearchController@searchFlower')->name('search.flower');
 Route::get('/search/seller', 'SearchController@searchSeller')->name('search.seller');
+
+Route::post('/order/bulkStore', 'OrderController@bulkStore')->name('order.bulkStore');
 Route::get('/order/view/{order}', 'OrderController@show')->name('order.view');
 Route::post('/order/{product}', 'OrderController@store')->name('order.store');
+
 Route::get('/product-review/', 'ProductReviewController@create')->name('product_review.create');
 Route::post('/product-review/{order}/{product}', 'ProductReviewController@store')->name('product_review.store');
 
@@ -64,7 +67,6 @@ Route::get('/artisan/config_clear', 'CommandController@config_clear');
 
 // search api
 Route::get('/api/flower', 'SearchController@apiFlowerAll')->name('api.flower.all');
-Route::get('/order/bulkStore', 'OrderController@bulkStore')->name('order.bulkStore');
 Route::get('/order/order_details/buyer', 'OrderController@buyerOrderDetais')->name('order.details.buyer');
 Route::get('/api/buyer_addressed', 'ApiController@buyerAddresses')->name('api.buyer.addresses');
 
