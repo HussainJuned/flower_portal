@@ -24,6 +24,19 @@ class Order extends Model
         return $this->belongsTo(Product::class, 'product_id');
     }
 
+    public function orderProducts()
+    {
+        return $this->hasMany(OrderProduct::class, 'order_id');
+    }
+
+
+
+    /*public function products()
+    {
+        return $this->hasManyThrough(OrderProduct::class, Product::class);
+    }*/
+
+
     public function productReview()
     {
         return $this->hasOne(ProductReview::class, 'order_id');

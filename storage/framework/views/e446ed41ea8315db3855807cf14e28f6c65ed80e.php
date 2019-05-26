@@ -158,6 +158,8 @@
                         </span>
                                     <?php endif; ?> </div>
                             </div>
+
+
                             <div class="form-group mb-30 row">
                                 <label for="delivery_address_1" class="col-md-4 col-form-label text-md-right">Delivery
                                     Address
@@ -170,10 +172,12 @@
                                            placeholder="Enter Your Address Here">
                                     <?php if($errors->has('delivery_address_1')): ?>
                                         <span class="invalid-feedback" role="alert">
-                            <strong><?php echo e($errors->first('delivery_address_1')); ?></strong>
-                        </span>
-                                    <?php endif; ?> </div>
+                                            <strong><?php echo e($errors->first('delivery_address_1')); ?></strong>
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
                             </div>
+
                             <div class="form-group mb-30 row">
                                 <label for="delivery_address_2" class="col-md-4 col-form-label text-md-right">Delivery
                                     Address Line 2 (Optional)
@@ -186,8 +190,8 @@
                                            placeholder="Continue Entering Your Address Here If No Space In Above Field">
                                     <?php if($errors->has('delivery_address_2')): ?>
                                         <span class="invalid-feedback" role="alert">
-                            <strong><?php echo e($errors->first('delivery_address_2')); ?></strong>
-                        </span>
+                                            <strong><?php echo e($errors->first('delivery_address_2')); ?></strong>
+                                        </span>
                                     <?php endif; ?> </div>
                             </div>
 
@@ -235,8 +239,6 @@
                                     <?php endif; ?>
                                 </div>
                             </div>
-
-
 
 
                             <div class="form-group mb-30 row">
@@ -343,7 +345,8 @@
                                 <label for="payment_type">If you are a seller. Preferred Payment type</label>
                                 <select class="form-control" id="payment_type" name="payment_type" required>
                                     <?php if(old('payment_type', null) != null): ?>
-                                        <option selected value="<?php echo e(old('payment_type')); ?>"><?php echo e(old('payment_type')); ?></option>
+                                        <option selected
+                                                value="<?php echo e(old('payment_type')); ?>"><?php echo e(old('payment_type')); ?></option>
                                     <?php endif; ?>
                                     <option value="online">Online</option>
                                     <option value="invoice">Invoice</option>

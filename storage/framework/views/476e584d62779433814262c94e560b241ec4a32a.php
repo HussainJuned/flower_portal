@@ -29,9 +29,9 @@
                             <td><?php echo e($order->statusToString()); ?></td>
 
 
-
                             <td><?php echo e($order->seller->name); ?></td>
-                            <td><?php echo e($order->total_price); ?></td>
+
+                            <td><?php echo e($order->order_total_price); ?></td>
                            
                             <td><a href="<?php echo e(route('buyer_dashboard.order.view', ['order' => $order->id])); ?>"
                                    class="btn btn-primary">view</a>
