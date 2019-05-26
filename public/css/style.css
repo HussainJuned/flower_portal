@@ -1566,7 +1566,8 @@ div#cropImagePop {
 .od_table td {vertical-align: middle;min-width: 194px;}
 
 td.tb_img {
-    width: 110px;
+    max-width: 93px !important;
+    min-width: 93px;
 }
 
 @keyframes popup {
