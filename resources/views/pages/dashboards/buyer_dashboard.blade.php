@@ -107,7 +107,7 @@
 {{--                            <td>{{ $order->unit_price }}</td>--}}
                             <td>{{ $order->statusToString() }}</td>
                             <td>{{ $order->seller->name }}</td>
-                            <td>{{ $order->total_price }}</td>
+                            <td>{{ $order->order_total_price }}</td>
                             {{--<td>
                                 @if ($order->productReview)
                                     {{ $order->productReview->quality }} / 5
