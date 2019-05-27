@@ -43,27 +43,89 @@
             </tr>
         </table>--}}
 
-        <table class="table table-responsive table-striped od_table">
-            <thead>
-            <tr>
-                <th>Image</th>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Total</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($order->orderProducts as $o_product)
+        <div class="row my-5 outstanding_invoice">
+            <div class="col-sm-12">
+                <h3 class="mb-3"><span class="ii"><i class="fas fa-file-invoice"></i></span>Invoices</h3>
+                <div class="oi_container">
+                    <div class="oi_box">
+                        <h5>Before You Continue Shopping, Please make a payment</h5>
+
+                        <p class="inp">Total amount due before you can continue shopping(including transaction costs:
+                            <strong>596.50</strong>
+                        </p>
+
+                        <a href="" class="btn btn_op">Pay</a>
+                        <a href="" class="btn btn_gop">Generate PDF</a>
+                    </div>
+
+                    <div class="oi_box">
+                        <h5>Outstanding Invoices</h5>
+
+                        <div class="table-responsive">
+                            <table class="oi_t table">
+                                <thead>
+                                <tr>
+                                    <th>Date of Invoice</th>
+                                    <th>Invoice ID</th>
+                                    <th>Client ID</th>
+                                    <th>Delivery Date</th>
+                                    <th>Currency</th>
+                                    <th>Amount</th>
+                                    <th>Paid</th>
+                                    <th>Outstanding</th>
+                                    <th>Age of Invoice</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>4/10/2019</td>
+                                    <td>33</td>
+                                    <td>19</td>
+                                    <td>4/17/2019</td>
+                                    <td>CAD</td>
+                                    <td>519.23</td>
+                                    <td>NO</td>
+                                    <td>519.23</td>
+                                    <td>7</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+            </div>
+
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped od_table">
+                <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($order->orderProducts as $o_product)
                     <tr>
-                        <td class="tb_img"><img src="{{ asset('') }}{{ $o_product->product->photo_url }}" alt="product image" class="img-fluid"></td>
+                        <td class="tb_img"><img src="{{ asset('') }}{{ $o_product->product->photo_url }}"
+                                                alt="product image" class="img-fluid"></td>
                         <td>{{ $o_product->product->name }}</td>
                         <td>1 x {{ $o_product->quantity }}</td>
                         <td>{{ $o_product->total_price }}</td>
                     </tr>
 
                 @endforeach
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
 
         @if ($order->productReview)
             <h4 class="mt-5 mb-3">Product Review</h4>

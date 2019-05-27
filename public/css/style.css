@@ -1570,6 +1570,77 @@ td.tb_img {
     min-width: 93px;
 }
 
+span.ii {
+    display: inline-block;
+    padding: 0 11px;
+    height: 40px;
+    line-height: 38px;
+    position: relative;
+    font-weight: 400;
+    border: 1px solid #5b92f9 !important;
+    background: transparent;
+    color: #5b92f9 !important;
+    border-radius: 50%;
+    margin-left: 0;
+    margin-right: 15px;
+    width: 40px;
+    text-align: center;
+    transition: 300ms;
+    font-size: 16px;
+}
+
+.outstanding_invoice h3 {
+    font-weight: 400;
+    color: #555555;
+}
+
+.oi_container {background-color: #F5F5F5;padding: 1px;}
+
+.oi_box {
+    border: 1px solid #e6e6e6;
+    padding: 25px;
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+
+.oi_box:last-child {
+    margin-bottom: 0;
+}
+
+.oi_box h5 {
+    color: #6B6B6B;
+    margin-bottom: 25px;
+}
+
+p.inp {
+    background: #F5F5F5;
+    padding: 17px 10px 18px 25px;
+    font-size: 14px;
+    border-left: 2px solid #DD4646;
+    margin-bottom: 25px;
+}
+
+.btn_op, .btn_gop {
+    background-color: #63CB6C;
+    color: white !important;
+    border-radius: 40px;
+    padding: 5px 25px;
+    margin-right: 30px;
+}
+
+.btn_gop {
+    background-color: #649aff;
+}
+
+table.oi_t thead th {
+    border: none;
+    background-color: #f5f5f5;
+    color: #B2B2B2;
+    font-weight: 400;
+}
+
+.oi_t tr th:first-child, .oi_t tr td:first-child {padding-left: 25px;}
+
 @keyframes popup {
     0%   { transform: translateX(305px);  }
     25%   { transform: translateX(0);  }
