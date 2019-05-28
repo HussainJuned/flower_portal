@@ -51,11 +51,11 @@
                         <h5>Before You Continue Shopping, Please make a payment</h5>
 
                         <p class="inp">Total amount due before you can continue shopping(including transaction costs:
-                            <strong>596.50</strong>
+                            <strong>{{ $invoice->amount }}</strong>
                         </p>
 
                         <a href="" class="btn btn_op">Pay</a>
-                        <a href="" class="btn btn_gop">Generate PDF</a>
+                        <a href="{{ route('pdf.invoice.outstanding', ['invoice' => $invoice->id]) }}" class="btn btn_gop">Generate PDF</a>
                     </div>
 
                     <div class="oi_box">
@@ -67,7 +67,7 @@
                                 <tr>
                                     <th>Date of Invoice</th>
                                     <th>Invoice ID</th>
-                                    <th>Client ID</th>
+                                    <th>Buyer ID</th>
                                     <th>Delivery Date</th>
                                     <th>Currency</th>
                                     <th>Amount</th>
@@ -78,15 +78,15 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>4/10/2019</td>
-                                    <td>33</td>
-                                    <td>19</td>
-                                    <td>4/17/2019</td>
-                                    <td>CAD</td>
-                                    <td>519.23</td>
-                                    <td>NO</td>
-                                    <td>519.23</td>
-                                    <td>7</td>
+                                    <td>{{ date('d/m/Y', strtotime($invoice->created_at)) }}</td>
+                                    <td>{{ $invoice->id }}</td>
+                                    <td>{{ $invoice->user_id }}</td>
+                                    <td>{{ $invoice->due_date }}</td>
+                                    <td>{{ $invoice->currency }}</td>
+                                    <td>{{ $invoice->amount }}</td>
+                                    <td>{{ $invoice->paid }}</td>
+                                    <td>{{ $invoice->outstanding }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($invoice->created_at)->diffInDays(\Carbon\Carbon::today()) + 1 }}</td>
                                 </tr>
                                 </tbody>
                             </table>

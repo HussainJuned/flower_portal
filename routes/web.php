@@ -47,6 +47,7 @@ Route::get('/search-intro', 'SearchController@intro')->name('search.intro');
 Route::get('/search/flower', 'SearchController@searchFlower')->name('search.flower');
 Route::get('/search/seller', 'SearchController@searchSeller')->name('search.seller');
 
+Route::get('/order/order_details/buyer', 'OrderController@buyerOrderDetais')->name('order.details.buyer');
 Route::post('/order/bulkStore', 'OrderController@bulkStore')->name('order.bulkStore');
 Route::get('/order/view/{order}', 'OrderController@show')->name('order.view');
 Route::post('/order/{product}', 'OrderController@store')->name('order.store');
@@ -67,12 +68,15 @@ Route::get('/artisan/config_clear', 'CommandController@config_clear');
 
 // search api
 Route::get('/api/flower', 'SearchController@apiFlowerAll')->name('api.flower.all');
-Route::get('/order/order_details/buyer', 'OrderController@buyerOrderDetais')->name('order.details.buyer');
 Route::get('/api/buyer_addressed', 'ApiController@buyerAddresses')->name('api.buyer.addresses');
 
 // product export import
 Route::get('/my-products/export', 'ProductExcelController@exportToExcel')->name('product.export.excel');
 Route::post('/my-products/import', 'ProductExcelController@importFromExcel')->name('product.import.excel');
+
+// PDF Controller
+Route::get('/outstanding_pdf/view_html/{invoice}', 'PdfController@viewOI')->name('view.html.oipdf');
+Route::get('/pdf/invoice/outstanding/{invoice}', 'PdfController@generateOIpdf')->name('pdf.invoice.outstanding');
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

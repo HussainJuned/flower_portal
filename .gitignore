@@ -24,6 +24,4 @@ Homestead.json
 /.idea
 /.phpstorm.meta.php
 /public/uploads
-/storage/framework
-/storage/logs
-/.env
+/storage/

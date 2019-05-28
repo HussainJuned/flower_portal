@@ -24,7 +24,8 @@ class BuyerDashboardController extends Controller
 
     public function viewOrder(Order $order)
     {
-        return view('pages.dashboards.view_buyer_order', compact('order'));
+        $invoice = $order->invoice;
+        return view('pages.dashboards.view_buyer_order', compact('order', 'invoice'));
     }
 
     public function updateOrderStatusToReceived(Order $order)

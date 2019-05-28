@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\BuyerAddress;
+use App\BuyerInvoice;
 use App\Order;
 use App\OrderProduct;
 use App\Product;
@@ -117,11 +118,11 @@ class OrderController extends Controller
     public function bulkStore(Request $request)
     {
 //        return $request;
-        if($request->has('delivery_address_id')) {
+        /*if($request->has('delivery_address_id')) {
             if ($request['delivery_address_id'] === 'new') {
                 BuyerAddressController::store($request->toArray(), auth()->id());
             }
-        }
+        }*/
 
         /*if (auth()->id() == $product->user->id) {
             return redirect()
@@ -182,6 +183,16 @@ class OrderController extends Controller
             $order->purchase_order_name = $request['purchase_order_name'];
             $order->delivery_option = $request['delivery_option'];
 
+            if($request->has('delivery_address_id')) {
+                if ($request['delivery_address_id'] === 'new') {
+                    $order->buyer_address_id = BuyerAddressController::store($request->toArray(), auth()->id());
+                } else {
+                    $order->buyer_address_id = $request['delivery_address_id'];
+                }
+
+            }
+
+
             $order->save();
 
             foreach ($ind_order as $k => $o)
@@ -198,7 +209,20 @@ class OrderController extends Controller
             }
             $order->order_total_price = $otp;
             $order->update();
+
+            $invoice = new BuyerInvoice;
+            $invoice->user_id = $order->buyer_user_id;
+            $invoice->order_id = $order->id;
+            $invoice->due_date = $order->order_date;
+            $invoice->currency = 'CAD';
+            $invoice->amount = $order->order_total_price;
+            $invoice->paid = 0;
+            $invoice->outstanding = $order->order_total_price;
+            $invoice->age_of_invoice = 1;
+            $invoice->save();
         }
+
+
 
         $user = auth()->user();
         $upcoming_orders = $user->upcomingOrdersBuyer;

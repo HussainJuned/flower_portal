@@ -47,6 +47,17 @@ class Order extends Model
         return $this->hasOne(BuyerAccountReview::class, 'order_id');
     }
 
+    public function invoice(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(BuyerInvoice::class, 'order_id');
+    }
+
+    public function buyer_address(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(BuyerAddress::class, 'buyer_address_id');
+    }
+
+
 
     public function statusToString()
     {

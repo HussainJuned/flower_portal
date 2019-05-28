@@ -29,6 +29,7 @@ class CreateOrdersTable extends Migration
 
             $table->string('purchase_order_name')->nullable();
             $table->string('delivery_option')->nullable();
+            $table->integer('buyer_address_id')->unsigned();
 
             $table->timestamps();
         });

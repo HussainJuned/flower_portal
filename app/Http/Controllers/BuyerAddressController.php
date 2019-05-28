@@ -26,5 +26,7 @@ class BuyerAddressController extends Controller
         $address->buzzer = $request['buzzer'];
 
         $address->save();
+
+        return $address->id;
     }
 }
