@@ -25,7 +25,7 @@
             @endif
 
             <div class="col-sm-6 my-3">
-                <a href="" class="btn btn-warning">Export product to excel</a>
+                <a href="{{ route('product.export.excel') }}" class="btn btn-warning">Export product to excel</a>
             </div>
             <div class="col-sm-6 my-3">
                 <form action="{{ route('product.import.excel') }}" enctype="multipart/form-data" method="post">

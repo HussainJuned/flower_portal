@@ -92,6 +92,6 @@ class ProductExcelController extends Controller
     {
         Excel::import(new ProductsImport, request()->file('excel_file'));
         $products = auth()->user()->products;
-        return redirect()->back()->with('message', 'Record Inserted successfully.')->with([ 'products' => $products]);
+        return redirect()->back()->with([ 'products' => $products]);
     }
 }
