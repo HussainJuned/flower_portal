@@ -19,6 +19,12 @@ Route::get('/', 'HomeController@intro')->name('intro');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/settings/preferred_communication/view/', 'UserinfoController@viewSettingsPC')
+    ->name('settings.preferred_communication');
+Route::get('/settings/preferred_communication/store/', 'UserinfoController@storeSettingsPC')
+    ->name('settings.preferred_communication.store');
+
 Route::get('/my-products', 'SellerDashboardController@myProducts')
     ->name('seller_dashboard.myProducts');
 

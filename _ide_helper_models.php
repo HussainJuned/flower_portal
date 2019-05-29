@@ -52,6 +52,75 @@ namespace App{
 
 namespace App{
 /**
+ * App\BuyerAddress
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $country
+ * @property string|null $state
+ * @property string $city
+ * @property string $delivery_address_1
+ * @property string|null $delivery_address_2
+ * @property string $zip
+ * @property string|null $suite
+ * @property string|null $buzzer
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAddress newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAddress newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAddress query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAddress whereBuzzer($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAddress whereCity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAddress whereCountry($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAddress whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAddress whereDeliveryAddress1($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAddress whereDeliveryAddress2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAddress whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAddress whereState($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAddress whereSuite($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAddress whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAddress whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerAddress whereZip($value)
+ */
+	class BuyerAddress extends \Eloquent {}
+}
+
+namespace App{
+/**
+ * App\BuyerInvoice
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int $order_id
+ * @property string $due_date
+ * @property string $currency
+ * @property float $amount
+ * @property int $paid
+ * @property float $outstanding
+ * @property int $age_of_invoice
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerInvoice newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerInvoice newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerInvoice query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerInvoice whereAgeOfInvoice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerInvoice whereAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerInvoice whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerInvoice whereCurrency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerInvoice whereDueDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerInvoice whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerInvoice whereOrderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerInvoice whereOutstanding($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerInvoice wherePaid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerInvoice whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerInvoice whereUserId($value)
+ */
+	class BuyerInvoice extends \Eloquent {}
+}
+
+namespace App{
+/**
  * App\Category
  *
  * @property int $id
@@ -76,18 +145,16 @@ namespace App{
  * @property int $id
  * @property int $buyer_user_id
  * @property int $seller_user_id
- * @property int $product_id
- * @property int $quantity
- * @property float $unit_price
- * @property float $total_price
+ * @property float|null $order_total_price
  * @property string $order_date
  * @property int $status
- * @property string $shipping
- * @property string $zip
+ * @property string|null $purchase_order_name
+ * @property string|null $delivery_option
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\User $buyer
  * @property-read \App\BuyerAccountReview $buyerAccountReview
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\OrderProduct[] $orderProducts
  * @property-read \App\Product $product
  * @property-read \App\ProductReview $productReview
  * @property-read \App\User $seller
@@ -96,19 +163,45 @@ namespace App{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order query()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereBuyerUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereDeliveryOption($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereOrderDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereProductId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereOrderTotalPrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Order wherePurchaseOrderName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereSellerUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereShipping($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereTotalPrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereUnitPrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereZip($value)
  */
 	class Order extends \Eloquent {}
+}
+
+namespace App{
+/**
+ * App\OrderProduct
+ *
+ * @property int $id
+ * @property int $product_id
+ * @property int $order_id
+ * @property int $quantity
+ * @property float $unit_price
+ * @property float $total_price
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Order $order
+ * @property-read \App\Product $product
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\OrderProduct newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\OrderProduct newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\OrderProduct query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\OrderProduct whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\OrderProduct whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\OrderProduct whereOrderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\OrderProduct whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\OrderProduct whereQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\OrderProduct whereTotalPrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\OrderProduct whereUnitPrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\OrderProduct whereUpdatedAt($value)
+ */
+	class OrderProduct extends \Eloquent {}
 }
 
 namespace App{
@@ -132,11 +225,12 @@ namespace App{
  * @property int $status
  * @property string $photo_url
  * @property int $stock
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int $s_increment
  * @property int $feature
  * @property string|null $grower
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read mixed $ad
  * @property mixed $tag_names
  * @property-read \Illuminate\Database\Eloquent\Collection $tags
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\ProductReview[] $reviews
@@ -236,6 +330,7 @@ namespace App{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\BuyerAccountReview[] $buyerAccountReviews
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\BuyerAddress[] $buyerAddresses
  * @property mixed $locale
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Order[] $orders_as_buyer
@@ -287,9 +382,10 @@ namespace App{
  * @property string|null $fax
  * @property int $isSeller
  * @property int $isBuyer
+ * @property int $status
+ * @property string $payment_type
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property int $status
  * @property-read \App\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Userinfo newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Userinfo newQuery()
@@ -310,6 +406,7 @@ namespace App{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Userinfo whereIsSeller($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Userinfo whereLanguage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Userinfo whereLastName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Userinfo wherePaymentType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Userinfo whereState($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Userinfo whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Userinfo whereTelephone($value)

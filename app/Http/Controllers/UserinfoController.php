@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\BuyerAddress;
+use App\PreferredCommunication;
 use App\User;
 use App\Userinfo;
 use Illuminate\Http\Request;
@@ -187,5 +188,78 @@ class UserinfoController extends Controller
     {
         //
     }
+
+    public function viewSettingsPC()
+    {
+        $pc = auth()->user()->preferred_communication;
+        return view('pages.user_infos.preferred_communication')->with('pc', $pc);
+    }
+
+    public function storeSettingsPC(Request $request)
+    {
+        $user = auth()->user();
+
+        if ( $user )
+        {
+            if ( $user->preferred_communication )
+            {
+                $pc = $user->preferred_communication;
+            }
+            else
+            {
+                $pc = new PreferredCommunication;
+            }
+
+            if ($request->has('general')) {
+                $request->validate([
+                    'email_general' => 'required|email'
+                ]);
+                $pc->general = 1;
+                $pc->email_general = $request->email_general;
+            } else {
+                $pc->general = 0;
+            }
+
+            if ($request->has('order_confirmation')) {
+                $request->validate([
+                    'email_order_confirmation' => 'required|email'
+                ]);
+                $pc->order_confirmation = 1;
+                $pc->email_order_confirmation = $request->email_order_confirmation;
+            } else {
+                $pc->order_confirmation = 0;
+            }
+
+            if ($request->has('shipment')) {
+                $request->validate([
+                    'email_shipment' => 'required|email'
+                ]);
+                $pc->shipment = 1;
+                $pc->email_shipment = $request->email_shipment;
+            } else {
+                $pc->shipment = 0;
+            }
+
+            if ($request->has('invoices')) {
+                $request->validate([
+                    'email_invoices' => 'required|email'
+                ]);
+                $pc->invoices = 1;
+                $pc->email_invoices = $request->email_invoices;
+            } else {
+                $pc->invoices = 0;
+            }
+
+            $pc->save();
+
+            return redirect()->back()->with('message', 'Preferred Communication Updated Successfully')
+                ->with('pc', $pc);
+
+        }
+
+        return  back()->withInput();
+    }
+
+
 
 }

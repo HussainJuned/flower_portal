@@ -42,6 +42,13 @@ class User extends \TCG\Voyager\Models\User
         return $this->hasOne(Userinfo::class);
     }
 
+    public function preferred_communication()
+    {
+        return $this->hasOne(PreferredCommunication::class);
+    }
+
+
+
     public function products()
     {
         return $this->hasMany(Product::class);

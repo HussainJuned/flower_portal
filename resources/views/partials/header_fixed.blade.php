@@ -84,9 +84,9 @@
                                     Communication
                                 </a>
 
-                                <a href="{{ route('seller_dashboard.myProducts') }}"
+                                <a href="{{ route('settings.preferred_communication') }}"
                                    class="dropdown-item">
-                                    Preferred departure date
+                                    Preferred Communication
                                 </a>
 
                                 <a class="dropdown-item text-danger" href="{{ route('logout') }}"
