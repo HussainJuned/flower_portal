@@ -159,9 +159,11 @@
                     <h4 v-if="delivery_date" class="text-center">Delivery Date: <span>@{{ delivery_date }}</span> </h4>
 
 
-                        <form action="{{ route('order.details.buyer') }}" id="card_order_form">
+                        <form action="{{ route('order.details.buyer') }}" id="card_order_form" method="post">
+                            @csrf
                             <template v-if="cart_products">
                             <section class="item" v-for="cart_product in cart_products">
+                                <input type="number" name="product_id[]" v-bind:value="cart_product.id" hidden>
                                 <div class="buttons">
                                     <span class="delete-btn"></span>
                                     <span class="like-btn"></span>
@@ -183,7 +185,6 @@
                                         <img src="{{ asset('images/icons/plus.svg') }}" alt="+"/>
                                     </button>
                                     <input type="text" name="quantity[]" value="1" min="1" class="q" v-bind:max="cart_product.stock">
-                                    <input type="number" name="product_id[]" v-bind:value="cart_product.id" hidden>
                                     <button class="minus-btn" type="button" name="button">
                                         <img src="{{ asset('images/icons/minus.svg') }}" alt="-"/>
                                     </button>
@@ -282,7 +283,6 @@
             });
 
             $(document).on('click', '.delete-btn', function (event) {
-                console.log('hi');
                 $(this).parent().parent().remove();
             });
 

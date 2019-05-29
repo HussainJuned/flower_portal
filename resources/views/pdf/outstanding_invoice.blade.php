@@ -122,26 +122,25 @@
 <body>
 <div class="row">
     <div class="col-6 margin_medium">
-        <h1>Seller Name: Hussain Juned</h1>
+        <h1>Seller Name: {{ $invoice->order->seller->name }}</h1>
     </div>
     <div class="col-6 margin_medium text-right">
-        <h1>Buyer Name: Prof. Janelle Cartwright</h1>
+        <h1>Buyer Name: {{ $invoice->order->buyer->name }}</h1>
     </div>
 
     <div class="col-6">
-        <h4>Seller Address: <br> 64537 Leilani Forges Suite 298
-            Brainshire, MS 41652, 52740-2071,
+        <h4>Seller Address: <br> {{ $invoice->order->seller->userinfo->delivery_address_1 }}, {{ $invoice->order->seller->userinfo->zip }},
             <br>
-            Ornbury, Jersey
+            {{ $invoice->order->seller->userinfo->city }}, {{ $invoice->order->seller->userinfo->country }}
         </h4>
-        <h4>Seller Contact: 619-875-3616 x693</h4>
+        <h4>Seller Contact: {{ $invoice->order->seller->userinfo->telephone }}</h4>
     </div>
     <div class="col-6  text-right">
         <h4>Buyer Address: <br>
-            Renesa 5, Block B, Jahanpur, Islampur, Shahporan, 3100, <br>
-            Sylhet, Bangladesh
+            {{ $invoice->order->buyer_address->delivery_address_1 }}, {{ $invoice->order->buyer_address->zip }}, <br>
+            {{ $invoice->order->buyer_address->city }}, {{ $invoice->order->buyer_address->country }}
         </h4>
-        <h4>Buyer Contact: (808) 413-6619 x47154</h4>
+        <h4>Buyer Contact: {{ $invoice->order->buyer->userinfo->telephone }}</h4>
     </div>
     <div class="col-12 margin_large">
         <div class="row">

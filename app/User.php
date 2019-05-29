@@ -99,22 +99,22 @@ class User extends \TCG\Voyager\Models\User
 
     public function upcomingOrdersSeller()
     {
-        return $this->orders_as_seller()->where('status', '!=', 5);
+        return $this->orders_as_seller()->where('status', '!=', 5)->orderBy('created_at', 'desc');
     }
 
     public function pastOrdersSeller()
     {
-        return $this->orders_as_seller()->where('status', '=', 5);
+        return $this->orders_as_seller()->where('status', '=', 5)->orderBy('created_at', 'desc');
     }
 
     public function upcomingOrdersBuyer()
     {
-        return $this->orders_as_buyer()->where('status', '!=', 5);
+        return $this->orders_as_buyer()->where('status', '!=', 5)->orderBy('created_at', 'desc');
     }
 
     public function pastOrdersBuyer()
     {
-        return $this->orders_as_buyer()->where('status', '=', 5);
+        return $this->orders_as_buyer()->where('status', '=', 5)->orderBy('created_at', 'desc');
     }
 
     public function availableProducts()

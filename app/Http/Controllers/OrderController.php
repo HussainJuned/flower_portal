@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\BuyerAddress;
 use App\BuyerInvoice;
+use App\Mail\OrderConfirmationMail;
 use App\Order;
 use App\OrderProduct;
 use App\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Mail;
 
 class OrderController extends Controller
 {
@@ -145,13 +147,15 @@ class OrderController extends Controller
             }
         }
 
+//        return $products;
+
 
         usort($products, array($this, 'cmp'));
-
+//
         $tmp = array();
         $oi = -1;
         foreach ($products as $index => $item) {
-            if (!in_array($item['user_id'], $tmp, true)) {
+            if (!in_array($item['user_id'], $tmp)) {
 //                $unique[] = $item;
                 $tmp[] = $item['user_id'];
                 $oi++;
@@ -161,7 +165,7 @@ class OrderController extends Controller
             }
         }
 
-
+//        return $orders;
 //        return $orders;
 
         foreach ($orders as $key=>$ind_order)
@@ -199,14 +203,18 @@ class OrderController extends Controller
             {
                 $order_product = new OrderProduct;
                 $order_product->product_id = $o->id;
+
                 $order_product->order_id = $order->id;
                 $order_product->quantity = $o->quantity;
                 $order_product->unit_price = $o->price;
                 $order_product->total_price = $o->price * $o->quantity;
                 $order_product->save();
 
+                $order->seller_user_id = $o->user_id;
+
                 $otp += $order_product->total_price;
             }
+
             $order->order_total_price = $otp;
             $order->update();
 
@@ -256,7 +264,7 @@ class OrderController extends Controller
                 $tmp[] = $item['user_id'];
             }
         }*/
-
+//        return $products;
         return view('pages.orders.deatials_buyer')
             ->with('products', $products)
             ->with('quantity', $request['quantity'])
@@ -266,10 +274,10 @@ class OrderController extends Controller
 
     function cmp($a, $b)
     {
-        if ($a == $b) {
+        if ($a->user_id == $b->user_id) {
             return 0;
         }
-        return ($a < $b) ? -1 : 1;
+        return ($a->user_id < $b->user_id) ? -1 : 1;
 //        return strcmp($a->user_id, $b->user_id);
     }
 

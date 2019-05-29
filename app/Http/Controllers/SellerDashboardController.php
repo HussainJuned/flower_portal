@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderConfirmationMail;
 use App\Order;
 use App\User;
 use Illuminate\Http\Request;
+use Mail;
+use Matrix\Exception;
 
 class SellerDashboardController extends Controller
 {
@@ -29,6 +32,10 @@ class SellerDashboardController extends Controller
     }
 
 
+    /**
+     * @param Order $order
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateToAccepted(Order $order)
     {
         if ($order->status === 1 && auth()->id() === $order->seller_user_id) {
@@ -37,6 +44,14 @@ class SellerDashboardController extends Controller
         } else {
             return redirect()->back()->withErrors('Order Status Update unsuccessful');
         }
+
+        try {
+            Mail::to($order->buyer->preferred_communication->email_order_confirmation)
+                ->send(new OrderConfirmationMail($order));
+        } catch (Exception $e) {
+            return back()->withInput()->with('error', $e);
+        }
+
 
         return redirect()->back()->with('message', 'Order Status Updated Successfully');
     }

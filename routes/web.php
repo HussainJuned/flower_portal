@@ -53,7 +53,7 @@ Route::get('/search-intro', 'SearchController@intro')->name('search.intro');
 Route::get('/search/flower', 'SearchController@searchFlower')->name('search.flower');
 Route::get('/search/seller', 'SearchController@searchSeller')->name('search.seller');
 
-Route::get('/order/order_details/buyer', 'OrderController@buyerOrderDetais')->name('order.details.buyer');
+Route::post('/order/order_details/buyer', 'OrderController@buyerOrderDetais')->name('order.details.buyer');
 Route::post('/order/bulkStore', 'OrderController@bulkStore')->name('order.bulkStore');
 Route::get('/order/view/{order}', 'OrderController@show')->name('order.view');
 Route::post('/order/{product}', 'OrderController@store')->name('order.store');
