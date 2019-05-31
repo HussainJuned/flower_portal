@@ -269,7 +269,10 @@
                         </div>
                         <div class="colour_item">
                             <label for="colour13">
-                                <input type="radio" required name="colour" id="colour13" value="mix">
+                                <input type="radio" required name="colour" id="colour13" value="mix"
+                                       @if( $product->colour === 'mix')
+                                checked="checked"
+                                    @endif>
                                 <span class="checkmark"
                                       style="background: linear-gradient(to right, red, orange, yellow, green, blue, violet)"></span>
                             </label>
@@ -327,14 +330,16 @@
                 <div class="form-group mb-30">
                     <label for="category">Category</label>
                     <select class="form-control" id="category" name="category" required>
-                        @if( $product->category )
-                            <option selected value="{{ $product->category }}">{{  $product->category  }}</option>
+                        @if($product->categoryR !== null)
+                            <option selected value="{{$product->categoryR->id}}">{{ $product->categoryR->name }}</option>
                         @endif
-                        <option value="Flower">Flower</option>
-                        <option value="Green">Green</option>
-                        <option value="Dried">Dried</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+
                     </select>
                 </div>
+
                 <div class="form-group mb-30">
                     <label for="available_date_start">Available Date Starts From</label>
                     <input required type="date"
@@ -783,13 +788,13 @@
 
             }
 
-            {{--var tags = [--}}
-            {{--        @foreach ($tags as $tag)--}}
-            {{--    {--}}
-            {{--        tag: "{{$tag}}"--}}
-            {{--    },--}}
-            {{--    @endforeach--}}
-            {{--];--}}
+            var tags = [
+                    @foreach ($tags as $tag)
+                {
+                    tag: "{{$tag}}"
+                },
+                @endforeach
+            ];
 
         });
 

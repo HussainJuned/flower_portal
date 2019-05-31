@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Product;
 use App\ProductCategory;
 use Illuminate\Http\Request;
@@ -162,7 +163,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('pages.products.edit', compact('product'));
+        $categories = ProductCategory::all();
+        $tags = Product::existingTags()->pluck('name');
+        return view('pages.products.edit', compact('product', 'categories', 'tags'));
     }
 
     /**
@@ -223,7 +226,8 @@ class ProductController extends Controller
         $product->origin = $request['origin'];
         $product->height = $request['height'];
         $product->colour = $request['colour'];
-        $product->category = $request['category'];
+        $c = Category::find($request['category']);
+        $product->category = $c->id;
         $product->available_date_start = $request['available_date_start'];
         $product->available_date_end = $request['available_date_end'];
         $product->stock = $request['stock'];

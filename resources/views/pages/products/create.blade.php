@@ -153,7 +153,7 @@
                         <div class="colour_item">
 
                             <label for="colour1">
-                                <input type="radio" required name="colour" id="colour1" value="#FFC813">
+                                <input type="radio" required name="colour" id="colour1" value="#FFC813" checked>
                                 <span class="checkmark" style="background-color: #FFC813"></span>
                             </label>
                         </div>
@@ -296,11 +296,12 @@
                             <option selected value="{{ old('category') }}">{{ old('category') }}</option>
                         @endif
                         @foreach ($categories as $category)
-                            <option value="{{ $category->name }}">{{ $category->name }}</option>
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
 
                     </select>
                 </div>
+
                 <div class="form-group mb-30">
                     <label for="available_date_start">Available Date Starts From</label>
                     <input required type="date"

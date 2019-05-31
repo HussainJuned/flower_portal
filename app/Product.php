@@ -18,6 +18,12 @@ class Product extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function categoryR(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'category', 'id');
+    }
+
+
     public function reviews()
     {
         return $this->hasMany(ProductReview::class);
