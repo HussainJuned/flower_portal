@@ -74,6 +74,18 @@
                         </span>
                     @endif
                 </div>
+                <div class="form-group mb-30" id="stem_increment">
+                    <label for="s_increment">Stem Increment</label>
+                    <input required type="number"
+                           class="form-control{{ $errors->has('s_increment') ? ' is-invalid' : '' }}"
+                           value="1" min="1" max="999999" step="1"
+                           id="s_increment" name="s_increment">
+                    @if ($errors->has('s_increment'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('s_increment') }}</strong>
+                        </span>
+                    @endif
+                </div>
                 <div class="form-group mb-30">
                     <label for="price">Price</label>
 
@@ -101,14 +113,24 @@
                             <strong>{{ $errors->first('product_photo') }}</strong>
                         </span>
                     @endif
-                    <label for="">update Product Photo</label>
-                    <label class="cabinet center-block">
-                        <figure>
-                            <img src="{{ url('/') }}/{{ $product->photo_url }}" class="gambar img-fluid img-thumbnail" id="item-img-output"/>
-                            <figcaption><i class="fas fa-camera"></i></figcaption>
-                        </figure>
-                        <input type="file" class="item-img file center-block"{{-- name="file_photo"--}}/>
-                    </label>
+                    <h5 class="mb-3">Change Product Photo</h5>
+
+                    <div class="upload_photo_container box">
+                        <div class="box__input">
+                            <label class="cabinet center-block">
+                                <figure>
+                                    <img src="{{ asset($product->photo_url) }}" class="gambar img-fluid img-thumbnail" id="item-img-output"/>
+                                    <figcaption><i class="fas fa-camera"></i></figcaption>
+                                </figure>
+                                <input type="file" class="item-img file center-block box__file"
+                                       {{--name="file_photo"--}} accept="image/*"/>
+                            </label>
+                        </div>
+                        {{--<div class="box__uploading">Uploading&hellip;</div>
+                        <div class="box__success">Done!</div>
+                        <div class="box__error">Error! <span></span>.</div>--}}
+                    </div>
+
                 </div>
                 {{--<div class="mb-30 text-center">
 
@@ -274,7 +296,7 @@
 
 @endsection
 
-@push('footer-js')
+{{--@push('footer-js')
     <script type="text/javascript">
         // domReady handler
         $(function () {
@@ -391,6 +413,253 @@
                 price_res = number_of_stem.val() *  price_per_s_b.val();
                 price.val(price_res);               
             });
+        });
+    </script>
+@endpush--}}
+
+@push('footer-js')
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tags').selectize({
+                delimiter: ',',
+                persist: false,
+                valueField: 'tag',
+                labelField: 'tag',
+                searchField: 'tag',
+                options: tags,
+                create: function (input) {
+                    return {
+                        tag: input
+                    }
+                }
+            });
+        });
+
+    </script>
+
+    <script type="text/javascript">
+        // domReady handler
+        $(function () {
+
+            // provide an event for when the form is submitted
+            $('#my-form').submit(function () {
+
+                // Find the input with id "file" in the context of
+                // the form (hence the second "this" parameter) and
+                // set it to be disabled
+                $('#photo', this).prop('disabled', true);
+                $('#photo', this).detach();
+
+                // return true to allow the form to submit
+                return true;
+            });
+
+
+            // Start upload preview image
+            // $(".gambar").attr("src", "https://via.placeholder.com/400x300?text=Click or drag and drop image here");
+            var $uploadCrop,
+                tempFilename,
+                rawImg,
+                imageId;
+
+            function readFile(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('.upload-demo').addClass('ready');
+                        $('#cropImagePop').modal('show');
+                        rawImg = e.target.result;
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                } else {
+                    alert("Sorry - you're browser doesn't support the FileReader API");
+                }
+            }
+
+            $uploadCrop = $('#upload-demo').croppie({
+                viewport: {
+                    width: 400,
+                    height: 300,
+                },
+                enforceBoundary: true,
+                enableExif: true,
+                enableOrientation: true,
+            });
+
+            $('#cropImagePop').on('shown.bs.modal', function () {
+                // alert('Shown pop');
+                $uploadCrop.croppie('bind', {
+                    url: rawImg
+                }).then(function () {
+                    console.log('jQuery bind complete');
+                });
+            });
+
+            $('.item-img').on('change', function () {
+                imageId = $(this).data('id');
+                tempFilename = $(this).val();
+
+                $('#cancelCropBtn').data('id', imageId);
+                readFile(this);
+            });
+
+            $('#cropImageBtn').on('click', function (ev) {
+                $uploadCrop.croppie('result', {
+                    type: 'base64',
+                    format: 'png',
+                    size: {width: 400, height: 300}
+                }).then(function (resp) {
+                    $('#item-img-output').attr('src', resp);
+                    $('#product_photo').val(resp);
+                    $('#cropImagePop').modal('hide');
+                });
+            });
+            // End upload preview image
+
+
+            var pack = $('#pack');
+            var nos_box = $('#nos_box');
+            var stem_incr_box = $('#stem_increment');
+            var number_of_stem = $('#number_of_stem');
+            var price_per_s_b = $('#price_per_stem_bunch');
+            var price = $('#price');
+            var isByBunch = false;
+            /*var nos = number_of_stem.val();
+            var pp_stem = price_per_s_b.val();*/
+            var price_res = 0;
+            nos_box.hide();
+
+            pack.on('change', function (event) {
+                var sv = pack.val();
+                if (sv === 'Bunch') {
+                    nos_box.show();
+                    stem_incr_box.hide();
+                    isByBunch = true;
+                } else {
+                    number_of_stem.val(1);
+                    price_res = number_of_stem.val() * price_per_s_b.val();
+                    price.val(price_res);
+                    nos_box.hide();
+                    stem_incr_box.show();
+                    isByBunch = false;
+                }
+            });
+
+            price_per_s_b.on('change', function (event) {
+                if (isByBunch) {
+                    price_res = number_of_stem.val() * price_per_s_b.val();
+                } else {
+                    price_res = $('#s_increment').val() * price_per_s_b.val();
+                }
+                price_res.toFixed(2);
+                price.val(price_res);
+            });
+
+            number_of_stem.on('change', function (event) {
+                price_res = number_of_stem.val() * price_per_s_b.val();
+                price_res.toFixed(2);
+
+                price.val(price_res);
+            });
+
+            $('#s_increment').on('change', function (event) {
+                price_res = $(this).val() * price_per_s_b.val();
+                price_res.toFixed(2);
+
+                price.val(price_res);
+            });
+
+
+            // drag and drop file
+
+            /*var isAdvancedUpload = function() {
+                var div = document.createElement('div');
+                return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window;
+            }();
+
+            var $form = $('#my-form');
+
+            var $input    = $form.find('input[type="file"]'),
+                $label    = $form.find('label'),
+                showFiles = function(files) {
+                    $label.text(files.length > 1 ? ($input.attr('data-multiple-caption') || '').replace( '{count}', files.length ) : files[ 0 ].name);
+
+                };
+
+
+            if (isAdvancedUpload) {
+
+                var droppedFiles = false;
+
+
+                $form.on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                })
+                    .on('dragover dragenter', function() {
+                        $form.addClass('is-dragover');
+                        console.log('dragover dreagenter');
+                    })
+                    .on('dragleave dragend drop', function() {
+                        $form.removeClass('is-dragover');
+                        console.log('dragLEAVE dreagend drop');
+                    })
+                    .on('drop', function(e) {
+                        droppedFiles = e.originalEvent.dataTransfer.files;
+                        showFiles( droppedFiles );
+                        console.log('drop');
+                        readFile('.item-img');
+                    });
+
+            }*/
+
+            var isAdvancedUpload = function () {
+                var div = document.createElement('div');
+                return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window;
+            }();
+
+            var $form = $('.box');
+
+
+            if (isAdvancedUpload) {
+
+                var droppedFiles = false;
+                $form.addClass('has-advanced-upload');
+
+                $form.on('drag dragstart dragend dragover dragenter dragleave drop', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }).on('dragover dragenter', function () {
+                    $form.addClass('is-dragover');
+                }).on('dragleave dragend drop', function () {
+                    $form.removeClass('is-dragover');
+                }).on('drop', function (e) {
+                    droppedFiles = e.originalEvent.dataTransfer.files;
+                    readFile(e.originalEvent.dataTransfer);
+                });
+
+            }
+
+            {{--var tags = [--}}
+            {{--        @foreach ($tags as $tag)--}}
+            {{--    {--}}
+            {{--        tag: "{{$tag}}"--}}
+            {{--    },--}}
+            {{--    @endforeach--}}
+            {{--];--}}
+
+        });
+
+        var product = new Vue({
+            el: '#vue-product',
+            data: {
+                msg: 'Vue js works are needed'
+            },
+            methods: {
+                stem: function (event) {
+                    alert('stem');
+                }
+            }
         });
     </script>
 @endpush
