@@ -142,51 +142,6 @@
                 <div id="preview-crop-image" class="mb-30"
                      style="width:500px;height:500px;">
                 </div>--}}
-                <div class="form-group mb-30">
-                    <label for="stock">Number in Stock</label>
-                    <input required type="number" class="form-control{{ $errors->has('stock') ? ' is-invalid' : '' }}"
-                           value="{{ old('stock') }}" id="stock" name="stock" placeholder="e.g. 10">
-                    @if ($errors->has('stock'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('stock') }}</strong>
-                        </span>
-                    @endif
-                </div>
-                <div class="form-group mb-30">
-                    <label for="height">Height</label>
-                    <input required type="text" class="form-control{{ $errors->has('height') ? ' is-invalid' : '' }}"
-                           value="{{ old('height') }}"
-                           id="height" name="height" placeholder="e.g. 30cm">
-                    @if ($errors->has('height'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('height') }}</strong>
-                        </span>
-                    @endif
-                </div>
-                <div class="form-group mb-30">
-                    <label for="origin">Origin</label>
-                    <input required type="text" class="form-control{{ $errors->has('origin') ? ' is-invalid' : '' }}"
-                           value="{{ old('origin') }}"
-                           id="origin" name="origin" placeholder="e.g. ">
-                    @if ($errors->has('origin'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('origin') }}</strong>
-                        </span>
-                    @endif
-                </div>
-
-                <div class="form-group mb-30">
-                    <label for="tags">Tags</label>
-                    <input required type="text" class="form-control{{ $errors->has('tags') ? ' is-invalid' : '' }}"
-                           value="{{ old('tags') }}"
-                           id="tags" name="tags" placeholder="e.g. rose, pink, stem">
-                    @if ($errors->has('tags'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('tags') }}</strong>
-                        </span>
-                    @endif
-                </div>
-
 
                 <div class="form-group mb-30">
                     <h6>Choose Colour</h6>
@@ -286,6 +241,54 @@
                         </span>
                     @endif
                 </div>
+
+                <div class="form-group mb-30">
+                    <label for="stock">Number in Stock</label>
+                    <input required type="number" class="form-control{{ $errors->has('stock') ? ' is-invalid' : '' }}"
+                           value="{{ old('stock') }}" id="stock" name="stock" placeholder="e.g. 10">
+                    @if ($errors->has('stock'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('stock') }}</strong>
+                        </span>
+                    @endif
+                </div>
+                <div class="form-group mb-30">
+                    <label for="height">Height</label>
+                    <input required type="text" class="form-control{{ $errors->has('height') ? ' is-invalid' : '' }}"
+                           value="{{ old('height') }}"
+                           id="height" name="height" placeholder="e.g. 30cm">
+                    @if ($errors->has('height'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('height') }}</strong>
+                        </span>
+                    @endif
+                </div>
+                <div class="form-group mb-30">
+                    <label for="origin">Origin</label>
+                    <input required type="text" class="form-control{{ $errors->has('origin') ? ' is-invalid' : '' }}"
+                           value="{{ old('origin') }}"
+                           id="origin" name="origin" placeholder="e.g. ">
+                    @if ($errors->has('origin'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('origin') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+                <div class="form-group mb-30">
+                    <label for="tags">Tags</label>
+                    <input required type="text" class="form-control{{ $errors->has('tags') ? ' is-invalid' : '' }}"
+                           value="{{ old('tags') }}"
+                           id="tags" name="tags" placeholder="e.g. rose, pink, stem">
+                    @if ($errors->has('tags'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('tags') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+
+
                 <div class="form-group mb-30">
                     <label for="category">Category</label>
                     <select class="form-control" id="category" name="category" required>
@@ -323,7 +326,7 @@
                     @endif
                 </div>
 
-                <div class="form-group mb-30">
+                {{--<div class="form-group mb-30">
                     <label for="payment_type">Payment type</label>
                     <select class="form-control" id="payment_type" name="payment_type" required>
                         @if(old('payment_type', null) != null)
@@ -332,7 +335,7 @@
                         <option value="online">Online</option>
                         <option value="invoice">Invoice</option>
                     </select>
-                </div>
+                </div>--}}
 
                 <div class="form-group mb-30">
                     <label for="grower">Grower</label>

@@ -195,6 +195,33 @@
                     @endif
                 </div>
 
+                <div class="form-group mb-30">
+                    <label for="grower">Grower</label>
+                    <input type="text" class="form-control{{ $errors->has('grower') ? ' is-invalid' : '' }}"
+                           value="{{ $product->grower }}"
+                           id="grower" name="grower" placeholder="e.g. ">
+                    @if ($errors->has('grower'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('grower') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+                <div class="form-group mb-30">
+                    <label for="feature">Feature</label>
+                    <select class="form-control" id="feature" name="feature" required>
+                        @if($product->feature != null)
+                            <option selected value="{{ $product->feature }}">{{ $product->fToStr() }}</option>
+                        @endif
+                        <option value="0">none</option>
+                        <option value="1">Special</option>
+                        <option value="2">Low Price</option>
+                        <option value="3">Exclusive</option>
+                        <option value="4">Limited</option>
+
+                    </select>
+                </div>
+
                 <div class="form-group mb-30 row form-check">
                     <label for="">Status</label>
                     <div class="col-md-12 text-center">

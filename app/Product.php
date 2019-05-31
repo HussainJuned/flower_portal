@@ -56,4 +56,21 @@ class Product extends Model
     {
         return $this->availableDates();
     }
+
+    public function fToStr() {
+        $f = $this->feature;
+        switch ($f) {
+            case 0:
+                return 'None';
+            case 1:
+                return 'Special';
+            case 2:
+                return 'Low Price';
+            case 3:
+                return 'Exclusive';
+            case 4:
+                return 'Limited';
+
+        }
+    }
 }

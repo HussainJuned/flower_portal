@@ -215,7 +215,7 @@
                             <div class="form-group mb-30 row">
                                 <label for="suite" class="col-md-4 col-form-label text-md-right">Suite</label>
                                 <div class="col-md-6">
-                                    <input required type="text"
+                                    <input type="text"
                                            class="form-control{{ $errors->has('suite') ? ' is-invalid' : '' }}"
                                            value="{{ old('suite') }}"
                                            id="suite" name="suite" placeholder="e.g. 14048">
@@ -230,7 +230,7 @@
                             <div class="form-group mb-30 row">
                                 <label for="buzzer" class="col-md-4 col-form-label text-md-right">Buzzer</label>
                                 <div class="col-md-6">
-                                    <input required type="text"
+                                    <input type="text"
                                            class="form-control{{ $errors->has('buzzer') ? ' is-invalid' : '' }}"
                                            value="{{ old('buzzer') }}"
                                            id="buzzer" name="buzzer" placeholder="e.g. 14048">

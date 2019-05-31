@@ -227,6 +227,8 @@ class ProductController extends Controller
         $product->available_date_start = $request['available_date_start'];
         $product->available_date_end = $request['available_date_end'];
         $product->stock = $request['stock'];
+        $product->feature = $request['feature'];
+        $product->grower = $request['grower'];
 
         if($request['pack'] == 'Stem') {
             $product->number_of_stem = 1;
