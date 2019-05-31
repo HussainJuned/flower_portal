@@ -699,20 +699,20 @@
                 } else {
                     price_res = $('#s_increment').val() * price_per_s_b.val();
                 }
-                price_res.toFixed(2);
+                price_res = parseFloat(Math.round(price_res * 100) / 100).toFixed(2);
                 price.val(price_res);
             });
 
             number_of_stem.on('change', function (event) {
                 price_res = number_of_stem.val() * price_per_s_b.val();
-                price_res.toFixed(2);
+                price_res = parseFloat(Math.round(price_res * 100) / 100).toFixed(2);
 
                 price.val(price_res);
             });
 
             $('#s_increment').on('change', function (event) {
                 price_res = $(this).val() * price_per_s_b.val();
-                price_res.toFixed(2);
+                price_res = parseFloat(Math.round(price_res * 100) / 100).toFixed(2);
 
                 price.val(price_res);
             });
