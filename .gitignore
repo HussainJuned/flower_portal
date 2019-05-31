@@ -26,3 +26,4 @@ Homestead.json
 /public/uploads
 /storage/framework/
 /storage/logs/
+!/public/uploads/default.png

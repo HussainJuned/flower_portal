@@ -1641,6 +1641,17 @@ table.oi_t thead th {
 
 .oi_t tr th:first-child, .oi_t tr td:first-child {padding-left: 25px;}
 
+.product_box figure figcaption {
+    position: absolute;
+    top: 0;
+    color: #fff;
+    width: 80px;
+    text-shadow: 0 0 10px #000;
+    background: #3490dd;
+    text-align: center;
+    padding: 5px 0;
+}
+
 @keyframes popup {
     0%   { transform: translateX(305px);  }
     25%   { transform: translateX(0);  }
