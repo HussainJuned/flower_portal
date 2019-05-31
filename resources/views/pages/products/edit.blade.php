@@ -6,7 +6,8 @@
 
     <div class="container" id="vue-product">
         <main>
-            <form action="{{ route('products.update', ['product' => $product->id]) }}" method="post" class="w-50 mx-auto mb-5"
+            <form action="{{ route('products.update', ['product' => $product->id]) }}" method="post"
+                  class="w-50 mx-auto mb-5"
                   id="my-form" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -93,7 +94,8 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">$</div>
                         </div>
-                        <input required type="number" class="form-control{{ $errors->has('price') ? ' is-invalid' : '' }}"
+                        <input required type="number"
+                               class="form-control{{ $errors->has('price') ? ' is-invalid' : '' }}"
                                value="{{ $product->price }}" min="0.1" max="9999999999" step="0.1"
                                id="price" name="price" disabled>
                         @if ($errors->has('price'))
@@ -119,7 +121,8 @@
                         <div class="box__input">
                             <label class="cabinet center-block">
                                 <figure>
-                                    <img src="{{ asset($product->photo_url) }}" class="gambar img-fluid img-thumbnail" id="item-img-output"/>
+                                    <img src="{{ asset($product->photo_url) }}" class="gambar img-fluid img-thumbnail"
+                                         id="item-img-output"/>
                                     <figcaption><i class="fas fa-camera"></i></figcaption>
                                 </figure>
                                 <input type="file" class="item-img file center-block box__file"
@@ -132,6 +135,156 @@
                     </div>
 
                 </div>
+
+                <div class="form-group mb-30">
+                    <h6>Change Colour</h6>
+                    {{--<input required type="text" class="form-control{{ $errors->has('colour') ? ' is-invalid' : '' }}"
+                           value="{{ old('colour') }}"
+                           id="colour" name="colour" placeholder="e.g. red">--}}
+
+                    <div class="color_preview_box">
+                        <div class="colour_item">
+
+                            <label for="colour1">
+                                <input type="radio" required name="colour" id="colour1" value="#FFC813"
+                                       @if( $product->colour === '#FFC813')
+                                       checked="checked"
+                                       @endif @if( $product->colour === '#FFC813')
+                                       checked="checked"
+                                    @endif>
+                                <span class="checkmark" style="background-color: #FFC813"></span>
+                            </label>
+                        </div>
+                        <div class="colour_item">
+
+                            <label for="colour2">
+                                <input type="radio" required name="colour" id="colour2" value="#FE7418"
+                                       @if( $product->colour === '#FE7418')
+                                       checked="checked"
+                                       @endif @if( $product->colour === '#FE7418')
+                                       checked="checked"
+                                    @endif>
+                                <span class="checkmark" style="background-color: #FE7418"></span>
+                            </label>
+                        </div>
+                        <div class="colour_item">
+                            <label for="colour3">
+                                <input type="radio" required name="colour" id="colour3" value="#FFB27E"
+                                       @if( $product->colour === '#FFB27E')
+                                       checked="checked"
+                                       @endif @if( $product->colour === '#FFB27E')
+                                       checked="checked"
+                                    @endif>
+                                <span class="checkmark" style="background-color: #FFB27E"></span>
+                            </label>
+                        </div>
+                        <div class="colour_item">
+                            <label for="colour4">
+                                <input type="radio" required name="colour" id="colour4" value="#B90000"
+                                       @if( $product->colour === '#B90000')
+                                       checked="checked"
+                                       @endif @if( $product->colour === '#B90000')
+                                       checked="checked"
+                                    @endif>
+                                <span class="checkmark" style="background-color: #B90000"></span>
+                            </label>
+                        </div>
+                        <div class="colour_item">
+                            <label for="colour5">
+                                <input type="radio" required name="colour" id="colour5" value="#E496C4"
+                                       @if( $product->colour === '#E496C4')
+                                       checked="checked"
+                                       @endif @if( $product->colour === '#E496C4')
+                                       checked="checked"
+                                    @endif>
+                                <span class="checkmark" style="background-color: #E496C4"></span>
+                            </label>
+                        </div>
+                        <div class="colour_item">
+                            <label for="colour6">
+                                <input type="radio" required name="colour" id="colour6" value="#2F2074"
+                                       @if( $product->colour === '#2F2074')
+                                       checked="checked"
+                                       @endif @if( $product->colour === '#2F2074')
+                                       checked="checked"
+                                    @endif>
+                                <span class="checkmark" style="background-color: #2F2074"></span>
+                            </label>
+                        </div>
+                        <div class="colour_item">
+                            <label for="colour7">
+                                <input type="radio" required name="colour" id="colour7" value="#95AB46"
+                                       @if( $product->colour === '#95AB46')
+                                       checked="checked"
+                                       @endif @if( $product->colour === '#95AB46')
+                                       checked="checked"
+                                    @endif>
+                                <span class="checkmark" style="background-color: #95AB46"></span>
+                            </label>
+                        </div>
+                        <div class="colour_item">
+                            <label for="colour8">
+                                <input type="radio" required name="colour" id="colour8" value="#914423"
+                                       @if( $product->colour === '#914423')
+                                       checked="checked"
+                                    @endif>
+                                <span class="checkmark" style="background-color: #914423"></span>
+                            </label>
+                        </div>
+                        <div class="colour_item">
+                            <label for="colour9">
+                                <input type="radio" required name="colour" id="colour9" value="#181417"
+                                       @if( $product->colour === '#181417')
+                                       checked="checked"
+                                    @endif>
+                                <span class="checkmark" style="background-color: #181417"></span>
+                            </label>
+                        </div>
+                        <div class="colour_item">
+                            <label for="colour10">
+                                <input type="radio" required name="colour" id="colour10" value="#E8E2DF"
+                                       @if( $product->colour === '#E8E2DF')
+                                       checked="checked"
+                                    @endif>
+                                <span class="checkmark" style="background-color: #E8E2DF"></span>
+                            </label>
+                        </div>
+                        <div class="colour_item">
+                            <label for="colour11">
+                                <input type="radio" required name="colour" id="colour11" value="#D4AF37"
+                                       @if( $product->colour === '#D4AF37')
+                                       checked="checked"
+                                    @endif>
+                                <span class="checkmark" style="background-color: #D4AF37"></span>
+                            </label>
+                        </div>
+                        <div class="colour_item">
+                            <label for="colour12">
+                                <input type="radio" required name="colour" id="colour12" value="#C0C0C0"
+                                       @if( $product->colour === '#C0C0C0')
+                                       checked="checked"
+                                    @endif>
+                                <span class="checkmark" style="background-color: #C0C0C0"></span>
+                            </label>
+                        </div>
+                        <div class="colour_item">
+                            <label for="colour13">
+                                <input type="radio" required name="colour" id="colour13" value="mix">
+                                <span class="checkmark"
+                                      style="background: linear-gradient(to right, red, orange, yellow, green, blue, violet)"></span>
+                            </label>
+                        </div>
+
+                    </div>
+
+
+                    @if ($errors->has('colour'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('colour') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
                 {{--<div class="mb-30 text-center">
 
                 </div>
@@ -170,17 +323,7 @@
                         </span>
                     @endif
                 </div>
-                <div class="form-group mb-30">
-                    <label for="colour">Colour</label>
-                    <input required type="text" class="form-control{{ $errors->has('colour') ? ' is-invalid' : '' }}"
-                           value="{{ $product->colour }}"
-                           id="colour" name="colour" placeholder="e.g. red">
-                    @if ($errors->has('colour'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('colour') }}</strong>
-                        </span>
-                    @endif
-                </div>
+
                 <div class="form-group mb-30">
                     <label for="category">Category</label>
                     <select class="form-control" id="category" name="category" required>
@@ -249,7 +392,7 @@
                     <div class="col-md-12 text-center">
                         <input type="checkbox" value="active"
                                @if ($product->status > 0 )
-                                   checked
+                               checked
                                @endif
                                class="form-check-input{{ $errors->has('status') ? ' is-invalid' : '' }}"
                                id="exampleCheck1" name="status">

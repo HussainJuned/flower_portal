@@ -17,6 +17,9 @@ $factory->define(\App\Product::class, function (Faker $faker) {
     $total = $price_p_s * $no_stem;
     $cat = \App\Category::all();
 
+    $colourPalate = array('#FFC813', '#FE7418', '#FFB27E', '#B90000', '#E496C4', '#2F2074', '#95AB46', '#914423',
+        '#181417', '#E8E2DF', '#D4AF37', '#C0C0C0', 'mix');
+
     return [
         'name' => $faker->name,
         'description' => $faker->text,
@@ -29,7 +32,7 @@ $factory->define(\App\Product::class, function (Faker $faker) {
         'pack' => $pack,
         'height' => $faker->numberBetween(1, 20) . ' cm',
         'origin' => $faker->country,
-        'colour' => $faker->colorName,
+        'colour' => $faker->randomElement($colourPalate),
         'category' => $faker->randomElement($cat),
         'available_date_start' => \Carbon\Carbon::now()->addDays(1),
         'available_date_end' => \Carbon\Carbon::now()->addDays($faker->numberBetween(2, 25)),
