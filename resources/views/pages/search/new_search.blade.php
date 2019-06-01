@@ -55,12 +55,25 @@
                         <div class="content overflow-container">
                             <div class="filter-content-height">
                                 <ul class="list no-active-highlight">
-                                    <li id="aanbod_1" onclick="onFilterChange()"><a data-href="{Aanbod: 1}">Length</a>
+                                    <li id="aanbod_1"><a data-href="{Aanbod: 1}">Length</a>
                                     </li>
-                                    <li class="active" id="aanbod_2" onclick="onFilterChange()"><a
+                                    <li class="active" id="aanbod_2"><a
                                             data-href="{Aanbod: 2}" data-partial="" data-scroll="no">Origin</a>
                                     </li>
-                                    <li id="aanbod_3" onclick="onFilterChange()"><a data-href="{Aanbod: 3}">Category</a>
+                                    <li id="aanbod_3">
+                                        <a data-toggle="collapse" href="#collapseCategory" role="button" aria-expanded="false" aria-controls="collapseCategory">Category</a>
+                                        <ul class="collapse" id="collapseCategory">
+                                            @foreach ($categories as $category)
+                                                <li class="category_list">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input inp_filter_catg" id="customCheck_{{$category->id}}" v-on:click="catgFilter({{$category->id}})">
+                                                        <label class="custom-control-label" for="customCheck_{{$category->id}}"> {{ $category->name }}</label>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+
+                                        </ul>
+
                                     </li>
                                 </ul>
                             </div>
@@ -135,7 +148,11 @@
 
                 <div class="result_column_container">
                     <flower-result-list-component v-bind:keywords="keywords" v-bind:cart_products="cart_products"
-                                                  v-bind:sort_by="sort_by" v-bind:delivery_date="delivery_date"></flower-result-list-component>
+                                                  v-bind:sort_by="sort_by" v-bind:delivery_date="delivery_date"
+                                                  v-bind:filter_catg="filter_catg"
+                    >
+
+                    </flower-result-list-component>
                 </div>
 
             </div>

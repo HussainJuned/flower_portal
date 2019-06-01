@@ -62,6 +62,11 @@
                 console.log(this.delivery_date);
                 this.fetch();
             },
+            filter_catg(after, before) {
+                console.log(this.filter_catg);
+                this.fetch();
+            },
+
 
         },
         created() {
@@ -77,8 +82,12 @@
                 return arr[1];
             },
             fetch() {
-                axios.get('/api/flower', {params: {keywords: this.keywords, sort_by: this.sort_by, delivery_date: this.delivery_date}})
-                    .then(response => {
+                axios.get('/api/flower', {
+                    params: {
+                        keywords: this.keywords, sort_by: this.sort_by, delivery_date: this.delivery_date,
+                        filter_catg: this.filter_catg
+                    }
+                }).then(response => {
                         this.products = response.data.data;
                         $('.result_count').text(response.data.total);
                     })
@@ -110,7 +119,7 @@
                 }.bind(this), 2050);
             }
         },
-        props: ['keywords', 'sort_by', 'cart_products', 'delivery_date'],
+        props: ['keywords', 'sort_by', 'cart_products', 'delivery_date', 'filter_catg'],
         computed: {
             resultCount() {
                 return this.products.total;

@@ -4274,6 +4274,10 @@ __webpack_require__.r(__webpack_exports__);
     delivery_date: function delivery_date(after, before) {
       console.log(this.delivery_date);
       this.fetch();
+    },
+    filter_catg: function filter_catg(after, before) {
+      console.log(this.filter_catg);
+      this.fetch();
     }
   },
   created: function created() {
@@ -4295,7 +4299,8 @@ __webpack_require__.r(__webpack_exports__);
         params: {
           keywords: this.keywords,
           sort_by: this.sort_by,
-          delivery_date: this.delivery_date
+          delivery_date: this.delivery_date,
+          filter_catg: this.filter_catg
         }
       }).then(function (response) {
         _this.products = response.data.data;
@@ -4326,7 +4331,7 @@ __webpack_require__.r(__webpack_exports__);
       }.bind(this), 2050);
     }
   },
-  props: ['keywords', 'sort_by', 'cart_products', 'delivery_date'],
+  props: ['keywords', 'sort_by', 'cart_products', 'delivery_date', 'filter_catg'],
   computed: {
     resultCount: function resultCount() {
       return this.products.total;
@@ -58629,7 +58634,8 @@ var app = new Vue({
     'keywords': null,
     'sort_by': 'price',
     'delivery_date': delivery_date_o,
-    'cart_products': []
+    'cart_products': [],
+    'filter_catg': []
   },
   methods: {
     sortBy: function sortBy(sort_by) {
@@ -58676,6 +58682,17 @@ var app = new Vue({
       }).then(function (response) {
         console.log(response.data); // this.delivery_date = response.data;
       }).catch(function (error) {});
+    },
+    catgFilter: function catgFilter($catg_id) {
+      if (this.filter_catg.includes($catg_id)) {
+        this.filter_catg.pop($catg_id);
+      } else {
+        this.filter_catg.push($catg_id);
+      }
+
+      this.filter_catg.forEach(function (cat) {
+        console.log(cat);
+      });
     }
   }
 });

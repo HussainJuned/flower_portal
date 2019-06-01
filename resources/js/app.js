@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -34,7 +33,7 @@ Vue.component('flower-result-list-component', require('./components/FlowerResult
  */
 
 var delivery_date_o = new Date();
-delivery_date_o = delivery_date_o.getFullYear()+'-'+(delivery_date_o.getMonth()+1)+'-'+delivery_date_o.getDate();
+delivery_date_o = delivery_date_o.getFullYear() + '-' + (delivery_date_o.getMonth() + 1) + '-' + delivery_date_o.getDate();
 
 var app = new Vue({
     el: '#app',
@@ -43,6 +42,7 @@ var app = new Vue({
         'sort_by': 'price',
         'delivery_date': delivery_date_o,
         'cart_products': [],
+        'filter_catg': [],
     },
     methods: {
         sortBy(sort_by) {
@@ -76,13 +76,25 @@ var app = new Vue({
         },
         onDDChange(event) {
             this.delivery_date = event.target.value;
-            axios.get('/api/session/set_order_date', {params: {order_date: this.delivery_date }})
+            axios.get('/api/session/set_order_date', {params: {order_date: this.delivery_date}})
                 .then(response => {
                     console.log(response.data);
                     // this.delivery_date = response.data;
                 })
                 .catch(error => {
                 });
+        },
+        catgFilter($catg_id) {
+            if(this.filter_catg.includes($catg_id)) {
+                this.filter_catg.pop($catg_id);
+            } else {
+                this.filter_catg.push($catg_id);
+            }
+
+            this.filter_catg.forEach(function (cat) {
+                console.log(cat);
+            });
+
         }
     }
 });

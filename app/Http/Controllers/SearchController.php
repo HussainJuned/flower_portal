@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Product;
 use App\User;
 use Carbon\Carbon;
@@ -55,8 +56,8 @@ class SearchController extends Controller
 //        $products->paginate(10);
 
 
-
-        return view('pages.search.new_search', compact('products', 'keyword', 'a_date'));
+        $categories = Category::all();
+        return view('pages.search.new_search', compact('products', 'keyword', 'a_date', 'categories'));
     }
 
     public function searchSeller(Request $request)
@@ -97,6 +98,7 @@ class SearchController extends Controller
 
     public function apiFlowerAll(Request $request)
     {
+//        return $request;
         $product = Product::query();
 
         $product = $product->where('name', 'like' , '%' .$request->keywords . '%')
@@ -107,8 +109,9 @@ class SearchController extends Controller
                 ->whereDate('available_date_end', '>=', $request['delivery_date']);
         }
 
-
-
+        if($request->has('filter_catg')) {
+            $product = $product->whereIn('category', $request['filter_catg']);
+        }
 
         if ($request->has('sort_by')) {
             if($request->sort_by === 'price_high') {
@@ -116,7 +119,6 @@ class SearchController extends Controller
             } else {
                 $product = $product->orderBy($request->sort_by, 'asc');
             }
-
         }
 
 //        $product->paginate(16);

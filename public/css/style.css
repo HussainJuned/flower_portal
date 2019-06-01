@@ -1652,6 +1652,24 @@ table.oi_t thead th {
     padding: 5px 0;
 }
 
+/* filter */
+.filter-content-height li {
+    border: 1px solid #ececec;
+    margin: 20px 0;
+    padding: 10px;
+}
+
+.filter-content-height li ul li {
+    margin: 0;
+    border: none;
+    padding: 20px;
+    color: #999;
+}
+
+.filter-content-height li ul {
+    margin-top: 20px;
+}
+
 @keyframes popup {
     0%   { transform: translateX(305px);  }
     25%   { transform: translateX(0);  }
