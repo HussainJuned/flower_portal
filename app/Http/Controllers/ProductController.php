@@ -165,6 +165,7 @@ class ProductController extends Controller
     {
         $categories = ProductCategory::all();
         $tags = Product::existingTags()->pluck('name');
+//        return $product;
         return view('pages.products.edit', compact('product', 'categories', 'tags'));
     }
 
