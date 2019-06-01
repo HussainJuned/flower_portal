@@ -23,7 +23,7 @@ class CreateOrdersTable extends Migration
 //            $table->decimal('total_price', 10, 2)->unsigned();
             $table->decimal('order_total_price', 10, 2)->nullable();
             $table->date('order_date');
-            $table->integer('status');//(1 Fullfilled/2 Outstanding/3 Confirmed/ 4 running/ 5 pending)
+            $table->integer('status');//(1 Submitted  /2 Confirmed 3/shipped 4/ Delivered 5/Fullfilled 6/ Not Available)
 //            $table->string('shipping');// (Delivery/Pickup)
 //            $table->string('zip');
 
