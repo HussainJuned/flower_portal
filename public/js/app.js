@@ -4277,7 +4277,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.fetch();
+    this.getSession();
   },
   methods: {
     splitPrice1: function splitPrice1(str) {
@@ -4300,6 +4300,16 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         _this.products = response.data.data;
         $('.result_count').text(response.data.total);
+      }).catch(function (error) {});
+    },
+    getSession: function getSession() {
+      var _this2 = this;
+
+      axios.get('/api/session/get_order_date').then(function (response) {
+        console.log(response.data);
+        _this2.$parent.delivery_date = response.data;
+
+        _this2.fetch();
       }).catch(function (error) {});
     },
     routeSP: function routeSP(product_id) {
@@ -58659,6 +58669,13 @@ var app = new Vue({
     },
     onDDChange: function onDDChange(event) {
       this.delivery_date = event.target.value;
+      axios.get('/api/session/set_order_date', {
+        params: {
+          order_date: this.delivery_date
+        }
+      }).then(function (response) {
+        console.log(response.data); // this.delivery_date = response.data;
+      }).catch(function (error) {});
     }
   }
 });

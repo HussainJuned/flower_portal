@@ -76,6 +76,13 @@ var app = new Vue({
         },
         onDDChange(event) {
             this.delivery_date = event.target.value;
+            axios.get('/api/session/set_order_date', {params: {order_date: this.delivery_date }})
+                .then(response => {
+                    console.log(response.data);
+                    // this.delivery_date = response.data;
+                })
+                .catch(error => {
+                });
         }
     }
 });

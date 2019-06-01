@@ -65,7 +65,7 @@
 
         },
         created() {
-            this.fetch();
+            this.getSession();
         },
         methods: {
             splitPrice1(str) {
@@ -85,6 +85,16 @@
                     .catch(error => {
                     });
 
+            },
+            getSession() {
+                axios.get('/api/session/get_order_date')
+                    .then(response => {
+                        console.log(response.data);
+                        this.$parent.delivery_date = response.data;
+                        this.fetch();
+                    })
+                    .catch(error => {
+                    });
             },
             routeSP(product_id) {
                 return "{{ route('products.show', ['product' => " + product_id + "]) }}"

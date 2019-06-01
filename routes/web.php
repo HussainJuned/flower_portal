@@ -75,6 +75,8 @@ Route::get('/artisan/config_clear', 'CommandController@config_clear');
 // search api
 Route::get('/api/flower', 'SearchController@apiFlowerAll')->name('api.flower.all');
 Route::get('/api/buyer_addressed', 'ApiController@buyerAddresses')->name('api.buyer.addresses');
+Route::get('/api/session/set_order_date', 'ApiController@setSessionOrderDate')->name('api.session.setOrderDate');
+Route::get('/api/session/get_order_date', 'ApiController@getSessionOrderDate')->name('api.session.getOrderDate');
 
 // product export import
 Route::get('/my-products/export', 'ProductExcelController@exportToExcel')->name('product.export.excel');
