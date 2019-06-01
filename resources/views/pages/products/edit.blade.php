@@ -872,7 +872,6 @@
                 minDate: moment(startDate),
                 // maxDate: moment(startDate).add(365, 'days')
             };
-
             end_datepicker.daterangepicker(end_settings);
         });
     </script>
