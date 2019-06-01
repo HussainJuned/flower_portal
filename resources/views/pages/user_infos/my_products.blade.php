@@ -33,7 +33,8 @@
 
                     <label for="choose_excel">
                         Import Prdouct from excel
-                        <input type="file" id="choose_excel" name="excel_file" class="form-control">
+                        <input type="file" id="choose_excel" name="excel_file" class="form-control"
+                               accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
                     </label>
                     <button class="btn btn-primary" type="submit">Submit</button>
                 </form>
