@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    @stack('css-lib')
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     @stack('css')
 </head>

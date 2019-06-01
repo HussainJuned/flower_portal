@@ -304,7 +304,7 @@
 
                 <div class="form-group mb-30">
                     <label for="available_date_start">Available Date Starts From</label>
-                    <input required type="date"
+                    <input required type="text"
                            class="form-control{{ $errors->has('available_date_start') ? ' is-invalid' : '' }}"
                            value="{{ old('available_date_start') }}"
                            id="available_date_start" name="available_date_start" placeholder="e.g. red">
@@ -316,7 +316,7 @@
                 </div>
                 <div class="form-group mb-30">
                     <label for="available_date_end">Available Date Ends At</label>
-                    <input required type="date"
+                    <input required type="text"
                            class="form-control{{ $errors->has('available_date_end') ? ' is-invalid' : '' }}"
                            value="{{ old('available_date_end') }}"
                            id="available_date_end" name="available_date_end" placeholder="e.g. red">
@@ -419,6 +419,9 @@
 @endsection
 
 @push('footer-js')
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('#tags').selectize({
@@ -492,7 +495,7 @@
                 $uploadCrop.croppie('bind', {
                     url: rawImg
                 }).then(function () {
-                    console.log('jQuery bind complete');
+                    // console.log('jQuery bind complete');
                 });
             });
 
@@ -664,4 +667,65 @@
             }
         });
     </script>
+
+    <script type="text/javascript">
+        let start_datepicker = $('#available_date_start');
+        let end_datepicker = $('#available_date_end');
+        let settings = {
+            "singleDatePicker": true,
+            "showDropdowns": true,
+            "showWeekNumbers": true,
+            "showISOWeekNumbers": true,
+            "autoApply": true,
+            ranges: {
+                'Today': [moment(), moment()],
+                'Tomorrow': [moment().add(1, 'days'), moment().add(1, 'days')],
+            },
+            "locale": {
+                "format": "YYYY-MM-DD",
+                "separator": " - ",
+                "firstDay": 1
+            },
+            "alwaysShowCalendars": true,
+            "startDate": moment(),
+            minDate: moment(),
+            maxDate: moment().add(365, 'days')
+        };
+        let startDate;
+
+        start_datepicker.daterangepicker(settings, function(start, end, label) {
+            // console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+            startDate = start.format('YYYY-MM-DD');
+            // console.log('start date: ', startDate)
+            end_datepicker.data('daterangepicker').setStartDate(moment(startDate));
+        });
+        let end_settings = {
+            "singleDatePicker": true,
+            "showDropdowns": true,
+            "showWeekNumbers": true,
+            "showISOWeekNumbers": true,
+            "autoApply": true,
+            ranges: {
+                'Today': [moment(), moment()],
+                'Tomorrow': [moment().add(1, 'days'), moment().add(1, 'days')],
+                '1 Week': [moment().add(7, 'days'), moment().add(7, 'days')],
+                '1 month': [moment().add(30, 'days'), moment().add(30, 'days')],
+            },
+            "locale": {
+                "format": "YYYY-MM-DD",
+                "separator": " - ",
+                "firstDay": 1
+            },
+            "alwaysShowCalendars": true,
+            "startDate":  moment(startDate).add(7, 'days'),
+            minDate: moment(startDate),
+            maxDate: moment(startDate).add(365, 'days')
+        };
+
+        end_datepicker.daterangepicker(end_settings);
+    </script>
+@endpush
+
+@push('css-lib')
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 @endpush
