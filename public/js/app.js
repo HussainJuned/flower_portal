@@ -4276,7 +4276,7 @@ __webpack_require__.r(__webpack_exports__);
       this.fetch();
     },
     filter_catg: function filter_catg(after, before) {
-      console.log(this.filter_catg);
+      // console.log(this.filter_catg);
       this.fetch();
     }
   },
@@ -4311,7 +4311,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios.get('/api/session/get_order_date').then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         _this2.$parent.delivery_date = response.data;
 
         _this2.fetch();
@@ -58679,8 +58679,8 @@ var app = new Vue({
         params: {
           order_date: this.delivery_date
         }
-      }).then(function (response) {
-        console.log(response.data); // this.delivery_date = response.data;
+      }).then(function (response) {// console.log(response.data);
+        // this.delivery_date = response.data;
       }).catch(function (error) {});
     },
     catgFilter: function catgFilter(catg_id) {

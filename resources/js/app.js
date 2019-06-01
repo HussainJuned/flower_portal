@@ -78,7 +78,7 @@ var app = new Vue({
             this.delivery_date = event.target.value;
             axios.get('/api/session/set_order_date', {params: {order_date: this.delivery_date}})
                 .then(response => {
-                    console.log(response.data);
+                    // console.log(response.data);
                     // this.delivery_date = response.data;
                 })
                 .catch(error => {

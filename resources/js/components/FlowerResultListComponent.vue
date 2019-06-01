@@ -63,7 +63,7 @@
                 this.fetch();
             },
             filter_catg(after, before) {
-                console.log(this.filter_catg);
+                // console.log(this.filter_catg);
                 this.fetch();
             },
 
@@ -98,7 +98,7 @@
             getSession() {
                 axios.get('/api/session/get_order_date')
                     .then(response => {
-                        console.log(response.data);
+                        // console.log(response.data);
                         this.$parent.delivery_date = response.data;
                         this.fetch();
                     })
