@@ -79,4 +79,23 @@ class Product extends Model
 
         }
     }
+
+    public function scopeName($query,  $keyword)
+    {
+        return $query->where('name', 'like' , '%' . $keyword . '%');
+    }
+
+    public function scopeIsAvailableOn($query,  $date)
+    {
+        return $query->whereDate('available_date_start', '<=', $date)
+            ->whereDate('available_date_end', '>=', $date);
+    }
+
+    public function scopeFilterByCategory($query,  $arr)
+    {
+        return $query->whereIn('category', $arr);
+    }
+
+
+
 }

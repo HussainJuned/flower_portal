@@ -101,16 +101,19 @@ class SearchController extends Controller
 //        return $request;
         $product = Product::query();
 
-        $product = $product->where('name', 'like' , '%' .$request->keywords . '%')
+//        $product = $product->where('name', 'like' , '%' .$request->keywords . '%')
             /*->orWhere('description', 'like' , '%' .$request->keywords . '%')*/;
+        $product = $product->name($request->keywords ? $request->keywords : '');
 
         if ($request->has('delivery_date')) {
-            $product = $product->whereDate('available_date_start', '<=', $request['delivery_date'])
-                ->whereDate('available_date_end', '>=', $request['delivery_date']);
+            /*$product = $product->whereDate('available_date_start', '<=', $request['delivery_date'])
+                ->whereDate('available_date_end', '>=', $request['delivery_date$request['delivery_date']']);*/
+            $product = $product->isAvailableOn($request['delivery_date']);
         }
 
         if($request->has('filter_catg')) {
             $product = $product->whereIn('category', $request['filter_catg']);
+//            $product = $product->filterByCategory($request['filter_catg']);
         }
 
         if ($request->has('sort_by')) {

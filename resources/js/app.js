@@ -84,16 +84,14 @@ var app = new Vue({
                 .catch(error => {
                 });
         },
-        catgFilter($catg_id) {
-            if(this.filter_catg.includes($catg_id)) {
-                this.filter_catg.pop($catg_id);
+        catgFilter(catg_id) {
+            if(this.filter_catg.includes(catg_id)) {
+                var index = this.filter_catg.indexOf(catg_id);
+                if (index !== -1) this.filter_catg.splice(index, 1);
+                // this.filter_catg.pop($catg_id);
             } else {
-                this.filter_catg.push($catg_id);
+                this.filter_catg.push(catg_id);
             }
-
-            this.filter_catg.forEach(function (cat) {
-                console.log(cat);
-            });
 
         }
     }
