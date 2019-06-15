@@ -1097,7 +1097,7 @@ section#app_result.container {
 }
 
 .side-filter ul {
-    float: left;
+    /* float: left; */
     width: 100%;
     display: block;
     margin: 0;

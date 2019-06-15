@@ -55,9 +55,21 @@
                         <div class="content overflow-container">
                             <div class="filter-content-height">
                                 <ul class="list no-active-highlight">
-                                    <li id="aanbod_1"><a data-href="{Aanbod: 1}">Length</a>
+                                    <li>
+                                        <a data-toggle="collapse" href="#collapse_length" role="button" aria-expanded="false" aria-controls="collapse_length">Length</a>
+                                        <ul class="collapse" id="collapse_length">
+                                            @for ($i=1; $i<100; $i+=10)
+                                                <li class="length_list category_list">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input inp_filter_length" id="customCheck_{{$i}}" v-on:click="lengthFilter({{$i}})">
+                                                        <label class="custom-control-label" for="customCheck_{{$i}}"> {{ $i }} - {{ $i + 9 }} cm</label>
+                                                    </div>
+                                                </li>
+                                            @endfor
+
+                                        </ul>
                                     </li>
-                                    <li class="active" id="aanbod_2"><a
+                                    <li class="" id="aanbod_2"><a
                                             data-href="{Aanbod: 2}" data-partial="" data-scroll="no">Origin</a>
                                     </li>
                                     <li id="aanbod_3">
