@@ -173,7 +173,14 @@ class UserinfoController extends Controller
         $userinfo->language = $request['language'];
         $userinfo->website = $request['website'];
         $userinfo->fax = $request['fax'];
+        $userinfo->payment_type = $request['payment_type'];
+
         $userinfo->save();
+
+        $userinfo->user->buyerAddresses[0]->suite = $request['suite'];
+        $userinfo->user->buyerAddresses[0]->buzzer = $request['buzzer'];
+
+        $userinfo->user->buyerAddresses[0]->update();
 
         return redirect()->back()->with('message', 'Profile Updated Successfully');
     }

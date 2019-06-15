@@ -7,7 +7,8 @@
                 <div class="card">
                     <div class="card-header">View and Update Your Information</div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('userinfos.update', ['userinfo' => auth()->user()->userinfo->id]) }}">
+                        <form method="POST"
+                              action="{{ route('userinfos.update', ['userinfo' => auth()->user()->userinfo->id]) }}">
                             @csrf
                             @method('PUT')
 
@@ -33,7 +34,8 @@
                                 <div class="col-md-6">
                                     <select class="form-control" id="title" name="title" required>
                                         @if($userinfo->title != null)
-                                            <option selected value="{{ $userinfo->title }}">{{ $userinfo->title }}</option>
+                                            <option selected
+                                                    value="{{ $userinfo->title }}">{{ $userinfo->title }}</option>
                                         @endif
                                         <option>Mr.</option>
                                         <option>Ms.</option>
@@ -156,6 +158,37 @@
                         </span>
                                     @endif </div>
                             </div>
+
+                            <div class="form-group mb-30 row">
+                                <label for="suite" class="col-md-4 col-form-label text-md-right">Suite</label>
+                                <div class="col-md-6">
+                                    <input type="text"
+                                           class="form-control{{ $errors->has('suite') ? ' is-invalid' : '' }}"
+                                           value="{{ $userinfo->user->buyerAddresses[0]->suite }}"
+                                           id="suite" name="suite">
+                                    @if ($errors->has('suite'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('suite') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-30 row">
+                                <label for="buzzer" class="col-md-4 col-form-label text-md-right">Buzzer</label>
+                                <div class="col-md-6">
+                                    <input type="text"
+                                           class="form-control{{ $errors->has('buzzer') ? ' is-invalid' : '' }}"
+                                           value="{{ $userinfo->user->buyerAddresses[0]->buzzer }}"
+                                           id="buzzer" name="buzzer" placeholder="e.g. 14048">
+                                    @if ($errors->has('buzzer'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('buzzer') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group mb-30 row">
                                 <label for="telephone" class="col-md-4 col-form-label text-md-right">Telephone</label>
                                 <div class="col-md-6">
@@ -252,6 +285,24 @@
                             <strong>{{ $errors->first('fax') }}</strong>
                         </span>
                                     @endif</div>
+                            </div>
+
+                            <div class="form-group mb-30">
+                                <label for="payment_type">If you are a seller. Preferred Payment type</label>
+                                <select class="form-control" id="payment_type" name="payment_type" required>
+                                    <option value="online"
+                                            @if ($userinfo->payment_type === 'online')
+                                            selected
+                                        @endif
+                                    >Online
+                                    </option>
+                                    <option value="invoice"
+                                            @if ($userinfo->payment_type === 'invoice')
+                                            selected
+                                        @endif
+                                    >Invoice
+                                    </option>
+                                </select>
                             </div>
 
                             <div class="form-group row mb-0">
