@@ -127,7 +127,7 @@ class SearchController extends Controller
 //        $product->paginate(16);
 
 //        return response()->json($product);
-        return $product->paginate(16);
+        return $product->paginate(16)->appends($_GET);
     }
 
 

@@ -4260,7 +4260,8 @@ __webpack_require__.r(__webpack_exports__);
   name: "flower-result-list-component",
   data: function data() {
     return {
-      products: []
+      products: [],
+      page_data: []
     };
   },
   watch: {
@@ -4282,6 +4283,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.getSession();
+    this.scroll();
   },
   methods: {
     splitPrice1: function splitPrice1(str) {
@@ -4304,6 +4306,8 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (response) {
         _this.products = response.data.data;
+        _this.page_data = response.data; // console.log('np url: ' + this.page_data.next_page_url);
+
         $('.result_count').text(response.data.total);
       }).catch(function (error) {});
     },
@@ -4329,6 +4333,36 @@ __webpack_require__.r(__webpack_exports__);
       setTimeout(function (e) {
         $('.popup').removeClass('slidein');
       }.bind(this), 2050);
+    },
+    scroll: function scroll() {
+      var _this3 = this;
+
+      window.onscroll = function () {
+        // let bottomOfWindow = (document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight);
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+          // alert("you're at the bottom of the page");
+          if (_this3.page_data.next_page_url) {
+            $('.ajax-load').show();
+            axios.get(_this3.page_data.next_page_url).then(function (response) {
+              Array.prototype.push.apply(_this3.products, response.data.data); // this.products = response.data.data;
+
+              _this3.page_data = response.data;
+              $('.ajax-load').hide();
+
+              _this3.$forceUpdate();
+
+              $('.ajax-load').hide();
+            });
+          }
+        }
+        /*if (bottomOfWindow) {
+            console.log('reached bottom');
+         }*/
+
+      };
+    },
+    mounted: function mounted() {
+      this.scroll();
     }
   },
   props: ['keywords', 'sort_by', 'cart_products', 'delivery_date', 'filter_catg'],

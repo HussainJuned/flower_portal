@@ -48,6 +48,7 @@
         data() {
             return {
                 products: [],
+                page_data: [],
             }
         },
         watch: {
@@ -71,6 +72,7 @@
         },
         created() {
             this.getSession();
+            this.scroll();
         },
         methods: {
             splitPrice1(str) {
@@ -89,6 +91,8 @@
                     }
                 }).then(response => {
                         this.products = response.data.data;
+                        this.page_data = response.data;
+                        // console.log('np url: ' + this.page_data.next_page_url);
                         $('.result_count').text(response.data.total);
                     })
                     .catch(error => {
@@ -117,7 +121,39 @@
                 setTimeout(function (e) {
                     $('.popup').removeClass('slidein');
                 }.bind(this), 2050);
-            }
+            },
+            scroll () {
+
+                window.onscroll = () => {
+                    // let bottomOfWindow = (document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight);
+                    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                        // alert("you're at the bottom of the page");
+
+                        if (this.page_data.next_page_url) {
+                            $('.ajax-load').show();
+                            axios.get(this.page_data.next_page_url)
+                                .then(response => {
+
+                                    Array.prototype.push.apply(this.products, response.data.data);
+                                    // this.products = response.data.data;
+                                    this.page_data = response.data;
+                                    $('.ajax-load').hide();
+                                    this.$forceUpdate();
+                                    $('.ajax-load').hide();
+                                });
+                        }
+
+                    }
+
+                    /*if (bottomOfWindow) {
+                        console.log('reached bottom');
+
+                    }*/
+                };
+            },
+            mounted () {
+                this.scroll();
+            },
         },
         props: ['keywords', 'sort_by', 'cart_products', 'delivery_date', 'filter_catg'],
         computed: {

@@ -166,10 +166,14 @@
 
                     </flower-result-list-component>
                 </div>
-
+                <div class="ajax-load text-center" style="display:none">
+                    <p><img src="{{ asset('images/icons/loader.gif') }}">Loading...</p>
+                </div>
             </div>
         </div>
+
     </section>
+
 @endsection
 
 @push('footer-js')
@@ -195,9 +199,52 @@
            $(this).dropdown('show');
         });*/
 
-
-
-
     </script>
 
+    {{--<script type="text/javascript">
+        var page = 1;
+        $(window).scroll(function() {
+            if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                page++;
+                loadMoreData(page);
+            }
+        });
+
+
+        function loadMoreData(page){
+            $.ajax(
+                {
+                    url: '?page=' + page,
+                    type: "get",
+                    beforeSend: function()
+                    {
+                        $('.ajax-load').show();
+                    }
+                })
+                .done(function(data)
+                {
+                    if(data.html == " "){
+                        $('.ajax-load').html("No more records found");
+                        return;
+                    }
+                    $('.ajax-load').hide();
+                    $("#post-data").append(data.html);
+                })
+                .fail(function(jqXHR, ajaxOptions, thrownError)
+                {
+                    alert('server not responding...');
+                });
+        }
+    </script>--}}
+
 @endpush
+
+@push('css')
+    <style type="text/css">
+        .ajax-load{
+            /*background: #e1e1e1;*/
+            padding: 10px 0 25px;
+            width: 100%;
+        }
+    </style>
+    @endpush
