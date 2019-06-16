@@ -172,10 +172,11 @@
 
                             <template v-if="cart_products">
                                 <div class="row mb-3">
-                                    <div class="col-5 text-center">Product</div>
-                                    <div class="col-3 text-right">QTY</div>
-                                    <div class="col-2 text-right">Price</div>
-                                    <div class="col-2">Total Stems</div>
+                                    <div class="col-5 text-right">Product</div>
+                                    <div class="col-2 text-right">QTY</div>
+                                    <div class="col-2 px-0 text-center">Price</div>
+                                    <div class="col-1 px-0">Sold By</div>
+                                    <div class="col-2 px-0">Total Stems</div>
                                 </div>
                             <section class="item" v-for="cart_product in cart_products">
                                 <input type="number" name="product_id[]" v-bind:value="cart_product.id" hidden>
@@ -213,6 +214,7 @@
 
 
                                 <div class="total-price">$ <span class="price_value" v-bind:data-price="cart_product.price">@{{ cart_product.price }}</span> </div>
+                                <div class="sold-type"> <span class="s_type_value" v-bind:data-price="cart_product.pack">@{{ cart_product.pack }}</span> </div>
                                 <div class="total-stem"> <span class="stem_value" v-bind:data-price="cart_product.number_of_stem">@{{ cart_product.number_of_stem }}</span> </div>
                             </section>
                             </template>
