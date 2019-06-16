@@ -5,7 +5,8 @@
                 <div class="card">
                     <div class="card-header">View and Update Your Information</div>
                     <div class="card-body">
-                        <form method="POST" action="<?php echo e(route('userinfos.update', ['userinfo' => auth()->user()->userinfo->id])); ?>">
+                        <form method="POST"
+                              action="<?php echo e(route('userinfos.update', ['userinfo' => auth()->user()->userinfo->id])); ?>">
                             <?php echo csrf_field(); ?>
                             <?php echo method_field('PUT'); ?>
 
@@ -31,7 +32,8 @@
                                 <div class="col-md-6">
                                     <select class="form-control" id="title" name="title" required>
                                         <?php if($userinfo->title != null): ?>
-                                            <option selected value="<?php echo e($userinfo->title); ?>"><?php echo e($userinfo->title); ?></option>
+                                            <option selected
+                                                    value="<?php echo e($userinfo->title); ?>"><?php echo e($userinfo->title); ?></option>
                                         <?php endif; ?>
                                         <option>Mr.</option>
                                         <option>Ms.</option>
@@ -74,7 +76,7 @@
                                            class="form-control<?php echo e($errors->has('country') ? ' is-invalid' : ''); ?>"
                                            value="<?php echo e($userinfo->country); ?>" required>
                                     <datalist id="country">
-                                        <?php echo $__env->make('partials.all_country_options', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                        <?php echo $__env->make('partials.all_country_options', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                     </datalist>
                                     <?php if($errors->has('country')): ?>
                                         <span class="invalid-feedback" role="alert">
@@ -154,6 +156,37 @@
                         </span>
                                     <?php endif; ?> </div>
                             </div>
+
+                            <div class="form-group mb-30 row">
+                                <label for="suite" class="col-md-4 col-form-label text-md-right">Suite</label>
+                                <div class="col-md-6">
+                                    <input type="text"
+                                           class="form-control<?php echo e($errors->has('suite') ? ' is-invalid' : ''); ?>"
+                                           value="<?php echo e($userinfo->user->buyerAddresses[0]->suite); ?>"
+                                           id="suite" name="suite">
+                                    <?php if($errors->has('suite')): ?>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong><?php echo e($errors->first('suite')); ?></strong>
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-30 row">
+                                <label for="buzzer" class="col-md-4 col-form-label text-md-right">Buzzer</label>
+                                <div class="col-md-6">
+                                    <input type="text"
+                                           class="form-control<?php echo e($errors->has('buzzer') ? ' is-invalid' : ''); ?>"
+                                           value="<?php echo e($userinfo->user->buyerAddresses[0]->buzzer); ?>"
+                                           id="buzzer" name="buzzer" placeholder="e.g. 14048">
+                                    <?php if($errors->has('buzzer')): ?>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong><?php echo e($errors->first('buzzer')); ?></strong>
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
                             <div class="form-group mb-30 row">
                                 <label for="telephone" class="col-md-4 col-form-label text-md-right">Telephone</label>
                                 <div class="col-md-6">
@@ -252,6 +285,24 @@
                                     <?php endif; ?></div>
                             </div>
 
+                            <div class="form-group mb-30">
+                                <label for="payment_type">If you are a seller. Preferred Payment type</label>
+                                <select class="form-control" id="payment_type" name="payment_type" required>
+                                    <option value="online"
+                                            <?php if($userinfo->payment_type === 'online'): ?>
+                                            selected
+                                        <?php endif; ?>
+                                    >Online
+                                    </option>
+                                    <option value="invoice"
+                                            <?php if($userinfo->payment_type === 'invoice'): ?>
+                                            selected
+                                        <?php endif; ?>
+                                    >Invoice
+                                    </option>
+                                </select>
+                            </div>
+
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn j_btn">
@@ -267,4 +318,4 @@
     </div>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Juned\PhpstormProjects\flowerapp\resources\views/pages/user_infos/edit.blade.php ENDPATH**/ ?>

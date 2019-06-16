@@ -24,7 +24,7 @@
             <?php endif; ?>
 
             <div class="col-sm-6 my-3">
-                <a href="" class="btn btn-warning">Export product to excel</a>
+                <a href="<?php echo e(route('product.export.excel')); ?>" class="btn btn-warning">Export product to excel</a>
             </div>
             <div class="col-sm-6 my-3">
                 <form action="<?php echo e(route('product.import.excel')); ?>" enctype="multipart/form-data" method="post">
@@ -32,7 +32,8 @@
 
                     <label for="choose_excel">
                         Import Prdouct from excel
-                        <input type="file" id="choose_excel" name="excel_file" class="form-control">
+                        <input type="file" id="choose_excel" name="excel_file" class="form-control"
+                               accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
                     </label>
                     <button class="btn btn-primary" type="submit">Submit</button>
                 </form>

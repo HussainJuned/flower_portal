@@ -46383,7 +46383,10 @@ var render = function() {
                 _c("li", [
                   _c("span", [_vm._v("colour:")]),
                   _vm._v(" "),
-                  _c("span", [_vm._v(_vm._s(product.colour))])
+                  _c("span", {
+                    staticClass: "rcs",
+                    style: { background: product.colour }
+                  })
                 ]),
                 _vm._v(" "),
                 _c("li", [

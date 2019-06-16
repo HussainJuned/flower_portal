@@ -109,4 +109,4 @@
 
         </div>
     </div>
-</div>
+</div><?php /**PATH C:\Users\Juned\PhpstormProjects\flowerapp\resources\views/partials/product_box.blade.php ENDPATH**/ ?>

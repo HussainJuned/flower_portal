@@ -10,4 +10,4 @@
         </div>
 
     </div>
-<?php endif; ?>
+<?php endif; ?><?php /**PATH C:\Users\Juned\PhpstormProjects\flowerapp\resources\views/partials/errors_message.blade.php ENDPATH**/ ?>

@@ -14,7 +14,7 @@
                             <li><span>Length</span><span> {{ product.height }} </span></li>
                             <li><span>stock</span> <span>{{ product.stock }}</span></li>
                             <li><span>pack:</span> <span>{{ product.pack }}</span></li>
-                            <li><span>colour:</span> <span>{{ product.colour }}</span></li>
+                            <li><span>colour:</span> <span v-bind:style="{background: product.colour}" class="rcs"></span></li>
                             <li><span style="width: 100%" class="availability"> Available from stock<div
                                 v-bind:class="{green: product.status}"
                                 class="product-status"></div></span></li>

@@ -9,7 +9,7 @@
                             <?php echo csrf_field(); ?>
                             <h6 class="text-center my-3">Login Information</h6>
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right"><?php echo e(__('Name')); ?></label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">Username</label>
                                 <div class="col-md-6">
                                     <input id="name" type="text"
                                            class="form-control<?php echo e($errors->has('name') ? ' is-invalid' : ''); ?>"
@@ -213,7 +213,7 @@
                             <div class="form-group mb-30 row">
                                 <label for="suite" class="col-md-4 col-form-label text-md-right">Suite</label>
                                 <div class="col-md-6">
-                                    <input required type="text"
+                                    <input type="text"
                                            class="form-control<?php echo e($errors->has('suite') ? ' is-invalid' : ''); ?>"
                                            value="<?php echo e(old('suite')); ?>"
                                            id="suite" name="suite" placeholder="e.g. 14048">
@@ -228,7 +228,7 @@
                             <div class="form-group mb-30 row">
                                 <label for="buzzer" class="col-md-4 col-form-label text-md-right">Buzzer</label>
                                 <div class="col-md-6">
-                                    <input required type="text"
+                                    <input type="text"
                                            class="form-control<?php echo e($errors->has('buzzer') ? ' is-invalid' : ''); ?>"
                                            value="<?php echo e(old('buzzer')); ?>"
                                            id="buzzer" name="buzzer" placeholder="e.g. 14048">
