@@ -74,7 +74,7 @@ class RegisterController extends Controller
             'website' => ['nullable', 'string', 'max:255'],
             'fax' => ['nullable', 'string', 'max:255'],
             'terms_and_conditions' => ['required'],
-        ]);
+        ], ['name.unique' => 'username already taken']);
     }
 
     /**
