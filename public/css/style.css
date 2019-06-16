@@ -647,7 +647,7 @@ ul.column.fragment:after {
     margin: 0;
     width: 50%;
     float: left;
-    padding: 5px 15px;
+    padding: 5px 10px;
     font-size: 14px;
     color: #333;
 }
@@ -1473,7 +1473,7 @@ div#cart {
 /* Product Quantity */
 .shopping-cart .quantity {
     padding-top: 20px;
-    margin-right: 60px;
+    margin-right: 8px;
 }
 .shopping-cart .quantity input {
     -webkit-appearance: none;
@@ -1509,7 +1509,7 @@ div#cart {
 }
 
 /* Total Price */
-.shopping-cart .total-price {
+.shopping-cart .total-price, .shopping-cart .total-stem {
     width: 83px;
     padding-top: 27px;
     text-align: center;
@@ -1650,6 +1650,10 @@ table.oi_t thead th {
     background: #3490dd;
     text-align: center;
     padding: 5px 0;
+}
+
+.shopping-cart .item:nth-child(2) {
+    border-top: 1px solid #E1E8EE;
 }
 
 span.rcs {

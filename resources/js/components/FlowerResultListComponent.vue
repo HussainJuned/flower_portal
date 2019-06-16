@@ -11,10 +11,11 @@
                     </div>
                     <div class="specs">
                         <ul class="clearfix">
-                            <li><span>Length</span><span> {{ product.height }} </span></li>
-                            <li><span>stock</span> <span>{{ product.stock }}</span></li>
-                            <li><span>pack:</span> <span>{{ product.pack }}</span></li>
-                            <li><span>colour:</span> <span v-bind:style="{background: product.colour}" class="rcs"></span></li>
+                            <li><span>Sold By:</span> <span>{{ product.pack }}</span></li>
+                            <li><span>Total Stem:</span> <span>{{ product.number_of_stem }}</span></li>
+                            <li><span>Length:</span><span> {{ product.height }} </span></li>
+                            <li><span>Stock:</span> <span>{{ product.stock }}</span></li>
+                            <li><span>Colour:</span> <span v-bind:style="{background: product.colour}" class="rcs"></span></li>
                             <li><span style="width: 100%" class="availability"> Available from stock<div
                                 v-bind:class="{green: product.status}"
                                 class="product-status"></div></span></li>
@@ -28,12 +29,12 @@
                         <div class="product-label exclusive" v-else-if="product.feature === 4">LIMITED</div>
                         <h6>{{ product.name }}</h6>
                         <div class="price-info">
-                            <span class="price">$ {{ splitPrice1(product.price) }}<sup> {{ splitPrice2(product.price) }}</sup>
+                            <span class="price">$ {{ splitPrice1(product.price_per_stem_bunch) }}<sup> {{ splitPrice2(product.price_per_stem_bunch) }}</sup>
                                 <div class="add_to_cart" v-on:click.stop.prevent.self="addToCart(product)">
                                     <i class="fas fa-plus" v-on:click.stop.prevent.self="addToCart(product)"></i>
                                 </div>
                             </span>
-                            <span class="each">Price per piece</span>
+                            <span class="each">Price per stem</span>
                         </div>
                     </div>
                 </a>

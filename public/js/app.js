@@ -4256,6 +4256,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "flower-result-list-component",
   data: function data() {
@@ -46364,24 +46365,30 @@ var render = function() {
             _c("div", { staticClass: "specs" }, [
               _c("ul", { staticClass: "clearfix" }, [
                 _c("li", [
-                  _c("span", [_vm._v("Length")]),
-                  _c("span", [_vm._v(" " + _vm._s(product.height) + " ")])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("span", [_vm._v("stock")]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v(_vm._s(product.stock))])
-                ]),
-                _vm._v(" "),
-                _c("li", [
-                  _c("span", [_vm._v("pack:")]),
+                  _c("span", [_vm._v("Sold By:")]),
                   _vm._v(" "),
                   _c("span", [_vm._v(_vm._s(product.pack))])
                 ]),
                 _vm._v(" "),
                 _c("li", [
-                  _c("span", [_vm._v("colour:")]),
+                  _c("span", [_vm._v("Total Stem:")]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v(_vm._s(product.number_of_stem))])
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("span", [_vm._v("Length:")]),
+                  _c("span", [_vm._v(" " + _vm._s(product.height) + " ")])
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("span", [_vm._v("Stock:")]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v(_vm._s(product.stock))])
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c("span", [_vm._v("Colour:")]),
                   _vm._v(" "),
                   _c("span", {
                     staticClass: "rcs",
@@ -46431,9 +46438,14 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "price-info" }, [
                 _c("span", { staticClass: "price" }, [
-                  _vm._v("$ " + _vm._s(_vm.splitPrice1(product.price))),
+                  _vm._v(
+                    "$ " + _vm._s(_vm.splitPrice1(product.price_per_stem_bunch))
+                  ),
                   _c("sup", [
-                    _vm._v(" " + _vm._s(_vm.splitPrice2(product.price)))
+                    _vm._v(
+                      " " +
+                        _vm._s(_vm.splitPrice2(product.price_per_stem_bunch))
+                    )
                   ]),
                   _vm._v(" "),
                   _c(
@@ -46469,7 +46481,7 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("span", { staticClass: "each" }, [_vm._v("Price per piece")])
+                _c("span", { staticClass: "each" }, [_vm._v("Price per stem")])
               ])
             ])
           ])

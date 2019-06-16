@@ -169,8 +169,14 @@
 
 
                         <form action="{{ route('order.details.buyer') }}" id="card_order_form" method="post">
-                            @csrf
+
                             <template v-if="cart_products">
+                                <div class="row mb-3">
+                                    <div class="col-5 text-center">Product</div>
+                                    <div class="col-3 text-right">QTY</div>
+                                    <div class="col-2 text-right">Price</div>
+                                    <div class="col-2">Total Stems</div>
+                                </div>
                             <section class="item" v-for="cart_product in cart_products">
                                 <input type="number" name="product_id[]" v-bind:value="cart_product.id" hidden>
                                 <div class="buttons">
@@ -207,6 +213,7 @@
 
 
                                 <div class="total-price">$ <span class="price_value" v-bind:data-price="cart_product.price">@{{ cart_product.price }}</span> </div>
+                                <div class="total-stem"> <span class="stem_value" v-bind:data-price="cart_product.number_of_stem">@{{ cart_product.number_of_stem }}</span> </div>
                             </section>
                             </template>
                             <input type="text" name="delivery_date" v-bind:value="delivery_date" hidden>
