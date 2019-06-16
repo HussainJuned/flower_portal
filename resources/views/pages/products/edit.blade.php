@@ -615,7 +615,7 @@
 
 
             // Start upload preview image
-            $(".gambar").attr("src", "https://via.placeholder.com/400x300?text=Click or drag and drop image here");
+            // $(".gambar").attr("src", "https://via.placeholder.com/400x300?text=Click or drag and drop image here");
             var $uploadCrop,
                 tempFilename,
                 rawImg,
