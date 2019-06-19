@@ -10,7 +10,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto nav_left">
+                <ul class="navbar-nav mr-auto nav_left" id="fixed_nav">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('home') }}">Home <span class="sr-only">Home</span></a>
                     </li>
@@ -23,9 +23,197 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('search.intro') }}"><i class="fas fa-search"></i> <span
+                        <a class="nav-link" href="{{ route('search.intro') }}">Search Page<span
                                 class="sr-only">Search</span></a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="main_search"><i class="fas fa-search" id="main_search_icon"></i> <span
+                                class="sr-only">Search</span></a>
+                    </li>
+
+                    <li class="nav-item full_area" id="full_search">
+                        <input type="text" class="form-control" id="main_search_inp">
+                        <span id="main_search_x"><i class="fas fa-times"></i></span>
+
+                        <ul id="main_s_result">
+                            <li>
+                                <a href="{{ route('products.show', ['product' => 1]) }}">
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <img src="{{ asset('uploads/juned_product_4.png') }}" alt="" class="img-fluid">
+                                            <span class="p_name">
+                                            Rose Benquest
+                                        </span>
+                                        </div>
+                                        <div class="col-3 text-right">
+                                        <span class="p_price">
+                                            $3.43
+                                        </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+
+
+                             <li>
+                                <a href="{{ route('products.show', ['product' => 1]) }}">
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <img src="{{ asset('uploads/juned_product_5.png') }}" alt="" class="img-fluid">
+                                            <span class="p_name">
+                                            Rose Benquest
+                                        </span>
+                                        </div>
+                                        <div class="col-3 text-right">
+                                        <span class="p_price">
+                                            $3.43
+                                        </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+
+                             <li>
+                                <a href="{{ route('products.show', ['product' => 1]) }}">
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <img src="{{ asset('uploads/juned_product_6.png') }}" alt="" class="img-fluid">
+                                            <span class="p_name">
+                                            Rose Benquest
+                                        </span>
+                                        </div>
+                                        <div class="col-3 text-right">
+                                        <span class="p_price">
+                                            $3.43
+                                        </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('products.show', ['product' => 1]) }}">
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <img src="{{ asset('uploads/juned_product_6.png') }}" alt="" class="img-fluid">
+                                            <span class="p_name">
+                                            Rose Benquest
+                                        </span>
+                                        </div>
+                                        <div class="col-3 text-right">
+                                        <span class="p_price">
+                                            $3.43
+                                        </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('products.show', ['product' => 1]) }}">
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <img src="{{ asset('uploads/juned_product_6.png') }}" alt="" class="img-fluid">
+                                            <span class="p_name">
+                                            Rose Benquest
+                                        </span>
+                                        </div>
+                                        <div class="col-3 text-right">
+                                        <span class="p_price">
+                                            $3.43
+                                        </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('products.show', ['product' => 1]) }}">
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <img src="{{ asset('uploads/juned_product_6.png') }}" alt="" class="img-fluid">
+                                            <span class="p_name">
+                                            Rose Benquest
+                                        </span>
+                                        </div>
+                                        <div class="col-3 text-right">
+                                        <span class="p_price">
+                                            $3.43
+                                        </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('products.show', ['product' => 1]) }}">
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <img src="{{ asset('uploads/juned_product_6.png') }}" alt="" class="img-fluid">
+                                            <span class="p_name">
+                                            Rose Benquest
+                                        </span>
+                                        </div>
+                                        <div class="col-3 text-right">
+                                        <span class="p_price">
+                                            $3.43
+                                        </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('products.show', ['product' => 1]) }}">
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <img src="{{ asset('uploads/juned_product_6.png') }}" alt="" class="img-fluid">
+                                            <span class="p_name">
+                                            Rose Benquest
+                                        </span>
+                                        </div>
+                                        <div class="col-3 text-right">
+                                        <span class="p_price">
+                                            $3.43
+                                        </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('products.show', ['product' => 1]) }}">
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <img src="{{ asset('uploads/juned_product_6.png') }}" alt="" class="img-fluid">
+                                            <span class="p_name">
+                                            Rose Benquest
+                                        </span>
+                                        </div>
+                                        <div class="col-3 text-right">
+                                        <span class="p_price">
+                                            $3.43
+                                        </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('products.show', ['product' => 1]) }}">
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <img src="{{ asset('uploads/juned_product_6.png') }}" alt="" class="img-fluid">
+                                            <span class="p_name">
+                                            Rose Benquest
+                                        </span>
+                                        </div>
+                                        <div class="col-3 text-right">
+                                        <span class="p_price">
+                                            $3.43
+                                        </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
 
                 </ul>
 
@@ -327,7 +515,28 @@
     </script>
 
     <script>
+        /*var specifiedElement = document.getElementById('full_search');
+        var specifiedElement2 = document.getElementById('main_search');
 
+        //I'm using "click" but it works with any event
+        document.addEventListener('click', function(event) {
+            var isClickInside = specifiedElement.contains(event.target);
+            var isClickInside2 = specifiedElement2.contains(event.target);
+
+            if (!isClickInside &&  !isClickInside2) {
+                //the click was outside the specifiedElement, do something
+                $('#fixed_nav').removeClass('show_search');
+            }
+        });*/
+
+        $('#main_search').on('click', function (event) {
+            $('#fixed_nav').addClass('show_search');
+        });
+
+        $('#main_search_x').on('click', function (event) {
+            $('#fixed_nav').removeClass('show_search');
+            $('#main_search_inp').val('');
+        });
     </script>
 
 @endpush
