@@ -25,6 +25,7 @@ require('selectize');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('flower-result-list-component', require('./components/FlowerResultListComponent').default);
+Vue.component('main-nav-search', require('./components/MainNavSearch').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
