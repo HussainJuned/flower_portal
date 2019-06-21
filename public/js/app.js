@@ -4280,6 +4280,10 @@ __webpack_require__.r(__webpack_exports__);
     filter_catg: function filter_catg(after, before) {
       // console.log(this.filter_catg);
       this.fetch();
+    },
+    filter_length: function filter_length(after, before) {
+      // console.log(this.filter_catg);
+      this.fetch();
     }
   },
   created: function created() {
@@ -4298,12 +4302,14 @@ __webpack_require__.r(__webpack_exports__);
     fetch: function fetch() {
       var _this = this;
 
+      console.log(this.filter_length);
       axios.get('/api/flower', {
         params: {
           keywords: this.keywords,
           sort_by: this.sort_by,
           delivery_date: this.delivery_date,
-          filter_catg: this.filter_catg
+          filter_catg: this.filter_catg,
+          filter_length: this.filter_length
         }
       }).then(function (response) {
         _this.products = response.data.data;
@@ -4366,7 +4372,7 @@ __webpack_require__.r(__webpack_exports__);
       this.scroll();
     }
   },
-  props: ['keywords', 'sort_by', 'cart_products', 'delivery_date', 'filter_catg'],
+  props: ['keywords', 'sort_by', 'cart_products', 'delivery_date', 'filter_catg', 'filter_length'],
   computed: {
     resultCount: function resultCount() {
       return this.products.total;
@@ -59549,7 +59555,8 @@ var app = new Vue({
     'sort_by': 'price',
     'delivery_date': delivery_date_o,
     'cart_products': [],
-    'filter_catg': []
+    'filter_catg': [],
+    'filter_length': []
   },
   methods: {
     sortBy: function sortBy(sort_by) {
@@ -59603,6 +59610,14 @@ var app = new Vue({
         if (index !== -1) this.filter_catg.splice(index, 1); // this.filter_catg.pop($catg_id);
       } else {
         this.filter_catg.push(catg_id);
+      }
+    },
+    lengthFilter: function lengthFilter(catg_id) {
+      if (this.filter_length.includes(catg_id)) {
+        var index = this.filter_length.indexOf(catg_id);
+        if (index !== -1) this.filter_length.splice(index, 1); // this.filter_catg.pop($catg_id);
+      } else {
+        this.filter_length.push(catg_id);
       }
     }
   }

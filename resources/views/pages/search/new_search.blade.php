@@ -61,17 +61,17 @@
                                             @for ($i=1; $i<100; $i+=10)
                                                 <li class="length_list category_list">
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input inp_filter_length" id="customCheck_{{$i}}" v-on:click="lengthFilter({{$i}})">
-                                                        <label class="custom-control-label" for="customCheck_{{$i}}"> {{ $i }} - {{ $i + 9 }} cm</label>
+                                                        <input type="checkbox" class="custom-control-input inp_filter_length" id="lengthCheck_{{$i}}" v-on:click="lengthFilter({{$i}})">
+                                                        <label class="custom-control-label" for="lengthCheck_{{$i}}"> {{ $i }} - {{ $i + 9 }} cm</label>
                                                     </div>
                                                 </li>
                                             @endfor
 
                                         </ul>
                                     </li>
-                                    <li class="" id="aanbod_2"><a
+                                    {{--<li class="" id="aanbod_2"><a
                                             data-href="{Aanbod: 2}" data-partial="" data-scroll="no">Origin</a>
-                                    </li>
+                                    </li>--}}
                                     <li id="aanbod_3">
                                         <a data-toggle="collapse" href="#collapseCategory" role="button" aria-expanded="false" aria-controls="collapseCategory">Category</a>
                                         <ul class="collapse" id="collapseCategory">
@@ -161,7 +161,7 @@
                 <div class="result_column_container">
                     <flower-result-list-component v-bind:keywords="keywords" v-bind:cart_products="cart_products"
                                                   v-bind:sort_by="sort_by" v-bind:delivery_date="delivery_date"
-                                                  v-bind:filter_catg="filter_catg"
+                                                  v-bind:filter_catg="filter_catg" v-bind:filter_length="filter_length"
                     >
 
                     </flower-result-list-component>

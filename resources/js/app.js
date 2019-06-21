@@ -44,6 +44,7 @@ var app = new Vue({
         'delivery_date': delivery_date_o,
         'cart_products': [],
         'filter_catg': [],
+        'filter_length': [],
     },
     methods: {
         sortBy(sort_by) {
@@ -94,7 +95,20 @@ var app = new Vue({
                 this.filter_catg.push(catg_id);
             }
 
-        }
+        },
+
+        lengthFilter(catg_id) {
+            if(this.filter_length.includes(catg_id)) {
+                var index = this.filter_length.indexOf(catg_id);
+                if (index !== -1) this.filter_length.splice(index, 1);
+                // this.filter_catg.pop($catg_id);
+            } else {
+                this.filter_length.push(catg_id);
+            }
+
+        },
+
+
     }
 });
 

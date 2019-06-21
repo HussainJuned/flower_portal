@@ -115,6 +115,20 @@ class SearchController extends Controller
             $product = $product->whereIn('category', $request['filter_catg']);
 //            $product = $product->filterByCategory($request['filter_catg']);
         }
+        if($request->has('filter_length')) {
+
+            $lengths = $request['filter_length'];
+            $l = array();
+            foreach ($lengths as $length) {
+                for ($i=0; $i <= 10; $i++) {
+                    array_push($l, $length+$i);
+                }
+            }
+            $product = $product->whereIn('height', $l);
+//            $product = $product->whereBetween('height', [ $length[0], $length[0]+9 ]);
+//            $product = $product->whereBetween('height', [ $length, $length+9 ]);
+        }
+
 
         if ($request->has('sort_by')) {
             if($request->sort_by === 'price_high') {

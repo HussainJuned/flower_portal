@@ -69,6 +69,11 @@
                 this.fetch();
             },
 
+            filter_length(after, before) {
+                // console.log(this.filter_catg);
+                this.fetch();
+            },
+
 
         },
         created() {
@@ -85,10 +90,12 @@
                 return arr[1];
             },
             fetch() {
+                console.log(this.filter_length);
+
                 axios.get('/api/flower', {
                     params: {
                         keywords: this.keywords, sort_by: this.sort_by, delivery_date: this.delivery_date,
-                        filter_catg: this.filter_catg
+                        filter_catg: this.filter_catg, filter_length: this.filter_length
                     }
                 }).then(response => {
                         this.products = response.data.data;
@@ -156,7 +163,7 @@
                 this.scroll();
             },
         },
-        props: ['keywords', 'sort_by', 'cart_products', 'delivery_date', 'filter_catg'],
+        props: ['keywords', 'sort_by', 'cart_products', 'delivery_date', 'filter_catg', 'filter_length'],
         computed: {
             resultCount() {
                 return this.products.total;
