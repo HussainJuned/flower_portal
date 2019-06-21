@@ -6,7 +6,7 @@
     <div class="container" id="vue-product">
         <main>
             <form action="{{ route('products.store') }}" method="post" class="w-50 mx-auto mb-5"
-                  id="my-form" enctype="multipart/form-data">
+                  id="my-form" enctype="multipart/form-data" name="new_product_upload">
                 @csrf
                 <h2 class="mt-3 mb-30">Upload your product</h2>
                 <div class="form-group mb-30">
@@ -20,6 +20,20 @@
                         </span>
                     @endif
                 </div>
+
+                <div class="form-group mb-30">
+                    <label for="category">Category</label>
+                    <select class="form-control" id="category" name="category" required autocomplete="off">
+                        @if(old('category', null) != null)
+                            <option selected value="{{ old('category') }}">{{ old('category') }}</option>
+                        @endif
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ strtolower($category->name) }}</option>
+                        @endforeach
+
+                    </select>
+                </div>
+
                 <div class="form-group mb-30">
                     <label for="description">Description</label>
                     <textarea required type="text"
@@ -34,7 +48,7 @@
                 </div>
                 <div class="form-group mb-30">
                     <label for="pack">Packing type</label>
-                    <select class="form-control" id="pack" name="pack" required>
+                    <select class="form-control" id="pack" name="pack" required autocomplete="off">
                         @if(old('pack', null) != null)
                             <option selected value="{{ old('pack') }}">{{ old('pack') }}</option>
                         @endif
@@ -287,21 +301,6 @@
                     @endif
                 </div>
 
-
-
-                <div class="form-group mb-30">
-                    <label for="category">Category</label>
-                    <select class="form-control" id="category" name="category" required>
-                        @if(old('category', null) != null)
-                            <option selected value="{{ old('category') }}">{{ old('category') }}</option>
-                        @endif
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endforeach
-
-                    </select>
-                </div>
-
                 <div class="form-group mb-30">
                     <label for="available_date_start">Available Date Starts From</label>
                     <input required type="text"
@@ -352,7 +351,7 @@
 
                 <div class="form-group mb-30">
                     <label for="feature">Feature</label>
-                    <select class="form-control" id="feature" name="feature" required>
+                    <select class="form-control" id="feature" name="feature" required autocomplete="off">
                         @if(old('feature', null) != null)
                             <option selected value="{{ old('feature') }}">{{ old('feature') }}</option>
                         @endif
@@ -693,7 +692,7 @@
         };
         let startDate;
 
-        start_datepicker.daterangepicker(settings, function(start, end, label) {
+        start_datepicker.daterangepicker(settings, function (start, end, label) {
             // console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
             startDate = start.format('YYYY-MM-DD');
             // console.log('start date: ', startDate)
@@ -717,15 +716,70 @@
                 "firstDay": 1
             },
             "alwaysShowCalendars": true,
-            "startDate":  moment(startDate).add(7, 'days'),
+            "startDate": moment(startDate).add(7, 'days'),
             minDate: moment(startDate),
             maxDate: moment(startDate).add(365, 'days')
         };
 
         end_datepicker.daterangepicker(end_settings);
     </script>
+
+    <script>
+        var options = $('#category option');
+
+        var values = $.map(options, function (option) {
+            return option.value;
+        });
+
+        var el_name = $('#name');
+        // var name = [];
+
+        el_name.on('keyup', function (event) {
+            $("#category option:selected").attr("selected", false);
+
+            var theValue = el_name.val().toLowerCase().split(" ");
+            // var name = el_name.val().split(" ");
+            // console.log(theValue);
+
+            let shouldBreak = false;
+
+            loop1:
+            for (let i = 0; i < theValue.length; i++) {
+                var contained = $('#category option:contains(' + theValue[i] + ')');
+                if (contained.eq(0).val() != null) {
+
+                    var ca = contained.eq(0).text().toLowerCase().split(' ');
+
+                    loop2:
+                    for (let j = 0; j < ca.length; j++) {
+                        if (ca[j] === theValue[i]) {
+                            // console.log('found');
+                            contained.eq(0).attr('selected', true);
+                            $("#category").select();
+                            break loop1;
+                        } else {
+                            // console.log('not full word');
+                            // console.log('cv: ' + contained.eq(0).text());
+                        }
+                    }
+
+                    /*if (contained.eq(0).text() === theValue[i]) {
+
+
+                    } */
+
+                } else {
+                    // console.log('not found');
+                    // $("#category option:selected").attr("selected", false);
+                }
+            }
+
+
+            // return false;
+        });
+    </script>
 @endpush
 
 @push('css-lib')
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
 @endpush

@@ -40,5 +40,9 @@ class BuyerDashboardController extends Controller
         return redirect()->back()->with('message', 'Order Status Updated Successfully');
     }
 
+    public function orderHistory ()
+    {
+
+    }
 
 }

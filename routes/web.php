@@ -38,6 +38,11 @@ Route::get('/buyer-dashboard/order/{order}', 'BuyerDashboardController@viewOrder
 Route::post('/buyer-dashboard/updateOrderToReceived/{order}', 'BuyerDashboardController@updateOrderStatusToReceived')
     ->name('buyer_dashboard.order.updateToReceived');
 
+Route::post('/buyer-dashboard/order_history', 'BuyerDashboardController@orderHistory')
+    ->name('buyer_dashboard.order.history');
+
+
+
 Route::post('/seller-dashboard/updateToAccepted/{order}', 'SellerDashboardController@updateToAccepted')
     ->name('seller_dashboard.order.updateToAccepted');
 Route::post('/seller-dashboard/updateToShipped/{order}', 'SellerDashboardController@updateToShipped')
