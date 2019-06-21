@@ -423,6 +423,14 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+            var tags = [
+                    @foreach ($tags as $tag)
+                {
+                    tag: "{{$tag}}"
+                },
+                @endforeach
+            ];
+
             $('#tags').selectize({
                 delimiter: ',',
                 persist: false,
@@ -643,14 +651,6 @@
                 });
 
             }
-
-            var tags = [
-                    @foreach ($tags as $tag)
-                {
-                    tag: "{{$tag}}"
-                },
-                @endforeach
-            ];
 
         });
 
