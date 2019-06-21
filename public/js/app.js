@@ -47311,7 +47311,7 @@ var render = function() {
               },
               [
                 _c("img", {
-                  attrs: { src: "images/icons/loader.gif", alt: "loading..." }
+                  attrs: { src: "/images/icons/loader.gif", alt: "loading..." }
                 }),
                 _vm._v("\n            Loading.....\n        ")
               ]
@@ -47326,12 +47326,12 @@ var render = function() {
         _vm._v(" "),
         _vm._l(_vm.products, function(product) {
           return _c("li", [
-            _c("a", { attrs: { href: "products/" + product.id } }, [
+            _c("a", { attrs: { href: "/products/" + product.id } }, [
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-9" }, [
                   _c("img", {
                     staticClass: "img-fluid",
-                    attrs: { src: product.photo_url, alt: "" }
+                    attrs: { src: "/" + product.photo_url, alt: "" }
                   }),
                   _vm._v(" "),
                   _c("span", { staticClass: "p_name" }, [

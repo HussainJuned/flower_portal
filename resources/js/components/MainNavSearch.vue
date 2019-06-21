@@ -6,17 +6,17 @@
 
         <ul id="main_s_result">
             <li v-if="loading" style="font-size: 14px; text-transform: capitalize">
-                <img src="images/icons/loader.gif" alt="loading..." />
+                <img src="/images/icons/loader.gif" alt="loading..." />
                 Loading.....
             </li>
 
             <li v-if="no_result" class="no_result_found"><a href="#">No result found</a></li>
 
             <li v-for="product in products">
-                <a v-bind:href="'products/' + product.id">
+                <a v-bind:href="'/products/' + product.id">
                     <div class="row">
                         <div class="col-9">
-                            <img v-bind:src="product.photo_url" alt="" class="img-fluid">
+                            <img v-bind:src="'/'+ product.photo_url" alt="" class="img-fluid">
                             <span class="p_name">
                                             {{ product.name}}
                                         </span>
