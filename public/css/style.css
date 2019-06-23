@@ -1660,6 +1660,7 @@ table.oi_t thead th {
 span.rcs {
     display: inline-block;
     height: 16px;
+    width: 30px;
     max-width: 30px;
     margin-top: 7px !important;
     border-radius: 3px;
@@ -1771,7 +1772,103 @@ span.p_price {
 }
 
 
+/* view product page */
 
+.av_dates {
+    max-height: 150px;
+    overflow: auto;
+    width: 180px;
+    margin: auto;
+}
+
+figure.product_fig figcaption {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #fff;
+    width: 120px;
+    text-shadow: 0 0 10px #000;
+    background: #0770cc;
+    padding: 3px 8px 5px 9px;
+    border-radius: 3px;
+}
+
+#product ul.specs {
+    display: block;
+    width: 100%;
+    float: left;
+    padding: 0;
+    margin: 0;
+}
+
+#product ul.specs li {
+    display: block;
+    width: 50%;
+    float: left;
+    padding: 5px 0;
+    border-top: 1px solid #e6e6e6;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+#product ul.specs li:nth-child(odd) {
+    padding-right: 15px;
+}
+
+#product ul.specs li:nth-child(1), #product ul.specs li:nth-child(2) {
+    border-top: 0 none;
+}
+
+#product ul.specs li span {
+    width: 50%;
+    float: left;
+    display: block;
+    margin: 0;
+    font-size: 14px;
+}
+
+#product ul.specs li span:first-child {
+    color: #333;
+}
+
+#product ul.specs li span:last-child {
+    text-align: right;
+}
+
+#product ul.specs li:nth-child(even) {
+    padding-left: 15px;
+}
+
+.grower {
+    background: #f9f9f9;
+    float: left;
+    width: 100%;
+    border-radius: 2px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.grower b {
+    color: #333;
+}
+
+.grower span {
+    color: #5b92f9;
+    font-weight: 300;
+    font-size: 14px;
+    float: right;
+}
+#product span.rcs {
+    float: right !important;
+    display: inline-block !important;
+    height: 15px;
+    width: 30px !important;
+    margin-top: 4px !important;
+    border-radius: 3px;
+    background: linear-gradient(to right, red, orange, yellow, green, blue, violet);
+}
+
+/* animations*/
 @keyframes popup {
     0%   { transform: translateX(305px);  }
     25%   { transform: translateX(0);  }

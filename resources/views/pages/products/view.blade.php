@@ -6,10 +6,10 @@
 
     <div class="container">
         <h2 class="mb-30 text-center mt-5">Product Info</h2>
-        <div class="row mb-3">
-            <div class="col-sm-12 mb-3 text-center">
+        <div class="row mb-3" id="product">
+            <div class="col-sm-7 mb-3 text-center">
                 <a href="{{ route('userinfos.show', ['userinfo' => $product->user->userinfo->id]) }}">
-                    <figure>
+                    <figure class="product_fig">
                         <img src="{{ url('/') }}/{{ $product->photo_url }}" class="img-fluid"
                              id="{{$product->user->name}}-product-id-{{$product->id}}"
                              alt="Image Loading Failed"/>
@@ -17,30 +17,54 @@
                     </figure>
                 </a>
             </div>
-            <div class="col-sm-12 mb-3 text-center">
+            <div class="col-sm-5 mb-3">
                 <h5 class="mb-30">
                     <strong>Title: {{ $product->name }}</strong>
                 </h5>
                 <div class="row">
-                    <div class="col-sm-6 mb-30">
-                        <p>Sold By: {{ $product->pack }}</p>
+                    <div class="col-sm-12 mb-30">
+                        {{--<p>Sold By: {{ $product->pack }}</p>
                         <p>Description: {{ $product->description }}</p>
                         <p>Stem in Bunch: {{ $product->number_of_stem }}</p>
                         <p>Stem price: {{ $product->price_per_stem_bunch }}</p>
-                        <p>Price: {{ $product->price }}</p>
+                        <p>Price: {{ $product->price }}</p>--}}
+                        <p class="mb-5"><strong>Description:</strong> {{ $product->description }}</p>
+                        <div class="grower"><b>Grower:</b><span>{{ $product->grower }}</span></div>
+
+                        <ul class="specs" id="alle-kenmerken">
+                            <li><span>Sold By:</span> <span>{{ $product->pack }}</span></li>
+{{--                            <li><span>Description:</span> <span>{{ $product->description }}</span></li>--}}
+                            <li><span>Stock:</span> <span>{{ $product->stock }}</span></li>
+                            <li><span>Colour:</span> <span><span style="background: {{ $product->colour }}" class="rcs"></span></span>
+                            </li>
+                            <li><span>Stem in Bunch: </span> <span>{{ $product->number_of_stem }} </span></li>
+                            <li><span>Stem price:</span> <span>${{ $product->price_per_stem_bunch }}</span></li>
+                            <li><span>Price:</span> <span>${{ $product->price }} </span></li>
+                            <li><span>Length</span> <span>{{ $product->height }} </span></li>
+                            <li><span>Origin:</span> <span>{{ $product->origin }} </span></li>
+                            <li><span>Category:</span> <span>{{ $product->categoryR->name }} </span></li>
+                            <li><span>Status:</span> <span>{{ $product->statusToStr() }} </span></li>
+                        </ul>
                     </div>
                     <div class="col-sm-6 mb-3">
-                        <p>Origin: {{ $product->origin }}</p>
+                        {{--<p>Origin: {{ $product->origin }}</p>
                         <p>Height: {{ $product->height }}</p>
-                        <p>Colour: {{ $product->colour }}</p>
-                        <p>Category: {{ $product->category }}</p>
-                        <p>Available Date: {{ $product->available_date }}</p>
+                        <p>Colour: <span style="background: {{ $product->colour }}" class="rcs"></span></p>
+                        <p>Category: {{ $product->categoryR->name }}</p>
                         <p>Stock: {{ $product->stock }}</p>
+                        <p>Available Dates:
+                        </p>
+                        <ul class="list-group av_dates">
+                            @foreach ($product->availableDates() as $ad)
+                                <li class="list-group-item">{{ $ad }}</li>
+                            @endforeach
+                        </ul>--}}
+
                     </div>
                 </div>
-                <h2 class="mb-30">Reviews</h2>
+                <h2 class="mb-30 mt-5">Reviews</h2>
 
-                    @if ($product->reviews->first())
+                @if ($product->reviews->first())
                     <div class="row">
                         @foreach($product->reviews as $review)
                             <div class="col-sm-6 mb-3">
@@ -54,9 +78,9 @@
                             </div>
                         @endforeach
                     </div>
-                        @else
-                        <p class="text-center">No review yet</p>
-                    @endif
+                @else
+                    <p class="text-center">No review yet</p>
+                @endif
 
                 @if (auth()->user()->products->contains('id', $product->id))
                     <p>
@@ -93,7 +117,7 @@
                                         <option value="{{ $order_date }}">{{ $order_date }}</option>
                                     @endforeach
                                 @else
-                                        <option value="false">not available</option>
+                                    <option value="false">not available</option>
                                 @endif
 
                             </select>

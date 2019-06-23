@@ -80,6 +80,19 @@ class Product extends Model
         }
     }
 
+    public function statusToStr() {
+        $f = $this->status;
+        switch ($f) {
+            case 1:
+                return 'available';
+            case 0:
+                return 'not available';
+
+        }
+    }
+
+
+
     public function scopeName($query,  $keyword)
     {
         return $query->where('name', 'like' , '%' . $keyword . '%');
