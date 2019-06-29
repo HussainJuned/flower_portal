@@ -3,7 +3,7 @@
         <div class="container">
 
             <a class="navbar-brand" href="{{ route('intro') }}">Floral Portal <br> <span
-                    class="text-dark">Flowerat</span></a>
+                    class="text-dark">Floweret</span></a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,6 +69,11 @@
                                    class="dropdown-item">
                                     Upload Product
                                 </a>
+                                <a href="{{ route('userinfos.edit', ['userinfo' => auth()->id()]) }}"
+                                   class="dropdown-item">
+                                    My Details
+                                </a>
+
                                 <a href="{{ route('seller_dashboard.myProducts') }}"
                                    class="dropdown-item">
                                     My Product
