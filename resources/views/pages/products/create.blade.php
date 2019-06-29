@@ -474,9 +474,9 @@
                 $('#photo', this).detach();
 
                 if($('#product_photo').val()) {
-                    console.log('tik ase');
+                    // console.log('tik ase');
                 } else {
-                    console.log('tik nai');
+                    // console.log('tik nai');
                     e.preventDefault();
                     $('#upload_container').addClass('has_error');
                     document.getElementById('upload_container').scrollIntoView({
@@ -504,7 +504,7 @@
                         $('.upload-demo').addClass('ready');
                         $('#cropImagePop').modal('show');
                         rawImg = e.target.result;
-                        console.log('result: ' + rawImg);
+                        // console.log('result: ' + rawImg);
                     };
                     reader.readAsDataURL(input.files[0]);
                 } else {
@@ -548,7 +548,7 @@
                     $('#item-img-output').attr('src', resp);
                     $('#product_photo').val(resp);
                     $('#cropImagePop').modal('hide');
-                    console.log('cropped: ' + resp);
+                    // console.log('cropped: ' + resp);
                     $('#upload_container').removeClass('has_error');
 
                 });
@@ -687,7 +687,7 @@
                     event.preventDefault();
                     event.stopPropagation();
 
-                    console.log('File(s) dropped');
+                    // console.log('File(s) dropped');
 
                     if (event.originalEvent.dataTransfer.items) {
                         // Use DataTransferItemList interface to access the file(s)
@@ -707,13 +707,13 @@
                                 // This item is the target node
                                 data[i].getAsString(function (s) {
                                     // event.target.appendChild(document.getElementById(s));
-                                    console.log(event.target);
+                                    // console.log(event.target);
                                 });
                             } else if ((data[i].kind == 'string') &&
                                 (data[i].type.match('^text/html'))) {
                                 // Drag data item is HTML
-                                console.log("... Drop: HTML");
-                                console.log(event.originalEvent.dataTransfer.getData('text/html'));
+                                // console.log("... Drop: HTML");
+                                // console.log(event.originalEvent.dataTransfer.getData('text/html'));
                                 var droppedHTML = event.originalEvent.dataTransfer.getData("text/html");
 
                                 // add this html to some container.
@@ -722,12 +722,12 @@
                                 var dropContext = $('#drop_preview').append(droppedHTML);
 
                                 let url = $(droppedHTML).filter('img').attr('src');
-                                console.log("dH: " + url);
+                                // console.log("dH: " + url);
 
                                 // now you can read the img-url (not link-url!!) like this:
                                 var imgURL = $(dropContext).find("img").attr('src');
                                 // $('#item-img-output').attr('src', imgURL);
-                                console.log('img_url: ' + imgURL);
+                                // console.log('img_url: ' + imgURL);
 
                                 var substring = "data:image/";
 
@@ -737,7 +737,7 @@
                                     $('#cropImagePop').modal('show');
                                     $('#upload_container').removeClass('has_error');
                                 } else {
-                                    console.log('url');
+                                    // console.log('url');
                                     $.ajax({
                                         method: "POST",
                                         url: "{{ route('api.product.upload_img') }}",
@@ -748,12 +748,12 @@
                                             $('#drop_message').show();
                                         }
                                     }).done(function (data) {
-                                        console.log("Sample of data:", data);
+                                        console.log("upload status:", data);
                                         inp_unique_id.val(data.unique_id);
                                         inp_image_id.val(data.image_id);
                                         unique_id = data.unique_id;
                                         image_id = data.image_id;
-                                        $('#product_photo').val(data.image_data);
+                                        // $('#product_photo').val(data.image_data);
                                         $('.loading').hide();
                                         $('#msg_txt').text(data.message);
 
@@ -790,14 +790,14 @@
                             } else if ((data[i].kind == 'string') &&
                                 (data[i].type.match('^text/uri-list'))) {
                                 // Drag data item is URI
-                                console.log("... Drop: URI");
-                                console.log(event.originalEvent.dataTransfer.getData('URI'));
+                                // console.log("... Drop: URI");
+                                // console.log(event.originalEvent.dataTransfer.getData('URI'));
                             } else if ((data[i].kind == 'file') &&
                                 (data[i].type.match('^image/'))) {
                                 // Drag data item is an image file
                                 var f = data[i].getAsFile();
 
-                                console.log('... file[' + i + '].name = ' + f.name);
+                                // console.log('... file[' + i + '].name = ' + f.name);
                                 droppedFiles = event.originalEvent.dataTransfer.files;
                                 readFile(event.originalEvent.dataTransfer);
                             }
@@ -805,7 +805,7 @@
                     } else {
                         // Use DataTransfer interface to access the file(s)
                         for (var i = 0; i < event.originalEvent.dataTransfer.files.length; i++) {
-                            console.log('... file[' + i + '].name = ' + event.originalEvent.dataTransfer.files[i].name);
+                            // console.log('... file[' + i + '].name = ' + event.originalEvent.dataTransfer.files[i].name);
                         }
                     }
 

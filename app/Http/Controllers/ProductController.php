@@ -360,7 +360,7 @@ class ProductController extends Controller
             'message' => $message,
             'unique_id' => $unique_id,
             'image_id' => $image_id,
-            'image_data' => base64_encode($image_data),
+//            'image_data' => base64_encode($image_data),
             'image_path' => /*public_path(). '/' .*/  $new_img_path,
         );
 
