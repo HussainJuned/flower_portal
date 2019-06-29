@@ -27,3 +27,4 @@ Homestead.json
 /storage/framework/
 /storage/logs/
 !/public/uploads/default.png
+/public/tmp/

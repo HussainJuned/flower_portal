@@ -18,7 +18,7 @@ class SellerDashboardController extends Controller
 
     public function myProducts()
     {
-        $products = auth()->user()->products;
+        $products = auth()->user()->latestProducts;
         return view('pages.user_infos.my_products', compact('products'));
     }
 

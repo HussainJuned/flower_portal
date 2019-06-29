@@ -54,6 +54,12 @@ class User extends \TCG\Voyager\Models\User
         return $this->hasMany(Product::class);
     }
 
+     public function latestProducts()
+    {
+        return $this->hasMany(Product::class)->latest();
+    }
+
+
     public function orders_as_seller()
     {
         return $this->hasMany(Order::class, 'seller_user_id');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Product;
 use App\ProductCategory;
+use App\TempImgUpload;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -45,6 +46,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        /*$unused_tmp = TempImgUpload::where('user_id', auth()->id())->get();
+        foreach ($unused_tmp as $ut) {
+//            unlink($ut->path);
+//            $ut->delete();
+            echo ('<p>' . $ut->path . '</p>');
+        }
+
+        return;*/
         /*if(auth()->user()->userinfo->id !== $product->id) {
             return redirect()->route('home')->withErrors('Invalid Action');
         }*/
@@ -70,29 +79,7 @@ class ProductController extends Controller
 //            'product_photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
         ]);
 
-        // validate image size
-        if ($request['product_photo']) {
-            list($width, $height, $type, $attr) = getimagesize($request['product_photo']);
 
-            if ($width < 400 || $width > 1024) {
-                return redirect()->back()->withErrors([
-                    'product_photo' => 'Image width not supported: please crop before uploading'
-                ]);
-
-            } elseif ($height < 300 || $height > 1024) {
-                return redirect()->back()->withErrors([
-                    'product_photo' => 'Image Height not supported: please crop before uploading'
-                ]);
-            }
-            /*echo "Width: " .$width. "<br />";
-            echo "Height: " .$height. "<br />";
-            echo "Type: " .$type. "<br />";
-            echo "Attribute: " .$attr. "<br />";*/
-        } else {
-            return redirect()->back()->withErrors([
-                'product_photo' => 'Please Select and Crop before uploading'
-            ]);
-        }
 
         $product = new Product();
         $product->name = $request['name'];
@@ -133,9 +120,60 @@ class ProductController extends Controller
         auth()->user()->userinfo->isSeller = true;
         auth()->user()->userinfo->update();
 
+        if($request->has('image_id')) {
+            $image_id = $request->image_id;
+            if ($image_id > 0) {
+                $tmp_img = TempImgUpload::find($image_id);
+                if ($tmp_img) {
+//                    $ti_array = explode('/', $tmp_img->path);
+//                    $img_name = end($ti_array);
+//                    $img_url = 'uploads/' . $img_name;
+//                    rename($tmp_img->path, $img_url);
+//                    $product->photo_url = $img_url;
+//                    $product->update();
+                    $product->photo_url = $this->cropAndUpload($request, $product->id);
+                    $product->update();
 
-        $product->photo_url = $this->cropAndUpload($request, $product->id);
+                    $tmp_img->delete();
+
+                    $unused_tmp = TempImgUpload::where('user_id', auth()->id())->get();
+                    foreach ($unused_tmp as $ut) {
+                        unlink(public_path() . '/' .$ut->path);
+                        $ut->delete();
+                    }
+                }
+            } else {
+                // validate image size
+                if ($request['product_photo']) {
+                    list($width, $height, $type, $attr) = getimagesize($request['product_photo']);
+
+                    if ($width < 400 || $width > 1024) {
+                        return redirect()->back()->withErrors([
+                            'product_photo' => 'Image width not supported: please crop before uploading'
+                        ]);
+
+                    } elseif ($height < 300 || $height > 1024) {
+                        return redirect()->back()->withErrors([
+                            'product_photo' => 'Image Height not supported: please crop before uploading'
+                        ]);
+                    }
+                    /*echo "Width: " .$width. "<br />";
+                    echo "Height: " .$height. "<br />";
+                    echo "Type: " .$type. "<br />";
+                    echo "Attribute: " .$attr. "<br />";*/
+                } else {
+                    return redirect()->back()->withErrors([
+                        'product_photo' => 'Please Select and Crop before uploading'
+                    ]);
+                }
+
+                $product->photo_url = $this->cropAndUpload($request, $product->id);
+                $product->update();
+            }
+        }
+
         $product->price = $product->number_of_stem * $product->price_per_stem_bunch;
+//        $product->photo_url = $this->cropAndUpload($request, $product->id);
         $product->update();
 
         $product->tag(explode(',', $request->tags));
@@ -277,6 +315,56 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+
+    public function getImage(Request $request)
+    {
+        $message = '';
+        $unique_id = '';
+        $image_id = 0;
+        $img_url = $request->img;
+        $image_data = '';
+        $new_img_path = '';
+        if ($request->has('img')) {
+            if (filter_var($img_url, FILTER_VALIDATE_URL)) {
+                $allowed_extension = array('jpg', 'jpeg', 'png', 'gif');
+                $url_array = explode('/', $img_url);
+                $img_name = end($url_array);
+                $img_array = explode('.', $img_name);
+                $img_extention = end($img_array);
+                if (in_array($img_extention, $allowed_extension)) {
+                    $image_data = file_get_contents($img_url);
+                    $unique_id = uniqid('', false);
+                    $new_img_path = 'tmp/'. auth()->user()->id . '_' . $unique_id . '.' . $img_extention;
+                    file_put_contents($new_img_path, $image_data);
+                    $message = 'Image uploaded successfully';
+
+                    $tiu = new TempImgUpload();
+                    $tiu->user_id = auth()->user()->id;
+                    $tiu->unique_id = $unique_id;
+                    $tiu->path = $new_img_path;
+                    $tiu->save();
+
+                    $image_id = $tiu->id;
+                } else {
+                    $message = 'Image upload failed';
+                }
+            } else {
+                $message = 'Invalid url';
+            }
+        } else {
+            $message = 'url not found';
+        }
+
+        $data = array(
+            'message' => $message,
+            'unique_id' => $unique_id,
+            'image_id' => $image_id,
+            'image_data' => base64_encode($image_data),
+            'image_path' => /*public_path(). '/' .*/  $new_img_path,
+        );
+
+        return $data;
     }
 
     public function cropAndUpload(Request $request, $id)

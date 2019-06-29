@@ -6,7 +6,8 @@
     <div class="container" id="vue-product">
         <main>
             <form action="{{ route('products.store') }}" method="post" class="w-50 mx-auto mb-5"
-                  id="my-form" enctype="multipart/form-data" name="new_product_upload">
+                  id="my-form" enctype="multipart/form-data"
+                  name="new_product_upload" {{--ondrop="onDropHandler(event)" ondragover="dragOverHandler(event);"--}}>
                 @csrf
                 <h2 class="mt-3 mb-30">Upload your product</h2>
                 <div class="form-group mb-30">
@@ -133,22 +134,31 @@
                     @endif
                     <h5 class="mb-3">Upload Product Photo</h5>
 
-                    <div class="upload_photo_container box">
+                    <div class="upload_photo_container box" id="upload_container">
                         <div class="box__input">
                             <label class="cabinet center-block">
                                 <figure>
                                     <img src="" class="gambar img-fluid img-thumbnail" id="item-img-output"/>
                                     <figcaption><i class="fas fa-camera"></i></figcaption>
                                 </figure>
-                                <input type="file" class="item-img file center-block box__file"
+                                <input type="file" class="item-img file center-block box__file" id="image_input"
                                        {{--name="file_photo"--}} accept="image/*"/>
                             </label>
+                        </div>
+                        <div class="loading">
+                            <img src="{{ asset('images/icons/loader.gif') }}" alt="loading...">
                         </div>
                         {{--<div class="box__uploading">Uploading&hellip;</div>
                         <div class="box__success">Done!</div>
                         <div class="box__error">Error! <span></span>.</div>--}}
+                        <input type="text" name="unique_id" id="unique_id" hidden>
+                        <input type="number" name="image_id" id="image_id" hidden>
                     </div>
 
+                </div>
+                <div id="drop_preview" class="d-none"></div>
+                <div id="drop_message" style="display: none" class="mb-5">
+                    <div class="alert" id="msg_txt"></div>
                 </div>
                 {{--<div class="mb-30 text-center">
 
@@ -381,7 +391,7 @@
                         @endif
                     </div>
                 </div>
-                <textarea required name="product_photo" id="product_photo" cols="30" rows="100" hidden></textarea>
+                <textarea name="product_photo" id="product_photo" cols="30" rows="100" hidden></textarea>
                 <button type="submit" class="btn j_btn">Submit</button>
             </form>
         </main>
@@ -392,13 +402,13 @@
 
 
     <div class="modal fade" id="cropImagePop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2"
-         aria-hidden="true">
+         aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    {{--<button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                    </button>
+                    </button>--}}
                     <h4 class="modal-title" id="myModalLabel2">
                         Edit Photo</h4>
                 </div>
@@ -406,7 +416,7 @@
                     <div id="upload-demo" class="center-block"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+{{--                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--}}
                     <button type="button" id="cropImageBtn" class="btn btn-primary">Crop</button>
                 </div>
             </div>
@@ -452,14 +462,27 @@
         // domReady handler
         $(function () {
 
-            // provide an event for when the form is submitted
-            $('#my-form').submit(function () {
+            // $('#cropImagePop').modal({backdrop: 'static', keyboard: false});
 
+            // provide an event for when the form is submitted
+            $('#my-form').submit(function (e) {
+                // e.preventDefault();
                 // Find the input with id "file" in the context of
                 // the form (hence the second "this" parameter) and
                 // set it to be disabled
                 $('#photo', this).prop('disabled', true);
                 $('#photo', this).detach();
+
+                if($('#product_photo').val()) {
+                    console.log('tik ase');
+                } else {
+                    console.log('tik nai');
+                    e.preventDefault();
+                    $('#upload_container').addClass('has_error');
+                    document.getElementById('upload_container').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
 
                 // return true to allow the form to submit
                 return true;
@@ -468,6 +491,7 @@
 
             // Start upload preview image
             $(".gambar").attr("src", "https://via.placeholder.com/400x300?text=Click or drag and drop image here");
+            $('.loading').hide();
             var $uploadCrop,
                 tempFilename,
                 rawImg,
@@ -480,6 +504,7 @@
                         $('.upload-demo').addClass('ready');
                         $('#cropImagePop').modal('show');
                         rawImg = e.target.result;
+                        console.log('result: ' + rawImg);
                     };
                     reader.readAsDataURL(input.files[0]);
                 } else {
@@ -523,6 +548,9 @@
                     $('#item-img-output').attr('src', resp);
                     $('#product_photo').val(resp);
                     $('#cropImagePop').modal('hide');
+                    console.log('cropped: ' + resp);
+                    $('#upload_container').removeClass('has_error');
+
                 });
             });
             // End upload preview image
@@ -631,23 +659,159 @@
             }();
 
             var $form = $('.box');
+            var inp_unique_id = $('#unique_id');
+            var inp_image_id = $('#image_id');
 
+            var unique_id = 0;
+            var image_id = 0;
 
             if (isAdvancedUpload) {
 
                 var droppedFiles = false;
                 $form.addClass('has-advanced-upload');
 
-                $form.on('drag dragstart dragend dragover dragenter dragleave drop', function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                }).on('dragover dragenter', function () {
+                $form.on('drag dragstart dragend dragover dragenter dragleave drop', function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }).on('dragover dragenter', function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
                     $form.addClass('is-dragover');
-                }).on('dragleave dragend drop', function () {
+                }).on('dragleave dragend drop', function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
                     $form.removeClass('is-dragover');
-                }).on('drop', function (e) {
-                    droppedFiles = e.originalEvent.dataTransfer.files;
-                    readFile(e.originalEvent.dataTransfer);
+                }).on('drop', function (event) {
+
+
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    console.log('File(s) dropped');
+
+                    if (event.originalEvent.dataTransfer.items) {
+                        // Use DataTransferItemList interface to access the file(s)
+                        /*for (var i = 0; i < event.dataTransfer.items.length; i++) {
+                            // If dropped items aren't files, reject them
+                            /!*console.log(event.dataTransfer.items[i].kind);
+                            console.log(event.dataTransfer.items[0].getAsString());*!/
+                            if (event.dataTransfer.items[i].kind === 'file') {
+                                var file = event.dataTransfer.items[i].getAsFile();
+                                console.log('... file[' + i + '].name = ' + file.name);
+                            }
+                        }*/
+                        var data = event.originalEvent.dataTransfer.items;
+                        for (var i = 0; i < data.length; i += 1) {
+                            if ((data[i].kind == 'string') &&
+                                (data[i].type.match('^text/plain'))) {
+                                // This item is the target node
+                                data[i].getAsString(function (s) {
+                                    // event.target.appendChild(document.getElementById(s));
+                                    console.log(event.target);
+                                });
+                            } else if ((data[i].kind == 'string') &&
+                                (data[i].type.match('^text/html'))) {
+                                // Drag data item is HTML
+                                console.log("... Drop: HTML");
+                                console.log(event.originalEvent.dataTransfer.getData('text/html'));
+                                var droppedHTML = event.originalEvent.dataTransfer.getData("text/html");
+
+                                // add this html to some container.
+                                // if you skip this, the following code won't work if a single img element is dropped
+                                $('#drop_preview').html('');
+                                var dropContext = $('#drop_preview').append(droppedHTML);
+
+                                let url = $(droppedHTML).filter('img').attr('src');
+                                console.log("dH: " + url);
+
+                                // now you can read the img-url (not link-url!!) like this:
+                                var imgURL = $(dropContext).find("img").attr('src');
+                                // $('#item-img-output').attr('src', imgURL);
+                                console.log('img_url: ' + imgURL);
+
+                                var substring = "data:image/";
+
+                                if (imgURL.includes(substring)) {
+                                    $('#product_photo').val(imgURL);
+                                    rawImg = imgURL;
+                                    $('#cropImagePop').modal('show');
+                                    $('#upload_container').removeClass('has_error');
+                                } else {
+                                    console.log('url');
+                                    $.ajax({
+                                        method: "POST",
+                                        url: "{{ route('api.product.upload_img') }}",
+                                        data: { img: imgURL, _token: "{{ csrf_token() }}", unique_id: unique_id, image_id: image_id},
+                                        beforeSend: function (xhr) {
+                                            $('.loading').show();
+                                            $('#msg_txt').text("Fetching Dropped URL's image");
+                                            $('#drop_message').show();
+                                        }
+                                    }).done(function (data) {
+                                        console.log("Sample of data:", data);
+                                        inp_unique_id.val(data.unique_id);
+                                        inp_image_id.val(data.image_id);
+                                        unique_id = data.unique_id;
+                                        image_id = data.image_id;
+                                        $('#product_photo').val(data.image_data);
+                                        $('.loading').hide();
+                                        $('#msg_txt').text(data.message);
+
+                                       /* var binary = "";
+                                        var responseText = data.image_data;
+                                        var responseTextLen = responseText.length;
+
+                                        for ( i = 0; i < responseTextLen; i++ ) {
+                                            binary += String.fromCharCode(responseText.charCodeAt(i) & 255)
+                                        }
+                                        $("#item-img-output").attr("src", "data:image/png;base64,"+btoa(binary));*/
+
+
+                                        // $('#item-img-output').attr('src', url);
+                                        /*var url = "data:image/jpeg;base64," + encode64(data.image_data);
+                                        $('#item-img-output').attr('src', url);*/
+                                        if (data.message.includes('Image uploaded successfully')) {
+                                            $('#item-img-output').attr('src', imgURL);
+
+                                            rawImg = '/' + data.image_path;
+                                            $('#cropImagePop').modal('show');
+                                            $('#upload_container').removeClass('has_error');
+
+                                        } else {
+                                            $('#item-img-output').attr('src', "https://via.placeholder.com/400x300?text=Click or drag and drop image here");
+                                            $('#upload_container').addClass('has_error');
+
+                                        }
+
+                                    });
+                                }
+
+
+                            } else if ((data[i].kind == 'string') &&
+                                (data[i].type.match('^text/uri-list'))) {
+                                // Drag data item is URI
+                                console.log("... Drop: URI");
+                                console.log(event.originalEvent.dataTransfer.getData('URI'));
+                            } else if ((data[i].kind == 'file') &&
+                                (data[i].type.match('^image/'))) {
+                                // Drag data item is an image file
+                                var f = data[i].getAsFile();
+
+                                console.log('... file[' + i + '].name = ' + f.name);
+                                droppedFiles = event.originalEvent.dataTransfer.files;
+                                readFile(event.originalEvent.dataTransfer);
+                            }
+                        }
+                    } else {
+                        // Use DataTransfer interface to access the file(s)
+                        for (var i = 0; i < event.originalEvent.dataTransfer.files.length; i++) {
+                            console.log('... file[' + i + '].name = ' + event.originalEvent.dataTransfer.files[i].name);
+                        }
+                    }
+
+
+                    /*droppedFiles = e.originalEvent.dataTransfer.files;
+                    readFile(e.originalEvent.dataTransfer);*/
                 });
 
             }
@@ -744,40 +908,109 @@
             let shouldBreak = false;
 
             loop1:
-            for (let i = 0; i < theValue.length; i++) {
-                var contained = $('#category option:contains(' + theValue[i] + ')');
-                if (contained.eq(0).val() != null) {
+                for (let i = 0; i < theValue.length; i++) {
+                    var contained = $('#category option:contains(' + theValue[i] + ')');
+                    if (contained.eq(0).val() != null) {
 
-                    var ca = contained.eq(0).text().toLowerCase().split(' ');
+                        var ca = contained.eq(0).text().toLowerCase().split(' ');
 
-                    loop2:
-                    for (let j = 0; j < ca.length; j++) {
-                        if (ca[j] === theValue[i]) {
-                            // console.log('found');
-                            contained.eq(0).attr('selected', true);
-                            $("#category").select();
-                            break loop1;
-                        } else {
-                            // console.log('not full word');
-                            // console.log('cv: ' + contained.eq(0).text());
-                        }
+                        loop2:
+                            for (let j = 0; j < ca.length; j++) {
+                                if (ca[j] === theValue[i]) {
+                                    // console.log('found');
+                                    contained.eq(0).attr('selected', true);
+                                    $("#category").select();
+                                    break loop1;
+                                } else {
+                                    // console.log('not full word');
+                                    // console.log('cv: ' + contained.eq(0).text());
+                                }
+                            }
+
+                        /*if (contained.eq(0).text() === theValue[i]) {
+
+
+                        } */
+
+                    } else {
+                        // console.log('not found');
+                        // $("#category option:selected").attr("selected", false);
                     }
-
-                    /*if (contained.eq(0).text() === theValue[i]) {
-
-
-                    } */
-
-                } else {
-                    // console.log('not found');
-                    // $("#category option:selected").attr("selected", false);
                 }
-            }
 
 
             // return false;
         });
     </script>
+
+    {{--<script>
+        function onDropHandler(event) {
+            event.preventDefault();
+            console.log('File(s) dropped');
+
+            if (event.dataTransfer.items) {
+                // Use DataTransferItemList interface to access the file(s)
+                /*for (var i = 0; i < event.dataTransfer.items.length; i++) {
+                    // If dropped items aren't files, reject them
+                    /!*console.log(event.dataTransfer.items[i].kind);
+                    console.log(event.dataTransfer.items[0].getAsString());*!/
+                    if (event.dataTransfer.items[i].kind === 'file') {
+                        var file = event.dataTransfer.items[i].getAsFile();
+                        console.log('... file[' + i + '].name = ' + file.name);
+                    }
+                }*/
+                var data = event.dataTransfer.items;
+                for (var i = 0; i < data.length; i += 1) {
+                    if ((data[i].kind == 'string') &&
+                        (data[i].type.match('^text/plain'))) {
+                        // This item is the target node
+                        data[i].getAsString(function (s){
+                            // event.target.appendChild(document.getElementById(s));
+                            console.log(event.target);
+                        });
+                    } else if ((data[i].kind == 'string') &&
+                        (data[i].type.match('^text/html'))) {
+                        // Drag data item is HTML
+                        console.log("... Drop: HTML");
+                        console.log(event.dataTransfer.getData('text/html'));
+                        var droppedHTML = event.dataTransfer.getData("text/html");
+
+// add this html to some container.
+// if you skip this, the following code won't work if a single img element is dropped
+                        $('#drop_preview').html('');
+                        var dropContext = $('#drop_preview').append(droppedHTML);
+
+// now you can read the img-url (not link-url!!) like this:
+                        var imgURL = $(dropContext).find("img").attr('src');
+
+                    } else if ((data[i].kind == 'string') &&
+                        (data[i].type.match('^text/uri-list'))) {
+                        // Drag data item is URI
+                        console.log("... Drop: URI");
+                        console.log(event.dataTransfer.getData('URI'));
+                    } else if ((data[i].kind == 'file') &&
+                        (data[i].type.match('^image/'))) {
+                        // Drag data item is an image file
+                        var f = data[i].getAsFile();
+
+                        console.log('... file[' + i + '].name = ' + f.name);
+                    }
+                }
+            } else {
+                // Use DataTransfer interface to access the file(s)
+                for (var i = 0; i < event.dataTransfer.files.length; i++) {
+                    console.log('... file[' + i + '].name = ' + event.dataTransfer.files[i].name);
+                }
+            }
+        }
+
+        function dragOverHandler(event) {
+            console.log('File(s) in drop zone');
+
+            // Prevent default behavior (Prevent file from being opened)
+            event.preventDefault();
+        }
+    </script>--}}
 @endpush
 
 @push('css-lib')

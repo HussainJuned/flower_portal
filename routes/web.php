@@ -76,6 +76,9 @@ Route::get('/artisan/migrate_fresh', 'CommandController@migrate_fresh');
 Route::get('/artisan/migrate', 'CommandController@migrate');
 Route::get('/artisan/config_clear', 'CommandController@config_clear');
 
+// upload image api
+Route::post('/api/image_upload', 'ProductController@getImage')->name('api.product.upload_img');
+
 
 // search api
 Route::get('/api/flower', 'SearchController@apiFlowerAll')->name('api.flower.all');
