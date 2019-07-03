@@ -45,4 +45,11 @@ class BuyerDashboardController extends Controller
 
     }
 
+    public function viewOrderHistory()
+    {
+        $orders = auth()->user()->pastOrdersBuyer()->paginate(20);
+        return view('pages.orders.buyer_order_history', compact('orders'));
+
+    }
+
 }

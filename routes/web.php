@@ -41,7 +41,11 @@ Route::post('/buyer-dashboard/updateOrderToReceived/{order}', 'BuyerDashboardCon
 Route::post('/buyer-dashboard/order_history', 'BuyerDashboardController@orderHistory')
     ->name('buyer_dashboard.order.history');
 
-
+// Order History
+Route::get('/buyer-dashboard/history/order', 'BuyerDashboardController@viewOrderHistory')
+    ->name('buyer_dashboard.order.past_history');
+Route::get('/seller-dashboard/history/order', 'SellerDashboardController@viewOrderHistory')
+    ->name('seller_dashboard.order.past_history');
 
 Route::post('/seller-dashboard/updateToAccepted/{order}', 'SellerDashboardController@updateToAccepted')
     ->name('seller_dashboard.order.updateToAccepted');
@@ -93,6 +97,8 @@ Route::post('/my-products/import', 'ProductExcelController@importFromExcel')->na
 // PDF Controller
 Route::get('/outstanding_pdf/view_html/{invoice}', 'PdfController@viewOI')->name('view.html.oipdf');
 Route::get('/pdf/invoice/outstanding/{invoice}', 'PdfController@generateOIpdf')->name('pdf.invoice.outstanding');
+
+
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

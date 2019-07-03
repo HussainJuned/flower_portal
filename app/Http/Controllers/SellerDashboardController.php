@@ -87,4 +87,10 @@ class SellerDashboardController extends Controller
         return view('pages.dashboards.view_seller_order', compact('order'));
     }
 
+    public function viewOrderHistory()
+    {
+        $orders = auth()->user()->pastOrdersSeller()->paginate(20);
+        return view('pages.orders.seller_order_history', compact('orders'));
+
+    }
 }

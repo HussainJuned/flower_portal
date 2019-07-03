@@ -79,10 +79,16 @@
                                     My Product
                                 </a>
 
-                                <a href="{{ route('seller_dashboard.myProducts') }}"
+                                <a href="{{ route('buyer_dashboard.order.past_history') }}"
                                    class="dropdown-item">
                                     Buying History
                                 </a>
+
+                                <a href="{{ route('seller_dashboard.order.past_history') }}"
+                                   class="dropdown-item">
+                                    Selling History
+                                </a>
+
 
                                 <a href="{{ route('seller_dashboard.myProducts') }}"
                                    class="dropdown-item">
