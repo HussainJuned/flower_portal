@@ -130,5 +130,9 @@ class User extends \TCG\Voyager\Models\User
             ->where('available_date_end', '>=', \Carbon\Carbon::now()->toDateString());
     }
 
+    public function invoices(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(BuyerInvoice::class, 'user_id');
+    }
 
 }

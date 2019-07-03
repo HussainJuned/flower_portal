@@ -52,4 +52,10 @@ class BuyerDashboardController extends Controller
 
     }
 
+    public function invoices()
+    {
+        $invoices = auth()->user()->invoices()->paginate(20);
+        return view('pages.invoices.buying_invoices', compact('invoices'));
+    }
+
 }

@@ -95,7 +95,7 @@
                                     Favourites
                                 </a>
 
-                                <a href="{{ route('seller_dashboard.myProducts') }}"
+                                <a href="{{ route('buyer_dashboard.list.invoices') }}"
                                    class="dropdown-item">
                                     Invoices
                                 </a>

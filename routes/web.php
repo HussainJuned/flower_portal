@@ -47,6 +47,11 @@ Route::get('/buyer-dashboard/history/order', 'BuyerDashboardController@viewOrder
 Route::get('/seller-dashboard/history/order', 'SellerDashboardController@viewOrderHistory')
     ->name('seller_dashboard.order.past_history');
 
+// buyer invoice
+Route::get('/buyer-dashboard/list/invoices', 'BuyerDashboardController@invoices')
+    ->name('buyer_dashboard.list.invoices');
+
+
 Route::post('/seller-dashboard/updateToAccepted/{order}', 'SellerDashboardController@updateToAccepted')
     ->name('seller_dashboard.order.updateToAccepted');
 Route::post('/seller-dashboard/updateToShipped/{order}', 'SellerDashboardController@updateToShipped')
