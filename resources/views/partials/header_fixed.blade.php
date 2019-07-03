@@ -15,7 +15,7 @@
                         <a class="nav-link" href="{{ route('home') }}">Home <span class="sr-only">Home</span></a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('home') }}">Shop <span class="sr-only">Shop</span></a>
+                        <a class="nav-link" href="{{ route('search.flower') }}">Shop <span class="sr-only">Shop</span></a>
                     </li>
 
                     <li class="nav-item">
