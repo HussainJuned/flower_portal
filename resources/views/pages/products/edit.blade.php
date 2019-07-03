@@ -687,7 +687,12 @@
             var pp_stem = price_per_s_b.val();*/
             var price_res = 0;
             nos_box.hide();
-
+            
+            if ($('#pack option:selected ').text() === "Bunch") {
+                nos_box.show();
+                stem_incr_box.hide();
+            }
+            
             pack.on('change', function (event) {
                 var sv = pack.val();
                 if (sv === 'Bunch') {
