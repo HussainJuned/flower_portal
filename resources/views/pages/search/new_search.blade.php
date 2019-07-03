@@ -50,7 +50,7 @@
 
                 <ul id="filter_aanbod" class="side-filter filter-opened">
                     <li class="animate-height open visible opened">
-                        <div><h6 class="opener aanbod-opener"><i class="fas fa-tag"></i> Filter
+                        <div><h6 class="opener aanbod-opener"><i class="fas fa-filter mr-2"></i> Filters
                             </h6></div>
                         <div class="content overflow-container">
                             <div class="filter-content-height">
