@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="container">
-        <h2 class="mb-30">User Info</h2>
+        <h2 class="mb-30">{{ $userinfo->company_name }}</h2>
         <div class="row">
             <div class="col-sm-6">
                 {{--<p> Username: {{ $userinfo->user->name }}</p>
@@ -31,10 +31,10 @@
                         <th>Name</th>
                         <td>{{ $userinfo->title }} {{ $userinfo->first_name }} {{ $userinfo->last_name }}</td>
                     </tr>
-                    <tr>
+                    {{--<tr>
                         <th>Company Name</th>
                         <td>{{ $userinfo->company_name }}</td>
-                    </tr>
+                    </tr>--}}
                     <tr>
                         <th>Business Type</th>
                         <td>{{ $userinfo->business_type }}</td>
@@ -107,23 +107,27 @@
             </div>
         </div>
 
-        <h2 class="mb-30 mt-5">All Available Products (which has status active and available_date_end not smaller than
-            today)</h2>
+        <h2 class="mb-30 mt-5">All Available Products {{--(which has status active and available_date_end not smaller than
+            today)--}}</h2>
         @if (!$userinfo->user->isSeller())
             <p> This User Has Not any product to show</p>
 
         @else
-            <div class="row">
-                @foreach($userinfo->user->availableProducts()->get() as $product)
-                    <div class="col-sm-6 mb-3">
-                        @include('partials.product_box')
-                    </div>
-                @endforeach
+           {{-- <div class="row">--}}
+            <div class="result_column_container">
+                <ul class="column fragment">
+                    @foreach($userinfo->user->availableProducts()->get() as $product)
+                        {{--<div class="col-sm-3 mb-3">--}}
+                        @include('partials.product_box_new')
+                        {{--</div>--}}
+                    @endforeach
+                </ul>
             </div>
+            {{--</div>--}}
 
         @endif
 
-        <h2 class="mb-30">Reviews</h2>
+        <h2 class="mb-30 mt-5">Reviews</h2>
         <div class="row">
             <div class="col-sm-6 mb-3">
                 <h4>Seller Account</h4>
