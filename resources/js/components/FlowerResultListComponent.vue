@@ -57,11 +57,11 @@
                 this.fetch();
             },
             sort_by(after, before) {
-                console.log(this.sort_by);
+                // console.log(this.sort_by);
                 this.fetch();
             },
             delivery_date(after, before) {
-                console.log(this.delivery_date);
+                // console.log(this.delivery_date);
                 this.fetch();
             },
             filter_catg(after, before) {
@@ -90,7 +90,7 @@
                 return arr[1];
             },
             fetch() {
-                console.log(this.filter_length);
+                // console.log(this.filter_length);
 
                 axios.get('/api/flower', {
                     params: {
@@ -132,13 +132,20 @@
             },
             scroll () {
 
+                var loading = false;
+
                 window.onscroll = () => {
                     // let bottomOfWindow = (document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight);
                     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
                         // alert("you're at the bottom of the page");
+                        console.log(this.page_data.next_page_url);
 
+                        if (loading) {
+                            return false;
+                        }
                         if (this.page_data.next_page_url) {
                             $('.ajax-load').show();
+                            loading =true;
                             axios.get(this.page_data.next_page_url)
                                 .then(response => {
 
@@ -148,6 +155,7 @@
                                     $('.ajax-load').hide();
                                     this.$forceUpdate();
                                     $('.ajax-load').hide();
+                                    loading = false;
                                 });
                         }
 

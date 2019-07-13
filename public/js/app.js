@@ -4270,11 +4270,11 @@ __webpack_require__.r(__webpack_exports__);
       this.fetch();
     },
     sort_by: function sort_by(after, before) {
-      console.log(this.sort_by);
+      // console.log(this.sort_by);
       this.fetch();
     },
     delivery_date: function delivery_date(after, before) {
-      console.log(this.delivery_date);
+      // console.log(this.delivery_date);
       this.fetch();
     },
     filter_catg: function filter_catg(after, before) {
@@ -4302,7 +4302,7 @@ __webpack_require__.r(__webpack_exports__);
     fetch: function fetch() {
       var _this = this;
 
-      console.log(this.filter_length);
+      // console.log(this.filter_length);
       axios.get('/api/flower', {
         params: {
           keywords: this.keywords,
@@ -4344,12 +4344,21 @@ __webpack_require__.r(__webpack_exports__);
     scroll: function scroll() {
       var _this3 = this;
 
+      var loading = false;
+
       window.onscroll = function () {
         // let bottomOfWindow = (document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight);
         if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
           // alert("you're at the bottom of the page");
+          console.log(_this3.page_data.next_page_url);
+
+          if (loading) {
+            return false;
+          }
+
           if (_this3.page_data.next_page_url) {
             $('.ajax-load').show();
+            loading = true;
             axios.get(_this3.page_data.next_page_url).then(function (response) {
               Array.prototype.push.apply(_this3.products, response.data.data); // this.products = response.data.data;
 
@@ -4359,6 +4368,7 @@ __webpack_require__.r(__webpack_exports__);
               _this3.$forceUpdate();
 
               $('.ajax-load').hide();
+              loading = false;
             });
           }
         }

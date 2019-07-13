@@ -15,5 +15,11 @@ class DatabaseSeeder extends Seeder
          $this->call(CategoryTableDataSeeder::class);
 //         $this->call(ProductTableSeeder::class);
          $this->call(UserTableDataSeeder::class);
+
+         $products = \App\Product::all();
+        foreach ($products as $product) {
+            $product->name = '#' . $product->id . ' ' . $product->name;
+            $product->update();
+        }
     }
 }

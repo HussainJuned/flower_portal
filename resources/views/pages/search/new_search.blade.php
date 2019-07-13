@@ -100,7 +100,7 @@
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="result_summary_box">
-                    <h1>Total <span class="result_count">2309</span> results found
+                    <h1>Total <span class="result_count">0</span> results found
                     </h1>
                 </div>
 

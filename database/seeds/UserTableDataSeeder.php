@@ -38,7 +38,12 @@ class UserTableDataSeeder extends Seeder
 
         factory(User::class, 20)->create()->each(function ($user) {
             //create 5 products for each user
-            factory(\App\Product::class, 5)->create(['user_id'=>$user->id]);
+            $products = factory(\App\Product::class, 5)->create(['user_id'=>$user->id]);
+            /*foreach ($products as $product) {
+                $product->name = 'Product ' . $product->id;
+                $product->update();
+            }*/
+
             factory(\App\Userinfo::class, 1)->create(['user_id'=>$user->id]);
             factory(\App\BuyerAddress::class, 1)->create(['user_id'=>$user->id]);
 

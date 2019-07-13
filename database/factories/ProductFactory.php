@@ -6,6 +6,8 @@ use App\Model;
 use Faker\Generator as Faker;
 
 $factory->define(\App\Product::class, function (Faker $faker) {
+    $names1 = array('Birthday', 'Party', 'Wedding', 'Wishes', 'Pretty', 'Stunning', 'Awesome');
+    $names2 = array('Bouquet', 'Basket', 'Flowers');
     $price_p_s = $faker->randomFloat(4, 0.01, 20);
     $pack_tf = $faker->boolean();
     $pack = 'Stem';
@@ -21,7 +23,7 @@ $factory->define(\App\Product::class, function (Faker $faker) {
         '#181417', '#E8E2DF', '#D4AF37', '#C0C0C0', 'mix');
 
     return [
-        'name' => $faker->name,
+        'name' => $faker->randomElement($names1) . ' ' . $faker->randomElement($names2),
         'description' => $faker->text,
         'user_id' => function() {
             return factory(App\User::class)->create()->id;
@@ -34,7 +36,7 @@ $factory->define(\App\Product::class, function (Faker $faker) {
         'origin' => $faker->country,
         'colour' => $faker->randomElement($colourPalate),
         'category' => $faker->randomElement($cat),
-        'available_date_start' => \Carbon\Carbon::now()->addDays(1),
+        'available_date_start' => \Carbon\Carbon::now(),
         'available_date_end' => \Carbon\Carbon::now()->addDays($faker->numberBetween(2, 25)),
         'status' => $faker->boolean(),
         'photo_url' => 'uploads/default.png',
