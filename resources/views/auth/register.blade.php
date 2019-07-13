@@ -343,16 +343,18 @@
                                     @endif</div>
                             </div>
 
-                            <div class="form-group mb-30">
-                                <label for="payment_type">If you are a seller. Preferred Payment type</label>
-                                <select class="form-control" id="payment_type" name="payment_type" required>
-                                    @if(old('payment_type', null) != null)
-                                        <option selected
-                                                value="{{ old('payment_type') }}">{{ old('payment_type') }}</option>
-                                    @endif
-                                    <option value="online">Online</option>
-                                    <option value="invoice">Invoice</option>
-                                </select>
+                            <div class="form-group mb-30 row">
+                                <label for="payment_type" class="col-md-4 col-form-label text-md-right">If you are a seller. Preferred Payment type</label>
+                                <div class="col-sm-6">
+                                    <select class="form-control" id="payment_type" name="payment_type"
+                                                              required>
+                                        @if(old('payment_type', null) != null)
+                                            <option selected
+                                                    value="{{ old('payment_type') }}">{{ old('payment_type') }}</option>
+                                        @endif
+                                        <option value="online">Online</option>
+                                        <option value="invoice">Invoice</option>
+                                    </select></div>
                             </div>
 
                             <div class="form-group mb-30 row form-check">
