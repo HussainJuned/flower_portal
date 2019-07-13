@@ -89,7 +89,7 @@
                         </a>
                     </p>
                 @else
-                    <form action="{{ route('order.store', ['product' => $product->id]) }}" method="post">
+                    {{--<form action="{{ route('order.store', ['product' => $product->id]) }}" method="post">
                         @csrf
                         <div class="form-group my-3">
                             <label for="quantity">Quantity</label>
@@ -132,7 +132,7 @@
                         @else
                             <button type="button" class="btn btn-primary" disabled>Not Available</button>
                         @endif
-                    </form>
+                    </form>--}}
                 @endif
             </div>
         </div>
