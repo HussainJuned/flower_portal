@@ -30,7 +30,7 @@
                             <td><a href="{{ route('userinfos.show', ['userinfo' => $order->buyer->id]) }}">{{ $order->buyer->name }}</a></td>
 {{--                            <td>{{ $order->quantity }}</td>--}}
 {{--                            <td>{{ $order->unit_price }}</td>--}}
-                            <td>{{ $order->order_total_price }}</td>
+                            <td>${{ $order->order_total_price }}</td>
                             {{--<td>@if ($order->productReview)
                                     {{ $order->productReview->quality }} / 5
                                 @else
@@ -101,7 +101,7 @@
                             <td><a href="{{ route('userinfos.show', ['userinfo' => $order->buyer->id]) }}">{{ $order->buyer->name }}</a></td>
                             {{--                            <td>{{ $order->quantity }}</td>--}}
                             {{--                            <td>{{ $order->unit_price }}</td>--}}
-                            <td>{{ $order->order_total_price }}</td>
+                            <td>${{ $order->order_total_price }}</td>
                             {{--<td>@if ($order->productReview)
                                     {{ $order->productReview->quality }} / 5
                                 @else

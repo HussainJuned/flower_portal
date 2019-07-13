@@ -29,7 +29,7 @@
             <div class="col-sm-6">
                 <p><strong>Order Date:</strong> {{ $order->order_date }}</p>
                 <p><strong>Status:</strong> {{ $order->statusToString() }}</p>
-                <p><strong>Total:</strong> {{ $order->order_total_price }}</p>
+                <p><strong>Total:</strong> ${{ $order->order_total_price }}</p>
             </div>
         </div>
 
@@ -51,7 +51,7 @@
                         <h5>Before You Continue Shopping, Please make a payment</h5>
 
                         <p class="inp">Total amount due before you can continue shopping(including transaction costs:
-                            <strong>{{ $invoice->amount }}</strong>
+                            <strong>${{ $invoice->amount }}</strong>
                         </p>
 
                         <a href="" class="btn btn_op">Pay</a>
@@ -83,9 +83,9 @@
                                     <td>{{ $invoice->user_id }}</td>
                                     <td>{{ $invoice->due_date }}</td>
                                     <td>{{ $invoice->currency }}</td>
-                                    <td>{{ $invoice->amount }}</td>
+                                    <td>${{ $invoice->amount }}</td>
                                     <td>{{ $invoice->paid }}</td>
-                                    <td>{{ $invoice->outstanding }}</td>
+                                    <td>${{ $invoice->outstanding }}</td>
                                     <td>{{ \Carbon\Carbon::parse($invoice->created_at)->diffInDays(\Carbon\Carbon::today()) + 1 }}</td>
                                 </tr>
                                 </tbody>
@@ -119,7 +119,7 @@
                                                 alt="product image" class="img-fluid"></td>
                         <td>{{ $o_product->product->name }}</td>
                         <td>1 x {{ $o_product->quantity }}</td>
-                        <td>{{ $o_product->total_price }}</td>
+                        <td>${{ $o_product->total_price }}</td>
                     </tr>
 
                 @endforeach

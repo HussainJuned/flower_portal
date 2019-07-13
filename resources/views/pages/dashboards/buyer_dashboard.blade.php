@@ -35,7 +35,7 @@
 
                             </td>
 {{--                            <td>1 x {{ $order->quantity }}</td>--}}
-                            <td>{{ $order->order_total_price }}</td>
+                            <td>${{ $order->order_total_price }}</td>
                            {{-- <td>
                                 @if ($order->productReview)
                                     {{ $order->productReview->quality }} / 5
@@ -111,7 +111,7 @@
                             <td>{{ $order->statusToString() }}</td>
                             <td><a href="{{ route('userinfos.show', ['userinfo' => $order->seller->id]) }}">{{ $order->seller->name }}</a>
                             </td>
-                            <td>{{ $order->order_total_price }}</td>
+                            <td>${{ $order->order_total_price }}</td>
                             {{--<td>
                                 @if ($order->productReview)
                                     {{ $order->productReview->quality }} / 5
