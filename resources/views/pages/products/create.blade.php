@@ -924,6 +924,9 @@
                                 } else {
                                     // console.log('not full word');
                                     // console.log('cv: ' + contained.eq(0).text());
+                                    $('#category option[value="28"]').attr('selected', true);
+                                    $("#category").select();
+                                    console.log('not matched');
                                 }
                             }
 
