@@ -4303,6 +4303,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       // console.log(this.filter_length);
+      $('#loader1').show();
       axios.get('/api/flower', {
         params: {
           keywords: this.keywords,
@@ -4312,11 +4313,14 @@ __webpack_require__.r(__webpack_exports__);
           filter_length: this.filter_length
         }
       }).then(function (response) {
+        $('#loader1').hide();
         _this.products = response.data.data;
         _this.page_data = response.data; // console.log('np url: ' + this.page_data.next_page_url);
 
         $('.result_count').text(response.data.total);
-      }).catch(function (error) {});
+      }).catch(function (error) {
+        $('#loader1').hide();
+      });
     },
     getSession: function getSession() {
       var _this2 = this;
@@ -4350,25 +4354,26 @@ __webpack_require__.r(__webpack_exports__);
         // let bottomOfWindow = (document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight);
         if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
           // alert("you're at the bottom of the page");
-          console.log(_this3.page_data.next_page_url);
-
+          // console.log(this.page_data.next_page_url);
           if (loading) {
             return false;
           }
 
           if (_this3.page_data.next_page_url) {
-            $('.ajax-load').show();
+            $('#loader2').show();
             loading = true;
             axios.get(_this3.page_data.next_page_url).then(function (response) {
               Array.prototype.push.apply(_this3.products, response.data.data); // this.products = response.data.data;
 
               _this3.page_data = response.data;
-              $('.ajax-load').hide();
+              $('#loader2').hide();
 
-              _this3.$forceUpdate();
+              _this3.$forceUpdate(); // $('#loader2').hide();
 
-              $('.ajax-load').hide();
+
               loading = false;
+            }).catch(function (error) {
+              $('#loader2').hide();
             });
           }
         }

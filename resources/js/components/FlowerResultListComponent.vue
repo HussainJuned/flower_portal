@@ -91,19 +91,21 @@
             },
             fetch() {
                 // console.log(this.filter_length);
-
+                $('#loader1').show();
                 axios.get('/api/flower', {
                     params: {
                         keywords: this.keywords, sort_by: this.sort_by, delivery_date: this.delivery_date,
                         filter_catg: this.filter_catg, filter_length: this.filter_length
                     }
                 }).then(response => {
-                        this.products = response.data.data;
-                        this.page_data = response.data;
-                        // console.log('np url: ' + this.page_data.next_page_url);
+                    $('#loader1').hide();
+                    this.products = response.data.data;
+                    this.page_data = response.data;
+                    // console.log('np url: ' + this.page_data.next_page_url);
                         $('.result_count').text(response.data.total);
                     })
                     .catch(error => {
+                        $('#loader1').hide();
                     });
 
             },
@@ -138,13 +140,13 @@
                     // let bottomOfWindow = (document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight);
                     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
                         // alert("you're at the bottom of the page");
-                        console.log(this.page_data.next_page_url);
+                        // console.log(this.page_data.next_page_url);
 
                         if (loading) {
                             return false;
                         }
                         if (this.page_data.next_page_url) {
-                            $('.ajax-load').show();
+                            $('#loader2').show();
                             loading =true;
                             axios.get(this.page_data.next_page_url)
                                 .then(response => {
@@ -152,11 +154,13 @@
                                     Array.prototype.push.apply(this.products, response.data.data);
                                     // this.products = response.data.data;
                                     this.page_data = response.data;
-                                    $('.ajax-load').hide();
+                                    $('#loader2').hide();
                                     this.$forceUpdate();
-                                    $('.ajax-load').hide();
+                                    // $('#loader2').hide();
                                     loading = false;
-                                });
+                                }).catch(error => {
+                                    $('#loader2').hide();
+                            });
                         }
 
                     }

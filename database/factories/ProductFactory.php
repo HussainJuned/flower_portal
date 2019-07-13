@@ -32,7 +32,7 @@ $factory->define(\App\Product::class, function (Faker $faker) {
         'number_of_stem' => $no_stem,
         'price' => $total,
         'pack' => $pack,
-        'height' => $faker->numberBetween(1, 20) . ' cm',
+        'height' => $faker->numberBetween(1, 100) . ' cm',
         'origin' => $faker->country,
         'colour' => $faker->randomElement($colourPalate),
         'category' => $faker->randomElement($cat),

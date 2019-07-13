@@ -74,7 +74,7 @@
                                     </li>--}}
                                     <li id="aanbod_3">
                                         <a data-toggle="collapse" href="#collapseCategory" role="button" aria-expanded="false" aria-controls="collapseCategory">Category</a>
-                                        <ul class="collapse" id="collapseCategory">
+                                        <ul class="collapse show" id="collapseCategory">
                                             @foreach ($categories as $category)
                                                 <li class="category_list">
                                                     <div class="custom-control custom-checkbox">
@@ -159,6 +159,10 @@
                 </div>
 
                 <div class="result_column_container">
+                    <div class="ajax-load text-center" style="display:none" id="loader1">
+                        <p><img src="{{ asset('images/icons/loader.gif') }}">Loading...</p>
+                    </div>
+
                     <flower-result-list-component v-bind:keywords="keywords" v-bind:cart_products="cart_products"
                                                   v-bind:sort_by="sort_by" v-bind:delivery_date="delivery_date"
                                                   v-bind:filter_catg="filter_catg" v-bind:filter_length="filter_length"
@@ -166,7 +170,7 @@
 
                     </flower-result-list-component>
                 </div>
-                <div class="ajax-load text-center" style="display:none">
+                <div class="ajax-load text-center" style="display:none"  id="loader2">
                     <p><img src="{{ asset('images/icons/loader.gif') }}">Loading...</p>
                 </div>
             </div>

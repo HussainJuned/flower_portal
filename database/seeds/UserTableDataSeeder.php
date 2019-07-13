@@ -36,9 +36,9 @@ class UserTableDataSeeder extends Seeder
         $this->storePC($user);
 
 
-        factory(User::class, 20)->create()->each(function ($user) {
+        factory(User::class, 100)->create()->each(function ($user) {
             //create 5 products for each user
-            $products = factory(\App\Product::class, 5)->create(['user_id'=>$user->id]);
+            $products = factory(\App\Product::class, 20)->create(['user_id'=>$user->id]);
             /*foreach ($products as $product) {
                 $product->name = 'Product ' . $product->id;
                 $product->update();
