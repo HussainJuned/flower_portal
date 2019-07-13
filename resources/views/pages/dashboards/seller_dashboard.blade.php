@@ -17,6 +17,7 @@
                         <td scope="col">Buyer</td>
 {{--                        <td scope="col">Quantity</td>--}}
 {{--                        <td scope="col">Unit Price</td>--}}
+                        <td scope="col">PO Name</td>
                         <td scope="col">Total Price</td>
 {{--                        <td scope="col">Product Review</td>--}}
                         <td scope="col">Action</td>
@@ -30,6 +31,7 @@
                             <td><a href="{{ route('userinfos.show', ['userinfo' => $order->buyer->id]) }}">{{ $order->buyer->name }}</a></td>
 {{--                            <td>{{ $order->quantity }}</td>--}}
 {{--                            <td>{{ $order->unit_price }}</td>--}}
+                            <td>{{ $order->purchase_order_name }}</td>
                             <td>${{ $order->order_total_price }}</td>
                             {{--<td>@if ($order->productReview)
                                     {{ $order->productReview->quality }} / 5
@@ -86,6 +88,7 @@
                         <td scope="col">Date</td>
                         <td scope="col">Status</td>
                         <td scope="col">Buyer</td>
+                        <td scope="col">PO Name</td>
                         {{--                        <td scope="col">Quantity</td>--}}
                         {{--                        <td scope="col">Unit Price</td>--}}
                         <td scope="col">Total Price</td>
@@ -101,6 +104,7 @@
                             <td><a href="{{ route('userinfos.show', ['userinfo' => $order->buyer->id]) }}">{{ $order->buyer->name }}</a></td>
                             {{--                            <td>{{ $order->quantity }}</td>--}}
                             {{--                            <td>{{ $order->unit_price }}</td>--}}
+                            <td>{{ $order->purchase_order_name }}</td>
                             <td>${{ $order->order_total_price }}</td>
                             {{--<td>@if ($order->productReview)
                                     {{ $order->productReview->quality }} / 5
