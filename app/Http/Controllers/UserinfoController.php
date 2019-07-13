@@ -74,6 +74,19 @@ class UserinfoController extends Controller
 
         BuyerAddressController::store($request, $user_id);
 
+        $user = User::find($user_id);
+        $pc = new \App\PreferredCommunication();
+        $pc->user_id = $user->id;
+        $pc->general = 1;
+        $pc->email_general = $user->email;
+        $pc->order_confirmation = 1;
+        $pc->email_order_confirmation = $user->email;
+        $pc->shipment = 1;
+        $pc->email_shipment = $user->email;
+        $pc->invoices = 1;
+        $pc->email_invoices = $user->email;
+        $pc->save();
+
 //        return redirect()->route('home')->with('message', 'Userinfo Registration Completed Successfully');
 
     }
