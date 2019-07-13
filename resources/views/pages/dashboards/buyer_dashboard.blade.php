@@ -15,10 +15,11 @@
                         <td scope="col">Date</td>
                         <td scope="col">Status</td>
                         <td scope="col">Seller</td>
+                        <td scope="col">PO Name</td>
 {{--                        <td scope="col">Product</td>--}}
 {{--                        <td scope="col">Bought</td>--}}
 {{--                        <td scope="col">Unit Price</td>--}}
-                        <td scope="col">Total Price</td>
+                        <td scope="col">Invoice Amount</td>
 {{--                        <td scope="col">Review</td>--}}
                         <td scope="col">Action</td>
                     </tr>
@@ -35,6 +36,7 @@
 
                             </td>
 {{--                            <td>1 x {{ $order->quantity }}</td>--}}
+                            <td>{{ $order->purchase_order_name }}</td>
                             <td>${{ $order->order_total_price }}</td>
                            {{-- <td>
                                 @if ($order->productReview)
@@ -96,6 +98,7 @@
                         <td scope="col">Unit Price</td>--}}
                         <td scope="col">Status</td>
                         <td scope="col">Seller</td>
+                        <td scope="col">PO Name</td>
                         <td scope="col">Total Price</td>
 {{--                        <td scope="col">Review</td>--}}
                         <td scope="col">Action</td>
@@ -111,6 +114,7 @@
                             <td>{{ $order->statusToString() }}</td>
                             <td><a href="{{ route('userinfos.show', ['userinfo' => $order->seller->id]) }}">{{ $order->seller->name }}</a>
                             </td>
+                            <td>{{ $order->purchase_order_name }}</td>
                             <td>${{ $order->order_total_price }}</td>
                             {{--<td>
                                 @if ($order->productReview)

@@ -14,7 +14,7 @@ class UserTableDataSeeder extends Seeder
     public function run()
     {
         $user = new User;
-        $user->name = 'Hussain Juned';
+        $user->name = 'hussain_juned';
         $user->email = 'hussainjuned99@gmail.com';
         $user->password = bcrypt('secret01');
         $user->remember_token = Str::random(10);
@@ -25,7 +25,7 @@ class UserTableDataSeeder extends Seeder
         $this->storePC($user);
 
         $user = new User;
-        $user->name = 'Eddy dEntrepreneur';
+        $user->name = 'eddy';
         $user->email = 'eddy@gmail.com';
         $user->password = bcrypt('secret01');
         $user->remember_token = Str::random(10);
