@@ -100,14 +100,14 @@
                                     Invoices
                                 </a>
 
-                                <a href="{{ route('seller_dashboard.myProducts') }}"
+                                {{--<a href="{{ route('seller_dashboard.myProducts') }}"
                                    class="dropdown-item">
                                     Communication
-                                </a>
+                                </a>--}}
 
                                 <a href="{{ route('settings.preferred_communication') }}"
                                    class="dropdown-item">
-                                    Preferred Communication
+                                    Communication
                                 </a>
 
                                 <a class="dropdown-item text-danger" href="{{ route('logout') }}"
