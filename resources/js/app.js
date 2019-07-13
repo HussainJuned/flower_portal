@@ -36,10 +36,29 @@ Vue.component('main-nav-search', require('./components/MainNavSearch').default);
 var delivery_date_o = new Date();
 delivery_date_o = delivery_date_o.getFullYear() + '-' + (delivery_date_o.getMonth() + 1) + '-' + delivery_date_o.getDate();
 
+$.urlParam = function(name){
+    var results = new RegExp('[\?&]' + name + '=([^]*)').exec(window.location.href);
+    if (results==null){
+        return null;
+    }
+    else{
+        return results[1] || 0;
+    }
+};
+
+
+// console.log($.urlParam('search_flower'));
+var url_keyword = '';
+if ($.urlParam('search_flower')) {
+    // $('#mini_search').val(decodeURIComponent($.urlParam('search_flower')));
+    url_keyword = decodeURIComponent($.urlParam('search_flower'));
+}
+
+
 var app = new Vue({
     el: '#app',
     data: {
-        'keywords': null,
+        'keywords': url_keyword,
         'sort_by': 'price',
         'delivery_date': delivery_date_o,
         'cart_products': [],

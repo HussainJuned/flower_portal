@@ -19,7 +19,7 @@
                         @endif
                     </div>
 
-                    <div class="form-group mb-30">
+                    {{--<div class="form-group mb-30">
                         <label for="available_date">Available Date</label>
                         <input type="date"
                                class="form-control{{ $errors->has('available_date') ? ' is-invalid' : '' }}"
@@ -30,7 +30,7 @@
                             <strong>{{ $errors->first('available_date') }}</strong>
                         </span>
                         @endif
-                    </div>
+                    </div>--}}
 
                     <button type="submit" class="btn btn-primary">Search</button>
                 </form>
