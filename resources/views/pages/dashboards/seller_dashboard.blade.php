@@ -13,12 +13,12 @@
                     <thead>
                     <tr>
                         <td scope="col">Date</td>
-                        <td scope="col">Buyer</td>
-                        <td scope="col">Quantity</td>
-                        <td scope="col">Unit Price</td>
-                        <td scope="col">Total</td>
                         <td scope="col">Status</td>
-                        <td scope="col">Product Review</td>
+                        <td scope="col">Buyer</td>
+{{--                        <td scope="col">Quantity</td>--}}
+{{--                        <td scope="col">Unit Price</td>--}}
+                        <td scope="col">Total Price</td>
+{{--                        <td scope="col">Product Review</td>--}}
                         <td scope="col">Action</td>
                     </tr>
                     </thead>
@@ -26,17 +26,17 @@
                     @foreach ($upcoming_orders as $order)
                         <tr scope="row">
                             <td>{{ $order->order_date }}</td>
-                            <td>{{ $order->buyer->name }}</td>
-                            <td>{{ $order->quantity }}</td>
-                            <td>{{ $order->unit_price }}</td>
-                            <td>{{ $order->total_price }}</td>
                             <td>{{ $order->statusToString() }}</td>
-                            <td>@if ($order->productReview)
+                            <td><a href="{{ route('userinfos.show', ['userinfo' => $order->buyer->id]) }}">{{ $order->buyer->name }}</a></td>
+{{--                            <td>{{ $order->quantity }}</td>--}}
+{{--                            <td>{{ $order->unit_price }}</td>--}}
+                            <td>{{ $order->order_total_price }}</td>
+                            {{--<td>@if ($order->productReview)
                                     {{ $order->productReview->quality }} / 5
                                 @else
                                     n/a
                                 @endif
-                            </td>
+                            </td>--}}
                             <td><a href="{{ route('seller_dashboard.order.view', ['order' => $order->id]) }}"
                                    class="btn btn-primary">view</a>
                                 <!-- Button trigger modal -->
@@ -84,12 +84,12 @@
                     <thead>
                     <tr>
                         <td scope="col">Date</td>
-                        <td scope="col">Buyer</td>
-                        <td scope="col">Quantity</td>
-                        <td scope="col">Unit Price</td>
-                        <td scope="col">Total</td>
                         <td scope="col">Status</td>
-                        <td scope="col">Product Review</td>
+                        <td scope="col">Buyer</td>
+                        {{--                        <td scope="col">Quantity</td>--}}
+                        {{--                        <td scope="col">Unit Price</td>--}}
+                        <td scope="col">Total Price</td>
+                        {{--                        <td scope="col">Product Review</td>--}}
                         <td scope="col">Action</td>
                     </tr>
                     </thead>
@@ -97,27 +97,26 @@
                     @foreach ($past_orders as $order)
                         <tr scope="row">
                             <td>{{ $order->order_date }}</td>
-                            <td>{{ $order->buyer->name }}</td>
-                            <td>{{ $order->quantity }}</td>
-                            <td>{{ $order->unit_price }}</td>
-                            <td>{{ $order->total_price }}</td>
                             <td>{{ $order->statusToString() }}</td>
-                            <td>
-                                @if ($order->productReview)
+                            <td><a href="{{ route('userinfos.show', ['userinfo' => $order->buyer->id]) }}">{{ $order->buyer->name }}</a></td>
+                            {{--                            <td>{{ $order->quantity }}</td>--}}
+                            {{--                            <td>{{ $order->unit_price }}</td>--}}
+                            <td>{{ $order->order_total_price }}</td>
+                            {{--<td>@if ($order->productReview)
                                     {{ $order->productReview->quality }} / 5
                                 @else
                                     n/a
                                 @endif
-                            </td>
+                            </td>--}}
                             <td><a href="{{ route('seller_dashboard.order.view', ['order' => $order->id]) }}"
                                    class="btn btn-primary">view</a>
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#po_{{ $order->id }}">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ur_{{ $order->id }}">
                                     edit
                                 </button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="po_{{ $order->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="ur_{{ $order->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
