@@ -2,7 +2,7 @@
 
 # Dear {{ $user->name }},
 
-<h1>Your account has been successfully created</h1>
+<h1>Your account has been created successfully</h1>
 
 @component('mail::button', ['url' => route('userinfos.show', ['userinfo' => $user->id])])
     View Profile

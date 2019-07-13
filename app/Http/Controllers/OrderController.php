@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\BuyerAddress;
 use App\BuyerInvoice;
 use App\Mail\OrderConfirmationMail;
+use App\Mail\OrderCreatedMail;
 use App\Order;
 use App\OrderProduct;
 use App\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Mail;
+use Matrix\Exception;
+use function PHPSTORM_META\type;
 
 class OrderController extends Controller
 {
@@ -235,6 +238,22 @@ class OrderController extends Controller
         $user = auth()->user();
         $upcoming_orders = $user->upcomingOrdersBuyer;
         $past_orders = $user->pastOrdersBuyer()->paginate(10);
+
+        try {
+            Mail::to($order->buyer->preferred_communication->email_order_confirmation)
+                ->send(new OrderCreatedMail($order, 'buyer'));
+        } catch (Exception $e) {
+            return back()->withInput()->with('error', $e);
+        }
+
+        try {
+            Mail::to($order->seller->preferred_communication->email_order_confirmation)
+                ->send(new OrderCreatedMail($order, 'seller'));
+        } catch (Exception $e) {
+            return back()->withInput()->with('error', $e);
+        }
+
+
 
         return redirect()->route('buyer_dashboard.buyer_dashboard')
             ->with('upcoming_orders' , $upcoming_orders)
