@@ -30,7 +30,7 @@
             <div class="col-sm-6">
                 <p>Order Date: {{ $order->order_date }}</p>
                 <p>Status: {{ $order->statusToString() }}</p>
-                <p>Total: {{ $order->order_total_price }}</p>
+                <p>Total: ${{ $order->order_total_price }}</p>
             </div>
         </div>
 
@@ -55,7 +55,7 @@
                     <td class="tb_img"><img src="{{ asset('') }}{{ $o_product->product->photo_url }}" alt="product image" class="img-fluid"></td>
                     <td>{{ $o_product->product->name }}</td>
                     <td>1 x {{ $o_product->quantity }}</td>
-                    <td>{{ $o_product->total_price }}</td>
+                    <td>${{ $o_product->total_price }}</td>
                 </tr>
 
             @endforeach
