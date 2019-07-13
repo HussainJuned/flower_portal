@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\UserinfoController;
+use App\Mail\AccountRegisteredMail;
+use App\Mail\OrderConfirmationMail;
 use App\User;
 use App\Http\Controllers\Controller;
 
@@ -12,6 +14,8 @@ use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Mail;
+use Matrix\Exception;
 
 class RegisterController extends Controller
 {
@@ -94,6 +98,14 @@ class RegisterController extends Controller
         $user_id = $user->id;
 
         UserinfoController::store($data, $user_id);
+
+        try {
+//            $u = User::find($user_id);
+            Mail::to($user->email)
+                ->send(new AccountRegisteredMail($user));
+        } catch (Exception $e) {
+            return back()->withInput()->with('error', $e);
+        }
 
         return $user;
     }
