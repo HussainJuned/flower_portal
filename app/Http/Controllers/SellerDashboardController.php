@@ -38,7 +38,7 @@ class SellerDashboardController extends Controller
      */
     public function updateToAccepted(Order $order)
     {
-        if ($order->status === 1 && auth()->id() === $order->seller_user_id) {
+        if (auth()->id() === $order->seller_user_id) {
             $order->status = 2;
             $order->save();
         } else {
@@ -58,7 +58,7 @@ class SellerDashboardController extends Controller
 
     public function updateToShipped(Order $order)
     {
-        if ($order->status === 2 && auth()->id() === $order->seller_user_id) {
+        if (auth()->id() === $order->seller_user_id) {
             $order->status = 3;
             $order->save();
         } else {
@@ -70,7 +70,7 @@ class SellerDashboardController extends Controller
 
     public function updateToDelivered(Order $order)
     {
-        if ($order->status === 3 && auth()->id() === $order->seller_user_id) {
+        if (auth()->id() === $order->seller_user_id) {
             $order->status = 4;
             $order->save();
         } else {

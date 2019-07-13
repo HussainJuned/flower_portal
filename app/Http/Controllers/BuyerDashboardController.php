@@ -30,7 +30,7 @@ class BuyerDashboardController extends Controller
 
     public function updateOrderStatusToReceived(Order $order)
     {
-        if ($order->status === 4 && auth()->id() === $order->buyer_user_id) {
+        if (auth()->id() === $order->buyer_user_id) {
             $order->status = 5;
             $order->save();
         } else {
