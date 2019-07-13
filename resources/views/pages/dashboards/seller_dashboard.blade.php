@@ -115,12 +115,12 @@
                             <td><a href="{{ route('seller_dashboard.order.view', ['order' => $order->id]) }}"
                                    class="btn btn-primary">view</a>
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ur_{{ $order->id }}">
+                                {{--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ur_{{ $order->id }}">
                                     edit
-                                </button>
+                                </button>--}}
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="ur_{{ $order->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                {{--<div class="modal fade" id="ur_{{ $order->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -139,7 +139,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>--}}
                             </td>
                         </tr>
                     @endforeach

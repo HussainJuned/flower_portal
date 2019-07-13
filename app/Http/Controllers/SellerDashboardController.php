@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\OrderConfirmationMail;
+use App\Mail\OrderStatusUpdateMail;
 use App\Order;
 use App\User;
 use Illuminate\Http\Request;
@@ -61,6 +62,14 @@ class SellerDashboardController extends Controller
         if (auth()->id() === $order->seller_user_id) {
             $order->status = 3;
             $order->save();
+
+            try {
+                Mail::to($order->buyer->preferred_communication->email_shipment)
+                    ->send(new OrderStatusUpdateMail($order, 'shipped'));
+            } catch (Exception $e) {
+                return back()->withInput()->with('error', $e);
+            }
+
         } else {
             return redirect()->back()->withErrors('Order Status Update unsuccessful');
         }
@@ -73,6 +82,14 @@ class SellerDashboardController extends Controller
         if (auth()->id() === $order->seller_user_id) {
             $order->status = 4;
             $order->save();
+
+            try {
+                Mail::to($order->buyer->preferred_communication->email_shipment)
+                    ->send(new OrderStatusUpdateMail($order, 'delivered'));
+            } catch (Exception $e) {
+                return back()->withInput()->with('error', $e);
+            }
+
         } else {
             return redirect()->back()->withErrors('Order Status Update unsuccessful');
         }
@@ -84,7 +101,12 @@ class SellerDashboardController extends Controller
 
     public function viewOrder(Order $order)
     {
-        return view('pages.dashboards.view_seller_order', compact('order'));
+        if (auth()->id() === $order->seller_user_id) {
+            return view('pages.dashboards.view_seller_order', compact('order'));
+        }
+
+        return redirect()->back()->withErrors('You do not have permission to view this page');
+
     }
 
     public function viewOrderHistory()

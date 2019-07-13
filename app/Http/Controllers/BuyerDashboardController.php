@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderCompleteMail;
+use App\Mail\OrderStatusUpdateMail;
 use App\Order;
 use App\User;
 use Illuminate\Http\Request;
+use Mail;
+use Matrix\Exception;
 
 class BuyerDashboardController extends Controller
 {
@@ -24,8 +28,12 @@ class BuyerDashboardController extends Controller
 
     public function viewOrder(Order $order)
     {
-        $invoice = $order->invoice;
-        return view('pages.dashboards.view_buyer_order', compact('order', 'invoice'));
+        if (auth()->id() === $order->buyer_user_id) {
+            $invoice = $order->invoice;
+            return view('pages.dashboards.view_buyer_order', compact('order', 'invoice'));
+        }
+
+        return redirect()->back()->withErrors('Access denied');
     }
 
     public function updateOrderStatusToReceived(Order $order)
@@ -33,6 +41,23 @@ class BuyerDashboardController extends Controller
         if (auth()->id() === $order->buyer_user_id) {
             $order->status = 5;
             $order->save();
+
+            try {
+                Mail::to($order->buyer->preferred_communication->email_shipment)
+                    ->send(new OrderCompleteMail($order, 'buyer'));
+            } catch (Exception $e) {
+                return back()->withInput()->with('error', $e);
+            }
+
+            try {
+                Mail::to($order->seller->preferred_communication->email_shipment)
+                    ->send(new OrderCompleteMail($order, 'seller'));
+            } catch (Exception $e) {
+                return back()->withInput()->with('error', $e);
+            }
+
+
+
         } else {
             return redirect()->back()->withErrors('Order Status Update unsuccessful');
         }

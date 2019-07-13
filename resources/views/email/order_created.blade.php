@@ -13,9 +13,17 @@
 <p><strong>Order Total Price: </strong> ${{ $order->order_total_price }}</p>
 <p><strong>Order Date: </strong> {{ $order->order_date }}</p>
 
+@if ($type === 'buyer')
 @component('mail::button', ['url' => route('buyer_dashboard.order.view', ['order' => $order->id])])
-    View order
+View order
 @endcomponent
+
+@else
+@component('mail::button', ['url' => route('seller_dashboard.order.view', ['order' => $order->id])])
+View order
+@endcomponent
+@endif
+
 
 <p>From,</p>
 <h2>{{ config('app.name') }}</h2>

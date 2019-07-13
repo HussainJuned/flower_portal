@@ -8,7 +8,8 @@
 
         @if ($order->status === 5 && \App\BuyerAccountReview::getBar($order->buyer_user_id, $order->seller_user_id)->first())
             <p class="my-3"> Buyer account review by you:
-                {{ \App\BuyerAccountReview::getBar($order->buyer_user_id, $order->seller_user_id)->first()->quality }} / 5</p>
+                {{ \App\BuyerAccountReview::getBar($order->buyer_user_id, $order->seller_user_id)->first()->quality }} /
+                5</p>
         @endif
 
 
@@ -52,7 +53,8 @@
             <tbody>
             @foreach($order->orderProducts as $o_product)
                 <tr>
-                    <td class="tb_img"><img src="{{ asset('') }}{{ $o_product->product->photo_url }}" alt="product image" class="img-fluid"></td>
+                    <td class="tb_img"><img src="{{ asset('') }}{{ $o_product->product->photo_url }}"
+                                            alt="product image" class="img-fluid"></td>
                     <td>{{ $o_product->product->name }}</td>
                     <td>1 x {{ $o_product->quantity }}</td>
                     <td>${{ $o_product->total_price }}</td>
@@ -74,13 +76,17 @@
                          data-toggle="modal" data-target="#exampleModal">
                     Review Buyer Account</a></p>
         @endif
-        <h4>Actions: </h4>
-        @include('partials.seller_order_prompt')
+        @if ($order->status !== 5)
+            <h4>Actions: </h4>
+            @include('partials.seller_order_prompt')
+        @endif
+
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Account Review</h5>
