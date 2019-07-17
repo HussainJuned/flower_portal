@@ -43,14 +43,14 @@ class BuyerDashboardController extends Controller
             $order->save();
 
             try {
-                Mail::to($order->buyer->preferred_communication->email_shipment)
+                Mail::to($order->buyer->preferred_communication->email_general)
                     ->send(new OrderCompleteMail($order, 'buyer'));
             } catch (Exception $e) {
                 return back()->withInput()->with('error', $e);
             }
 
             try {
-                Mail::to($order->seller->preferred_communication->email_shipment)
+                Mail::to($order->seller->preferred_communication->email_general)
                     ->send(new OrderCompleteMail($order, 'seller'));
             } catch (Exception $e) {
                 return back()->withInput()->with('error', $e);
