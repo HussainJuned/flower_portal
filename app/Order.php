@@ -73,6 +73,8 @@ class Order extends Model
                 return "Delivered";
             case 5:
                 return "Full Filled";
+            case 6:
+                return "Ready to pickup";
 
         }
     }

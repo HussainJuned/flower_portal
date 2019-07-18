@@ -34,8 +34,13 @@
                                     <div class="mx-5 my-5">
                                         <p class="my-3">View
                                             <a href="{{ route('seller_dashboard.seller_dashboard') }}">Seller Dashboard</a></p>
-                                        <a href="{{ route('products.create') }}" class="btn j_btn my-3">Upload Product</a>
-                                        <a href="{{ route('seller_dashboard.myProducts') }}" class="ml-3 btn j_btn my-3">View My Products</a>
+                                        {{-- <a href="{{ route('products.create') }}" class="btn j_btn my-3">Upload Product</a> --}}
+
+                                        <a href="{{ route('products.create') }}" class="btn my_account_btn p-0">Upload Product</a>
+                                        {{-- <a href="{{ route('seller_dashboard.myProducts') }}" class="ml-3 btn j_btn my-3">View My Products</a> --}}
+                                        
+                                        <a href="{{ route('seller_dashboard.myProducts') }}" class="btn my_account_btn p-0">View My Products</a>
+                                        
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="nav-buying" role="tabpanel"

@@ -19,14 +19,23 @@
         </div>
     @endif
 
-{{--     @if (auth()->id() === $order->seller_user_id)
+    @if (auth()->id() === $order->seller_user_id)
         <div class="my-3">
             <form action="{{ route('seller_dashboard.order.updateToDelivered', ['order' => $order->id]) }}" method="post">
                 @csrf
-                <button type="submit" class="btn btn-primary">Order is Delivered</button>
+                <button type="submit" class="btn my_account_btn dashboard-btn">Order is Delivered</button>
             </form>
         </div>
-    @endif --}}
+    @endif
+
+     @if (auth()->id() === $order->seller_user_id)
+        <div class="my-3">
+            <form action="{{ route('seller_dashboard.order.updateToPickUp', ['order' => $order->id]) }}" method="post">
+                @csrf
+                <button type="submit" class="btn my_account_btn dashboard-btn">Ready to pickup</button>
+            </form>
+        </div>
+    @endif
 
     @if (auth()->id() === $order->seller_user_id)
 

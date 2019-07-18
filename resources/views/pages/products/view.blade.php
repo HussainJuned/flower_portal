@@ -57,7 +57,7 @@
                             @if($product->availableDates())
                             <button type="submit" class="btn btn-secondary float-right">Order</button>
                         @else
-                            <button type="button" class="btn btn-primary" disabled>Not Available</button>
+                            <button type="button" class="btn my_account_btn dashboard-btn" disabled>Not Available</button>
                         @endif
                         </div>
                         

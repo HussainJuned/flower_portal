@@ -307,7 +307,8 @@
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn j_btn">
+                                    {{-- class="btn j_btn" --}}
+                                    <button type="submit" class="btn my_account_btn p-0">
                                         Update
                                     </button>
                                 </div>

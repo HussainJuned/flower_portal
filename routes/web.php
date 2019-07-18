@@ -58,6 +58,8 @@ Route::post('/seller-dashboard/updateToShipped/{order}', 'SellerDashboardControl
     ->name('seller_dashboard.order.updateToShipped');
 Route::post('/seller-dashboard/updateToDelivered/{order}', 'SellerDashboardController@updateToDelivered')
     ->name('seller_dashboard.order.updateToDelivered');
+Route::post('/seller-dashboard/updateToPickUp/{order}', 'SellerDashboardController@updateToPickUp')
+    ->name('seller_dashboard.order.updateToPickUp');
 
 Route::get('/seller-dashboard/order/{order}', 'SellerDashboardController@viewOrder')
     ->name('seller_dashboard.order.view');

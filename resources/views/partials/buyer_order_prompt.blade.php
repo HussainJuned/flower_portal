@@ -4,7 +4,7 @@
         <form action="{{ route('buyer_dashboard.order.updateToReceived', ['order' => $order->id]) }}" method="post">
             @csrf
             <input type="number" name="status" value="5" hidden>
-            <button type="submit" class="btn btn-primary">I have received the order</button>
+            <button type="submit" class="btn my_account_btn dashboard-btn">I have received the order</button>
         </form>
     </div>
 

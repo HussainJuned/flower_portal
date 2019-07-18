@@ -78,7 +78,7 @@
         @endif
         @if ($order->status !== 5)
             <h4>Actions: </h4>
-            @include('partials.seller_order_prompt')
+            @include('partials.summary_seller_order_prompt')
         @endif
 
     </div>
@@ -105,7 +105,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn my_account_btn dashboard-btn" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

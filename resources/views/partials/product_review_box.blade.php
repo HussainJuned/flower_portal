@@ -27,5 +27,5 @@
                         </span>
                 @endif
             </div>
-            <button type="submit" class="btn j_btn">Submit</button>
+            <button type="submit" class="btn my_account_btn dashboard-btn">Submit</button>
         </form>

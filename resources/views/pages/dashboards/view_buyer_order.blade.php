@@ -55,7 +55,7 @@
                         </p>
 
                         <a href="" class="btn btn_op">Pay</a>
-                        <a href="{{ route('pdf.invoice.outstanding', ['invoice' => $invoice->id]) }}" class="btn btn_gop">Generate PDF</a>
+                        <a href="{{ route('pdf.invoice.outstanding', ['invoice' => $invoice->id]) }}" class="btn my_account_btn dashboard-btn">Generate PDF</a>
                     </div>
 
                     <div class="oi_box">

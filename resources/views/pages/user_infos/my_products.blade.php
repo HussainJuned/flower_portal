@@ -7,7 +7,7 @@
         <div class="row">
             @if(session()->has('message'))
                 <div class="my-5 container">
-                    <a href="{{ route('products.create') }}" class="btn btn-primary">Upload another product</a>
+                    <a href="{{ route('products.create') }}" class="btn my_account_btn">Upload another product</a>
                 </div>
             @endif
             
@@ -18,14 +18,15 @@
                     <div class="card p-5">
                         <p class="mb-3"> You dont have any product to show</p>
                         <p>
-                            <a href="{{ route('products.create') }}" class="btn btn-primary">Upload product</a>
+                            <a href="{{ route('products.create') }}" class="btn my_account_btn">Upload product</a>
                         </p>
                     </div>
                 </div>
             @endif
 
             <div class="col-sm-6 my-3">
-                <a href="{{ route('product.export.excel') }}" class="btn btn-warning">Export product to excel</a>
+                {{-- class="btn btn-warning" --}}
+                <a href="{{ route('product.export.excel') }}" class="btn my_account_btn dashboard-btn">Export product to excel</a>
             </div>
             <div class="col-sm-6 my-3">
                 <form action="{{ route('product.import.excel') }}" enctype="multipart/form-data" method="post">
@@ -36,7 +37,7 @@
                         <input type="file" id="choose_excel" name="excel_file" class="form-control"
                                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
                     </label>
-                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <button class="btn my_account_btn" type="submit">Submit</button>
                 </form>
             </div>
 

@@ -32,7 +32,7 @@
                     @endif
                 </div>
 
-                <button type="submit" class="btn btn-primary">Search</button>
+                <button type="submit" class="btn my_account_btn dashboard-btn">Search</button>
             </div>
             @if ($errors->has('search_flower'))
                 <span class="invalid-feedback my-3" role="alert">

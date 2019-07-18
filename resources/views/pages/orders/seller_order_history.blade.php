@@ -38,9 +38,9 @@
                             @endif
                         </td>
                         <td><a href="{{ route('seller_dashboard.order.view', ['order' => $order->id]) }}"
-                               class="btn btn-primary">view</a>
+                               class="btn my_account_btn dashboard-btn">view</a>
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#po_{{ $order->id }}">
+                            <button type="button" class="btn my_account_btn dashboard-btn" data-toggle="modal" data-target="#po_{{ $order->id }}">
                                 edit
                             </button>
 
@@ -60,7 +60,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn my_account_btn dashboard-btn" data-dismiss="modal">Close</button>
                                         </div>
                                     </div>
                                 </div>

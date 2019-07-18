@@ -40,9 +40,9 @@
                             <td>{{ $invoice->outstanding }}</td>
                             <td>{{ \Carbon\Carbon::parse($invoice->created_at)->diffInDays(\Carbon\Carbon::today()) + 1 }}</td>
                             <td><a href="{{ route('view.html.oipdf', ['invoice' => $invoice->id]) }}"
-                                   class="btn btn-link">View</a></td>
+                                   class="btn my_account_btn dashboard-btn">View</a></td>
                             <td><a href="{{ route('pdf.invoice.outstanding', ['invoice' => $invoice->id]) }}"
-                                   class="btn btn-link">Download</a></td>
+                                   class="btn my_account_btn dashboard-btn">Download</a></td>
                         </tr>
                         @endforeach
                     </tbody>

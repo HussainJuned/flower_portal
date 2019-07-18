@@ -32,7 +32,7 @@
                         @endif
                     </div>--}}
 
-                    <button type="submit" class="btn btn-primary">Search</button>
+                    <button type="submit" class="btn my_account_btn">Search</button>
                 </form>
                 <form action="{{ route('search.seller') }}" method="get" class="my-5">
                     <div class="form-group mb-30">
@@ -46,7 +46,7 @@
                         </span>
                         @endif
                     </div>
-                    <button type="submit" class="btn btn-primary">Search</button>
+                    <button type="submit" class="btn my_account_btn">Search</button>
                 </form>
             </div>
         </div>

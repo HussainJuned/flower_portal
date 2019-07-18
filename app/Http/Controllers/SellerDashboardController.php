@@ -97,6 +97,27 @@ class SellerDashboardController extends Controller
         return redirect()->back()->with('message', 'Order Status Updated Successfully');
     }
 
+    public function updateToPickUp(Order $order)
+    {
+        if (auth()->id() === $order->seller_user_id) {
+            $order->status = 6;
+            $order->save();
+
+            try {
+                Mail::to($order->buyer->preferred_communication->email_shipment)
+                    ->send(new OrderStatusUpdateMail($order, 'Ready to pickup'));
+            } catch (Exception $e) {
+                return back()->withInput()->with('error', $e);
+            }
+
+        } else {
+            return redirect()->back()->withErrors('Order Status Update unsuccessful');
+        }
+
+        return redirect()->back()->with('message', 'Order Status Updated Successfully');
+    }
+
+
 
 
     public function viewOrder(Order $order)

@@ -392,7 +392,7 @@
                     </div>
                 </div>
                 <textarea name="product_photo" id="product_photo" cols="30" rows="100" hidden></textarea>
-                <button type="submit" class="btn j_btn">Submit</button>
+                <button type="submit" class="btn my_account_btn p-0">Submit</button>
             </form>
         </main>
     </div>
@@ -417,7 +417,7 @@
                 </div>
                 <div class="modal-footer">
 {{--                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--}}
-                    <button type="button" id="cropImageBtn" class="btn btn-primary">Crop</button>
+                    <button type="button" id="cropImageBtn" class="btn my_account_btn dashboard-btn">Crop</button>
                 </div>
             </div>
         </div>

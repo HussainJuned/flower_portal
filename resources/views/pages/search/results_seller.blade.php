@@ -11,7 +11,7 @@
                 <input type="text" class="px-3 mx-3{{ $errors->has('search_seller') ? ' is-invalid' : '' }}"
                        value="{{ $keyword }}"
                        id="search_seller" name="search_seller" placeholder="e.g. anderson">
-                <button type="submit" class="btn btn-primary">Search</button>
+                <button type="submit" class="btn my_account_btn dashboard-btn">Search</button>
             </div>
             @if ($errors->has('search_seller'))
                 <span class="invalid-feedback my-3" role="alert">

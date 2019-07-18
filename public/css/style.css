@@ -2022,3 +2022,7 @@ border-radius: 0 20px 20px 0;
 .quantity.buttons_added .plus:focus {
  outline: none; }
 
+.dashboard-btn {
+    width: auto !important;
+    padding: 0 20px !important;
+}

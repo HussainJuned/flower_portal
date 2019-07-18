@@ -25,12 +25,12 @@
             @endif
 
             <p>
-                <a href="{{ route('products.show', ['product' => $product->id]) }}" class="btn btn-primary">View Full Details</a>
+                <a href="{{ route('products.show', ['product' => $product->id]) }}" class="btn my_account_btn p-0">View Full Details</a>
             </p>
             @auth
                 @if (auth()->user()->products->contains('id', $product->id))
                 <p>
-                    <a href="{{ route('products.edit', ['product' => $product->id]) }}" class="btn btn-primary">Modify Product</a>
+                    <a href="{{ route('products.edit', ['product' => $product->id]) }}" class="btn my_account_btn">Modify Product</a>
                 </p>
                 @else
                     <p>
@@ -65,7 +65,7 @@
                             </span>
                             @endif
                         </div>
-                        <button type="submit" class="btn btn-primary">Order</button>
+                        <button type="submit" class="btn my_account_btn dashboard-btn">Order</button>
                     </form>
                     </p>
                 @endif
@@ -102,7 +102,7 @@
                             </span>
                     @endif
                 </div>
-                <button type="submit" class="btn btn-primary">Order</button>
+                <button type="submit" class="btn my_account_btn dashboard-btn">Order</button>
                 </form>
                 </p>
             @endauth

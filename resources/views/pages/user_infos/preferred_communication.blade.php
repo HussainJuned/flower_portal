@@ -115,7 +115,7 @@
                                 </table>
                             </div>
                             <div class="my-5 text-center">
-                                <input type="submit" class="btn btn-primary" value="Save">
+                                <input type="submit" class="btn my_account_btn " value="Save">
                             </div>
                         </div>
                     </div>

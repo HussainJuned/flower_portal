@@ -24,7 +24,7 @@
       		    <input type="checkbox" class="form-check-input" id="exampleCheck1">
       		    <label class="form-check-label" for="exampleCheck1">I agree to the terms and conditions</label>
       		  </div>
-      		  <button type="submit" class="btn j_btn">Submit</button>
+      		  <button type="submit" class="btn my_account_btn dashboard-btn">Submit</button>
       	</form>
       </main>
   </div>
