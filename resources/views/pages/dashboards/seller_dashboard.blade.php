@@ -13,13 +13,13 @@
                     <thead>
                     <tr>
                         <td scope="col">Date</td>
-                        <td scope="col">Status</td>
                         <td scope="col">Buyer</td>
-{{--                        <td scope="col">Quantity</td>--}}
-{{--                        <td scope="col">Unit Price</td>--}}
-                        <td scope="col">PO Name</td>
-                        <td scope="col">Total Price</td>
-{{--                        <td scope="col">Product Review</td>--}}
+                         <td scope="col">PO Name</td>
+                        <td scope="col">Quantity</td>
+                        <td scope="col">Unit Price</td>
+                        <td scope="col">Total</td>
+                        <td scope="col">Status</td>
+                        <td scope="col">Product Review</td>
                         <td scope="col">Action</td>
                     </tr>
                     </thead>
@@ -27,18 +27,31 @@
                     @foreach ($upcoming_orders as $order)
                         <tr scope="row">
                             <td>{{ $order->order_date }}</td>
-                            <td>{{ $order->statusToString() }}</td>
+                           
                             <td><a href="{{ route('userinfos.show', ['userinfo' => $order->buyer->id]) }}">{{ $order->buyer->name }}</a></td>
-{{--                            <td>{{ $order->quantity }}</td>--}}
-{{--                            <td>{{ $order->unit_price }}</td>--}}
                             <td>{{ $order->purchase_order_name }}</td>
+                            <td>
+                                @php 
+                                    $qty = json_decode($order->orderProducts, true);
+                                    echo $qty[0]['quantity'];
+                                @endphp
+                            </td>
+                            
+                            <td>
+                             @php 
+                                $qty = json_decode($order->orderProducts, true);
+                                echo $qty[0]['unit_price'];
+                            @endphp
+                            </td>
+                            
                             <td>${{ $order->order_total_price }}</td>
-                            {{--<td>@if ($order->productReview)
+                             <td>{{ $order->statusToString() }}</td>
+                            <td>@if ($order->productReview)
                                     {{ $order->productReview->quality }} / 5
                                 @else
                                     n/a
                                 @endif
-                            </td>--}}
+                            </td>
                             <td><a href="{{ route('seller_dashboard.order.view', ['order' => $order->id]) }}"
                                    class="btn btn-primary">view</a>
                                 <!-- Button trigger modal -->

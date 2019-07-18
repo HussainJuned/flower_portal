@@ -23,7 +23,8 @@
                         <th>Paid</th>
                         <th>Outstanding</th>
                         <th>Age of Invoice</th>
-                        <th>pdf</th>
+                        <th>View</th>
+                        <th>PDF</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -38,11 +39,14 @@
                             <td>{{ $invoice->paid }}</td>
                             <td>{{ $invoice->outstanding }}</td>
                             <td>{{ \Carbon\Carbon::parse($invoice->created_at)->diffInDays(\Carbon\Carbon::today()) + 1 }}</td>
+                            <td><a href="{{ route('view.html.oipdf', ['invoice' => $invoice->id]) }}"
+                                   class="btn btn-link">View</a></td>
                             <td><a href="{{ route('pdf.invoice.outstanding', ['invoice' => $invoice->id]) }}"
-                                   class="btn btn-link">download</a></td>
+                                   class="btn btn-link">Download</a></td>
                         </tr>
                         @endforeach
                     </tbody>
+                    
                 </table>
             </div>
         </div>

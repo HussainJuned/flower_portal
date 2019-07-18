@@ -138,8 +138,7 @@ class OrderController extends Controller
         $products = [];
         $orders = array(array());
         $q = $request->quantity;
-
-
+ 
         if ( $request->has('product_id') )
         {
             foreach ($request['product_id'] as $index => $prouct_id) {

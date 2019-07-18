@@ -102,7 +102,7 @@ class SearchController extends Controller
         $product = Product::query();
 
 //        $product = $product->where('name', 'like' , '%' .$request->keywords . '%')
-            /*->orWhere('description', 'like' , '%' .$request->keywords . '%')*/;
+            /*->orWhere('description', 'like' , '%' .$request->keywords . '%');*/
         $product = $product->name($request->keywords ? $request->keywords : '');
 
         if ($request->has('delivery_date')) {

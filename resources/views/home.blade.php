@@ -12,8 +12,8 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        You are logged in as {{ Auth::user()->name }}!
-                            <a href="{{ route('userinfos.edit', ['userinfo' => auth()->user()->userinfo->id]) }}"
+                         You are logged in as {{ Auth::user()->name }}!
+                            <a href="{{ route('userinfos.edit', ['userinfo' => auth()->user()->userinfo]) }}"
                             class="btn btn-link">Manage My Account</a>
                         <div class="my-5">
                             <nav>

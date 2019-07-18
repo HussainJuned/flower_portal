@@ -5,7 +5,7 @@
         <div class="my-3">
             <form action="{{ route('seller_dashboard.order.updateToAccepted', ['order' => $order->id]) }}" method="post">
                 @csrf
-                <button type="submit" class="btn btn-primary">Accept Order</button>
+                <button type="submit" class="btn btn-primary">Order is Confirmed</button>
             </form>
         </div>
     @endif
@@ -19,14 +19,14 @@
         </div>
     @endif
 
-    @if (auth()->id() === $order->seller_user_id)
+{{--     @if (auth()->id() === $order->seller_user_id)
         <div class="my-3">
             <form action="{{ route('seller_dashboard.order.updateToDelivered', ['order' => $order->id]) }}" method="post">
                 @csrf
                 <button type="submit" class="btn btn-primary">Order is Delivered</button>
             </form>
         </div>
-    @endif
+    @endif --}}
 
     @if (auth()->id() === $order->seller_user_id)
 

@@ -902,28 +902,29 @@
             $("#category option:selected").attr("selected", false);
 
             var theValue = el_name.val().toLowerCase().split(" ");
-            // var name = el_name.val().split(" ");
-            // console.log(theValue);
+
+            //var name = el_name.val().split(" ");
+            //console.log(theValue);
 
             let shouldBreak = false;
 
             loop1:
                 for (let i = 0; i < theValue.length; i++) {
                     var contained = $('#category option:contains(' + theValue[i] + ')');
-                    if (contained.eq(0).val() != null) {
+                     if (contained.eq(0).val() != null) {
 
                         var ca = contained.eq(0).text().toLowerCase().split(' ');
-
+                         
                         loop2:
                             for (let j = 0; j < ca.length; j++) {
                                 if (ca[j] === theValue[i]) {
-                                    // console.log('found');
+                                      console.log('found');
                                     contained.eq(0).attr('selected', true);
                                     $("#category").select();
                                     break loop1;
                                 } else {
                                     // console.log('not full word');
-                                    // console.log('cv: ' + contained.eq(0).text());
+                                    //console.log('cv: ' + contained.eq(0).text());
                                     $('#category option[value="28"]').attr('selected', true);
                                     $("#category").select();
                                     console.log('not matched');
@@ -936,8 +937,9 @@
                         } */
 
                     } else {
-                        // console.log('not found');
-                        // $("#category option:selected").attr("selected", false);
+                          //console.log('not found');
+                          $('#category option[value="28"]').attr('selected', true)
+                          //$("#category option:selected").attr("selected", false);
                     }
                 }
 

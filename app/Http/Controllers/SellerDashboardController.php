@@ -27,7 +27,7 @@ class SellerDashboardController extends Controller
     {
         $user = auth()->user();
         $upcoming_orders = $user->upcomingOrdersSeller;
-        $past_orders = $user->pastOrdersSeller()->paginate(10);
+         $past_orders = $user->pastOrdersSeller()->paginate(10);
 
         return view('pages.dashboards.seller_dashboard', compact('upcoming_orders', 'past_orders'));
     }
