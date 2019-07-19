@@ -15,6 +15,9 @@
     @stack('css-lib')
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     @stack('css')
+    <script>
+      var tomorrow_date = '{{ \Carbon\Carbon::today()->addDays(1)->toDateString() }}';
+    </script>
 </head>
 <body>
 <div id="app">

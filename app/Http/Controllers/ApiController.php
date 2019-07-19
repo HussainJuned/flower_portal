@@ -27,7 +27,7 @@ class ApiController extends Controller
 
     public function getSessionOrderDate(Request $request)
     {
-
+        //return session()->get('order_date', '2019-07-18');
         return session()->get('order_date', Carbon::today()->toDateString());
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\OrderConfirmationMail;
 use App\Mail\OrderStatusUpdateMail;
+use App\Mail\OrderStatusUpdateMail_seller;
 use App\Order;
 use App\User;
 use Illuminate\Http\Request;
@@ -66,6 +67,13 @@ class SellerDashboardController extends Controller
             try {
                 Mail::to($order->buyer->preferred_communication->email_shipment)
                     ->send(new OrderStatusUpdateMail($order, 'shipped'));
+            } catch (Exception $e) {
+                return back()->withInput()->with('error', $e);
+            }
+
+            try {
+                Mail::to($order->seller->preferred_communication->email_shipment)
+                    ->send(new OrderStatusUpdateMail_seller($order, 'shipped'));
             } catch (Exception $e) {
                 return back()->withInput()->with('error', $e);
             }

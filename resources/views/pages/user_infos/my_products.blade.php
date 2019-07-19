@@ -10,9 +10,9 @@
                     <a href="{{ route('products.create') }}" class="btn my_account_btn">Upload another product</a>
                 </div>
             @endif
-            
+             
             @include('partials.errors_message')
-
+            
             @if(count($products) < 1)
                 <div class="col-sm-12 mb-3">
                     <div class="card p-5">
@@ -40,12 +40,23 @@
                     <button class="btn my_account_btn" type="submit">Submit</button>
                 </form>
             </div>
-
+{{-- 
             @foreach($products as $product)
                 <div class="col-sm-12 mb-3">
                     @include('partials.product_box')
                 </div>
-            @endforeach
+            @endforeach --}}
+
+                {{-- <div class="row">--}}
+            <div class="result_column_container">
+                <ul class="column fragment">
+                    @foreach($products as $product)
+                         @include('partials.product_box')
+                     @endforeach
+                </ul>
+            </div>
+            {{--</div>--}}
+
         </div>
     </div>
 @endsection

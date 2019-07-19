@@ -13,6 +13,14 @@
                             @method('PUT')
 
                             <h6 class="text-center py-3">Personal Information</h6>
+                                <div class="form-group mb-30 row">
+                                <label for="company_name" class="col-md-4 col-form-label text-md-right">Username</label>
+                                <div class="col-md-6">
+                                    <input disabled="" class="form-control"
+                                           value="{{ Auth::user()->name }}">
+                                    </div>
+                            </div>
+
                             <div class="form-group mb-30 row">
                                 <label for="company_name" class="col-md-4 col-form-label text-md-right">Company
                                     Name
@@ -272,6 +280,7 @@
                         </span>
                                     @endif</div>
                             </div>
+                            
                             <div class="form-group mb-30 row">
                                 <label for="fax" class="col-md-4 col-form-label text-md-right">Fax (optional)</label>
                                 <div class="col-md-6">
@@ -287,9 +296,10 @@
                                     @endif</div>
                             </div>
 
-                            <div class="form-group mb-30">
-                                <label for="payment_type">If you are a seller. Preferred Payment type</label>
-                                <select class="form-control" id="payment_type" name="payment_type" required>
+                            <div class="form-group mb-30 row">
+                                <label for="fax" class="col-md-4 col-form-label text-md-right">If you are a seller.<br> Preferred Payment type</label>
+                                <div class="col-md-6">
+                                  <select class="form-control" id="payment_type" name="payment_type" required>
                                     <option value="online"
                                             @if ($userinfo->payment_type === 'online')
                                             selected
@@ -302,9 +312,10 @@
                                         @endif
                                     >Invoice
                                     </option>
-                                </select>
+                                </select>  
+                                </div>
                             </div>
-
+ 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     {{-- class="btn j_btn" --}}

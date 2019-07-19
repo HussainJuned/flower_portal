@@ -69,11 +69,11 @@
                                    class="dropdown-item">
                                     Upload Product
                                 </a>
-                                <a href="{{ route('userinfos.edit', ['userinfo' => auth()->id()]) }}"
+                                <a href="{{ route('userinfos.edit', ['userinfo' => Auth::user()->userinfo->id]) }}"
                                    class="dropdown-item">
                                     My Details
                                 </a>
-
+ 
                                 <a href="{{ route('seller_dashboard.myProducts') }}"
                                    class="dropdown-item">
                                     My Product
@@ -152,18 +152,27 @@
                     </nav>
                 </div>
                 <div class="col-sm-6 text-right align-self-center">
+                    
                     <select name="select-date" id="select-date" class="custom-select" v-on:change="onDDChange($event)">
+
                         @if (session()->has('order_date'))
                             <option value="{{ session()->get('order_date') }}" selected>
                                 @if (\Carbon\Carbon::today()->toDateString() == session()->get('order_date'))
                                     Today
+                                    
                                     @else
+
                                     {{ \Carbon\Carbon::parse(session()->get('order_date'))->format('l') }}
                                 @endif
                                 - {{ session()->get('order_date') }}</option>
+                             
                         @endif
+
+                         <option value="{{ \Carbon\Carbon::today()->addDays(1)->toDateString() }}">Tomorrow</option>
+
                         <option value="{{ \Carbon\Carbon::today()->addDays(0)->toDateString() }}">Today</option>
-                        @for( $i=1; $i<14; $i++)
+                      
+                        @for( $i=2; $i<14; $i++)
                             <option value="{{ \Carbon\Carbon::today()->addDays($i)->toDateString() }}">{{ \Carbon\Carbon::today()->addDays($i)->format('l') }} - {{ \Carbon\Carbon::today()->addDays($i)->toDateString() }}</option>
                         @endfor
                     </select>

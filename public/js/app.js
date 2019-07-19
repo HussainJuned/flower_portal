@@ -4301,14 +4301,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     fetch: function fetch() {
       var _this = this;
-
+      var delivery_date_get = $('#select-date').val();
       // console.log(this.filter_length);
       $('#loader1').show();
       axios.get('/api/flower', {
         params: {
           keywords: this.keywords,
           sort_by: this.sort_by,
-          delivery_date: this.delivery_date,
+          delivery_date: delivery_date_get,
           filter_catg: this.filter_catg,
           filter_length: this.filter_length
         }

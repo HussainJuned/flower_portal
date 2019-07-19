@@ -20,13 +20,13 @@ class PdfController extends Controller
 
     public function generateOIpdf(BuyerInvoice $invoice) {
 
-//        view()->share('invoice',$invoice);
+//      view()->share('invoice',$invoice);
         $pdf = PDF::loadView('pdf.outstanding_invoice', compact('invoice'));
 
-        $pdf->setOption('enable-javascript', true);
-        $pdf->setOption('javascript-delay', 1000);
-//        $pdf->setOption('enable-smart-shrinking', true);
-        $pdf->setOption('no-stop-slow-scripts', true);
+        //$pdf->setOption('enable-javascript', true);
+       // $pdf->setOption('javascript-delay', 10);
+ //        $pdf->setOption('enable-smart-shrinking', true);
+        //$pdf->setOption('no-stop-slow-scripts', true);
 
         return $pdf->download('invoice-'. $invoice->id .'.pdf');
     }

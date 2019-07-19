@@ -37,12 +37,12 @@ class SearchController extends Controller
                     ->where('available_date_start', '<=', $a_date)
                     ->where('available_date_end', '>=', $a_date)
                     ->paginate(10);
-            } else {
-                $products = Product::where('name', 'LIKE', '%'.$keyword.'%')
-                    ->where('status',  '=', true)
-                    ->where('available_date_end', '>=', Carbon::now()->toDateString())
-                    ->paginate(10);
-            }
+                } else {
+                    $products = Product::where('name', 'LIKE', '%'.$keyword.'%')
+                        ->where('status',  '=', true)
+                        ->where('available_date_end', '>=', Carbon::now()->toDateString())
+                        ->paginate(10);
+                }
 
 
         } else {
