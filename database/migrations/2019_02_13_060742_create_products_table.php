@@ -26,6 +26,7 @@ class CreateProductsTable extends Migration
             $table->decimal('price', 10, 2);
             $table->string('pack');
             $table->string('height');
+            $table->string('weight')->nullable();
             $table->string('origin');
             $table->string('colour');
             $table->string('category');

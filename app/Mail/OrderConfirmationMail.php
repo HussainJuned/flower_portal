@@ -10,6 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class OrderConfirmationMail extends Mailable
 {
     public $order;
+    public $type;
     use Queueable, SerializesModels;
 
     /**
@@ -17,9 +18,10 @@ class OrderConfirmationMail extends Mailable
      *
      * @param $order
      */
-    public function __construct($order)
+    public function __construct($order,$type)
     {
         $this->order = $order;
+        $this->type = $type;
     }
 
     /**

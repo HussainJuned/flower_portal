@@ -1,7 +1,6 @@
 @extends('layouts.master')
 @section('title', 'Flower Search Results')
 
-
 @section('content')
     <div class="container">
         <h2 class="my-3">Search Results: total
@@ -10,7 +9,6 @@
             @else
                 0
             @endif
-
 
              product found</h2>
         <form action="{{ route('search.flower') }}" method="get" class="my-3">

@@ -1,7 +1,6 @@
 @extends('layouts.master')
 @section('title', 'Product Info')
 
-
 @section('content')
 
     <div class="container">
@@ -39,7 +38,7 @@
 
                         <div class="grower">
                             <span class="float-left" >Stem in Bunch: {{ $product->number_of_stem }}</span>
-                            <span class="float-right prod-price" >${{ $product->price }}</span>
+                            <span class="float-right prod-price" id="total_price_order" >${{ $product->price }}</span>
                             <br>
 
                              <form action="{{ route('order.store', ['product' => $product->id]) }}" method="post">
@@ -47,7 +46,8 @@
                         <div class="form-group my-3">
                             <div class="quantity buttons_added">
                                 <input type="button" value="-" class="minus"><input type="number" min="{{ $product->number_of_stem }}" max="1000" step="{{ $product->number_of_stem }}"
-                                   id="quantity" name="quantity" value="{{ $product->number_of_stem }}" title="Qty" class="input-text qty text {{ $errors->has('quantity') ? ' is-invalid' : '' }}" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+                                   id="quantity" name="quantity" value="{{ $product->number_of_stem }}" title="Qty" class="input-text qty text {{ $errors->has('quantity') ? ' is-invalid' : '' }}" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus"> 
+
                             </div>
                             @if ($errors->has('quantity'))
                                 <span class="invalid-feedback" role="alert">
@@ -60,7 +60,6 @@
                             <button type="button" class="btn my_account_btn dashboard-btn" disabled>Not Available</button>
                         @endif
                         </div>
-                        
                         
                     </form>
                             
@@ -185,3 +184,15 @@
     </div>
 
 @endsection
+
+@push('footer-js')
+<script>
+ 
+ $('#quantity').on('change paste keyup',function(){
+    var qty = $(this).val();
+    $('#total_price_order').html('');
+    $('#total_price_order').text('$'+qty*{{ $product['price'] }});
+ });
+    
+</script>
+@endpush

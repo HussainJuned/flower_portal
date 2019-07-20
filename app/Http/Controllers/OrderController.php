@@ -50,6 +50,7 @@ class OrderController extends Controller
      */
     public function store(Request $request, Product $product)
     {
+        //dd($request->all());
         if (auth()->id() == $product->user->id) {
             return redirect()
                 ->back()
@@ -136,6 +137,7 @@ class OrderController extends Controller
         }*/
 
         $products = [];
+        $less_stock = [];
         $orders = array(array());
         $q = $request->quantity;
  
@@ -146,10 +148,11 @@ class OrderController extends Controller
 
                 $product->quantity = $q[$index];
                 $products[] = $product;
+                $less_stock[] = ['prod_id' => $prouct_id , 'qty' => $q[$index]];
             }
         }
-
-//        return $products;
+      
+ //        return $products;
 
 
         usort($products, array($this, 'cmp'));
@@ -219,7 +222,6 @@ class OrderController extends Controller
 
             $order->order_total_price = $otp;
             $order->update();
-
             $invoice = new BuyerInvoice;
             $invoice->user_id = $order->buyer_user_id;
             $invoice->order_id = $order->id;
@@ -231,8 +233,6 @@ class OrderController extends Controller
             $invoice->age_of_invoice = 1;
             $invoice->save();
         }
-
-
 
         $user = auth()->user();
         $upcoming_orders = $user->upcomingOrdersBuyer;
@@ -251,15 +251,22 @@ class OrderController extends Controller
         } catch (Exception $e) {
             return back()->withInput()->with('error', $e);
         }
+ 
+        foreach ($less_stock as $key => $less_qty) {
+            
+            $previous_stock = Product::where('id',$less_qty['prod_id'])
+            ->first();
 
-
-
+            Product::where('id',$less_qty['prod_id'])
+            ->update(['stock'=> $previous_stock->stock-$less_qty['qty']]);
+        }
+ 
         return redirect()->route('buyer_dashboard.buyer_dashboard')
             ->with('upcoming_orders' , $upcoming_orders)
             ->with('past_orders' , $past_orders);
 
     }
-
+ 
     public function buyerOrderDetais(Request $request)
     {
 

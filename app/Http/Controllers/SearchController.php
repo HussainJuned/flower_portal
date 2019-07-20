@@ -29,8 +29,8 @@ class SearchController extends Controller
             $a_date = trim($a_date);
 
             if($a_date != '') {
-//                $a_date = Carbon::createFromFormat('Y-m-d', $a_date);
-//                $a_date = $a_date->Carbon::toDateString();
+            //  $a_date = Carbon::createFromFormat('Y-m-d', $a_date);
+            //  $a_date = $a_date->Carbon::toDateString();
 
                 $products = Product::where('name', 'LIKE', '%'.$keyword.'%')
                     ->where('status',  '=', true)
@@ -55,9 +55,17 @@ class SearchController extends Controller
 
 //        $products->paginate(10);
 
-
         $categories = Category::all();
-        return view('pages.search.new_search', compact('products', 'keyword', 'a_date', 'categories'));
+
+        $origns = $products = Product::select('origin')
+        ->whereNotNull('origin')
+        ->groupBy('origin')->get();
+
+        $weights = $products = Product::select('weight')
+        ->whereNotNull('weight')
+        ->groupBy('weight')->get();
+
+        return view('pages.search.new_search', compact('products', 'keyword', 'a_date', 'categories','origns','weights'));
     }
 
     public function searchSeller(Request $request)
@@ -113,8 +121,25 @@ class SearchController extends Controller
 
         if($request->has('filter_catg')) {
             $product = $product->whereIn('category', $request['filter_catg']);
-//            $product = $product->filterByCategory($request['filter_catg']);
         }
+
+        if($request->has('filter_origin')) {
+            $product = $product->whereIn('origin', $request['filter_origin']);
+        }
+
+        if($request->has('filter_colour')) {
+            $product = $product->whereIn('colour', $request['filter_colour']);
+        }
+
+        if($request->has('feature_filter')) {
+            $product = $product->whereIn('feature', $request['feature_filter']);
+        }
+
+        if($request->has('weight_check')) {
+            $product = $product->whereIn('weight', $request['weight_check']);
+        }        
+
+
         if($request->has('filter_length')) {
 
             $lengths = $request['filter_length'];

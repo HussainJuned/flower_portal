@@ -11315,3 +11315,8 @@ background: #ccc;
   --fontThird: "Ubuntu", sans-serif;
 }
 
+.filter-content-height li ul li {
+	padding-top: 5px !important;
+	padding-bottom: 5px !important;
+} 
+

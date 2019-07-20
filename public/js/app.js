@@ -4258,6 +4258,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+
   name: "flower-result-list-component",
   data: function data() {
     return {
@@ -4270,11 +4271,11 @@ __webpack_require__.r(__webpack_exports__);
       this.fetch();
     },
     sort_by: function sort_by(after, before) {
-      // console.log(this.sort_by);
+       //console.log(this.sort_by);
       this.fetch();
     },
     delivery_date: function delivery_date(after, before) {
-      // console.log(this.delivery_date);
+      //  console.log(this.delivery_date);
       this.fetch();
     },
     filter_catg: function filter_catg(after, before) {
@@ -4282,9 +4283,27 @@ __webpack_require__.r(__webpack_exports__);
       this.fetch();
     },
     filter_length: function filter_length(after, before) {
+      //console.log(this.filter_catg);
+      this.fetch();
+    },
+     filter_origin: function filter_origin(after, before) {
+       // console.log(this.filter_catg);
+      this.fetch();
+    },
+      filter_colour: function filter_colour(after, before) {
+      // console.log(this.filter_catg);
+      this.fetch();
+    },
+    feature_filter: function feature_filter(after, before) {
+      // console.log(this.filter_catg);
+      this.fetch();
+    },
+    weight_check: function weight_check(after, before) {
       // console.log(this.filter_catg);
       this.fetch();
     }
+
+
   },
   created: function created() {
     this.getSession();
@@ -4310,7 +4329,11 @@ __webpack_require__.r(__webpack_exports__);
           sort_by: this.sort_by,
           delivery_date: delivery_date_get,
           filter_catg: this.filter_catg,
-          filter_length: this.filter_length
+          filter_length: this.filter_length,
+          filter_origin: this.filter_origin,
+          filter_colour: this.filter_colour,
+          feature_filter: this.feature_filter,
+          weight_check: this.weight_check
         }
       }).then(function (response) {
         $('#loader1').hide();
@@ -4318,6 +4341,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.page_data = response.data; // console.log('np url: ' + this.page_data.next_page_url);
 
         $('.result_count').text(response.data.total);
+
       }).catch(function (error) {
         $('#loader1').hide();
       });
@@ -4361,6 +4385,7 @@ __webpack_require__.r(__webpack_exports__);
 
           if (_this3.page_data.next_page_url) {
             $('#loader2').show();
+
             loading = true;
             axios.get(_this3.page_data.next_page_url).then(function (response) {
               Array.prototype.push.apply(_this3.products, response.data.data); // this.products = response.data.data;
@@ -4387,7 +4412,7 @@ __webpack_require__.r(__webpack_exports__);
       this.scroll();
     }
   },
-  props: ['keywords', 'sort_by', 'cart_products', 'delivery_date', 'filter_catg', 'filter_length'],
+  props: ['keywords', 'sort_by', 'cart_products', 'delivery_date', 'filter_catg', 'filter_length','filter_origin','filter_colour','feature_filter','weight_check'],
   computed: {
     resultCount: function resultCount() {
       return this.products.total;
@@ -59590,7 +59615,11 @@ var app = new Vue({
     'delivery_date': delivery_date_o,
     'cart_products': [],
     'filter_catg': [],
-    'filter_length': []
+    'filter_length': [],
+    'filter_origin': [],
+    'filter_colour': [],
+    'feature_filter': [],
+    'weight_check':[]
   },
   methods: {
     sortBy: function sortBy(sort_by) {
@@ -59646,12 +59675,44 @@ var app = new Vue({
         this.filter_catg.push(catg_id);
       }
     },
+    orignFilter: function orignFilter(origin) {
+      if (this.filter_origin.includes(origin)) {
+        var index = this.filter_origin.indexOf(origin);
+        if (index !== -1) this.filter_origin.splice(index, 1); // this.filter_origin.pop($origin);
+      } else {
+        this.filter_origin.push(origin);
+      }
+    },
     lengthFilter: function lengthFilter(catg_id) {
       if (this.filter_length.includes(catg_id)) {
         var index = this.filter_length.indexOf(catg_id);
-        if (index !== -1) this.filter_length.splice(index, 1); // this.filter_catg.pop($catg_id);
+        if (index !== -1) this.filter_length.splice(index, 1); // this.filter_length.pop($catg_id);
       } else {
         this.filter_length.push(catg_id);
+      }
+    },
+    colourFilter: function colourFilter(colour) {
+      if (this.filter_colour.includes(colour)) {
+        var index = this.filter_colour.indexOf(colour);
+        if (index !== -1) this.filter_colour.splice(index, 1); // this.filter_colour.pop($colour);
+      } else {
+        this.filter_colour.push(colour);
+      }
+    },
+    featureFilter: function featureFilter(feat) {
+      if (this.feature_filter.includes(feat)) {
+        var index = this.feature_filter.indexOf(feat);
+        if (index !== -1) this.feature_filter.splice(index, 1); // this.feature_filter.pop($feat);
+      } else {
+        this.feature_filter.push(feat);
+      }
+    },
+    weightCheck: function weightCheck(weight) {
+      if (this.weight_check.includes(weight)) {
+        var index = this.weight_check.indexOf(weight);
+        if (index !== -1) this.weight_check.splice(index, 1); // this.weight_check.pop($weight);
+      } else {
+        this.weight_check.push(weight);
       }
     }
   }

@@ -10,6 +10,9 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 {{--    <link href="https://fonts.googleapis.com/css?family=Arimo:400,700|Varela+Round" rel="stylesheet">--}}
     <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel="stylesheet">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css" rel="stylesheet" >
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @stack('css-lib')

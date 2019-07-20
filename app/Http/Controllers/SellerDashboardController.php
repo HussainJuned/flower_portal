@@ -49,7 +49,14 @@ class SellerDashboardController extends Controller
 
         try {
             Mail::to($order->buyer->preferred_communication->email_order_confirmation)
-                ->send(new OrderConfirmationMail($order));
+                ->send(new OrderConfirmationMail($order,'buyer'));
+        } catch (Exception $e) {
+            return back()->withInput()->with('error', $e);
+        }
+
+        try {
+            Mail::to($order->seller->preferred_communication->email_order_confirmation)
+                ->send(new OrderConfirmationMail($order,'seller'));
         } catch (Exception $e) {
             return back()->withInput()->with('error', $e);
         }

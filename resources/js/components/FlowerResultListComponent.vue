@@ -45,6 +45,7 @@
 
 <script>
     export default {
+    
         name: "flower-result-list-component",
         data() {
             return {
@@ -70,9 +71,15 @@
             },
 
             filter_length(after, before) {
-                // console.log(this.filter_catg);
+                console.log(this.filter_catg);
                 this.fetch();
             },
+
+            filter_origin(after, before) {
+                console.log(this.filter_origin);
+                this.fetch();
+            },
+
 
 
         },
