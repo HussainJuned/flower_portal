@@ -230,7 +230,7 @@
                                     <button class="plus-btn" type="button" name="button" >
                                         <img src="{{ asset('images/icons/plus.svg') }}" alt="+"/>
                                     </button>
-                                    <input type="text" name="quantity[]" value="1" min="1" class="q" v-bind:max="cart_product.stock">
+                                    <input type="text" name="quantity[]" v-bind:value="cart_product.qty" min="1" class="q" v-bind:max="cart_product.stock">
                                     <button class="minus-btn" type="button" name="button">
                                         <img src="{{ asset('images/icons/minus.svg') }}" alt="-"/>
                                     </button>
@@ -245,7 +245,11 @@
 
                                 <div class="total-price">$ <span class="price_value" v-bind:data-price="cart_product.price">@{{ cart_product.price }}</span> </div>
                                 <div class="sold-type"> <span class="s_type_value" v-bind:data-price="cart_product.pack">@{{ cart_product.pack }}</span> </div>
-                                <div class="total-stem"> <span class="stem_value" v-bind:data-price="cart_product.number_of_stem">@{{ cart_product.number_of_stem }}</span> </div>
+                                <div class="total-stem"> <span class="stem_value" v-bind:data-price="cart_product.number_of_stem">@{{ cart_product.number_of_stem*cart_product.qty }}</span>
+                                
+                                <span id="num_of_stem_value" style="display: none;">@{{ cart_product.number_of_stem }}</span>
+                                 
+                                 </div>
                             </section>
                             </template>
                             <input type="text" name="delivery_date" v-bind:value="delivery_date" hidden>
@@ -275,7 +279,6 @@
 
         $(document).ready(function () {
 
-
             $(document).on('click', '.minus-btn', function(e) {
                 e.preventDefault();
                 var $this = $(this);
@@ -283,8 +286,11 @@
 
                 var $price = $this.closest('section').find('.price_value');
                 var price_value = parseFloat($price.attr('data-price'));
-
                 var value = parseInt($input.val());
+                
+                var total_stem  = $this.closest('section').find('#num_of_stem_value').text();
+
+                var stem_value  = $this.closest('section').find('.stem_value');
 
 
                 if (value > 1) {
@@ -294,6 +300,8 @@
                 }
 
                 $input.val(value);
+ 
+                stem_value.text(total_stem*value);
 
                 var cal_total = (value * price_value);
                 cal_total = cal_total.toFixed(2);
@@ -309,6 +317,10 @@
 
                 var $price = $this.closest('section').find('.price_value');
                 var price_value = parseFloat($price.attr('data-price'));
+ 
+                var total_stem  = $this.closest('section').find('#num_of_stem_value').text();
+
+                 var stem_value  = $this.closest('section').find('.stem_value');
 
                 var value = parseInt($input.val());
                 var max = parseInt($input.attr('max'));
@@ -320,6 +332,9 @@
                 }
 
                 $input.val(value);
+
+                stem_value.text(total_stem*value);
+
                 var cal_total = (value * price_value);
                 cal_total = cal_total.toFixed(2);
                 $price.text(cal_total);

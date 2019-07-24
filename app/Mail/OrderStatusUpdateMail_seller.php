@@ -29,6 +29,6 @@ class OrderStatusUpdateMail_seller extends Mailable
      */
     public function build()
     {
-        return $this->from('mail@floweret.com')->markdown('email.order_status_update_seller');
+        return $this->from('notifications@floweret.ca')->markdown('email.order_status_update_seller');
     }
 }

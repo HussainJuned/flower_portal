@@ -7,7 +7,7 @@
         <div class="row">
             @if(session()->has('message'))
                 <div class="my-5 container">
-                    <a href="{{ route('products.create') }}" class="btn my_account_btn">Upload another product</a>
+                    <a href="{{ route('products.create') }}" class="btn my_account_btn" style="width: auto;">Upload another product</a>
                 </div>
             @endif
              
@@ -48,8 +48,8 @@
             @endforeach --}}
 
                 {{-- <div class="row">--}}
-            <div class="result_column_container">
-                <ul class="column fragment">
+            <div class="result_column_container" style="width: 100%;">
+                <ul class="column fragment" >
                     @foreach($products as $product)
                          @include('partials.product_box')
                      @endforeach

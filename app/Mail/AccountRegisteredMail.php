@@ -28,6 +28,6 @@ class AccountRegisteredMail extends Mailable
      */
     public function build()
     {
-        return $this->from('mail@floweret.com')->markdown('email.account_registered');
+        return $this->from('notifications@floweret.ca')->markdown('email.account_registered');
     }
 }

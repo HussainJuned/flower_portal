@@ -8,10 +8,10 @@
         <form action="{{ route('order.bulkStore') }}" id="card_order_form" method="post">
             @foreach($products as $index => $product)
                 <section class="item">
-                    {{--<div class="buttons">
+                    <div class="buttons">
                         <span class="delete-btn"></span>
                         <span class="like-btn"></span>
-                    </div>--}}
+                    </div>
 
                     <div class="image">
                         <img class="img-fluid" src="{{ asset($product->photo_url) }}" alt="product photo"/>
@@ -20,33 +20,29 @@
                     <div class="description">
                         <span>{{ $product->name }}</span>
                         <span>{{ $product->stock }} in stock</span>
-                        {{--                        <span>Delivery Date: </span>--}}
+                                                {{-- <span>Delivery Date: </span> --}}
                     </div>
 
                     <div class="quantity">
 
-                        {{--<button class="plus-btn" type="button" name="button" >
+                        <button class="plus-btn-new" type="button" name="button" >
                             <img src="{{ asset('images/icons/plus.svg') }}" alt="+"/>
-                        </button>--}}
-                        <input type="text" name="a_quantity[]" value="{{ $quantity[$index] }}" class="q" disabled>
-                        <input type="text" name="quantity[]" value="{{ $quantity[$index] }}" class="q" hidden>
+                        </button>
+                        <input type="text" name="a_quantity[]" value="{{ $quantity[$index] }}" class="q a_quantity" disabled max="{{ $product->stock }}">
+                        <input type="text" name="quantity[]" value="{{ $quantity[$index] }}" class="q a_quantity" hidden> 
                         <input type="text" name="product_id[]" value="{{ $product->id }}" hidden>
-                        {{--<button class="minus-btn" type="button" name="button">
+                        <button class="minus-btn-new" type="button" name="button">
                             <img src="{{ asset('images/icons/minus.svg') }}" alt="-"/>
-                        </button>--}}
-                        {{--<div class="delivery_date">
+                        </button>
+                        <div class="delivery_date">
                             <span>{{ $order_date[$index] }}</span>
                             <input type="text" name="order_date[]" value="{{ $order_date[$index] }}" class="q" hidden>
-                        </div>--}}
-
+                        </div>
                     </div>
-
-                    {{--<div>
-
-                    </div>--}}
-
-
-                    {{--            <div class="total-price">$ <span class="price_value" v-bind:data-price="$product.price">@{{ $product.price }}</span> </div>--}}
+                    <div>
+                    </div>
+ 
+                     <div class="total-price">$ <span class="price_value" {{-- v-bind:data-price="product.price" --}} data-price="{{ $product->price }}">{{ $product->price }}</span> </div>
                 </section>
             @endforeach
             @csrf
@@ -282,6 +278,56 @@
             }
 
         });
+
+          $(document).on('click', '.minus-btn-new', function(e) {
+                e.preventDefault();
+                var $this = $(this);
+                var $input = $this.closest('div').find('input.a_quantity');
+
+                var $price = $this.closest('section').find('.price_value');
+                var price_value = parseFloat($price.attr('data-price'));
+                 var value = parseInt($input.val());
+
+                if (value > 1) {
+                    value = value - 1;
+                } else {
+                    value = 1;
+                }
+
+                $input.val(value);
+
+                var cal_total = (value * price_value);
+                cal_total = cal_total.toFixed(2);
+                $price.text(cal_total);
+
+            });
+
+            $('.shopping-cart').on('click', '.plus-btn-new', function(e) {
+                e.preventDefault();
+
+                var $this = $(this);
+                var $input = $this.closest('div').find('input.a_quantity');
+
+                var $price = $this.closest('section').find('.price_value');
+                var price_value = parseFloat($price.attr('data-price'));
+
+                var value = parseInt($input.val());
+                var max = parseInt($input.attr('max'));
+
+                if (value < max) {
+                    value = value + 1;
+                } else {
+                    value =max;
+                }
+
+                $input.val(value);
+                var cal_total = (value * price_value);
+                cal_total = cal_total.toFixed(2);
+                $price.text(cal_total);
+            });
+
+ 
+
 
     </script>
 

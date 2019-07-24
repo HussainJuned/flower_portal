@@ -123,6 +123,7 @@ class OrderController extends Controller
 
     public function bulkStore(Request $request)
     {
+
 //        return $request;
         /*if($request->has('delivery_address_id')) {
             if ($request['delivery_address_id'] === 'new') {
@@ -135,8 +136,7 @@ class OrderController extends Controller
                 ->back()
                 ->withErrors(['order_error' => 'You can not buy your own product']);
         }*/
-
-        $products = [];
+         $products = [];
         $less_stock = [];
         $orders = array(array());
         $q = $request->quantity;
@@ -145,14 +145,12 @@ class OrderController extends Controller
         {
             foreach ($request['product_id'] as $index => $prouct_id) {
                 $product = Product::find($prouct_id);
-
-                $product->quantity = $q[$index];
+                 $product->quantity = $q[$index];
                 $products[] = $product;
                 $less_stock[] = ['prod_id' => $prouct_id , 'qty' => $q[$index]];
             }
         }
-      
- //        return $products;
+  //        return $products;
 
 
         usort($products, array($this, 'cmp'));

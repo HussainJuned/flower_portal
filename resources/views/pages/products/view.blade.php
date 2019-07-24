@@ -44,7 +44,7 @@
                              <form action="{{ route('order.store', ['product' => $product->id]) }}" method="post">
                         @csrf
                         <div class="form-group my-3">
-                            <div class="quantity buttons_added">
+                            <div class="quantity_details buttons_added">
                                 <input type="button" value="-" class="minus"><input type="number" min="{{ $product->number_of_stem }}" max="1000" step="{{ $product->number_of_stem }}"
                                    id="quantity" name="quantity" value="{{ $product->number_of_stem }}" title="Qty" class="input-text qty text {{ $errors->has('quantity') ? ' is-invalid' : '' }}" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus"> 
 
@@ -191,7 +191,10 @@
  $('#quantity').on('change paste keyup',function(){
     var qty = $(this).val();
     $('#total_price_order').html('');
-    $('#total_price_order').text('$'+qty*{{ $product['price'] }});
+    var p_rice = {{ number_format($product['price'],2) }};
+    var total = qty*p_rice;
+ 
+    $('#total_price_order').text('$'+total.toFixed(2));
  });
     
 </script>

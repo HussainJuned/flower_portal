@@ -1,5 +1,5 @@
 function wcqib_refresh_quantity_increments() {
-    jQuery("div.quantity:not(.buttons_added), td.quantity:not(.buttons_added)").each(function(a, b) {
+    jQuery("div.quantity_details:not(.buttons_added), td.quantity:not(.buttons_added)").each(function(a, b) {
         var c = jQuery(b);
         c.addClass("buttons_added"), c.children().first().before('<input type="button" value="-" class="minus" />'), c.children().last().after('<input type="button" value="+" class="plus" />')
     })
@@ -13,7 +13,7 @@ String.prototype.getDecimals || (String.prototype.getDecimals = function() {
 }), jQuery(document).on("updated_wc_div", function() {
     wcqib_refresh_quantity_increments()
 }), jQuery(document).on("click", ".plus, .minus", function() {
-    var a = jQuery(this).closest(".quantity").find(".qty"),
+    var a = jQuery(this).closest(".quantity_details").find(".qty"),
         b = parseFloat(a.val()),
         c = parseFloat(a.attr("max")),
         d = parseFloat(a.attr("min")),

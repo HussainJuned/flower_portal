@@ -1958,10 +1958,10 @@ figure.product_fig figcaption {
 }
 /* -- quantity box product info page -- */
 
-.quantity {
+.quantity_details {
  display: inline-block; }
 
-.quantity .input-text.qty {
+.quantity_details .input-text.qty {
  width: 35px;
  height: 41px;
  padding: 0 5px;
@@ -1971,27 +1971,27 @@ figure.product_fig figcaption {
     color: #fff;
 }
 
-.quantity.buttons_added {
+.quantity_details.buttons_added {
  text-align: left;
  position: relative;
  white-space: nowrap;
  vertical-align: top; }
 
-.quantity.buttons_added input {
+.quantity_details.buttons_added input {
  display: inline-block;
  margin: 0;
  vertical-align: top;
  box-shadow: none;
 }
 
-.quantity.buttons_added .minus{
+.quantity_details.buttons_added .minus{
 border-radius: 20px 0 0 20px;
 }
-.quantity.buttons_added .plus{
+.quantity_details.buttons_added .plus{
 border-radius: 0 20px 20px 0;
 }
-.quantity.buttons_added .minus,
-.quantity.buttons_added .plus {
+.quantity_details.buttons_added .minus,
+.quantity_details.buttons_added .plus {
  padding: 7px 10px 8px;
  height: 41px;
  background-color: #5e94f6;
@@ -2001,25 +2001,25 @@ border-radius: 0 20px 20px 0;
     
 }
 
-.quantity.buttons_added .minus {
+.quantity_details.buttons_added .minus {
  border-right: 0; }
 
-.quantity.buttons_added .plus {
+.quantity_details.buttons_added .plus {
  border-left: 0; }
 
-.quantity.buttons_added .minus:hover,
-.quantity.buttons_added .plus:hover {
+.quantity_details.buttons_added .minus:hover,
+.quantity_details.buttons_added .plus:hover {
  background: #fff;
  color:#5e94f6;  }
 
-.quantity input::-webkit-outer-spin-button,
-.quantity input::-webkit-inner-spin-button {
+.quantity_details input::-webkit-outer-spin-button,
+.quantity_details input::-webkit-inner-spin-button {
  -webkit-appearance: none;
  -moz-appearance: none;
  margin: 0; }
  
- .quantity.buttons_added .minus:focus,
-.quantity.buttons_added .plus:focus {
+ .quantity_details.buttons_added .minus:focus,
+.quantity_details.buttons_added .plus:focus {
  outline: none; }
 
 .dashboard-btn {

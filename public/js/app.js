@@ -4360,7 +4360,22 @@ __webpack_require__.r(__webpack_exports__);
       return "{{ route('products.show', ['product' => " + product_id + "]) }}";
     },
     addToCart: function addToCart(product) {
-      this.cart_products.push(product);
+  
+      var exists = _.findIndex(this.cart_products, ['id', product.id]);
+ 
+      if (exists == -1) {
+        var item = Vue.util.extend({'qty': 1}, product);
+        
+        this.cart_products.push(item);
+      } else {
+
+        var total_qty = this.cart_products[exists].qty++;
+        
+        //this.cart_products.number_of_stem = total_qty;
+      }
+   
+
+
       this.popup();
     },
     popup: function popup() {
