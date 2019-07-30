@@ -243,7 +243,7 @@
                                 </div>
 
 
-                                <div class="total-price">$ <span class="price_value" v-bind:data-price="cart_product.price">@{{ cart_product.price }}</span> </div>
+                                <div class="total-price">$ <span class="price_value" v-bind:data-price="cart_product.price">@{{ cart_product.price*cart_product.qty }}</span> </div>
                                 <div class="sold-type"> <span class="s_type_value" v-bind:data-price="cart_product.pack">@{{ cart_product.pack }}</span> </div>
                                 <div class="total-stem"> <span class="stem_value" v-bind:data-price="cart_product.number_of_stem">@{{ cart_product.number_of_stem*cart_product.qty }}</span>
                                 
