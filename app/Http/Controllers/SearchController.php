@@ -145,12 +145,13 @@ class SearchController extends Controller
             $lengths = $request['filter_length'];
             $l = array();
             foreach ($lengths as $length) {
-                for ($i=0; $i <= 10; $i++) {
+                for ($i=0; $i <= 9; $i++) {
                     array_push($l, $length+$i);
                 }
             }
+         
             $product = $product->whereIn('height', $l);
-//            $product = $product->whereBetween('height', [ $length[0], $length[0]+9 ]);
+            //$product = $product->whereBetween('height', [ $length[0], $length[0]+9 ]);
 //            $product = $product->whereBetween('height', [ $length, $length+9 ]);
         }
 
