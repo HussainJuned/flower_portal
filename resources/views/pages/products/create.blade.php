@@ -287,6 +287,19 @@
                         </span>
                     @endif
                 </div>
+
+                <div class="form-group mb-30">
+                    <label for="weight">Weight</label>
+                    <input required type="text" class="form-control{{ $errors->has('height') ? ' is-invalid' : '' }}"
+                           value="{{ old('height') }}"
+                           id="weight" name="weight" placeholder="e.g. 300g">
+                    @if ($errors->has('height'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('weight') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
                 <div class="form-group mb-30">
                     <label for="origin">Origin</label>
                     <input required type="text" class="form-control{{ $errors->has('origin') ? ' is-invalid' : '' }}"

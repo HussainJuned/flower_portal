@@ -69,6 +69,7 @@ class ProductController extends Controller
 //            'price' => 'required|numeric|min:0|max:99999999',
             'pack' => 'required|string|max:255',
             'height' => 'required|string|max:255',
+            'weight' => 'required|string|max:255',
             'origin' => 'required|string|max:255',
             'colour' => 'required|string|max:255',
             'category' => 'required|string|max:255',
@@ -99,6 +100,7 @@ class ProductController extends Controller
 
         $product->origin = $request['origin'];
         $product->height = $request['height'];
+        $product->weight = $request['weight'];
         $product->colour = $request['colour'];
         $product->category = $request['category'];
         $product->available_date_start = $request['available_date_start'];
@@ -225,6 +227,7 @@ class ProductController extends Controller
 //            'price' => 'required|numeric|min:0|max:99999999',
             'pack' => 'required|string|max:255',
             'height' => 'required|string|max:255',
+            'weight' => 'required|string|max:255',
             'origin' => 'required|string|max:255',
             'colour' => 'required|string|max:255',
             'category' => 'required|string|max:255',
@@ -264,6 +267,7 @@ class ProductController extends Controller
         $product->number_of_stem = $request['number_of_stem'];
         $product->pack = $request['pack'];
         $product->origin = $request['origin'];
+        $product->weight = $request['weight'];
         $product->height = $request['height'];
         $product->colour = $request['colour'];
         $c = Category::find($request['category']);
