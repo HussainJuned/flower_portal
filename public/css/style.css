@@ -1963,19 +1963,25 @@ figure.product_fig figcaption {
 
 .quantity_details .input-text.qty {
  width: 35px;
- height: 41px;
- padding: 0 5px;
+ height: 35px;
+ /* padding: 0 5px; */
  text-align: center;
  background-color: #5e94f6;
-    border: none;
-    color: #fff;
+ border: none;
+ color: #fff;
 }
 
 .quantity_details.buttons_added {
  text-align: left;
  position: relative;
  white-space: nowrap;
- vertical-align: top; }
+ vertical-align: top;
+ background: #5e94f6;
+ border-radius: 30px;
+ padding: 0 3px;
+ }
+
+.quantity_details.buttons_added {}
 
 .quantity_details.buttons_added input {
  display: inline-block;
@@ -1987,22 +1993,22 @@ figure.product_fig figcaption {
 .quantity_details.buttons_added .minus{
 border-radius: 20px 0 0 20px;
 }
-.quantity_details.buttons_added .plus{
-border-radius: 0 20px 20px 0;
-}
+.quantity_details.buttons_added .plus{border-radius: 0 20px 20px 0;}
 .quantity_details.buttons_added .minus,
 .quantity_details.buttons_added .plus {
- padding: 7px 10px 8px;
- height: 41px;
+ padding: 0 10px 0 10px;
+ height: 35px;
  background-color: #5e94f6;
-    border: none;
-    color: #fff;
+ border: none;
+ color: #fff;
  cursor:pointer;
-    
+ /* transition: background 400ms; */
 }
 
 .quantity_details.buttons_added .minus {
- border-right: 0; }
+ border-right: 0;
+ width: 30px;
+ }
 
 .quantity_details.buttons_added .plus {
  border-left: 0; }
@@ -2010,7 +2016,14 @@ border-radius: 0 20px 20px 0;
 .quantity_details.buttons_added .minus:hover,
 .quantity_details.buttons_added .plus:hover {
  background: #fff;
- color:#5e94f6;  }
+ color:#5e94f6;
+ border-radius: 50%;
+ height: 30px;
+ width: 30px;
+ margin-top: 3px;
+ line-height: 0;
+ /* margin-right: 0px; */
+ }
 
 .quantity_details input::-webkit-outer-spin-button,
 .quantity_details input::-webkit-inner-spin-button {

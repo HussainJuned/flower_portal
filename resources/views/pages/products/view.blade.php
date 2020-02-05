@@ -7,18 +7,18 @@
         {{-- <h2 class="mb-30 text-center mt-5">Product Info</h2> --}}
         <div class="row mb-3" id="product">
             <div class="col-sm-7 mb-3 text-center">
-                
+
                     <figure class="product_fig">
-                        <img class="w-100" src="{{ url('/') }}/{{ $product->photo_url }}"  
+                        <img class="w-100" src="{{ url('/') }}/{{ $product->photo_url }}"
                              id="{{$product->user->name}}-product-id-{{$product->id}}"
                              alt="Image Loading Failed"/>
                         {{-- <figcaption>View Profile</figcaption> --}}
                     </figure>
-                
+
             </div>
           {{--   <a href="{{ route('userinfos.show', ['userinfo' => $product->user->userinfo->id]) }}"></a> --}}
             <div class="col-sm-5 mb-3">
-                
+
                 <div class="mb-2 class-1" >
                     <span style="background: {{ $product->colour }}" class="rcs"></span>
                     <h5 class="mb-10 text-upper"   >
@@ -46,7 +46,7 @@
                         <div class="form-group my-3">
                             <div class="quantity_details buttons_added">
                                 <input type="button" value="-" class="minus"><input type="number" min="{{ $product->number_of_stem }}" max="1000" step="{{ $product->number_of_stem }}"
-                                   id="quantity" name="quantity" value="{{ $product->number_of_stem }}" title="Qty" class="input-text qty text {{ $errors->has('quantity') ? ' is-invalid' : '' }}" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus"> 
+                                   id="quantity" name="quantity" value="{{ $product->number_of_stem }}" title="Qty" class="input-text qty text {{ $errors->has('quantity') ? ' is-invalid' : '' }}" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
 
                             </div>
                             @if ($errors->has('quantity'))
@@ -60,9 +60,9 @@
                             <button type="button" class="btn my_account_btn dashboard-btn" disabled>Not Available</button>
                         @endif
                         </div>
-                        
+
                     </form>
-                            
+
                         </div>
 
                         <div class="float-left mb-3 w-100 m-0-auto text-center">
@@ -70,12 +70,12 @@
                         <a href="#" class="nav-link nav_btn_cart p-0">Continue Shopping</a>
                             </div>
                         </div>
-                         
+
                          <div class="grower">
                             <b>Company:</b><span><a href="{{ route('userinfos.show', ['userinfo' => $product->user->userinfo->id]) }}">{{ $product->user->userinfo->company_name }}</a></span><br>
                             <b>Grower:</b><span>{{ $product->grower }}</span>
                         </div>
- 
+
                         <ul class="specs" id="alle-kenmerken">
                             <li><span>Sold By:</span> <span>{{ $product->pack }}</span></li>
 {{--                            <li><span>Description:</span> <span>{{ $product->description }}</span></li>--}}
@@ -187,15 +187,15 @@
 
 @push('footer-js')
 <script>
- 
+
  $('#quantity').on('change paste keyup',function(){
     var qty = $(this).val();
     $('#total_price_order').html('');
     var p_rice = {{ number_format($product['price'],2) }};
     var total = qty*p_rice;
- 
+
     $('#total_price_order').text('$'+total.toFixed(2));
  });
-    
+
 </script>
 @endpush

@@ -4258,7 +4258,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-
   name: "flower-result-list-component",
   data: function data() {
     return {
@@ -4271,11 +4270,11 @@ __webpack_require__.r(__webpack_exports__);
       this.fetch();
     },
     sort_by: function sort_by(after, before) {
-       //console.log(this.sort_by);
+      // console.log(this.sort_by);
       this.fetch();
     },
     delivery_date: function delivery_date(after, before) {
-      //  console.log(this.delivery_date);
+      // console.log(this.delivery_date);
       this.fetch();
     },
     filter_catg: function filter_catg(after, before) {
@@ -4283,27 +4282,13 @@ __webpack_require__.r(__webpack_exports__);
       this.fetch();
     },
     filter_length: function filter_length(after, before) {
-      //console.log(this.filter_catg);
+      console.log(this.filter_catg);
       this.fetch();
     },
-     filter_origin: function filter_origin(after, before) {
-       // console.log(this.filter_catg);
-      this.fetch();
-    },
-      filter_colour: function filter_colour(after, before) {
-      // console.log(this.filter_catg);
-      this.fetch();
-    },
-    feature_filter: function feature_filter(after, before) {
-      // console.log(this.filter_catg);
-      this.fetch();
-    },
-    weight_check: function weight_check(after, before) {
-      // console.log(this.filter_catg);
+    filter_origin: function filter_origin(after, before) {
+      console.log(this.filter_origin);
       this.fetch();
     }
-
-
   },
   created: function created() {
     this.getSession();
@@ -4320,20 +4305,16 @@ __webpack_require__.r(__webpack_exports__);
     },
     fetch: function fetch() {
       var _this = this;
-      var delivery_date_get = $('#select-date').val();
+
       // console.log(this.filter_length);
       $('#loader1').show();
       axios.get('/api/flower', {
         params: {
           keywords: this.keywords,
           sort_by: this.sort_by,
-          delivery_date: delivery_date_get,
+          delivery_date: this.delivery_date,
           filter_catg: this.filter_catg,
-          filter_length: this.filter_length,
-          filter_origin: this.filter_origin,
-          filter_colour: this.filter_colour,
-          feature_filter: this.feature_filter,
-          weight_check: this.weight_check
+          filter_length: this.filter_length
         }
       }).then(function (response) {
         $('#loader1').hide();
@@ -4341,8 +4322,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.page_data = response.data; // console.log('np url: ' + this.page_data.next_page_url);
 
         $('.result_count').text(response.data.total);
-
-      }).catch(function (error) {
+      })["catch"](function (error) {
         $('#loader1').hide();
       });
     },
@@ -4354,28 +4334,13 @@ __webpack_require__.r(__webpack_exports__);
         _this2.$parent.delivery_date = response.data;
 
         _this2.fetch();
-      }).catch(function (error) {});
+      })["catch"](function (error) {});
     },
     routeSP: function routeSP(product_id) {
       return "{{ route('products.show', ['product' => " + product_id + "]) }}";
     },
     addToCart: function addToCart(product) {
-  
-      var exists = _.findIndex(this.cart_products, ['id', product.id]);
- 
-      if (exists == -1) {
-        var item = Vue.util.extend({'qty': 1}, product);
-        
-        this.cart_products.push(item);
-      } else {
-
-        var total_qty = this.cart_products[exists].qty++;
-        
-        //this.cart_products.number_of_stem = total_qty;
-      }
-   
-
-
+      this.cart_products.push(product);
       this.popup();
     },
     popup: function popup() {
@@ -4400,7 +4365,6 @@ __webpack_require__.r(__webpack_exports__);
 
           if (_this3.page_data.next_page_url) {
             $('#loader2').show();
-
             loading = true;
             axios.get(_this3.page_data.next_page_url).then(function (response) {
               Array.prototype.push.apply(_this3.products, response.data.data); // this.products = response.data.data;
@@ -4412,7 +4376,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
               loading = false;
-            }).catch(function (error) {
+            })["catch"](function (error) {
               $('#loader2').hide();
             });
           }
@@ -4427,7 +4391,7 @@ __webpack_require__.r(__webpack_exports__);
       this.scroll();
     }
   },
-  props: ['keywords', 'sort_by', 'cart_products', 'delivery_date', 'filter_catg', 'filter_length','filter_origin','filter_colour','feature_filter','weight_check'],
+  props: ['keywords', 'sort_by', 'cart_products', 'delivery_date', 'filter_catg', 'filter_length'],
   computed: {
     resultCount: function resultCount() {
       return this.products.total;
@@ -4520,7 +4484,7 @@ __webpack_require__.r(__webpack_exports__);
           // console.log('np url: ' + this.page_data.next_page_url);
           // $('.result_count').text(response.data.total);
 
-        }).catch(function (error) {
+        })["catch"](function (error) {
           _this.loading = false;
         });
       } else {
@@ -59592,9 +59556,9 @@ __webpack_require__(/*! selectize */ "./node_modules/selectize/dist/js/selectize
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 
-Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue").default);
-Vue.component('flower-result-list-component', __webpack_require__(/*! ./components/FlowerResultListComponent */ "./resources/js/components/FlowerResultListComponent.vue").default);
-Vue.component('main-nav-search', __webpack_require__(/*! ./components/MainNavSearch */ "./resources/js/components/MainNavSearch.vue").default);
+Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
+Vue.component('flower-result-list-component', __webpack_require__(/*! ./components/FlowerResultListComponent */ "./resources/js/components/FlowerResultListComponent.vue")["default"]);
+Vue.component('main-nav-search', __webpack_require__(/*! ./components/MainNavSearch */ "./resources/js/components/MainNavSearch.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -59630,11 +59594,7 @@ var app = new Vue({
     'delivery_date': delivery_date_o,
     'cart_products': [],
     'filter_catg': [],
-    'filter_length': [],
-    'filter_origin': [],
-    'filter_colour': [],
-    'feature_filter': [],
-    'weight_check':[]
+    'filter_length': []
   },
   methods: {
     sortBy: function sortBy(sort_by) {
@@ -59680,7 +59640,7 @@ var app = new Vue({
         }
       }).then(function (response) {// console.log(response.data);
         // this.delivery_date = response.data;
-      }).catch(function (error) {});
+      })["catch"](function (error) {});
     },
     catgFilter: function catgFilter(catg_id) {
       if (this.filter_catg.includes(catg_id)) {
@@ -59690,44 +59650,12 @@ var app = new Vue({
         this.filter_catg.push(catg_id);
       }
     },
-    orignFilter: function orignFilter(origin) {
-      if (this.filter_origin.includes(origin)) {
-        var index = this.filter_origin.indexOf(origin);
-        if (index !== -1) this.filter_origin.splice(index, 1); // this.filter_origin.pop($origin);
-      } else {
-        this.filter_origin.push(origin);
-      }
-    },
     lengthFilter: function lengthFilter(catg_id) {
       if (this.filter_length.includes(catg_id)) {
         var index = this.filter_length.indexOf(catg_id);
-        if (index !== -1) this.filter_length.splice(index, 1); // this.filter_length.pop($catg_id);
+        if (index !== -1) this.filter_length.splice(index, 1); // this.filter_catg.pop($catg_id);
       } else {
         this.filter_length.push(catg_id);
-      }
-    },
-    colourFilter: function colourFilter(colour) {
-      if (this.filter_colour.includes(colour)) {
-        var index = this.filter_colour.indexOf(colour);
-        if (index !== -1) this.filter_colour.splice(index, 1); // this.filter_colour.pop($colour);
-      } else {
-        this.filter_colour.push(colour);
-      }
-    },
-    featureFilter: function featureFilter(feat) {
-      if (this.feature_filter.includes(feat)) {
-        var index = this.feature_filter.indexOf(feat);
-        if (index !== -1) this.feature_filter.splice(index, 1); // this.feature_filter.pop($feat);
-      } else {
-        this.feature_filter.push(feat);
-      }
-    },
-    weightCheck: function weightCheck(weight) {
-      if (this.weight_check.includes(weight)) {
-        var index = this.weight_check.indexOf(weight);
-        if (index !== -1) this.weight_check.splice(index, 1); // this.weight_check.pop($weight);
-      } else {
-        this.weight_check.push(weight);
       }
     }
   }
@@ -59750,7 +59678,7 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
  */
 
 try {
-  window.Popper = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js").default;
+  window.Popper = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")["default"];
   window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
   __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
@@ -60036,8 +59964,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Juned\PhpstormProjects\flowerapp\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Juned\PhpstormProjects\flowerapp\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\hussa\PhpstormProjects\flowerapp\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\hussa\PhpstormProjects\flowerapp\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
