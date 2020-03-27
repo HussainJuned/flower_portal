@@ -107,7 +107,7 @@
 
                     </div>
                 </div>
-                {{-- <h2 class="mb-30 mt-5">Reviews</h2>
+                {{-- <h2 class="mb-30 mt-5">Reviews </h2>
 
                 @if ($product->reviews->first())
                     <div class="row">
