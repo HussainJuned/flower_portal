@@ -31,6 +31,13 @@ Homestead.json
 
 
 # Local Plesk Directories
+.bash_history
+.bashrc
+.cache/
+.config/
+.gitconfig
+.local/
+.npm/
 app.floweret.ca
 bin
 config/composer.json
