@@ -1,4 +1,4 @@
-# Floweret
+# Floweret (DEMO)
 An online Flower ordering platform
 
 ## Description
