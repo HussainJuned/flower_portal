@@ -186,13 +186,14 @@
 @endsection
 
 @push('footer-js')
-<script>
+<script type="text/javascript">
 
  $('#quantity').on('change paste keyup',function(){
-    var qty = $(this).val();
+    var qty = parseInt($(this).val());
+    console.log(qty);
     $('#total_price_order').html('');
-    var p_rice = {{ number_format($product['price'],2) }};
-    var total = qty*p_rice;
+    var p_rice = {{ $product['price_per_stem_bunch'] }};
+    var total = qty* p_rice;
 
     $('#total_price_order').text('$'+total.toFixed(2));
  });
