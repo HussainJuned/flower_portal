@@ -29,6 +29,12 @@ class Product extends Model
         return $this->hasMany(ProductReview::class);
     }
 
+    public function shoppingCart()
+    {
+        return $this->hasMany(ShoppingCart::class);
+    }
+
+
     public function reviewsAvg()
     {
         return $this->reviews()

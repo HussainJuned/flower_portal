@@ -7,7 +7,14 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+
+//support vuex
+import Vuex from 'vuex'
+Vue.use(Vuex)
+import storeData from "./store/index"
+
 window.Croppie = require('croppie');
+
 require('exif-js');
 require('@fortawesome/fontawesome-free');
 require('selectize');
@@ -26,6 +33,7 @@ require('selectize');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('flower-result-list-component', require('./components/FlowerResultListComponent').default);
 Vue.component('main-nav-search', require('./components/MainNavSearch').default);
+Vue.component('shopping-cart-component', require('./components/ShoppingCartComponent').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

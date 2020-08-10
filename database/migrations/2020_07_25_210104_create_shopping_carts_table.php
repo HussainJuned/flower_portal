@@ -15,12 +15,20 @@ class CreateShoppingCartsTable extends Migration
     {
         Schema::create('shopping_carts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('product_id')->constrained('products');
+            $table->integer('user_id')->unsigned();
+            $table->integer('product_id')->unsigned();
+
             $table->integer('quantity');
             $table->decimal('total_price');
-            $table->date('order_date');
+            $table->date('delivery_date');
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users');
+            $table->foreign('product_id')
+                ->references('id')
+                ->on('products');
 
         });
     }

@@ -73,7 +73,7 @@
                                    class="dropdown-item">
                                     My Details
                                 </a>
- 
+
                                 <a href="{{ route('seller_dashboard.myProducts') }}"
                                    class="dropdown-item">
                                     My Product
@@ -146,32 +146,32 @@
                 <div class="col-sm-6">
                     <nav class="navbar navbar-light navbar-expand-md py-0">
                         <ul class="navbar-nav nav_left">
-                            <li class="nav-item"><a href="" class="nav-link">Home</a></li>
-                            <li class="nav-item active"><a href="" class="nav-link">Flowers</a></li>
+                            <li class="nav-item"><a href="{{ route('home')}}" class="nav-link">Home</a></li>
+                            <li class="nav-item active"><a href="{{ route('search.flower') }}" class="nav-link">Flowers</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="col-sm-6 text-right align-self-center">
-                    
+
                     <select name="select-date" id="select-date" class="custom-select" v-on:change="onDDChange($event)">
 
                         @if (session()->has('order_date'))
                             <option value="{{ session()->get('order_date') }}" selected>
                                 @if (\Carbon\Carbon::today()->toDateString() == session()->get('order_date'))
                                     Today
-                                    
+
                                     @else
 
                                     {{ \Carbon\Carbon::parse(session()->get('order_date'))->format('l') }}
                                 @endif
                                 - {{ session()->get('order_date') }}</option>
-                             
+
                         @endif
 
                          <option value="{{ \Carbon\Carbon::today()->addDays(1)->toDateString() }}">Tomorrow</option>
 
                         <option value="{{ \Carbon\Carbon::today()->addDays(0)->toDateString() }}">Today</option>
-                      
+
                         @for( $i=2; $i<14; $i++)
                             <option value="{{ \Carbon\Carbon::today()->addDays($i)->toDateString() }}">{{ \Carbon\Carbon::today()->addDays($i)->format('l') }} - {{ \Carbon\Carbon::today()->addDays($i)->toDateString() }}</option>
                         @endfor
@@ -183,90 +183,12 @@
 </header>
 
 <!-- Modal -->
-<div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Shopping Cart</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="my-3 shopping-cart">
-
-                    <h4 v-if="delivery_date" class="text-center">Delivery Date: <span>@{{ delivery_date }}</span> </h4>
-
-
-                        <form action="{{ route('order.details.buyer') }}" id="card_order_form" method="post">
-
-                            <template v-if="cart_products">
-                                <div class="row mb-3">
-                                    <div class="col-5 text-right">Product</div>
-                                    <div class="col-2 text-right">QTY</div>
-                                    <div class="col-2 px-0 text-center">Price</div>
-                                    <div class="col-1 px-0">Sold By</div>
-                                    <div class="col-2 px-0">Total Stems</div>
-                                </div>
-                            <section class="item" v-for="cart_product in cart_products">
-                                <input type="number" name="product_id[]" v-bind:value="cart_product.id" hidden>
-                                <div class="buttons">
-                                    <span class="delete-btn"></span>
-                                    <span class="like-btn"></span>
-                                </div>
-
-                                <div class="image">
-                                    <img class="img-fluid" v-bind:src="  '/' + cart_product.photo_url " alt=""/>
-                                </div>
-
-                                <div class="description">
-                                    <span>@{{ cart_product.name }}</span>
-                                    <span>@{{ cart_product.stock }} in stock</span>
-{{--                                    <span>Delivery Date: </span>--}}
-                                </div>
-
-                                <div class="quantity">
-
-                                    <button class="plus-btn" type="button" name="button" >
-                                        <img src="{{ asset('images/icons/plus.svg') }}" alt="+"/>
-                                    </button>
-                                    <input type="text" name="quantity[]" v-bind:value="cart_product.qty" min="1" class="q" v-bind:max="cart_product.stock">
-                                    <button class="minus-btn" type="button" name="button">
-                                        <img src="{{ asset('images/icons/minus.svg') }}" alt="-"/>
-                                    </button>
-                                    {{--<div class="delivery_date">
-                                        <select class="cart_order_date" name="order_date[]" required>
-                                            <option selected v-for="ad in cart_product.ad" v-bind:value="ad">@{{ ad }}</option>
-                                        </select>
-                                    </div>--}}
-
-                                </div>
-
-
-                                <div class="total-price">$ <span class="price_value" v-bind:data-price="cart_product.price">@{{ cart_product.price*cart_product.qty }}</span> </div>
-                                <div class="sold-type"> <span class="s_type_value" v-bind:data-price="cart_product.pack">@{{ cart_product.pack }}</span> </div>
-                                <div class="total-stem"> <span class="stem_value" v-bind:data-price="cart_product.number_of_stem">@{{ cart_product.number_of_stem*cart_product.qty }}</span>
-                                
-                                <span id="num_of_stem_value" style="display: none;">@{{ cart_product.number_of_stem }}</span>
-                                 
-                                 </div>
-                            </section>
-                            </template>
-                            <input type="text" name="delivery_date" v-bind:value="delivery_date" hidden>
-                            @csrf
-                        </form>
-
-
-
-                </div>
-            </div>
-            <div class="modal-footer">
-                <input type="submit" class="btn btn-primary" {{--data-dismiss="modal"--}}
-                id="cart_order_now" form="card_order_form" value="Check Out">
-            </div>
-        </div>
-    </div>
-</div>
+<shopping-cart-component img_plus="{{ asset('images/icons/plus.svg') }}"
+                         img_minus="{{ asset('images/icons/minus.svg') }}"
+                         route_order_deatails_buyer="{{ route('order.details.buyer') }}"
+                         csrf="{{ csrf_token() }}"
+>
+</shopping-cart-component>
 
 
 <div class="popup">
@@ -275,103 +197,8 @@
 
 
 @push('footer-js')
+
     <script type="text/javascript">
-
-        $(document).ready(function () {
-
-            $(document).on('click', '.minus-btn', function(e) {
-                e.preventDefault();
-                var $this = $(this);
-                var $input = $this.closest('div').find('input');
-
-                var $price = $this.closest('section').find('.price_value');
-                var price_value = parseFloat($price.attr('data-price'));
-                var value = parseInt($input.val());
-                
-                var total_stem  = $this.closest('section').find('#num_of_stem_value').text();
-
-                var stem_value  = $this.closest('section').find('.stem_value');
-
-
-                if (value > 1) {
-                    value = value - 1;
-                } else {
-                    value = 1;
-                }
-
-                $input.val(value);
- 
-                stem_value.text(total_stem*value);
-
-                var cal_total = (value * price_value);
-                cal_total = cal_total.toFixed(2);
-                $price.text(cal_total);
-
-            });
-
-            $('.shopping-cart').on('click', '.plus-btn', function(e) {
-                e.preventDefault();
-
-                var $this = $(this);
-                var $input = $this.closest('div').find('input');
-
-                var $price = $this.closest('section').find('.price_value');
-                var price_value = parseFloat($price.attr('data-price'));
- 
-                var total_stem  = $this.closest('section').find('#num_of_stem_value').text();
-
-                 var stem_value  = $this.closest('section').find('.stem_value');
-
-                var value = parseInt($input.val());
-                var max = parseInt($input.attr('max'));
-
-                if (value < max) {
-                    value = value + 1;
-                } else {
-                    value =max;
-                }
-
-                $input.val(value);
-
-                stem_value.text(total_stem*value);
-
-                var cal_total = (value * price_value);
-                cal_total = cal_total.toFixed(2);
-                $price.text(cal_total);
-            });
-
-            $('.like-btn').on('click', function() {
-                $(this).toggleClass('is-active');
-
-            });
-
-            $(document).on('click', '.delete-btn', function (event) {
-                $(this).parent().parent().remove();
-            });
-
-            /*$("#cart_order_now").on('click', function(){
-                console.log('clicked');
-                $(".shopping-cart form").each(function(){
-                    var fd = new FormData($(this)[0]);
-                    $.ajax({
-                        type: "get",
-                        url: "cart/try",
-                        data: fd,
-                        success: function(data,status) {
-                            console.log(data);
-                        },
-                        error: function(data, status) {
-                            //this will execute when get any error
-                        },
-                    });
-                });
-            });*/
-
-
-        })
-    </script>
-
-    <script>
         /*var specifiedElement = document.getElementById('full_search');
         var specifiedElement2 = document.getElementById('main_search');
 

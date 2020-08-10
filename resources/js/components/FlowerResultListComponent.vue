@@ -45,7 +45,7 @@
 
 <script>
     export default {
-    
+
         name: "flower-result-list-component",
         data() {
             return {
@@ -129,8 +129,25 @@
             routeSP(product_id) {
                 return "{{ route('products.show', ['product' => " + product_id + "]) }}"
             },
+            storeSC(product) {
+                axios({
+                    method: 'post',
+                    url: '/api/shopping_cart/store/' + product.id,
+                    data: {
+                        quantity: 1, total_price: product.price, delivery_date: this.delivery_date
+                    }
+                }).then(response => {
+                    this.cart_products = response.data;
+                }).catch(error => {
+
+                });
+            },
             addToCart(product) {
+                console.log("addToCart: " + this.delivery_date);
                 this.cart_products.push(product);
+
+                this.storeSC(product);
+
                 this.popup();
             },
             popup() {

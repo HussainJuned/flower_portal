@@ -105,6 +105,12 @@ Route::post('/my-products/import', 'ProductExcelController@importFromExcel')->na
 Route::get('/outstanding_pdf/view_html/{invoice}', 'PdfController@viewOI')->name('view.html.oipdf');
 Route::get('/pdf/invoice/outstanding/{invoice}', 'PdfController@generateOIpdf')->name('pdf.invoice.outstanding');
 
+//Shopping Cart Api
+Route::post('/api/shopping_cart/store/{product}', 'ShoppingCartController@store')->name('api.shopping_cart.store');
+Route::get('/api/shopping_cart/show/all', 'ShoppingCartController@viewAll')->name('api.shopping_cart.show.all');
+
+
+
 
 
 Route::group(['prefix' => 'admin'], function () {

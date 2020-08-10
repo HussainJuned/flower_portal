@@ -101,6 +101,8 @@ namespace App{
  * @property int $age_of_invoice
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\User $buyer
+ * @property-read \App\Order $order
  * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerInvoice newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerInvoice newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\BuyerInvoice query()
@@ -150,17 +152,22 @@ namespace App{
  * @property int $status
  * @property string|null $purchase_order_name
  * @property string|null $delivery_option
+ * @property int $buyer_address_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\User $buyer
  * @property-read \App\BuyerAccountReview $buyerAccountReview
+ * @property-read \App\BuyerAddress $buyer_address
+ * @property-read \App\BuyerInvoice $invoice
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\OrderProduct[] $orderProducts
+ * @property-read int|null $order_products_count
  * @property-read \App\Product $product
  * @property-read \App\ProductReview $productReview
  * @property-read \App\User $seller
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereBuyerAddressId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereBuyerUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereDeliveryOption($value)
@@ -206,6 +213,42 @@ namespace App{
 
 namespace App{
 /**
+ * App\PreferredCommunication
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int $general
+ * @property string|null $email_general
+ * @property int $order_confirmation
+ * @property string|null $email_order_confirmation
+ * @property int $shipment
+ * @property string|null $email_shipment
+ * @property int $invoices
+ * @property string|null $email_invoices
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PreferredCommunication newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PreferredCommunication newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PreferredCommunication query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PreferredCommunication whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PreferredCommunication whereEmailGeneral($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PreferredCommunication whereEmailInvoices($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PreferredCommunication whereEmailOrderConfirmation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PreferredCommunication whereEmailShipment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PreferredCommunication whereGeneral($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PreferredCommunication whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PreferredCommunication whereInvoices($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PreferredCommunication whereOrderConfirmation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PreferredCommunication whereShipment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PreferredCommunication whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\PreferredCommunication whereUserId($value)
+ */
+	class PreferredCommunication extends \Eloquent {}
+}
+
+namespace App{
+/**
  * App\Product
  *
  * @property int $id
@@ -217,6 +260,7 @@ namespace App{
  * @property float $price
  * @property string $pack
  * @property string $height
+ * @property string|null $weight
  * @property string $origin
  * @property string $colour
  * @property string $category
@@ -230,12 +274,18 @@ namespace App{
  * @property string|null $grower
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Category $categoryR
  * @property-read mixed $ad
  * @property mixed $tag_names
  * @property-read \Illuminate\Database\Eloquent\Collection $tags
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\ProductReview[] $reviews
+ * @property-read int|null $reviews_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Conner\Tagging\Model\Tagged[] $tagged
+ * @property-read int|null $tagged_count
  * @property-read \App\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product filterByCategory($arr)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product isAvailableOn($date)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product name($keyword)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product query()
@@ -261,6 +311,7 @@ namespace App{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereStock($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereWeight($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product withAllTags($tagNames)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product withAnyTag($tagNames)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product withoutTags($tagNames)
@@ -316,6 +367,40 @@ namespace App{
 
 namespace App{
 /**
+ * App\ShoppingCart
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ShoppingCart newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ShoppingCart newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\ShoppingCart query()
+ */
+	class ShoppingCart extends \Eloquent {}
+}
+
+namespace App{
+/**
+ * App\TempImgUpload
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $unique_id
+ * @property string $path
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TempImgUpload newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TempImgUpload newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TempImgUpload query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TempImgUpload whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TempImgUpload whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TempImgUpload wherePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TempImgUpload whereUniqueId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TempImgUpload whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\TempImgUpload whereUserId($value)
+ */
+	class TempImgUpload extends \Eloquent {}
+}
+
+namespace App{
+/**
  * App\User
  *
  * @property int $id
@@ -330,14 +415,26 @@ namespace App{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\BuyerAccountReview[] $buyerAccountReviews
+ * @property-read int|null $buyer_account_reviews_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\BuyerAddress[] $buyerAddresses
+ * @property-read int|null $buyer_addresses_count
  * @property mixed $locale
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\BuyerInvoice[] $invoices
+ * @property-read int|null $invoices_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Product[] $latestProducts
+ * @property-read int|null $latest_products_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Order[] $orders_as_buyer
+ * @property-read int|null $orders_as_buyer_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Order[] $orders_as_seller
+ * @property-read int|null $orders_as_seller_count
+ * @property-read \App\PreferredCommunication $preferred_communication
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Product[] $products
+ * @property-read int|null $products_count
  * @property-read \TCG\Voyager\Models\Role|null $role
  * @property-read \Illuminate\Database\Eloquent\Collection|\TCG\Voyager\Models\Role[] $roles
+ * @property-read int|null $roles_count
  * @property-read \App\Userinfo $userinfo
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User newQuery()
