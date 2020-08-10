@@ -28,3 +28,25 @@ Homestead.json
 /storage/logs/
 !/public/uploads/default.png
 /public/tmp/
+
+
+# Local Plesk Directories
+.bash_history
+.bashrc
+.cache/
+.config/
+.gitconfig
+.local/
+.npm/
+app.floweret.ca
+bin
+config/composer.json
+dev.floweret.ca/
+error_docs/
+etc/
+httpdocs/
+lib
+lib64
+logs/
+sbin
+usr/
